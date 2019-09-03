@@ -64,7 +64,8 @@
             this.TopPanelMinimizeButton.Margin = new System.Windows.Forms.Padding(6);
             this.TopPanelMinimizeButton.Name = "TopPanelMinimizeButton";
             this.TopPanelMinimizeButton.Size = new System.Drawing.Size(37, 32);
-            this.TopPanelMinimizeButton.TabIndex = 1;
+            this.TopPanelMinimizeButton.TabIndex = 0;
+            this.TopPanelMinimizeButton.TabStop = false;
             this.TopPanelMinimizeButton.Text = "0";
             this.TopPanelMinimizeButton.UseVisualStyleBackColor = true;
             this.TopPanelMinimizeButton.Click += new System.EventHandler(this.TopPanelMinimizeButton_Click);
@@ -82,7 +83,8 @@
             this.TopPanelCloseButton.Margin = new System.Windows.Forms.Padding(6);
             this.TopPanelCloseButton.Name = "TopPanelCloseButton";
             this.TopPanelCloseButton.Size = new System.Drawing.Size(37, 32);
-            this.TopPanelCloseButton.TabIndex = 3;
+            this.TopPanelCloseButton.TabIndex = 0;
+            this.TopPanelCloseButton.TabStop = false;
             this.TopPanelCloseButton.Text = "r";
             this.TopPanelCloseButton.UseVisualStyleBackColor = true;
             this.TopPanelCloseButton.Click += new System.EventHandler(this.TopPanelCloseButton_Click);
@@ -100,7 +102,8 @@
             this.TopPanelMaximizeButton.Margin = new System.Windows.Forms.Padding(6);
             this.TopPanelMaximizeButton.Name = "TopPanelMaximizeButton";
             this.TopPanelMaximizeButton.Size = new System.Drawing.Size(37, 32);
-            this.TopPanelMaximizeButton.TabIndex = 2;
+            this.TopPanelMaximizeButton.TabIndex = 0;
+            this.TopPanelMaximizeButton.TabStop = false;
             this.TopPanelMaximizeButton.Text = "1";
             this.TopPanelMaximizeButton.UseVisualStyleBackColor = true;
             this.TopPanelMaximizeButton.Click += new System.EventHandler(this.TopPanelMaximizeButton_Click);

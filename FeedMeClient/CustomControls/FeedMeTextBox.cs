@@ -50,7 +50,11 @@ namespace FeedMeClient.CustomControls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            ReSizeTextBox();
+            if (AutoResize)
+            {
+                ReSizeTextBox();
+            }
+            
             Invalidate();
         }
 
@@ -67,6 +71,7 @@ namespace FeedMeClient.CustomControls
             {
                 Font = new Font(Font.FontFamily, Font.Size, this.Font.Style | FontStyle.Italic);
                 ResetText();
+                Text = string.Empty;
             }
         }
 
@@ -74,6 +79,10 @@ namespace FeedMeClient.CustomControls
         {
             base.OnLostFocus(e);
             CheckWatermark();
+            //if (Text == string.Empty)
+            //{
+            //    Text = watermark;
+            //}
         }
 
         protected override void OnTextChanged(EventArgs e)
@@ -85,12 +94,12 @@ namespace FeedMeClient.CustomControls
                 Text = Text.Substring(0, Text.Length - Watermark.Length);
             }
 
-            CheckWatermark();
-            if (Text == watermark || Text == String.Empty)
+            
+            if (Text == watermark || Text == string.Empty)
             {
                 return;
             }
-
+            CheckWatermark();
             Font = new Font(Font.FontFamily, Font.Size, FontStyle.Regular);
             Size size = TextRenderer.MeasureText(Text, Font);
             Height = size.Height + 5;
@@ -101,13 +110,39 @@ namespace FeedMeClient.CustomControls
         protected override void OnEnter(EventArgs e)
         {
             base.OnEnter(e);
+            if (Text == watermark)
+            {
+                Console.WriteLine("Text");
+                Text = string.Empty;
+            }
             Controls[0].BackColor = _FocusColor;
+
+            if (!SingleLine)
+            {
+                Controls[0].BackColor = _FocusColor;
+                Controls[1].BackColor = _FocusColor;
+                Controls[2].BackColor = _FocusColor;
+                Controls[3].BackColor = _FocusColor;
+            }
+
         }
 
         protected override void OnLeave(EventArgs e)
         {
             base.OnLeave(e);
+            if (Text == string.Empty)
+            {
+                Console.WriteLine("Test");
+                Text = watermark;
+            }
             Controls[0].BackColor = _borderColor;
+            if (!SingleLine)
+            {
+                Controls[0].BackColor = _borderColor;
+                Controls[1].BackColor = _borderColor;
+                Controls[2].BackColor = _borderColor;
+                Controls[3].BackColor = _borderColor;
+            }
         }
         #endregion
 
@@ -122,6 +157,20 @@ namespace FeedMeClient.CustomControls
         private Color _borderColor = Color.Black;
         private Color _FocusColor = Color.White;
         private string watermark = string.Empty;
+        private bool _autoResize = false;
+        private bool _singleLine = true;
+
+        public bool SingleLine
+        {
+            get { return _singleLine; }
+            set { _singleLine = value; CheckBorder(); }
+        }
+
+        public bool AutoResize
+        {
+            get { return _autoResize; }
+            set { _autoResize = value; }
+        }
 
         public Color BaseColor
         {
@@ -164,6 +213,77 @@ namespace FeedMeClient.CustomControls
         #endregion
 
         #region Helper Methods
+
+        #region Border Methods
+
+        private void ChangeFocus(bool isFocus)
+        {
+            Controls[0].BackColor = _FocusColor;
+            if (!_singleLine)
+            {
+                Controls[0].BackColor = _FocusColor;
+                Controls[1].BackColor = _FocusColor;
+                Controls[2].BackColor = _FocusColor;
+                Controls[3].BackColor = _FocusColor;
+            }
+        }
+
+        private void CheckBorder()
+        {
+            if (_singleLine)
+            {
+                RemoveBorder();
+            }
+            else
+            {
+                AddBorders();
+            }
+        }
+
+        private void AddBorders()
+        {
+            if (!SingleLine)
+            {
+                Controls.Add(new Label
+                {
+                    Name = "TopBorder",
+                    Height = 1,
+                    Dock = DockStyle.Top,
+                    BackColor = _borderColor
+                });
+
+                Controls.Add(new Label
+                {
+                    Name = "LeftBorder",
+                    Height = this.Height,
+                    Width = 1,
+                    Dock = DockStyle.Left,
+                    BackColor = _borderColor
+                });
+
+                Controls.Add(new Label
+                {
+                    Name = "RightBorder",
+                    Height = this.Height,
+                    Width = 1,
+                    Dock = DockStyle.Right,
+                    BackColor = _borderColor
+                });
+            }
+        }
+
+        private void RemoveBorder()
+        {
+            string[] LabelList = new string[] { "TopBorder", "LeftBorder", "RightBorder" };
+            foreach(String BorderSide in LabelList)
+            {
+                Label CurrentLabel = Controls.Find(BorderSide, true).OfType<Label>().SingleOrDefault();
+                Controls.Remove(CurrentLabel);
+            }
+        }
+        #endregion
+
+        #region Other Helpers
         private void ReSizeTextBox()
         {
             Size size = TextRenderer.MeasureText(Text, Font); // Gets The Size
@@ -172,12 +292,12 @@ namespace FeedMeClient.CustomControls
 
         private void CheckWatermark()
         {
-            if (Text == string.Empty || Text == watermark)
+            if (Text == watermark || Text == string.Empty)
             {
                 ForeColor = Color.Gray;
                 Text = watermark;
                 Font = new Font(Font.FontFamily, FntSize - 1.0F, FontStyle.Italic);
-                //Invalidate();
+                Invalidate();
             }
             else
             {
@@ -186,6 +306,7 @@ namespace FeedMeClient.CustomControls
                 ReSizeTextBox();
             }
         }
+        #endregion
 
         #endregion
 
