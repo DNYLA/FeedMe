@@ -1,6 +1,6 @@
 ﻿namespace FeedMeClient.Forms.Authentication
 {
-    partial class RegistrationForm
+    partial class Register
     {
         /// <summary>
         /// Required designer variable.
@@ -271,7 +271,7 @@
             this.label6.TabIndex = 27;
             this.label6.Text = "Confirm Password:";
             // 
-            // RegistrationForm
+            // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,7 +292,7 @@
             this.Controls.Add(this.NoAccountLinkLabel);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.RegisterButton);
-            this.Name = "RegistrationForm";
+            this.Name = "Register";
             this.Text = "RegistrationForm";
             this.Load += new System.EventHandler(this.RegistrationForm_Load);
             this.Controls.SetChildIndex(this.RegisterButton, 0);

@@ -11,10 +11,10 @@ using FeedMeClient.Functions;
 
 namespace FeedMeClient.Forms.Authentication
 {
-    public partial class RegistrationForm : FeedMeMainForm
+    public partial class Register : FeedMeMainForm
     {
         #region Initializing
-        public RegistrationForm()
+        public Register()
         {
             InitializeComponent();
         }
@@ -57,6 +57,7 @@ namespace FeedMeClient.Forms.Authentication
 
             if (!CheckPassword())
             {
+                MessageBox.Show("Password Don't Match");
                 return; //Returning Nothing just stops the function
             }
 
@@ -66,7 +67,7 @@ namespace FeedMeClient.Forms.Authentication
             string Username = UsernameBox.Text;
             string[] HashedPasswordData = Functions.Data.HashPass.HashPassword(PasswordBox.Text); //INDEX 0: Hashed Password; INDEX 1: Salt;
 
-            string SQLQuery = $"INSERT INTO users (Name, Email, username, password, salt) VALUES ('{Name}', '{Email}', '{Username}', '{HashedPasswordData[0]}', '{HashedPasswordData[1]}')";
+            string SQLQuery = $"INSERT INTO users (name, email, username, password, salt) VALUES ('{Name}', '{Email}', '{Username}', '{HashedPasswordData[0]}', '{HashedPasswordData[1]}')";
             Functions.Data.DAL.ExecCommand(SQLQuery);
             MessageBox.Show("Successfully Registered"); // Add Error Handling Later.
 

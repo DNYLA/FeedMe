@@ -17,13 +17,17 @@ namespace FeedMeClient.Functions.Data
         //When Using This im not sure how variables will get passed through so you will have to reference them using this.
         //One Problem with this Function is that it executes Non-Paraterized queries which could be a problem with SQL Injections. This should be updates
         //to allow paraterized queries.
+
+
+
         public static DataTable ExecCommand(string command)
         {
+            string myConString = "server=77.102.93.95; port=3306; uid=feedme_user; pwd=mi63b2; database=feedme; persistsecurityinfo=True; SSL Mode=None";
             //string myConString = "server=77.102.93.95; port=3306; uid=feedme_user; pwd=mi63b2; database=feedme; persistsecurityinfo=True; SSL Mode=None";
-            string myConString = "server=localhost; port=3306; uid=root; database=schooldb; persistsecurityinfo=True; SSL Mode=None";
             MySqlConnection conn = new MySqlConnection();
             MySqlDataAdapter adapter;
             DataTable myTable = new DataTable();
+
 
             try
             {

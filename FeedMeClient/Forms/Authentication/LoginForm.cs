@@ -26,7 +26,7 @@ namespace FeedMeClient.Forms.Authentication
             string SQLQuery = ($"SELECT * FROM users WHERE username = '{UsernameTextBox.Text}'");
             DataTable SQLResults = DAL.ExecCommand(SQLQuery);
             string[] HashData = new string[2];
-            HashData[0] = "Invalid";
+            HashData[0] = "-1";
             HashData[1] = "Invalid";
             if (SQLResults.Rows.Count > 0)
             {
@@ -41,6 +41,13 @@ namespace FeedMeClient.Forms.Authentication
         private void AuthenticateLogin()
         {
             string[] HashData = GetHashData(); //INDEX 0: Stored Password Hash; INDEX 1: Stored Salt;
+
+            if (HashData[0] == "-1")
+            {
+                MessageBox.Show("Username is Invalid!");
+                return;
+            }
+
             string CurrentHash = HashPass.ConfirmHash(PasswordTextBox.Text, HashData[1]);
             Console.WriteLine(CurrentHash);
             Console.WriteLine(HashData[0]);
@@ -58,7 +65,7 @@ namespace FeedMeClient.Forms.Authentication
         #region Event Handlers
         private void NoAccountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            RegistrationForm RF = new RegistrationForm();
+            Register RF = new Register();
             RF.Show();
             this.Hide();
         }
