@@ -14,9 +14,9 @@ namespace FeedMeClient.Functions.Data
         //Declaring This Variable Now so i remember to Add Error Handling Later on (This will probably be Done On The Server)
         public static int ErrorCode;
 
-        //When Using This im not sure how variables will get passed through so you will have to reference them using this.
-        //One Problem with this Function is that it executes Non-Paraterized queries which could be a problem with SQL Injections. This should be updates
-        //to allow paraterized queries.
+        /* When Using This im not sure how variables will get passed through so you will have to reference them using this.
+        // One Problem with this Function is that it executes Non-Paraterized queries which could be a problem with SQL Injections. This should be updated
+        // to allow paraterized queries. */
 
 
 
@@ -39,6 +39,7 @@ namespace FeedMeClient.Functions.Data
             }
             catch (MySqlException ex)
             {
+                //Debugging Tools
                 Console.WriteLine(ex.Number);
                 Console.WriteLine(ex.Message);
                 //Add Error Handling In Below
