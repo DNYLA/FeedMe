@@ -35,6 +35,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.feedMeTextBox1 = new FeedMeClient.CustomControls.FeedMeTextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -133,11 +135,36 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
+            // feedMeTextBox1
+            // 
+            this.feedMeTextBox1.AutoResize = false;
+            this.feedMeTextBox1.BaseColor = System.Drawing.Color.Red;
+            this.feedMeTextBox1.BorderColor = System.Drawing.Color.Maroon;
+            this.feedMeTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.feedMeTextBox1.FocusColor = System.Drawing.Color.DarkOrange;
+            this.feedMeTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Italic);
+            this.feedMeTextBox1.ForeColor = System.Drawing.Color.Gray;
+            this.feedMeTextBox1.Location = new System.Drawing.Point(106, 393);
+            this.feedMeTextBox1.Name = "feedMeTextBox1";
+            this.feedMeTextBox1.SingleLine = true;
+            this.feedMeTextBox1.Size = new System.Drawing.Size(126, 24);
+            this.feedMeTextBox1.TabIndex = 7;
+            this.feedMeTextBox1.Watermark = "";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(106, 423);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(126, 33);
+            this.textBox1.TabIndex = 8;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 538);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.feedMeTextBox1);
             this.Controls.Add(this.NoAccountLinkLabel);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
@@ -154,6 +181,8 @@
             this.Controls.SetChildIndex(this.pictureBox3, 0);
             this.Controls.SetChildIndex(this.pictureBox2, 0);
             this.Controls.SetChildIndex(this.NoAccountLinkLabel, 0);
+            this.Controls.SetChildIndex(this.feedMeTextBox1, 0);
+            this.Controls.SetChildIndex(this.textBox1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -170,5 +199,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.LinkLabel NoAccountLinkLabel;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private CustomControls.FeedMeTextBox feedMeTextBox1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
