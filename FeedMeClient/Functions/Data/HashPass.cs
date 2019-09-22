@@ -22,7 +22,7 @@ namespace FeedMeClient.Functions.Data
          * [X] 3. If They are the same then the Password is correct.
          */
 
-        static int HASH_ITERATIONS = 100000;
+        static int HASH_ITERATIONS = 100000; //This can be increased when i create a server because once the program is complete the server should be hosted on dedicated Host.
 
         #region Generate Methods
         private static byte[] GenerateSalt(int length)
@@ -37,6 +37,7 @@ namespace FeedMeClient.Functions.Data
         private static string GenerateHash(string password, byte[] salt, int iterations)
         {
             Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
+            Console.WriteLine(Convert.ToBase64String(pbkdf2.GetBytes(32)));
             return ByteArrayToString(pbkdf2.GetBytes(32));
         }
         #endregion
