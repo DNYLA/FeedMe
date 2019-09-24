@@ -16,5 +16,17 @@ namespace FeedMeClient.Forms
         {
             InitializeComponent();
         }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            ButtonPanel.Height = button1.Height;
+            ButtonPanel.Location = new Point(0, button1.Location.Y);
+
+            //Set Each Buttons Location Manually
+            button1.Location = new Point(ButtonPanel.Location.X + ButtonPanel.Width, button1.Location.Y);
+
+            //Set Width Of Bar Panel
+            panel1.Width = ButtonPanel.Width + button1.Width + 1;
+        }
     }
 }
