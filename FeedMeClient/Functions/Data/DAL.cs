@@ -22,8 +22,10 @@ namespace FeedMeClient.Functions.Data
 
         public static DataTable ExecCommand(string command)
         {
-            string myConString = "server=77.102.93.95; port=3306; uid=feedme_user; pwd=mi63b2; database=feedme; persistsecurityinfo=True; SSL Mode=None";
             //string myConString = "server=77.102.93.95; port=3306; uid=feedme_user; pwd=mi63b2; database=feedme; persistsecurityinfo=True; SSL Mode=None";
+            //string myConString = "server=77.102.93.95; port=3306; uid=feedme_user; pwd=mi63b2; database=feedme; persistsecurityinfo=True; SSL Mode=None";
+            //string myConString = "server=77.102.93.95; port=3307; uid=dan; pwd=5OPE54; database=feedme;";
+            string myConString = "server=77.102.93.95; port=3307; uid=Bob; pwd=1234; database=feedme;";
             MySqlConnection conn = new MySqlConnection();
             MySqlDataAdapter adapter;
             DataTable myTable = new DataTable();

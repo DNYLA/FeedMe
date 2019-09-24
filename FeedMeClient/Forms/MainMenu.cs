@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FeedMeClient.Forms
 {
-    public partial class MainMenu : Form
+    public partial class MainMenu : FeedMeMainForm
     {
         public MainMenu()
         {
