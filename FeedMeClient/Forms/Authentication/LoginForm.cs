@@ -54,6 +54,9 @@ namespace FeedMeClient.Forms.Authentication
             if (CurrentHash == HashData[0])
             {
                 MessageBox.Show("Successfully Logged In");
+                MainMenu MainMenuForm = new MainMenu();
+                MainMenuForm.Show();
+                this.Hide();
             }
             else
             {
