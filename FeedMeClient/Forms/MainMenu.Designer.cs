@@ -28,103 +28,129 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.ButtonPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.SideMenuPanel = new System.Windows.Forms.Panel();
+            this.MenuButton = new System.Windows.Forms.Button();
+            this.MenuIndicatorPanel = new System.Windows.Forms.Panel();
+            this.SettingsButton = new System.Windows.Forms.Button();
+            this.ProfileButton = new System.Windows.Forms.Button();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.HomeButton = new System.Windows.Forms.Button();
+            this.SideMenuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // SideMenuPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(161)))), ((int)(((byte)(180)))));
-            this.panel1.Controls.Add(this.ButtonPanel);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 32);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(160, 418);
-            this.panel1.TabIndex = 1;
+            this.SideMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(161)))), ((int)(((byte)(180)))));
+            this.SideMenuPanel.Controls.Add(this.MenuButton);
+            this.SideMenuPanel.Controls.Add(this.MenuIndicatorPanel);
+            this.SideMenuPanel.Controls.Add(this.SettingsButton);
+            this.SideMenuPanel.Controls.Add(this.ProfileButton);
+            this.SideMenuPanel.Controls.Add(this.SearchButton);
+            this.SideMenuPanel.Controls.Add(this.HomeButton);
+            this.SideMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.SideMenuPanel.Location = new System.Drawing.Point(0, 32);
+            this.SideMenuPanel.Name = "SideMenuPanel";
+            this.SideMenuPanel.Size = new System.Drawing.Size(139, 418);
+            this.SideMenuPanel.TabIndex = 1;
             // 
-            // ButtonPanel
+            // MenuButton
             // 
-            this.ButtonPanel.BackColor = System.Drawing.Color.Red;
-            this.ButtonPanel.Location = new System.Drawing.Point(3, 53);
-            this.ButtonPanel.Name = "ButtonPanel";
-            this.ButtonPanel.Size = new System.Drawing.Size(16, 32);
-            this.ButtonPanel.TabIndex = 2;
+            this.MenuButton.Location = new System.Drawing.Point(19, 19);
+            this.MenuButton.Name = "MenuButton";
+            this.MenuButton.Size = new System.Drawing.Size(111, 35);
+            this.MenuButton.TabIndex = 3;
+            this.MenuButton.Text = "Menu";
+            this.MenuButton.UseVisualStyleBackColor = true;
+            this.MenuButton.Click += new System.EventHandler(this.MenuButton_Click);
             // 
-            // button1
+            // MenuIndicatorPanel
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button1.Location = new System.Drawing.Point(34, 53);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 51);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.MenuIndicatorPanel.BackColor = System.Drawing.Color.DodgerBlue;
+            this.MenuIndicatorPanel.Location = new System.Drawing.Point(1, 60);
+            this.MenuIndicatorPanel.Name = "MenuIndicatorPanel";
+            this.MenuIndicatorPanel.Size = new System.Drawing.Size(12, 51);
+            this.MenuIndicatorPanel.TabIndex = 2;
             // 
-            // button2
+            // SettingsButton
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button2.Location = new System.Drawing.Point(34, 110);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 51);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Favourites";
-            this.button2.UseVisualStyleBackColor = true;
+            this.SettingsButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SettingsButton.FlatAppearance.BorderSize = 0;
+            this.SettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SettingsButton.ForeColor = System.Drawing.Color.White;
+            this.SettingsButton.Image = global::FeedMeClient.Properties.Resources.SettingsIcon;
+            this.SettingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.SettingsButton.Location = new System.Drawing.Point(0, 367);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(139, 51);
+            this.SettingsButton.TabIndex = 2;
+            this.SettingsButton.Text = "       Settings";
+            this.SettingsButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // ProfileButton
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button3.Location = new System.Drawing.Point(34, 167);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(123, 51);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "History";
-            this.button3.UseVisualStyleBackColor = true;
+            this.ProfileButton.FlatAppearance.BorderSize = 0;
+            this.ProfileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ProfileButton.ForeColor = System.Drawing.Color.White;
+            this.ProfileButton.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
+            this.ProfileButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ProfileButton.Location = new System.Drawing.Point(12, 162);
+            this.ProfileButton.Name = "ProfileButton";
+            this.ProfileButton.Size = new System.Drawing.Size(123, 51);
+            this.ProfileButton.TabIndex = 2;
+            this.ProfileButton.Text = "     Profile";
+            this.ProfileButton.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // SearchButton
             // 
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button5.Location = new System.Drawing.Point(37, 364);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(123, 51);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Settings";
-            this.button5.UseVisualStyleBackColor = true;
+            this.SearchButton.FlatAppearance.BorderSize = 0;
+            this.SearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SearchButton.ForeColor = System.Drawing.Color.White;
+            this.SearchButton.Image = global::FeedMeClient.Properties.Resources.SearchIcon;
+            this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.SearchButton.Location = new System.Drawing.Point(12, 111);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(123, 51);
+            this.SearchButton.TabIndex = 2;
+            this.SearchButton.Text = "     Search";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            // 
+            // HomeButton
+            // 
+            this.HomeButton.FlatAppearance.BorderSize = 0;
+            this.HomeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.HomeButton.ForeColor = System.Drawing.Color.White;
+            this.HomeButton.Image = global::FeedMeClient.Properties.Resources.HomeIcon;
+            this.HomeButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.HomeButton.Location = new System.Drawing.Point(12, 60);
+            this.HomeButton.Name = "HomeButton";
+            this.HomeButton.Size = new System.Drawing.Size(123, 51);
+            this.HomeButton.TabIndex = 2;
+            this.HomeButton.Text = "     Home";
+            this.HomeButton.UseVisualStyleBackColor = true;
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.SideMenuPanel);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.panel1.ResumeLayout(false);
+            this.Controls.SetChildIndex(this.SideMenuPanel, 0);
+            this.SideMenuPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel ButtonPanel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel SideMenuPanel;
+        private System.Windows.Forms.Panel MenuIndicatorPanel;
+        private System.Windows.Forms.Button HomeButton;
+        private System.Windows.Forms.Button SettingsButton;
+        private System.Windows.Forms.Button ProfileButton;
+        private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.Button MenuButton;
     }
 }
