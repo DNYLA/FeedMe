@@ -126,6 +126,12 @@
     <Compile Include="UserControls\Designs\HomeDesign.Designer.cs">
       <DependentUpon>HomeDesign.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\HomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\HomeControl.Designer.cs">
+      <DependentUpon>HomeControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CustomControls\FeedMeTextBox.resx">
       <DependentUpon>FeedMeTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Designs\HomeDesign.resx">
       <DependentUpon>HomeDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\HomeControl.resx">
+      <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

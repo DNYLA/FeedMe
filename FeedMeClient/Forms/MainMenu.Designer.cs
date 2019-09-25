@@ -36,7 +36,9 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
             this.UserViewPanel = new System.Windows.Forms.Panel();
+            this.homeControl1 = new FeedMeClient.UserControls.HomeControl();
             this.SideMenuPanel.SuspendLayout();
+            this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SideMenuPanel
@@ -134,11 +136,22 @@
             // 
             // UserViewPanel
             // 
+            this.UserViewPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.UserViewPanel.Controls.Add(this.homeControl1);
             this.UserViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UserViewPanel.Location = new System.Drawing.Point(139, 32);
             this.UserViewPanel.Name = "UserViewPanel";
             this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
             this.UserViewPanel.TabIndex = 2;
+            // 
+            // homeControl1
+            // 
+            this.homeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.homeControl1.Location = new System.Drawing.Point(0, 0);
+            this.homeControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.homeControl1.Name = "homeControl1";
+            this.homeControl1.Size = new System.Drawing.Size(764, 677);
+            this.homeControl1.TabIndex = 0;
             // 
             // MainMenu
             // 
@@ -153,6 +166,7 @@
             this.Controls.SetChildIndex(this.SideMenuPanel, 0);
             this.Controls.SetChildIndex(this.UserViewPanel, 0);
             this.SideMenuPanel.ResumeLayout(false);
+            this.UserViewPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -167,5 +181,6 @@
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button MenuButton;
         private System.Windows.Forms.Panel UserViewPanel;
+        private UserControls.HomeControl homeControl1;
     }
 }

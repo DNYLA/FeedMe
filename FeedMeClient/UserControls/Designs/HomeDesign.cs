@@ -16,5 +16,11 @@ namespace FeedMeClient.UserControls.Designs
         {
             InitializeComponent();
         }
+
+        private void HomeDesign_Load(object sender, EventArgs e)
+        {
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoSize = true;
+        }
     }
 }
