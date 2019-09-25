@@ -35,6 +35,7 @@
             this.ProfileButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
+            this.UserViewPanel = new System.Windows.Forms.Panel();
             this.SideMenuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,7 @@
             this.SideMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.SideMenuPanel.Location = new System.Drawing.Point(0, 32);
             this.SideMenuPanel.Name = "SideMenuPanel";
-            this.SideMenuPanel.Size = new System.Drawing.Size(139, 418);
+            this.SideMenuPanel.Size = new System.Drawing.Size(139, 677);
             this.SideMenuPanel.TabIndex = 1;
             // 
             // MenuButton
@@ -79,7 +80,7 @@
             this.SettingsButton.ForeColor = System.Drawing.Color.White;
             this.SettingsButton.Image = global::FeedMeClient.Properties.Resources.SettingsIcon;
             this.SettingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.SettingsButton.Location = new System.Drawing.Point(0, 367);
+            this.SettingsButton.Location = new System.Drawing.Point(0, 626);
             this.SettingsButton.Name = "SettingsButton";
             this.SettingsButton.Size = new System.Drawing.Size(139, 51);
             this.SettingsButton.TabIndex = 2;
@@ -99,6 +100,7 @@
             this.ProfileButton.TabIndex = 2;
             this.ProfileButton.Text = "     Profile";
             this.ProfileButton.UseVisualStyleBackColor = true;
+            this.ProfileButton.Click += new System.EventHandler(this.ProfileButton_Click);
             // 
             // SearchButton
             // 
@@ -113,6 +115,7 @@
             this.SearchButton.TabIndex = 2;
             this.SearchButton.Text = "     Search";
             this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // HomeButton
             // 
@@ -127,17 +130,28 @@
             this.HomeButton.TabIndex = 2;
             this.HomeButton.Text = "     Home";
             this.HomeButton.UseVisualStyleBackColor = true;
+            this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
+            // 
+            // UserViewPanel
+            // 
+            this.UserViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UserViewPanel.Location = new System.Drawing.Point(139, 32);
+            this.UserViewPanel.Name = "UserViewPanel";
+            this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
+            this.UserViewPanel.TabIndex = 2;
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(903, 709);
+            this.Controls.Add(this.UserViewPanel);
             this.Controls.Add(this.SideMenuPanel);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.Controls.SetChildIndex(this.SideMenuPanel, 0);
+            this.Controls.SetChildIndex(this.UserViewPanel, 0);
             this.SideMenuPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -152,5 +166,6 @@
         private System.Windows.Forms.Button ProfileButton;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button MenuButton;
+        private System.Windows.Forms.Panel UserViewPanel;
     }
 }

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FeedMeClient.UserControls
+namespace FeedMeClient.UserControls.Designs
 {
-    public partial class VendorList : UserControl
+    public partial class HomeDesign : UserControl
     {
-        public VendorList()
+        public HomeDesign()
         {
             InitializeComponent();
         }

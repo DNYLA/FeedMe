@@ -57,17 +57,24 @@ namespace FeedMeClient.Forms
             {
                 while (SideMenuPanel.Width != OPENED_PANEL_WIDTH)
                 {
+                    SideMenuPanel.Width = SideMenuPanel.Width + 1;
                     if (MenuIndicatorPanel.Width != 15)
                     {
                         MenuIndicatorPanel.Width = MenuIndicatorPanel.Width + 1;
+                        System.Threading.Thread.Sleep(30);
+                    }
+                    else
+                    {
+                        MenuIndicatorPanel.BackColor = Color.DodgerBlue;
+                        System.Threading.Thread.Sleep(10);
                     }
 
                     
-                    SideMenuPanel.Width = SideMenuPanel.Width + 1;
-                    System.Threading.Thread.Sleep(10);
+                    
+                    
 
                     //Add User Control ReSizing Below
-                    menuClosed = false;
+                    //Adding a Panel & Then Docking it to the centre removes the need to resize controls as it is handled within the docking.
                 }
 
                 for (int i = 0; i < 3; i++)
@@ -75,31 +82,59 @@ namespace FeedMeClient.Forms
                     OpenButton(MenuButtonArray[i], MenuButtonNames[i]);
                 }
 
-                MenuIndicatorPanel.BackColor = Color.DodgerBlue;
+                OpenButton(SettingsButton, "    Settings");
+
+                menuClosed = false;
             }
             else
             {
                 while (SideMenuPanel.Width != CLOSED_PANEL_WDITH)
                 {
+                    SideMenuPanel.Width = SideMenuPanel.Width - 1;
                     if (MenuIndicatorPanel.Width != 5)
                     {
                         MenuIndicatorPanel.Width = MenuIndicatorPanel.Width - 1;
+                        System.Threading.Thread.Sleep(30);
                     }
-                    SideMenuPanel.Width = SideMenuPanel.Width - 1;
-                    System.Threading.Thread.Sleep(10);
+                    else
+                    {
+                        MenuIndicatorPanel.BackColor = Color.Blue;
+                        System.Threading.Thread.Sleep(10);
+                    }
+                    
+                    
 
                     //Add User Control ReSizing Below
-                    menuClosed = true;
+                    
                 }
+
+                menuClosed = true;
 
                 for (int i = 0; i < 3; i++)
                 {
                     CloseButton(MenuButtonArray[i]);
                 }
+                CloseButton(SettingsButton);
 
-                MenuIndicatorPanel.BackColor = Color.Blue;
             }
 
+        }
+
+        private void AnimateIndicator(Button ButtonObject)
+        {
+            while(MenuIndicatorPanel.Location.Y != ButtonObject.Location.Y)
+            {
+                if (MenuIndicatorPanel.Location.Y > ButtonObject.Location.Y)
+                {
+                    MenuIndicatorPanel.Location = new Point(MenuIndicatorPanel.Location.X, MenuIndicatorPanel.Location.Y - 1);
+                    System.Threading.Thread.Sleep(10);
+                }
+                else
+                {
+                    MenuIndicatorPanel.Location = new Point(MenuIndicatorPanel.Location.X, MenuIndicatorPanel.Location.Y + 1);
+                    System.Threading.Thread.Sleep(10);
+                }
+            }
         }
 
         private void OpenButton(Button ButtonObject, string ButtonName)
@@ -118,5 +153,22 @@ namespace FeedMeClient.Forms
             ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 3, ButtonObject.Location.Y);
         }
 
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+            Button ButtonObject = (Button)sender;
+            AnimateIndicator(ButtonObject);
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            Button ButtonObject = (Button)sender;
+            AnimateIndicator(ButtonObject);
+        }
+
+        private void ProfileButton_Click(object sender, EventArgs e)
+        {
+            Button ButtonObject = (Button)sender;
+            AnimateIndicator(ButtonObject);
+        }
     }
 }
