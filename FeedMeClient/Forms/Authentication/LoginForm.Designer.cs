@@ -50,7 +50,7 @@
             this.UsernameTextBox.FocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(123)))), ((int)(((byte)(75)))));
             this.UsernameTextBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
             this.UsernameTextBox.ForeColor = System.Drawing.Color.Gray;
-            this.UsernameTextBox.Location = new System.Drawing.Point(56, 197);
+            this.UsernameTextBox.Location = new System.Drawing.Point(62, 197);
             this.UsernameTextBox.Name = "UsernameTextBox";
             this.UsernameTextBox.SingleLine = true;
             this.UsernameTextBox.Size = new System.Drawing.Size(288, 23);
@@ -68,7 +68,7 @@
             this.PasswordTextBox.FocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(123)))), ((int)(((byte)(75)))));
             this.PasswordTextBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
             this.PasswordTextBox.ForeColor = System.Drawing.Color.Gray;
-            this.PasswordTextBox.Location = new System.Drawing.Point(56, 239);
+            this.PasswordTextBox.Location = new System.Drawing.Point(62, 239);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = '*';
             this.PasswordTextBox.SingleLine = true;
@@ -81,7 +81,7 @@
             // 
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.LoginButton.Location = new System.Drawing.Point(40, 308);
+            this.LoginButton.Location = new System.Drawing.Point(46, 308);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(286, 44);
             this.LoginButton.TabIndex = 2;
@@ -95,7 +95,7 @@
             this.NoAccountLinkLabel.AutoSize = true;
             this.NoAccountLinkLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NoAccountLinkLabel.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(121)))));
-            this.NoAccountLinkLabel.Location = new System.Drawing.Point(112, 274);
+            this.NoAccountLinkLabel.Location = new System.Drawing.Point(118, 274);
             this.NoAccountLinkLabel.Name = "NoAccountLinkLabel";
             this.NoAccountLinkLabel.Size = new System.Drawing.Size(143, 17);
             this.NoAccountLinkLabel.TabIndex = 3;
@@ -106,7 +106,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(26, 236);
+            this.pictureBox2.Location = new System.Drawing.Point(32, 236);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -116,7 +116,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::FeedMeClient.Properties.Resources.PizzaLogo;
-            this.pictureBox3.Location = new System.Drawing.Point(130, 53);
+            this.pictureBox3.Location = new System.Drawing.Point(136, 53);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(125, 125);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -126,7 +126,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::FeedMeClient.Properties.Resources.avatar;
-            this.pictureBox1.Location = new System.Drawing.Point(25, 196);
+            this.pictureBox1.Location = new System.Drawing.Point(31, 196);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(24, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;

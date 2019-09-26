@@ -78,5 +78,10 @@ namespace FeedMeClient.Forms.Authentication
             AuthenticateLogin();
         }
         #endregion
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

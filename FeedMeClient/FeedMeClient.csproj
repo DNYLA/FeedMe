@@ -126,6 +126,12 @@
     <Compile Include="UserControls\Designs\HomeDesign.Designer.cs">
       <DependentUpon>HomeDesign.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Designs\OrderDesign.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Designs\OrderDesign.Designer.cs">
+      <DependentUpon>OrderDesign.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\HomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Designs\HomeDesign.resx">
       <DependentUpon>HomeDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Designs\OrderDesign.resx">
+      <DependentUpon>OrderDesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
@@ -195,7 +204,6 @@
     <Content Include="Images\Pizza-Express.jpg" />
     <Content Include="Images\PizzaLogo.png" />
     <Content Include="Images\Icons\UserIcon.png" />
-    <None Include="Resources\UserIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

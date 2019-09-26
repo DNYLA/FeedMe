@@ -63,6 +63,16 @@ namespace FeedMeClient.Forms
                 WindowState = FormWindowState.Normal;
             }
             ReSizeTitle();
+
+            float widthRatio = Screen.PrimaryScreen.Bounds.Width / 1280;
+            float heightRatio = Screen.PrimaryScreen.Bounds.Height / 800f;
+            SizeF scale = new SizeF(widthRatio, heightRatio);
+            this.Scale(scale);
+            foreach (Control control in this.Controls)
+            {
+                control.Font = new Font("Verdana", control.Font.SizeInPoints * heightRatio * widthRatio);
+            }
+
         }
 
         private void TopPanelMinimizeButton_Click(object sender, EventArgs e)

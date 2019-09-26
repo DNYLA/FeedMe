@@ -27,6 +27,17 @@ namespace FeedMeClient.UserControls
             MasterGenerator();
         }
 
+        private void OpenVendor(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void CursorChangeArgs()
+        {
+
+        }
+
+
         private void MasterGenerator()
         {
             string vendorID, vendorName, vendorDescription, vendorPostcode, vendorRating;
@@ -34,9 +45,9 @@ namespace FeedMeClient.UserControls
             string SQLQuery = "SELECT * FROM vendors";
             DataTable DataResults = DAL.ExecCommand(SQLQuery);
             int vendorAmount = DataResults.Rows.Count;
-            VendorAmountLabel.Text = String.Format("There are currently {0} restraunts/food places near you", vendorAmount.ToString());
+            VendorAmountLabel.Text = String.Format("There are currently {0} restraunts/food places near you", vendorAmount.ToString()); //Updates Text to Match No of Vendors
 
-            //Initializing Height & Location Variables
+            //Initializing Height & Location Variables (Information from Design Version)
             Size vendorPanelSize = new Size(711, 96);
             Size TitleSize = new Size(142, 30);
             Size DescSize = new Size(556, 47);
