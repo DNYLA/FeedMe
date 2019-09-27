@@ -31,9 +31,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -91,17 +91,17 @@
             this.panel1.Size = new System.Drawing.Size(761, 75);
             this.panel1.TabIndex = 11;
             // 
-            // button2
+            // button4
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(208, 11);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(172, 56);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Wraps";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button4.Location = new System.Drawing.Point(564, 11);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(172, 56);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Drinks";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -115,17 +115,17 @@
             this.button3.Text = "Sides";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // button2
             // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button4.Location = new System.Drawing.Point(564, 11);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(172, 56);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Drinks";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button2.Location = new System.Drawing.Point(208, 11);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(172, 56);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Wraps";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -177,16 +177,16 @@
             // label2
             // 
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(19, 41);
+            this.label2.Location = new System.Drawing.Point(133, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(559, 78);
+            this.label2.Size = new System.Drawing.Size(434, 78);
             this.label2.TabIndex = 1;
             this.label2.Text = "Comes with two PERi-PERi chicken breast fillets it’s a\r\ndefinite two-hander";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(274, 10);
+            this.label3.Location = new System.Drawing.Point(278, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(119, 21);
             this.label3.TabIndex = 0;
