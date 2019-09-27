@@ -14,7 +14,6 @@ namespace FeedMeClient.Forms
     {
         //Initializing Variables used globaly WITHIN the Class
         bool menuClosed = false;
-        int curIndicatorWidth;
         private const int CLOSED_PANEL_WDITH = 80;
         private const int OPENED_PANEL_WIDTH = 139;
         String[] MenuButtonNames = new string[3];
@@ -26,6 +25,7 @@ namespace FeedMeClient.Forms
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            HomeControl.BringToFront(); //Brings Vendor List Control to Front
             Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton };
 
             //Everything written Below can be easily edited using the Designer but Coding it in below ensure that if i edit the Menu Bar in the future
@@ -51,16 +51,17 @@ namespace FeedMeClient.Forms
 
         private void MenuButton_Click(object sender, EventArgs e)
         {
+
             Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton }; // Coppied from Above not making it a Global Variable to prevent any changes
 
             if (menuClosed)
             {
                 while (SideMenuPanel.Width != OPENED_PANEL_WIDTH)
                 {
-                    SideMenuPanel.Width = SideMenuPanel.Width + 1;
+                    SideMenuPanel.Width += 1;
                     if (MenuIndicatorPanel.Width != 15)
                     {
-                        MenuIndicatorPanel.Width = MenuIndicatorPanel.Width + 1;
+                        MenuIndicatorPanel.Width += 1;
                         System.Threading.Thread.Sleep(30);
                     }
                     else
@@ -90,10 +91,10 @@ namespace FeedMeClient.Forms
             {
                 while (SideMenuPanel.Width != CLOSED_PANEL_WDITH)
                 {
-                    SideMenuPanel.Width = SideMenuPanel.Width - 1;
+                    SideMenuPanel.Width -= 1;
                     if (MenuIndicatorPanel.Width != 5)
                     {
-                        MenuIndicatorPanel.Width = MenuIndicatorPanel.Width - 1;
+                        MenuIndicatorPanel.Width -= 1;
                         System.Threading.Thread.Sleep(30);
                     }
                     else
@@ -157,6 +158,7 @@ namespace FeedMeClient.Forms
         {
             Button ButtonObject = (Button)sender;
             AnimateIndicator(ButtonObject);
+            HomeControl.BringToFront();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)

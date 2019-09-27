@@ -24,18 +24,18 @@ namespace FeedMeClient.Forms.Authentication
         private string[] GetHashData()
         {
             string SQLQuery = ($"SELECT * FROM users WHERE username = '{UsernameTextBox.Text}'");
-            DataTable SQLResults = DAL.ExecCommand(SQLQuery);
-            string[] HashData = new string[2];
-            HashData[0] = "-1";
-            HashData[1] = "Invalid";
-            if (SQLResults.Rows.Count > 0)
+            using (DataTable SQLResults = DAL.ExecCommand(SQLQuery))
             {
-                HashData[0] = SQLResults.Rows[0]["password"].ToString();
-                HashData[1] = SQLResults.Rows[0]["salt"].ToString();
+                string[] HashData = new string[2];
+                HashData[0] = "-1";
+                HashData[1] = "Invalid";
+                if (SQLResults.Rows.Count > 0)
+                {
+                    HashData[0] = SQLResults.Rows[0]["password"].ToString();
+                    HashData[1] = SQLResults.Rows[0]["salt"].ToString();
+                }
                 return HashData;
             }
-
-            return HashData;
         }
 
         private void AuthenticateLogin()

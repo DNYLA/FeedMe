@@ -138,6 +138,12 @@
     <Compile Include="UserControls\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\OrderControl.Designer.cs">
+      <DependentUpon>OrderControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CustomControls\FeedMeTextBox.resx">
       <DependentUpon>FeedMeTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\OrderControl.resx">
+      <DependentUpon>OrderControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -196,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\avatar.png" />
+    <Content Include="Images\ChickenBurger.jpg" />
     <Content Include="Images\Icons\HomeIcon.png" />
     <Content Include="Images\Icons\ProfileIcon.png" />
     <Content Include="Images\Icons\SearchIcon.png" />

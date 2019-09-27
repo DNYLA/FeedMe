@@ -18,32 +18,35 @@ namespace FeedMeClient.Functions
         #region Panel Method
         public static Panel AddPanel(string panelName, Color panelColour, Size panelSize)
         {
-            Panel panelObject = new Panel();
-
-            panelObject.Name = panelName + "Panel";
-            panelObject.BackColor = panelColour;
-            panelObject.Size = panelSize;
-            panelObject.TabIndex = 0;
-            panelObject.Font = new Font("Nirmala UI", 14);
-            panelObject.Margin = new Padding(8, 5, 5, 5);
+            Panel panelObject = new Panel
+            {
+                Name = panelName + "Panel",
+                BackColor = panelColour,
+                Size = panelSize,
+                TabIndex = 0,
+                Font = new Font("Nirmala UI", 14),
+                Margin = new Padding(8, 5, 5, 5)
+            };
 
             return panelObject;
         }
         #endregion
 
         #region Label Method
-        public static Label AddLabel(string labelName, string labelText, Point labelLocation, string labelFont, int fontSize, FontStyle labelFontStyle, Color labelForeColor, Color labelBackColor, Size labelSize, bool autoSize)
+        public static Label AddLabel(string labelName, string labelText, Point labelLocation, Font labelFont, Color labelForeColor, Color labelBackColor, Size labelSize, bool autoSize)
         {
-            Label labelObject = new Label();
+            Label labelObject = new Label
+            {
 
-            //Set Properties
-            labelObject.Name = labelName + "Label";
-            labelObject.Text = labelText;
+                //Set Properties
+                Name = labelName + "Label",
+                Text = labelText,
 
-            labelObject.ForeColor = labelForeColor;
-            labelObject.BackColor = labelBackColor;
+                ForeColor = labelForeColor,
+                BackColor = labelBackColor,
 
-            labelObject.Font = new Font(labelFont, fontSize, labelFontStyle);
+                Font = labelFont
+            };
 
             if (!autoSize)
             {
@@ -65,21 +68,82 @@ namespace FeedMeClient.Functions
         #region PictureBox Method
         public static PictureBox AddPictureBox(string picBoxName, Point picBoxLocation, Size picBoxSize)
         {
-            PictureBox picBoxObject = new PictureBox();
+            PictureBox picBoxObject = new PictureBox
+            {
 
-            //Setting Properties
-            picBoxObject.Name = picBoxName + "PicBox";
-            picBoxObject.Image = FeedMeClient.Properties.Resources.Pizza_Express; //This is Temporary until i Set up the Server. The Image won't even be handled in this function;
+                //Setting Properties
+                Name = picBoxName + "PicBox",
+                Image = FeedMeClient.Properties.Resources.Pizza_Express, //This is Temporary until i Set up the Server. The Image won't even be handled in this function;
 
-            picBoxObject.Location = picBoxLocation;
-            picBoxObject.Size = picBoxSize;
+                Location = picBoxLocation,
+                Size = picBoxSize,
 
-            picBoxObject.SizeMode = PictureBoxSizeMode.Zoom;
+                SizeMode = PictureBoxSizeMode.Zoom
+            };
 
 
 
             return picBoxObject;
         }
+        #endregion
+
+        #region Button Method
+
+        //To Shorten the Amount of paramters i decided to make it so you have to build the Font variable as one instead of three seperate paramters for font.
+        public static Button AddButton(string buttonName, string buttonText, Point buttonLocation, Font buttonFont, Color buttonForeColor, Color buttonBackColor, Size buttonSize, bool autoSize)
+        {
+            Button buttonObject = new Button
+            {
+                Name = buttonName + "Button",
+                Text = buttonText,
+                Location = buttonLocation,
+                Font = buttonFont,
+                ForeColor = buttonForeColor,
+                BackColor = buttonBackColor,
+                FlatStyle = FlatStyle.Flat,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Margin = new Padding(5)
+            };
+
+            if (!autoSize)
+            {
+                buttonObject.Size = buttonSize;
+            }
+            else
+            {
+                buttonObject.AutoSize = true;
+            }
+
+            buttonObject.Location = buttonLocation;
+            buttonObject.FlatAppearance.BorderSize = 1;
+
+            return buttonObject;
+        }
+
+        #endregion
+
+        #region TextBox Method
+
+        public static TextBox AddTextBox(string TextBoxName, string TextBoxText, string TextBoxTag, Point TextBoxLocation, Font TextBoxFont, Color BoxForeColor, Color BoxBackColor, Size TextBoxSize)
+        {
+            TextBox textBoxObject = new TextBox
+            {
+                Name = TextBoxName + "TBox",
+                Text = TextBoxText,
+                ForeColor = BoxForeColor,
+                BackColor = BoxBackColor,
+                Tag = TextBoxTag,
+                Font = TextBoxFont,
+                Size = TextBoxSize,
+                Location = TextBoxLocation,
+                BorderStyle = BorderStyle.None,
+                TextAlign = HorizontalAlignment.Center,
+                Margin = new Padding(5)
+            };
+
+            return textBoxObject;
+        }
+
         #endregion
 
         #endregion

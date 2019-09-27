@@ -13,8 +13,7 @@ namespace FeedMeClient.CustomControls
     public partial class FeedMeTextBox : TextBox
     {
         private Font Fnt;
-        private Color Col;
-        private float FntSize;
+        private readonly float FntSize;
 
         #region Initialize Class
         public FeedMeTextBox()
