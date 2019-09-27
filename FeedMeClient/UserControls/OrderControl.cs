@@ -32,22 +32,7 @@ namespace FeedMeClient.UserControls
             InitializeComponent();
         }
 
-        private void OrderControl_Load(object sender, EventArgs e)
-        {
-            GenerateTopButtons(2);
-            GenerateItems(0, "Burgers");
-
-            try
-            {
-                
-
-
-            }
-            catch
-            {
-                MessageBox.Show("Unexpected Error.");
-            }
-        }
+        #region Dynamic Generator Methods
 
         #region Generate Top Button Method
         private void GenerateTopButtons(int vendorID)
@@ -82,8 +67,10 @@ namespace FeedMeClient.UserControls
         }
         #endregion
 
+        #region Generate Items Method
         private void GenerateItems(int vendorID, string itemType)
         {
+            #region Initiaizling Variables & DataTable
             int ItemAmount;
             string ItemID, VendorID, ItemType, ItemName, ItemDescription, ItemPrice;
 
@@ -91,7 +78,9 @@ namespace FeedMeClient.UserControls
 
             DataTable ItemResults = DAL.ExecCommand(SQLCommand);
             ItemAmount = ItemResults.Rows.Count;
+            #endregion
 
+            #region Initiaizling Common Variables for Dynamic Controls
             //Size & Location Variables
             Size EmptySize = new Size(0, 0);
             Size PanelSize = new Size(678, 133);
@@ -117,16 +106,21 @@ namespace FeedMeClient.UserControls
             Color WhiteColour = Color.White;
             Color TransparentColour = Color.Transparent;
             Color DimGrayColour = Color.DimGray;
+            #endregion
 
+            #region Iterating Through DataTable
             //Getting Data From Table & Creating Controls
             foreach (DataRow Item in ItemResults.Rows)
             {
+                #region Getting Item Information
                 ItemID = Item[0].ToString();
                 ItemName = Item[2].ToString();
                 ItemType = Item[3].ToString();
                 ItemDescription = Item[4].ToString();
                 ItemPrice = Item[5].ToString();
+                #endregion
 
+                #region Creating Dynamic Item Controls
                 Panel ItemPanel = GenControls.AddPanel(ItemName, Color.White, PanelSize);
 
                 Label TitleLabel = GenControls.AddLabel(ItemName + "Title", ItemName, TitleLoc, TitleFont, BlackColour, TransparentColour, EmptySize, true);
@@ -138,7 +132,9 @@ namespace FeedMeClient.UserControls
                 PictureBox ItemPictureBox = GenControls.AddPictureBox(ItemName, PicBoxLoc, PicBoxSize);
 
                 ItemPictureBox.Image = FeedMeClient.Properties.Resources.ChickenBurger;
+                #endregion
 
+                #region Adding to Form & Setting Event Handlers
                 Control[] PanelControls = new Control[] { TitleLabel, DescLabel, PriceLabel, RemoveButton, ItemAmountTBox, AddButton, ItemPictureBox };
 
                 foreach (Control CurrentItemControl in PanelControls)
@@ -150,11 +146,15 @@ namespace FeedMeClient.UserControls
                 AddButton.Click += new EventHandler(ItemIncreased);
                 ItemAmountTBox.TextChanged += new EventHandler(ItemAmountChanged);
                 ItemsFlowPanel.Controls.Add(ItemPanel);
-                
+                #endregion
             }
+            #endregion
         }
+        #endregion
 
+        #endregion
 
+        #region Helper Methods
         private DataRow getVendorDetails(string vendorName)
         {
             DataTable QueryResults = DAL.ExecCommand($"SELECT * FROM vendors WHERE Name = '{vendorName}'");
@@ -162,6 +162,101 @@ namespace FeedMeClient.UserControls
             DataRow VendorDetail = QueryResults.Rows[0];
 
             return VendorDetail;
+        }
+        #endregion
+
+        #region Event Handlers
+        #region Control Load Event
+        private void OrderControl_Load(object sender, EventArgs e)
+        {
+            GenerateTopButtons(2);
+            GenerateItems(0, "Burgers");
+
+            try
+            {
+
+
+
+            }
+            catch
+            {
+                MessageBox.Show("Unexpected Error.");
+            }
+        }
+        #endregion
+
+        #region Other Events
+        private void VendorTitleLabel_TextChanged(object sender, EventArgs e)
+        {
+            DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
+            int vendorID = Convert.ToInt32(vendorInfo[0].ToString());
+            //Clearing Flow Item Panels
+            ButtonsFlowPanel.Controls.Clear();
+            ItemsFlowPanel.Controls.Clear();
+
+            //Adding New Controls to Flow Panels
+            GenerateTopButtons(vendorID);
+
+
+            Button FirstItemType = (Button)ButtonsFlowPanel.Controls[0];
+            string ItemType = FirstItemType.Name.Substring(0, FirstItemType.Name.Length - 6); //Removes the "Button" part at the end of the name.
+
+            GenerateItems(vendorID, ItemType);
+
+        }
+
+        private void PanelButtonClicked(object sender, EventArgs e)
+        {
+            Button ItemTypeButton = (Button)sender;
+
+            DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
+            int vendorID = Convert.ToInt32(vendorInfo[0]);
+
+
+
+            ItemsFlowPanel.Controls.Clear();
+
+            //Naming Scheme is Name + Button So removing the "Button" Part from the name is needed to get the item Type
+            string ItemTypeName = ItemTypeButton.Name.Substring(0, ItemTypeButton.Name.Length - 6);
+            Console.WriteLine(vendorID.ToString() + ItemTypeName);
+
+            GenerateItems(vendorID, ItemTypeName);
+        }
+        #endregion
+
+        #region Item Event Handlers
+        private void ItemDecreased(object sender, EventArgs e)
+        {
+            Button decreaseButton = (Button)sender;
+
+            //Need to Remove the "RemoveButton" at the end of the name and add "TextBox" instead.
+            string TextBoxName = decreaseButton.Name.Substring(0, decreaseButton.Name.Length - 12);
+            Console.WriteLine(TextBoxName);
+            TextBoxName = TextBoxName + "TBox";
+            Console.WriteLine(TextBoxName);
+
+            TextBox tb = Controls.Find(TextBoxName, true).OfType<TextBox>().SingleOrDefault();
+
+            int tbIntVal = Convert.ToInt32(tb.Text);
+            tbIntVal = tbIntVal - 1;
+            tb.Text = tbIntVal.ToString();
+        }
+
+        private void ItemIncreased(object sender, EventArgs e)
+        {
+            Button increaseButton = (Button)sender;
+
+            //Need to Remove the "AddButton" at the end of the name and add "TextBox" instead.
+            string TextBoxName = increaseButton.Name.Substring(0, increaseButton.Name.Length - 9);
+            Console.WriteLine(TextBoxName);
+            TextBoxName = TextBoxName + "TBox";
+            Console.WriteLine(TextBoxName);
+
+            TextBox tb = Controls.Find(TextBoxName, true).OfType<TextBox>().SingleOrDefault();
+
+            int tbIntVal = Convert.ToInt32(tb.Text);
+            tbIntVal = tbIntVal + 1;
+            tb.Text = tbIntVal.ToString();
         }
 
         private void ItemAmountChanged(object sender, EventArgs e)
@@ -193,76 +288,9 @@ namespace FeedMeClient.UserControls
 
             }
         }
-
-        private void ItemIncreased(object sender, EventArgs e)
-        {
-            Button increaseButton = (Button)sender;
-
-            //Need to Remove the "AddButton" at the end of the name and add "TextBox" instead.
-            string TextBoxName = increaseButton.Name.Substring(0, increaseButton.Name.Length - 9);
-            Console.WriteLine(TextBoxName);
-            TextBoxName = TextBoxName + "TBox";
-            Console.WriteLine(TextBoxName);
-
-            TextBox tb = Controls.Find(TextBoxName, true).OfType<TextBox>().SingleOrDefault();
-
-            int tbIntVal = Convert.ToInt32(tb.Text);
-            tbIntVal = tbIntVal + 1;
-            tb.Text = tbIntVal.ToString();
-        }
-
-        private void ItemDecreased(object sender, EventArgs e)
-        {
-            Button decreaseButton = (Button)sender;
-
-            //Need to Remove the "RemoveButton" at the end of the name and add "TextBox" instead.
-            string TextBoxName = decreaseButton.Name.Substring(0, decreaseButton.Name.Length - 12);
-            Console.WriteLine(TextBoxName);
-            TextBoxName = TextBoxName + "TBox";
-            Console.WriteLine(TextBoxName);
-
-            TextBox tb = Controls.Find(TextBoxName, true).OfType<TextBox>().SingleOrDefault();
-
-            int tbIntVal = Convert.ToInt32(tb.Text);
-            tbIntVal = tbIntVal - 1;
-            tb.Text = tbIntVal.ToString();
-        }
-
-        private void PanelButtonClicked(object sender, EventArgs e)
-        {
-            Button ItemTypeButton = (Button)sender;
-
-            DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
-            int vendorID = Convert.ToInt32(vendorInfo[0]);
-
-            
-
-            ItemsFlowPanel.Controls.Clear();
-
-            //Naming Scheme is Name + Button So removing the "Button" Part from the name is needed to get the item Type
-            string ItemTypeName = ItemTypeButton.Name.Substring(0, ItemTypeButton.Name.Length - 6);
-            Console.WriteLine(vendorID.ToString() + ItemTypeName);
-
-            GenerateItems(vendorID, ItemTypeName);
-        }
-
-        private void VendorTitleLabel_TextChanged(object sender, EventArgs e)
-        {
-            DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
-            int vendorID = Convert.ToInt32(vendorInfo[0].ToString());
-            //Clearing Flow Item Panels
-            ButtonsFlowPanel.Controls.Clear();
-            ItemsFlowPanel.Controls.Clear();
-
-            //Adding New Controls to Flow Panels
-            GenerateTopButtons(vendorID);
+        #endregion
 
 
-            Button FirstItemType = (Button)ButtonsFlowPanel.Controls[0];
-            string ItemType = FirstItemType.Name.Substring(0, FirstItemType.Name.Length - 6); //Removes the "Button" part at the end of the name.
-
-            GenerateItems(vendorID, ItemType);
-
-        }
+        #endregion
     }
 }

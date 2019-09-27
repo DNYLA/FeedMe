@@ -144,12 +144,6 @@
     <Compile Include="UserControls\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Notification.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Notification.Designer.cs">
-      <DependentUpon>Notification.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\OrderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,9 +181,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Notification.resx">
-      <DependentUpon>Notification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\OrderControl.resx">
       <DependentUpon>OrderControl.cs</DependentUpon>

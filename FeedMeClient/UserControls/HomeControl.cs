@@ -19,6 +19,7 @@ namespace FeedMeClient.UserControls
             InitializeComponent();
         }
 
+        #region Obsolete
         [Obsolete("Master Generator Updated which doesn't require this function anymore.")]
         private void ControlGenerator(int CurrentGen, int HighGen)
         {
@@ -44,21 +45,33 @@ namespace FeedMeClient.UserControls
 
         }
 
+        #endregion
+
+        #region Event Handlers
         private void HomeControl_Load(object sender, EventArgs e)
         {
-            
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
 
             MasterGenerator();
         }
 
+        private void CursorChangeArgs(object sender, MouseEventArgs e)
+        {
+            Cursor.Current = Cursors.Hand;
+        }
+
+
         private void OpenVendor(object sender, EventArgs e)
         {
+            #region Initializing Variables
             Control PanelControl = (Control)sender; //Not Specifying if it is a Button, Label ETC because it can be any.
             int VendorNameLen = PanelControl.Name.Length;
             string PanelName = PanelControl.Name;
             int LenToRemove = 0;
+            #endregion
+
+            #region Removing Label Ending
             //Cant Use a Switch Statement since The expression can always be different
             if (PanelName.EndsWith("DescLabel")) //DescLabel has to be before "Label" otherwise it will be ignored
             {
@@ -82,10 +95,9 @@ namespace FeedMeClient.UserControls
             {
                 LenToRemove = 6;
             }
+            #endregion
 
-            Console.WriteLine(LenToRemove.ToString());
-
-
+            #region Finding & Setting Order User Control Info
             string VendorName = PanelControl.Name.Substring(0, VendorNameLen - LenToRemove); //Removing "Label" From Label Name
             Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
             UserControl userControl = CurrentForm.Controls.Find("OrderControl", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
@@ -94,10 +106,12 @@ namespace FeedMeClient.UserControls
             TitleLabel.Text = VendorName; //Sets Vendor Title To Vendor that was just selected
 
             userControl.BringToFront();
-
+            #endregion
         }
 
+        #endregion
 
+        #region Dynamic Control Generator Method
         private void MasterGenerator()
         {
             string vendorID, vendorName, vendorDescription, vendorPostcode, vendorRating;
@@ -108,6 +122,7 @@ namespace FeedMeClient.UserControls
                 int vendorAmount = DataResults.Rows.Count;
                 VendorAmountLabel.Text = String.Format("There are currently {0} restraunts/food places near you", vendorAmount.ToString()); //Updates Text to Match No of Vendors
 
+                #region Initiaizling Location & Size For Controls
                 //Initializing Height & Location Variables (Information from Design Version)
                 Size vendorPanelSize = new Size(711, 96);
                 Size TitleSize = new Size(142, 30);
@@ -124,23 +139,25 @@ namespace FeedMeClient.UserControls
 
                 Font DefaultFont = new Font("Nirmala UI", 12, FontStyle.Regular);
                 Font TitleFont = new Font("Nirmala UI", 14, FontStyle.Bold);
+                #endregion
 
                 string DefaultFnt = "Nirmala UI";
 
                 int maxGen = vendorAmount;
 
+                #region Iterating Through Each Vendor
                 for (int i = 0; i < maxGen; i++)
                 {
+                    #region Getting Variables
                     vendorID = DataResults.Rows[i][0].ToString();
                     vendorName = DataResults.Rows[i][1].ToString();
                     vendorDescription = DataResults.Rows[i][2].ToString();
                     vendorPostcode = ("(" + DataResults.Rows[i][4].ToString() + ")");
                     //vendorRating = DataResults.Rows[i][6].ToString();
                     vendorRating = "⭐⭐⭐⭐⭐";
+                    #endregion
 
-
-                    //COLOR WHITE
-                    //
+                    #region Creating & Adding Event Handlers To Each Control
                     Panel vendorPanelObject = GenControls.AddPanel(vendorName, Color.White, vendorPanelSize);
 
                     Label vendorTitleLabel = GenControls.AddLabel(vendorName, vendorName, TitleLoc, TitleFont, Color.Black, Color.Transparent, TitleSize, true);
@@ -156,7 +173,7 @@ namespace FeedMeClient.UserControls
 
                     Control[] controlArray = new Control[] { vendorTitleLabel, vendorDescLabel, vendorRatingLabel, vendorPostcodeLabel, vendorPictureBox };
 
-
+#
 
                     foreach (Control curControl in controlArray)
                     {
@@ -170,14 +187,14 @@ namespace FeedMeClient.UserControls
                     VendorsFlowPanel.Controls.Add(vendorPanelObject);
                     vendorPanelObject.Click += new EventHandler(OpenVendor);
                     vendorPanelObject.MouseMove += new MouseEventHandler(CursorChangeArgs);
-
+                    #endregion
                 }
+                #endregion
             }
         }
 
-        private void CursorChangeArgs(object sender, MouseEventArgs e)
-        {
-            Cursor.Current = Cursors.Hand;
-        }
+        #endregion
+
+
     }
 }
