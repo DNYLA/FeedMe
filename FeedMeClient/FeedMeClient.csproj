@@ -110,6 +110,12 @@
     <Compile Include="Forms\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Notification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Notification.Designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Functions\Data\DAL.cs" />
     <Compile Include="Functions\Data\HashPass.cs" />
     <Compile Include="Functions\GenControls.cs" />
@@ -138,6 +144,12 @@
     <Compile Include="UserControls\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Notification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Notification.Designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -159,6 +171,9 @@
     <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Notification.resx">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -172,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Notification.resx">
+      <DependentUpon>Notification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\OrderControl.resx">
       <DependentUpon>OrderControl.cs</DependentUpon>
@@ -207,6 +225,9 @@
     <Content Include="Images\avatar.png" />
     <Content Include="Images\ChickenBurger.jpg" />
     <Content Include="Images\Icons\HomeIcon.png" />
+    <Content Include="Images\Icons\Notifications\error.png" />
+    <Content Include="Images\Icons\Notifications\success.png" />
+    <Content Include="Images\Icons\Notifications\warning.png" />
     <Content Include="Images\Icons\ProfileIcon.png" />
     <Content Include="Images\Icons\SearchIcon.png" />
     <Content Include="Images\Icons\SettingsIcon.png" />

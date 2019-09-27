@@ -16,8 +16,8 @@ namespace FeedMeClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.MainMenu());
-            //Application.Run(new Forms.Authentication.LoginForm());
+            //Application.Run(new Forms.MainMenu());
+            Application.Run(new Forms.Authentication.LoginForm());
         }
     }
 }

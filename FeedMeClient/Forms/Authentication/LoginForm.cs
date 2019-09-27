@@ -44,7 +44,8 @@ namespace FeedMeClient.Forms.Authentication
 
             if (HashData[0] == "-1")
             {
-                MessageBox.Show("Username is Invalid!");
+                Notification NotifForm = new Notification("Username is Invalid!", NotifType.information);
+                NotifForm.Show();
                 return;
             }
 
@@ -53,14 +54,16 @@ namespace FeedMeClient.Forms.Authentication
             Console.WriteLine(HashData[0]);
             if (CurrentHash == HashData[0])
             {
-                MessageBox.Show("Successfully Logged In");
+                Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
+                NotifForm.Show();
                 MainMenu MainMenuForm = new MainMenu();
                 MainMenuForm.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Invalid Credentials");
+                Notification NotifForm = new Notification("Invalid Credentials ", NotifType.error);
+                NotifForm.Show();
             }
         }
         #endregion

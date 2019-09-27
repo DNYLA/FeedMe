@@ -171,6 +171,8 @@ namespace FeedMeClient.Forms
         {
             Button ButtonObject = (Button)sender;
             AnimateIndicator(ButtonObject);
+            Notification NotifForm = new Notification("Success ", NotifType.error);
+            NotifForm.Show();
         }
     }
 }
