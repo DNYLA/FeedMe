@@ -173,7 +173,6 @@ namespace FeedMeClient.UserControls
 
                     Control[] controlArray = new Control[] { vendorTitleLabel, vendorDescLabel, vendorRatingLabel, vendorPostcodeLabel, vendorPictureBox };
 
-#
 
                     foreach (Control curControl in controlArray)
                     {

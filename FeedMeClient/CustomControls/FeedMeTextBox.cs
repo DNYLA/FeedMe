@@ -111,7 +111,6 @@ namespace FeedMeClient.CustomControls
             base.OnEnter(e);
             if (Text == watermark)
             {
-                Console.WriteLine("Text");
                 Text = string.Empty;
             }
             Controls[0].BackColor = _FocusColor;
@@ -131,7 +130,6 @@ namespace FeedMeClient.CustomControls
             base.OnLeave(e);
             if (Text == string.Empty)
             {
-                Console.WriteLine("Test");
                 Text = watermark;
             }
             Controls[0].BackColor = _borderColor;
