@@ -32,6 +32,8 @@
             this.OrderButton = new System.Windows.Forms.Button();
             this.ItemsFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ButtonsFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // VendorTitleLabel
@@ -75,10 +77,21 @@
             this.ButtonsFlowPanel.Size = new System.Drawing.Size(761, 75);
             this.ButtonsFlowPanel.TabIndex = 17;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::FeedMeClient.Properties.Resources.Pizza_Express;
+            this.pictureBox2.Location = new System.Drawing.Point(196, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(72, 49);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 18;
+            this.pictureBox2.TabStop = false;
+            // 
             // OrderControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.ButtonsFlowPanel);
             this.Controls.Add(this.ItemsFlowPanel);
             this.Controls.Add(this.OrderButton);
@@ -88,6 +101,7 @@
             this.Name = "OrderControl";
             this.Size = new System.Drawing.Size(767, 677);
             this.Load += new System.EventHandler(this.OrderControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,5 +112,6 @@
         private System.Windows.Forms.Button OrderButton;
         private System.Windows.Forms.FlowLayoutPanel ItemsFlowPanel;
         private System.Windows.Forms.FlowLayoutPanel ButtonsFlowPanel;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

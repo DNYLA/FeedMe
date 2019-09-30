@@ -51,31 +51,38 @@ namespace FeedMeClient.Forms
 
         private void MenuButton_Click(object sender, EventArgs e)
         {
+           Task ThreadMenu = new Task(() =>
+           {
 
-            Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton }; // Coppied from Above not making it a Global Variable to prevent any changes
+
+               //Slow Down Animation When approaching Button.
+               Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton }; // Coppied from Above not making it a Global Variable to prevent any changes
 
             if (menuClosed)
             {
                 while (SideMenuPanel.Width != OPENED_PANEL_WIDTH)
                 {
-                    SideMenuPanel.Width += 1;
-                    if (MenuIndicatorPanel.Width != 15)
+                    MethodInvoker updateIt = delegate
                     {
-                        MenuIndicatorPanel.Width += 1;
-                        System.Threading.Thread.Sleep(30);
-                    }
-                    else
-                    {
-                        MenuIndicatorPanel.BackColor = Color.DodgerBlue;
-                        System.Threading.Thread.Sleep(10);
-                    }
-
-                    
-                    
-                    
-
-                    //Add User Control ReSizing Below
-                    //Adding a Panel & Then Docking it to the centre removes the need to resize controls as it is handled within the docking.
+                        SideMenuPanel.Width += 1;
+                    };
+                    this.SideMenuPanel.BeginInvoke(updateIt);
+                       //Add User Control ReSizing Below
+                       //Adding a Panel & Then Docking it to the centre removes the need to resize controls as it is handled within the docking.
+                       MethodInvoker UiThread = delegate
+                       {
+                           if (MenuIndicatorPanel.Width != 15)
+                           {
+                               MenuIndicatorPanel.Width += 1;
+                               System.Threading.Thread.Sleep(30);
+                           }
+                           else
+                           {
+                               MenuIndicatorPanel.BackColor = Color.DodgerBlue;
+                               System.Threading.Thread.Sleep(10);
+                           }
+                       };
+                       MenuIndicatorPanel.BeginInvoke(UiThread);
                 }
 
                 for (int i = 0; i < 3; i++)
@@ -91,10 +98,20 @@ namespace FeedMeClient.Forms
             {
                 while (SideMenuPanel.Width != CLOSED_PANEL_WDITH)
                 {
-                    SideMenuPanel.Width -= 1;
+                    MethodInvoker updateIt = delegate
+                    {
+                        SideMenuPanel.Width -= 1;
+                    };
+                    this.SideMenuPanel.BeginInvoke(updateIt);
+                    Application.DoEvents();
                     if (MenuIndicatorPanel.Width != 5)
                     {
-                        MenuIndicatorPanel.Width -= 1;
+                           MethodInvoker updateIt2 = delegate
+                           {
+                               MenuIndicatorPanel.Width -= 1;
+                           };
+                           this.MenuIndicatorPanel.BeginInvoke(updateIt2);
+                           Application.DoEvents();
                         System.Threading.Thread.Sleep(30);
                     }
                     else
@@ -118,7 +135,8 @@ namespace FeedMeClient.Forms
                 CloseButton(SettingsButton);
 
             }
-
+           });
+            ThreadMenu.Start();
         }
 
         private void AnimateIndicator(Button ButtonObject)
@@ -140,18 +158,31 @@ namespace FeedMeClient.Forms
 
         private void OpenButton(Button ButtonObject, string ButtonName)
         {
-            ButtonObject.Width = SideMenuPanel.Width + 5;
-            ButtonObject.Text = ButtonName;
-            ButtonObject.ImageAlign = ContentAlignment.MiddleLeft;
-            ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 12, ButtonObject.Location.Y);
+            MethodInvoker updateIt2 = delegate
+            {
+                Application.DoEvents();
+                ButtonObject.Width = SideMenuPanel.Width + 5;
+                ButtonObject.Text = ButtonName;
+                ButtonObject.ImageAlign = ContentAlignment.MiddleLeft;
+                ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 12, ButtonObject.Location.Y);
+            };
+            this.MenuIndicatorPanel.BeginInvoke(updateIt2);
+
         }
 
         private void CloseButton(Button ButtonObject)
         {
-            ButtonObject.Width = SideMenuPanel.Width;
-            ButtonObject.Text = "";
-            ButtonObject.ImageAlign = ContentAlignment.MiddleCenter;
-            ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 3, ButtonObject.Location.Y);
+            MethodInvoker updateIt2 = delegate
+            {
+                ButtonObject.Width = SideMenuPanel.Width;
+                ButtonObject.Text = "";
+                ButtonObject.ImageAlign = ContentAlignment.MiddleCenter;
+                ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 3, ButtonObject.Location.Y);
+            };
+            this.MenuIndicatorPanel.BeginInvoke(updateIt2);
+            Application.DoEvents();
+
+
         }
 
         private void HomeButton_Click(object sender, EventArgs e)
