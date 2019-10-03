@@ -35,6 +35,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ServerTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -133,11 +134,22 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
+            // ServerTest
+            // 
+            this.ServerTest.Location = new System.Drawing.Point(82, 413);
+            this.ServerTest.Name = "ServerTest";
+            this.ServerTest.Size = new System.Drawing.Size(135, 53);
+            this.ServerTest.TabIndex = 7;
+            this.ServerTest.Text = "button1";
+            this.ServerTest.UseVisualStyleBackColor = true;
+            this.ServerTest.Click += new System.EventHandler(this.ServerTest_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 538);
+            this.Controls.Add(this.ServerTest);
             this.Controls.Add(this.NoAccountLinkLabel);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
@@ -147,6 +159,7 @@
             this.Controls.Add(this.UsernameTextBox);
             this.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.Name = "LoginForm";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.Controls.SetChildIndex(this.UsernameTextBox, 0);
             this.Controls.SetChildIndex(this.PasswordTextBox, 0);
             this.Controls.SetChildIndex(this.LoginButton, 0);
@@ -154,6 +167,7 @@
             this.Controls.SetChildIndex(this.pictureBox3, 0);
             this.Controls.SetChildIndex(this.pictureBox2, 0);
             this.Controls.SetChildIndex(this.NoAccountLinkLabel, 0);
+            this.Controls.SetChildIndex(this.ServerTest, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -170,5 +184,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.LinkLabel NoAccountLinkLabel;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Button ServerTest;
     }
 }

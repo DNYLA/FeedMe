@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeClient.Functions.Data;
+using FeedMeClient.Functions.Server;
 
 namespace FeedMeClient.Forms.Authentication
 {
@@ -85,6 +86,16 @@ namespace FeedMeClient.Forms.Authentication
         private void Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void ServerTest_Click(object sender, EventArgs e)
+        {
+            ServerConnection.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text);
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            ServerConnection.InitiailizeConnection();
         }
     }
 }
