@@ -200,7 +200,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FeedMeSerialization\FeedMeSerialization.csproj">
+      <Project>{5b06a087-ea59-4960-a8eb-a26a4134379b}</Project>
+      <Name>FeedMeSerialization</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
