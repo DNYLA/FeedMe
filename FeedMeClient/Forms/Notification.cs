@@ -61,7 +61,7 @@ namespace FeedMeClient.Forms
             this.Opacity = Opacity - 0.01;
 
             //Closes Form After Changing Opacity to 1%
-            if (Opacity == 0.01)
+            if (Opacity < 0.05)
             {
                 this.Close();
             }
