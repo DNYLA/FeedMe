@@ -21,9 +21,7 @@ namespace FeedMeServer.Functions.Data
 
         public static DataTable ExecCommand(string command)
         {
-            //string myConString = "server=77.102.93.95; port=3307; uid=root; pwd=blopdop; database=feedme; persistsecurityinfo=True;";
             string myConString = "server=77.102.93.95; port=3307; uid=FeedMe_User; pwd=2En6vo; database=feedme; persistsecurityinfo=True;";
-            // 
 
             MySqlConnection conn = new MySqlConnection();
             MySqlDataAdapter adapter;
@@ -34,8 +32,7 @@ namespace FeedMeServer.Functions.Data
                 conn.ConnectionString = myConString;
                 conn.Open();
 
-                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(command, conn);
-                adapter = mySqlDataAdapter;
+                adapter = new MySqlDataAdapter(command, conn);
                 adapter.Fill(myTable);
             }
             catch (MySqlException ex)
@@ -44,6 +41,19 @@ namespace FeedMeServer.Functions.Data
                 Console.WriteLine(ex.Number);
                 Console.WriteLine(ex.Message);
                 //Add Error Handling In Below
+                ErrorCode = ex.Number;
+
+                /* Errors Are handled Directly by the Method acessing this method (This makes it easier to network the error Message)
+                switch (ex.Number)
+                {
+                    case 0:
+                        Console.WriteLine("Undiagnosed Error Occured");
+                        break;
+                    case 1062:
+                        Console.WriteLine("Duplicate user!");
+                        break;
+                }
+                */
             }
             finally
             {
