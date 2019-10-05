@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FeedMeSerialization;
+using FeedMeServer.Functions.Commands;
+
 namespace FeedMeServer.Functions
 {
     class ServerMain
@@ -62,26 +64,7 @@ namespace FeedMeServer.Functions
                             //Do Stuff
                             break;
                         case "Login":
-                            Console.WriteLine("Client Requested to Logon");
-
-                            string userName = ReceiveData(clientSocket);
-                            string password = ReceiveData(clientSocket);
-
-                            Console.WriteLine("Client Credentials Username: {0}, Password: {1}", userName, password);
-
-                            if (userName == "Dan" && password == "Pass")
-                            {
-                                string response = "Successfull";
-                                byte[] responseBA = Encoding.UTF8.GetBytes(response);
-                                clientSocket.Send(responseBA, 0, responseBA.Length, SocketFlags.None);
-                            }
-                            else
-                            {
-                                string response = "UnSuccessfull";
-                                byte[] responseBA = Encoding.UTF8.GetBytes(response);
-                                clientSocket.Send(responseBA, 0, responseBA.Length, SocketFlags.None);
-                            }
-
+                            LoginAuthentication.LoginHandler(clientSocket);
                             break;
                     }
 
@@ -107,6 +90,11 @@ namespace FeedMeServer.Functions
             Array.Copy(clientMessage, choppedMessage, size); //Copying the Data from clientMessage Array to chopped Array using the Size received to remove extra padded 0's
 
             return Encoding.UTF8.GetString(choppedMessage); //Converts Byte Array into String encoded in UTF
+        }
+
+        public static void ServerLogger(string message)
+        {
+            Console.WriteLine(DateTime.Now + ":Customer: " + message);
         }
     }
 }

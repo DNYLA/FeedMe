@@ -12,8 +12,17 @@ namespace FeedMeServer.Functions.Commands
 {
     class LoginAuthentication
     {
-        public static void LoginHandler(Socket Client, string username, string password)
+        public static void LoginHandler(Socket Client)
         {
+            //Receive Client Information
+            string username = ServerMain.ReceiveData(Client);
+            string password = ServerMain.ReceiveData(Client);
+
+            ServerMain.ServerLogger("Requested to Login");
+
+            //Decrypt Password
+
+            //If Login is Correct send back sucess message
             if (CheckUserCredentials(username, password) == true)
             {
                 byte[] data = GetUserInfo(username);
@@ -21,6 +30,7 @@ namespace FeedMeServer.Functions.Commands
                 return;
             }
 
+            //Otherwise Return -1 as userID
             byte[] invalidData = InvalidCredentials();
             Client.Send(invalidData, 0, invalidData.Length, SocketFlags.None);
         }

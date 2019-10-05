@@ -119,6 +119,7 @@
     <Compile Include="Functions\Data\DAL.cs" />
     <Compile Include="Functions\Data\HashPass.cs" />
     <Compile Include="Functions\GenControls.cs" />
+    <Compile Include="Functions\Server\AuthenticationHandler.cs" />
     <Compile Include="Functions\Server\ServerConnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

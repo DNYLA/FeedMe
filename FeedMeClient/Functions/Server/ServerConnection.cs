@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FeedMeSerialization;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -23,25 +25,63 @@ namespace FeedMeClient.Functions.Server
             clientSocket.Connect(endPoint);
         }
 
-        public static void AuthenticateLogin(string username, string password)
+        public static void CloseConnection()
         {
-            clientSocket.Send(Encoding.UTF8.GetBytes("Login"), 0, "Login".Length, SocketFlags.None);
+            clientSocket.Close(1000); //Waits 1 second to send any data
+        }
 
-            clientSocket.Send(Encoding.UTF8.GetBytes(username), 0, username.Length, SocketFlags.None);
+        /// <summary>
+        /// Simple Function which executes a single command. Makes it quicker than writing everything out each time & if i ever decide to change the 
+        /// Encoding Type from UTF8 to something different like UTF16 then i only have to change this function
+        /// </summary>
+        /// <param name="message"></param>
+        public static void SendMessage(string message)
+        {
+            clientSocket.Send(Encoding.UTF8.GetBytes(message), 0, message.Length, SocketFlags.None);
 
-            Thread.Sleep(100); //If Data is sent to quickly the server might read seperate messages as one string sometimes
+            //If Data is sent too quickly the server might read seperate messages as one string sometimes
+            Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
+        }
 
-            clientSocket.Send(Encoding.UTF8.GetBytes(password), 0, password.Length, SocketFlags.None);
+        /// <summary>
+        /// Receives Data And Returns it as a byte
+        /// </summary>
+        /// <returns>Message From Server as a Byte</returns>
+        private static byte[] ReceiveData()
+        {
+            byte[] data = new byte[1024];
+            int size = clientSocket.Receive(data);
+            byte[] responseBuffer = new byte[size]; //Buffer has Specific Size of the message (Removes Extra Padding)
+            Array.Copy(data, responseBuffer, size);
 
-            byte[] responseFromServer = new byte[1024];
-            int size = clientSocket.Receive(responseFromServer);
+            return responseBuffer;
+        }
 
-            byte[] responseBuffer = new byte[size];
+        /// <summary>
+        /// Uses Receive Data To convert Byte Received into a String
+        /// </summary>
+        /// <returns>The Message From Server As a String</returns>
+        public static String ReceiveMessage()
+        {
+            return Encoding.UTF8.GetString(ReceiveData());
+        }
 
-            Array.Copy(responseFromServer, responseBuffer, size);
+        /// <summary>
+        /// Converts Message From Server Into UserInfo Object
+        /// </summary>
+        /// <returns>UserInfo Object</returns>
+        public static UserInfo ReceiveUserInfo()
+        {
+            return (UserInfo) ProtoBufSerialization.ObjectDeserializing(ReceiveData());
+        }
 
-            string valuefromserver = Encoding.UTF8.GetString(responseBuffer);
-            MessageBox.Show(valuefromserver);
+        /// <summary>
+        /// Converts message from server into DataTable
+        /// </summary>
+        /// <returns>DataTable from Byte Array</returns>
+        public static DataTable ReceiveDataTable()
+        {
+            return ProtoBufSerialization.DataDeserializing(ReceiveData());
         }
     }
 }

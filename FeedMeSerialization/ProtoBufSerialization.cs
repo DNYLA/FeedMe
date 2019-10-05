@@ -127,6 +127,7 @@ namespace FeedMeSerialization
 
     #region User Object
 
+    //Password & Salt Values will only ever Be Received by the server when registering every other time it will be Blank
     [ProtoContract]
     public class UserInfo
     {
@@ -141,6 +142,10 @@ namespace FeedMeSerialization
         [ProtoMember(5)]
         public string Email { get; set; }
         [ProtoMember(6)]
+        public string Password { get; set; }
+        [ProtoMember(7)]
+        public string Salt { get; set; }
+        [ProtoMember(8)]
         public bool Admin { get; set; }
     }
 
