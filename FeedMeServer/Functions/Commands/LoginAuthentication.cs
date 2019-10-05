@@ -97,8 +97,6 @@ namespace FeedMeServer.Functions.Commands
             {
                 return false;
             }
-
-            Console.WriteLine("Returning True");
             return true;
         }
 

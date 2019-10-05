@@ -37,7 +37,6 @@ namespace FeedMeServer.Functions.Data
         private static string GenerateHash(string password, byte[] salt, int iterations)
         {
             Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
-            Console.WriteLine(Convert.ToBase64String(pbkdf2.GetBytes(32)));
             return ByteArrayToString(pbkdf2.GetBytes(32));
         }
         #endregion
