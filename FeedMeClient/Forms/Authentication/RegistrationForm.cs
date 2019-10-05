@@ -62,12 +62,13 @@ namespace FeedMeClient.Forms.Authentication
             }
 
             //Store User Info In Variables
-            string Name = FirstNameBox.Text + " " + LastNameBox.Text;
+            string fName = FirstNameBox.Text;
+            string lName = LastNameBox.Text;
             string Email = EmailBox.Text; //Add a Method To Authenticate Email (E.G Check if Email Includes @ sign) later
             string Username = UsernameBox.Text;
             string[] HashedPasswordData = Functions.Data.HashPass.HashPassword(PasswordBox.Text); //INDEX 0: Hashed Password; INDEX 1: Salt;
 
-            string SQLQuery = $"INSERT INTO users (name, email, username, password, salt) VALUES ('{Name}', '{Email}', '{Username}', '{HashedPasswordData[0]}', '{HashedPasswordData[1]}')";
+            string SQLQuery = $"INSERT INTO users (username, firstname, lastname, email, password, salt) VALUES ('{Username}', '{fName}', '{lName}', '{Email}', '{HashedPasswordData[0]}', '{HashedPasswordData[1]}')";
             Functions.Data.DAL.ExecCommand(SQLQuery);
             MessageBox.Show("Successfully Registered"); // Add Error Handling Later.
 

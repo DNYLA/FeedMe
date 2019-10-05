@@ -202,6 +202,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
+      <Project>{0d28c0d9-e040-460f-b2f4-42982a5e226a}</Project>
+      <Name>FeedMeNetworking</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FeedMeSerialization\FeedMeSerialization.csproj">
       <Project>{5b06a087-ea59-4960-a8eb-a26a4134379b}</Project>
       <Name>FeedMeSerialization</Name>

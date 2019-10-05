@@ -37,7 +37,6 @@ namespace FeedMeClient.Functions.Data
         private static string GenerateHash(string password, byte[] salt, int iterations)
         {
             Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
-            Console.WriteLine(Convert.ToBase64String(pbkdf2.GetBytes(32)));
             return ByteArrayToString(pbkdf2.GetBytes(32));
         }
         #endregion
@@ -71,7 +70,6 @@ namespace FeedMeClient.Functions.Data
         public static string ConfirmHash(string PlainText, string salt)
         {
             byte[] BASalt = StringToByteArray(salt);
-            Console.WriteLine(GenerateHash(PlainText, BASalt, HASH_ITERATIONS));
             return GenerateHash(PlainText, BASalt, HASH_ITERATIONS);
         }
         #endregion

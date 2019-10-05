@@ -1,4 +1,5 @@
-﻿using FeedMeSerialization;
+﻿using FeedMeNetworking;
+using FeedMeSerialization;
 using FeedMeServer.Functions.Data;
 using System;
 using System.Collections.Generic;
@@ -14,28 +15,24 @@ namespace FeedMeServer.Functions.Commands
     {
         public static void LoginHandler(Socket Client)
         {
+            ServerMain.ServerLogger("Requested to Login", "Client");
+
             //Receive Client Information
-            string username = ServerMain.ReceiveData(Client);
-            string password = ServerMain.ReceiveData(Client);
-
-            ServerMain.ServerLogger("Requested to Login");
-
-            //Decrypt Password
+            string username = Receive.ReceiveMessage(Client);
+            string password = Receive.ReceiveMessage(Client);
 
             //If Login is Correct send back sucess message
             if (CheckUserCredentials(username, password) == true)
             {
-                byte[] data = GetUserInfo(username);
-                Client.Send(data, 0, data.Length, SocketFlags.None);
+                Send.SendUserInfo(Client, GetUserInfo(username));
                 return;
             }
 
             //Otherwise Return -1 as userID
-            byte[] invalidData = InvalidCredentials();
-            Client.Send(invalidData, 0, invalidData.Length, SocketFlags.None);
+            Send.SendUserInfo(Client, InvalidCredentials());
         }
 
-        private static byte[] GetUserInfo(string username)
+        private static UserInfo GetUserInfo(string username)
         {
             UserInfo UserInformation = new UserInfo();
             DataTable userInfoDT = DAL.ExecCommand($"SELECT * FROM users WHERE username = '{username}'");
@@ -46,8 +43,9 @@ namespace FeedMeServer.Functions.Commands
             UserInformation.LastName = userInfoDT.Rows[0][3].ToString();
             UserInformation.Email = userInfoDT.Rows[0][4].ToString();
 
-            int TempAdminValue = Convert.ToInt32(userInfoDT.Rows[0][7].ToString());
-            if (TempAdminValue == 0)
+            string TempAdminValue = userInfoDT.Rows[0][7].ToString();
+
+            if (TempAdminValue == "0")
             {
                 UserInformation.Admin = false;
             }
@@ -56,21 +54,17 @@ namespace FeedMeServer.Functions.Commands
                 UserInformation.Admin = true;
             }
 
-            byte[] tempByte = ProtoBufSerialization.ObjectSerialization(UserInformation);
-
-            return tempByte;
+            return UserInformation;
 
         }
 
-        private static byte[] InvalidCredentials()
+        private static UserInfo InvalidCredentials()
         {
             UserInfo UserInformation = new UserInfo();
 
             UserInformation.UserID = -1;
 
-            byte[] tempByte = ProtoBufSerialization.ObjectSerialization(UserInformation);
-
-            return tempByte;
+            return UserInformation;
         }
 
         private static bool CheckUserCredentials(string username, string password)
@@ -89,8 +83,7 @@ namespace FeedMeServer.Functions.Commands
                 return false;
             }
 
-
-            return CheckDetails(username, password);
+            return CheckDetails(username, CurrentHash);
 
         }
 
@@ -105,6 +98,7 @@ namespace FeedMeServer.Functions.Commands
                 return false;
             }
 
+            Console.WriteLine("Returning True");
             return true;
         }
 

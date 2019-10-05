@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FeedMeNetworking;
 
 namespace FeedMeClient.Functions.Server
 {
@@ -13,18 +14,22 @@ namespace FeedMeClient.Functions.Server
     {
         public static UserInfo AuthenticateLogin(string username, string password)
         {
-            ServerConnection.SendMessage("Login");
+            Send.SendMessage(ServerConnection.ServerSock, "Login");
 
-            ServerConnection.SendMessage(username);
+            Send.SendMessage(ServerConnection.ServerSock, username);
 
-            ServerConnection.SendMessage(password);
+            Send.SendMessage(ServerConnection.ServerSock, password);
 
-            return ServerConnection.ReceiveUserInfo();
+            return Receive.ReceiveUserInfo(ServerConnection.ServerSock);
         }
 
-        public static int RegisterUser()
+        public static int RegisterUser(UserInfo UserInformation)
         {
+            Send.SendMessage(ServerConnection.ServerSock, "Register");
 
+            //ServerConnection.SendMessage();
+
+            return 3;
         }
     }
 }

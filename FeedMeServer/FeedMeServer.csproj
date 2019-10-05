@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functions\Commands\LoginAuthentication.cs" />
+    <Compile Include="Functions\Commands\RegisterAuthentication.cs" />
     <Compile Include="Functions\Data\DAL.cs" />
     <Compile Include="Functions\Data\HashPass.cs" />
     <Compile Include="Functions\ServerMain.cs" />
@@ -76,6 +77,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
+      <Project>{0D28C0D9-E040-460F-B2F4-42982A5E226A}</Project>
+      <Name>FeedMeNetworking</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FeedMeSerialization\FeedMeSerialization.csproj">
       <Project>{5b06a087-ea59-4960-a8eb-a26a4134379b}</Project>
       <Name>FeedMeSerialization</Name>

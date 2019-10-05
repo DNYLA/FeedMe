@@ -22,8 +22,7 @@ namespace FeedMeServer.Functions.Data
          * [X] 3. If They are the same then the Password is correct.
          */
 
-        //This can be increased when i create a server because once the program is complete the server should be hosted on dedicated Host.
-        static int HASH_ITERATIONS = 200000; //Increased to 200,000 from 100,000
+        static int HASH_ITERATIONS = 100000; //This can be increased when i create a server because once the program is complete the server should be hosted on dedicated Host.
 
         #region Generate Methods
         private static byte[] GenerateSalt(int length)
@@ -72,7 +71,6 @@ namespace FeedMeServer.Functions.Data
         public static string ConfirmHash(string PlainText, string salt)
         {
             byte[] BASalt = StringToByteArray(salt);
-            Console.WriteLine(GenerateHash(PlainText, BASalt, HASH_ITERATIONS));
             return GenerateHash(PlainText, BASalt, HASH_ITERATIONS);
         }
         #endregion

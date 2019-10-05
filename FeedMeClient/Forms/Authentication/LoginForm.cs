@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeClient.Functions.Data;
 using FeedMeClient.Functions.Server;
+using FeedMeSerialization;
 
 namespace FeedMeClient.Forms.Authentication
 {
     public partial class LoginForm : Forms.FeedMeMainForm
     {
+        public static UserInfo ClientInfo = new UserInfo();
+
         #region Initializing
         public LoginForm()
         {
@@ -22,38 +25,12 @@ namespace FeedMeClient.Forms.Authentication
         #endregion
 
         #region Methods
-        private string[] GetHashData()
+        //Other Methods Were moved over to the server
+
+
+        private void CheckDetails()
         {
-            string SQLQuery = ($"SELECT * FROM users WHERE username = '{UsernameTextBox.Text}'");
-            using (DataTable SQLResults = DAL.ExecCommand(SQLQuery))
-            {
-                string[] HashData = new string[2];
-                HashData[0] = "-1";
-                HashData[1] = "Invalid";
-                if (SQLResults.Rows.Count > 0)
-                {
-                    HashData[0] = SQLResults.Rows[0]["password"].ToString();
-                    HashData[1] = SQLResults.Rows[0]["salt"].ToString();
-                }
-                return HashData;
-            }
-        }
-
-        private void AuthenticateLogin()
-        {
-            string[] HashData = GetHashData(); //INDEX 0: Stored Password Hash; INDEX 1: Stored Salt;
-
-            if (HashData[0] == "-1")
-            {
-                Notification NotifForm = new Notification("Username is Invalid!", NotifType.information);
-                NotifForm.Show();
-                return;
-            }
-
-            string CurrentHash = HashPass.ConfirmHash(PasswordTextBox.Text, HashData[1]);
-            Console.WriteLine(CurrentHash);
-            Console.WriteLine(HashData[0]);
-            if (CurrentHash == HashData[0])
+            if (ClientInfo.UserID != -1)
             {
                 Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
                 NotifForm.Show();
@@ -79,23 +56,14 @@ namespace FeedMeClient.Forms.Authentication
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            AuthenticateLogin();
-        }
-        #endregion
-
-        private void Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ServerTest_Click(object sender, EventArgs e)
-        {
-            ServerConnection.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text);
+            ClientInfo = AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text);
+            CheckDetails();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
             ServerConnection.InitiailizeConnection();
         }
+        #endregion
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeedMeSerialization
+namespace FeedMeServer.Functions.Commands
 {
-    public class Class1
+    class RegisterAuthentication
     {
+
     }
 }
