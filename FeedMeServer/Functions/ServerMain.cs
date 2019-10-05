@@ -66,6 +66,9 @@ namespace FeedMeServer.Functions
                         case "Login":
                             LoginAuthentication.LoginHandler(clientSocket);
                             break;
+                        case "Register":
+                            RegisterAuthentication.RegistrationHandler(clientSocket);
+                            break;
                     }
 
                 }

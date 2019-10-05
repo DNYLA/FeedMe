@@ -27,6 +27,8 @@ namespace FeedMeServer.Functions.Data
             MySqlDataAdapter adapter;
             DataTable myTable = new DataTable();
 
+            ErrorCode = -1; //Normal State // No Error
+
             try
             {
                 conn.ConnectionString = myConString;

@@ -20,11 +20,21 @@ namespace FeedMeClient.Functions.Server
         //Microsoft Documentation: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/accessibility-levels
         protected internal static Socket ServerSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 
         public static string GlobalCommandToSend = "";
+        public static bool Connected = false;
 
         public static void InitiailizeConnection()
         {
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP_ADDRESS), PORT_NO);
-            ServerSock.Connect(endPoint);
+            if (!Connected)
+            {
+                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP_ADDRESS), PORT_NO);
+                ServerSock.Connect(endPoint);
+                Connected = true;
+            }
+            else
+            {
+                Console.WriteLine("Already Connected!");
+            }
+            
         }
 
         public static void CloseConnection()

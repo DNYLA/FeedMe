@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeClient.Functions;
+using FeedMeSerialization;
 
 namespace FeedMeClient.Forms.Authentication
 {
@@ -53,24 +54,36 @@ namespace FeedMeClient.Forms.Authentication
 
         private void RegisterUser()
         {
-
-
             if (!CheckPassword())
             {
-                MessageBox.Show("Password Don't Match");
-                return; //Returning Nothing just stops the function
+                return;
             }
 
-            //Store User Info In Variables
-            string fName = FirstNameBox.Text;
-            string lName = LastNameBox.Text;
-            string Email = EmailBox.Text; //Add a Method To Authenticate Email (E.G Check if Email Includes @ sign) later
-            string Username = UsernameBox.Text;
-            string[] HashedPasswordData = Functions.Data.HashPass.HashPassword(PasswordBox.Text); //INDEX 0: Hashed Password; INDEX 1: Salt;
+            UserInfo UserInformation = new UserInfo();
 
-            string SQLQuery = $"INSERT INTO users (username, firstname, lastname, email, password, salt) VALUES ('{Username}', '{fName}', '{lName}', '{Email}', '{HashedPasswordData[0]}', '{HashedPasswordData[1]}')";
-            Functions.Data.DAL.ExecCommand(SQLQuery);
-            MessageBox.Show("Successfully Registered"); // Add Error Handling Later.
+            UserInformation.Username = UsernameBox.Text;
+            UserInformation.FirstName = FirstNameBox.Text;
+            UserInformation.LastName = LastNameBox.Text;
+            UserInformation.Email = EmailBox.Text;
+
+            //Add Hashing Or Encryption on password Client Side 
+            UserInformation.Password = PasswordBox.Text;
+
+            int response = Functions.Server.AuthenticationHandler.RegisterUser(UserInformation);
+
+            if (response == 0)
+            {
+                MessageBox.Show("Duplicate Username");
+            }
+            else if (response == 1)
+            {
+                MessageBox.Show("Successfully Registered! You Can Now Login");
+            }
+            else
+            {
+                MessageBox.Show("Undiagnosed Error!");
+            }
+
 
         }
         #endregion

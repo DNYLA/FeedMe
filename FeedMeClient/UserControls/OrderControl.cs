@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeClient.Functions.Data;
 using FeedMeClient.Functions;
+using FeedMeClient.Functions.Server;
 
 namespace FeedMeClient.UserControls
 {
@@ -169,6 +170,14 @@ namespace FeedMeClient.UserControls
         #region Control Load Event
         private void OrderControl_Load(object sender, EventArgs e)
         {
+            //Prevents Any Errors When Loading MainMenu Form in Design View 
+            if (!ServerConnection.Connected)
+            {
+                return;
+            }
+
+
+
             GenerateTopButtons(2);
             GenerateItems(0, "Burgers");
 

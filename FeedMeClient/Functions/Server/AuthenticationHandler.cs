@@ -27,9 +27,9 @@ namespace FeedMeClient.Functions.Server
         {
             Send.SendMessage(ServerConnection.ServerSock, "Register");
 
-            //ServerConnection.SendMessage();
+            Send.SendUserInfo(ServerConnection.ServerSock, UserInformation);
 
-            return 3;
+            return Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
         }
     }
 }

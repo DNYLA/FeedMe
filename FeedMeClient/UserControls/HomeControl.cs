@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeClient.Functions.Data;
 using FeedMeClient.Functions;
+using FeedMeClient.Functions.Server;
 
 namespace FeedMeClient.UserControls
 {
@@ -50,6 +51,12 @@ namespace FeedMeClient.UserControls
         #region Event Handlers
         private void HomeControl_Load(object sender, EventArgs e)
         {
+            //Prevents Any Errors When Loading MainMenu Form in Design View
+            if (!ServerConnection.Connected)
+            {
+                return;
+            }
+
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
 
