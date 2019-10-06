@@ -15,7 +15,9 @@ namespace FeedMeClient.Functions.Server
     class ServerConnection
     {
         static int PORT_NO = 4030;
-        static string IP_ADDRESS = "127.0.0.1";
+        static string IP_ADDRESS = "86.180.33.203";
+        //static string IP_ADDRESS = "85.255.236.26";
+
         //Protected Internal Variables are only acessible to the assembly or from containing classes (Anything Outside of FeedMeClient.Functions.Server Is Unable To Access This Variable)
         //Microsoft Documentation: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/accessibility-levels
         protected internal static Socket ServerSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 

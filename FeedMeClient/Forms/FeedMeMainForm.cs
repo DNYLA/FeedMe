@@ -48,7 +48,16 @@ namespace FeedMeClient.Forms
         private void TopPanelCloseButton_Click(object sender, EventArgs e)
         {
             //Add a check to See if Its Main Form and then either Application.Exit || Form.Close
-            Close();
+            if (Name == "MainMenu" || Name == "LoginForm" || Name == "Register")
+            {
+                Functions.Server.ServerConnection.CloseConnection();
+                Application.Exit();
+            }
+            else
+            {
+                Close();
+            }
+            
         }
 
         private void TopPanelMaximizeButton_Click(object sender, EventArgs e)
