@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeSerialization", "Feed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeNetworking", "FeedMeNetworking\FeedMeNetworking.csproj", "{0D28C0D9-E040-460F-B2F4-42982A5E226A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeWebAPI", "FeedMeWebAPI\FeedMeWebAPI.csproj", "{E73F5AD0-CE54-4C14-8191-4AA6E1726F44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0D28C0D9-E040-460F-B2F4-42982A5E226A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D28C0D9-E040-460F-B2F4-42982A5E226A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D28C0D9-E040-460F-B2F4-42982A5E226A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E73F5AD0-CE54-4C14-8191-4AA6E1726F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E73F5AD0-CE54-4C14-8191-4AA6E1726F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E73F5AD0-CE54-4C14-8191-4AA6E1726F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E73F5AD0-CE54-4C14-8191-4AA6E1726F44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

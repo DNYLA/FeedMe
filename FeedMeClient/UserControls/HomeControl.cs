@@ -148,7 +148,7 @@ namespace FeedMeClient.UserControls
                 Font TitleFont = new Font("Nirmala UI", 14, FontStyle.Bold);
                 #endregion
 
-                string DefaultFnt = "Nirmala UI";
+                //string DefaultFnt = "Nirmala UI";
 
                 int maxGen = vendorAmount;
 

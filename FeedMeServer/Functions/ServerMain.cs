@@ -66,9 +66,10 @@ namespace FeedMeServer.Functions
         {
 
             IPAddress IP = GetIP();
-            string IPADD = "192.168.1.64";
-            //IPEndPoint endPoint = new IPEndPoint(myIp, PORT_NO);
-            IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
+            //string IPADD = "192.168.1.64";
+            string IPADD = "127.0.0.1";
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
+            //IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
             Console.WriteLine($"IP ADDRESS: {endPoint.ToString()}");
             serverSocket.Bind(endPoint); //Binds the EndPoint to the Socket
             serverSocket.Listen(100); //Backlog of 100 clients
