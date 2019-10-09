@@ -40,6 +40,7 @@ namespace FeedMeClient.Functions.Server
             
         }
 
+
         public static void CloseConnection()
         {
             ServerSock.Close(1000); //Waits 1 second to send any data before closing
