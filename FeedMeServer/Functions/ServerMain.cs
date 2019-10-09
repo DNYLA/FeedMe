@@ -60,6 +60,17 @@ namespace FeedMeServer.Functions
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
         static HttpClient client = new HttpClient();
 
+        static async Task<Uri> CreateProductAsync(ServerInformation ServerData)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                "api/servers",
+                ServerData);
+            response.EnsureSuccessStatusCode();
+
+            // return URI of the created resource.
+            return response.Headers.Location;
+        }
+
         static async Task GetServerList()
         {
             client.BaseAddress = new Uri("http://localhost:44362/");
@@ -70,9 +81,20 @@ namespace FeedMeServer.Functions
             {
                 ServerInformation SI = new ServerInformation
                 {
+                    Name = "John",
+                    Address = "66.44.22.33",
+                    Port = "33",
+                    Country = "UK",
+                    UpTime = DateTime.Now,
+                    UserCount = 55
+                };
+                var url = await CreateProductAsync(SI);
+                Console.WriteLine($"Created at {url}");
 
-                }
-
+            }
+            catch (Exception Ex)
+            {
+                throw;
             }
         }
 
