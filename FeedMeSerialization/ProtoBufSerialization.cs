@@ -126,8 +126,8 @@ namespace FeedMeSerialization
     }
 
     #region User Object
-
-    //Password & Salt Values will only ever Be Received by the server when registering every other time it will be Blank
+    //If More Objects are created move this to its own class.
+    //Password & Salt Values will only ever Be Received by the server when registering every other time it will be Blank.
     [ProtoContract]
     public class UserInfo
     {

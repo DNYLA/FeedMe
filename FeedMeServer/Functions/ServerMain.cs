@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
@@ -43,6 +44,36 @@ namespace FeedMeServer.Functions
 
             return myIp;
 
+        }
+
+        public class ServerInformation
+        {
+            public int Id { get; set; } = 0;
+            public string Name { get; set; } = "";
+            public string Address { get; set; } = "";
+            public string Port { get; set; } = "";
+            public string Country { get; set; } = "";
+            public DateTime UpTime { get; set; } = DateTime.Now;
+            public int UserCount { get; set; } = 0;
+        }
+
+        //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
+        static HttpClient client = new HttpClient();
+
+        static async Task GetServerList()
+        {
+            client.BaseAddress = new Uri("http://localhost:44362/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                ServerInformation SI = new ServerInformation
+                {
+
+                }
+
+            }
         }
 
         private static void GetPublicIP()
