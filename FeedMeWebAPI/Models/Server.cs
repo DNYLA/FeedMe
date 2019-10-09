@@ -12,7 +12,7 @@ namespace FeedMeWebAPI.Models
         public string Address { get; set; } = "";
         public string Port { get; set; } = "";
         public string Country { get; set; } = "";
-        public DateTime UpTime { get; set; } = DateTime.Now;
+        public DateTime TimeStarted { get; set; } = DateTime.Now;
         public int UserCount { get; set; } = 0;
 
     }

@@ -27,7 +27,8 @@ namespace FeedMeServer.Functions
 
         static Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        private static IPAddress GetIP()
+        //Move All of this to its own Class
+        private static IPAddress GetPrivateIP()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress myIp = ipHostInfo.AddressList[0];
@@ -44,7 +45,7 @@ namespace FeedMeServer.Functions
 
         }
 
-        private static void UploadPublicIP()
+        private static void GetPublicIP()
         {
             var request = (HttpWebRequest)WebRequest.Create("http://ifconfig.me");
 
@@ -65,7 +66,7 @@ namespace FeedMeServer.Functions
         public static void InitializeClient()
         {
 
-            IPAddress IP = GetIP();
+            IPAddress IP = GetPrivateIP();
             //string IPADD = "192.168.1.64";
             string IPADD = "127.0.0.1";
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
