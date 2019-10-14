@@ -11,6 +11,7 @@ namespace FeedMeServer.Functions.Commands
 {
     class RegisterAuthentication
     {
+        private const string SERVER_HASH = "FeedMeHash";
         public static void RegistrationHandler(Socket Client)
         {
             UserInfo UserInformation = Receive.ReceiveUserInfo(Client);
@@ -51,6 +52,11 @@ namespace FeedMeServer.Functions.Commands
             {
                 return 3; //Undiagnosed Error (Will Add More Error Handling Later);
             }
+        }
+
+        private static String ReHashPassword(string Password)
+        {
+
         }
     }
 }
