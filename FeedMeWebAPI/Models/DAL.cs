@@ -31,8 +31,11 @@ namespace FeedMeWebAPI.Models
                 conn.ConnectionString = myConString;
                 conn.Open();
 
-                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(command, conn);
-                adapter = mySqlDataAdapter;
+                using (MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(command, conn))
+                {
+                    adapter = mySqlDataAdapter;
+                }
+
                 adapter.Fill(myTable);
             }
             catch (MySqlException ex)
