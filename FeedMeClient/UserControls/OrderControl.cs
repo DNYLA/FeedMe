@@ -73,7 +73,7 @@ namespace FeedMeClient.UserControls
         {
             #region Initiaizling Variables & DataTable
             int ItemAmount;
-            string ItemID, VendorID, ItemType, ItemName, ItemDescription, ItemPrice;
+            string ItemID, ItemType, ItemName, ItemDescription, ItemPrice;
 
             string SQLCommand = ($"SELECT * FROM items WHERE vendorID = {vendorID} AND ItemType = '{itemType}'");
 

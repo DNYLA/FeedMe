@@ -94,7 +94,7 @@ namespace FeedMeServer.Functions
             }
             catch (Exception Ex)
             {
-                throw;
+                throw Ex;
             }
         }
 

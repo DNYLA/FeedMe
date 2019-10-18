@@ -14,13 +14,13 @@ namespace FeedMeClient.Forms
     {
         //Initializing Variables used globaly WITHIN the Class
         bool menuClosed = false;
-        private const int CLOSED_PANEL_WDITH = 80;
-        private const int OPENED_PANEL_WIDTH = 139;
-        String[] MenuButtonNames = new string[3];
-
+        private const int CLOSED_PANEL_WDITH = 80; 
+        private const int OPENED_PANEL_WIDTH = 139; 
+        String[] MenuButtonNames = new string[3]; 
+        //
         public MainMenu()
         {
-            InitializeComponent();
+            InitializeComponent(); //Initiaizling Stuff
         }
 
         private void MainMenu_Load(object sender, EventArgs e)

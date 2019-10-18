@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace FeedMeClient.Functions.Data
 {
+    
     class DAL
     {
         //Declaring This Variable Now so i remember to Add Error Handling Later on (This will probably be Done On The Server)
@@ -19,7 +20,7 @@ namespace FeedMeClient.Functions.Data
         // to allow paraterized queries. */
 
 
-
+        [Obsolete("Not Used Anymore As Everything is done Server Side Now")]
         public static DataTable ExecCommand(string command)
         {
             //string myConString = "server=77.102.93.95; port=3307; uid=root; pwd=blopdop; database=feedme; persistsecurityinfo=True;";
