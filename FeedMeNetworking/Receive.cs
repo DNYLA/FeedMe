@@ -11,6 +11,11 @@ namespace FeedMeNetworking
 {
     public class Receive
     {
+
+        /*
+         * Add Function to Encrypt All BYTES not unserialized data
+         */
+
         /// <summary>
         /// Receives Data And Returns it as a byte
         /// </summary>

@@ -11,6 +11,11 @@ namespace FeedMeNetworking
 {
     public class Send
     {
+        /*
+         * ADD Function to decrypt BYTES.
+         */
+
+
         /// <summary>
         /// Simple Function which streams data over a network
         /// </summary>
