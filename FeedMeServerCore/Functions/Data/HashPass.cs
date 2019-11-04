@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
+//using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace FeedMeServer.Functions.Data
+namespace FeedMeServerCore.Functions.Data
 {
     class HashPass
     {
@@ -23,7 +21,7 @@ namespace FeedMeServer.Functions.Data
          */
 
         static int HASH_ITERATIONS = 100000; //This can be increased when i create a server because once the program is complete the server should be hosted on dedicated Host.
-        static string SERVER_SALT = "G0QgcjMKDUDuIhEBmbHCLUM6XDelVPHB";
+
         #region Generate Methods
         private static byte[] GenerateSalt(int length)
         {
@@ -43,24 +41,23 @@ namespace FeedMeServer.Functions.Data
 
         #region Converters
         //Credit To: https://stackoverflow.com/a/2556329/11627879
-        private static string ByteArrayToString(byte[] ba)
-        {
-            SoapHexBinary SHB = new SoapHexBinary(ba);
-            return SHB.ToString();
-        }
+        //private static string ByteArrayToString(byte[] ba)
+        //{
+        //    SoapHexBinary SHB = new SoapHexBinary(ba);
+        //    return SHB.ToString();
+        //}
 
-        private static byte[] StringToByteArray(string HexString)
-        {
-            SoapHexBinary SHB = SoapHexBinary.Parse(HexString);
-            return SHB.Value;
-        }
+        //private static byte[] StringToByteArray(string HexString)
+        //{
+        //    SoapHexBinary SHB = SoapHexBinary.Parse(HexString);
+        //    return SHB.Value;
+        //}
         #endregion
 
         #region Public Methods
         public static String[] HashPassword(string PlainText)
         {
-
-            byte[] salt = Encoding.UTF8.GetBytes(SERVER_SALT);
+            byte[] salt = GenerateSalt(32);
             string[] HashedData = new string[2]; //Password, Salt (Possibility Of Adding in Random Amount of Iterations)
             HashedData[0] = GenerateHash(PlainText, salt, HASH_ITERATIONS);
             HashedData[1] = ByteArrayToString(salt);

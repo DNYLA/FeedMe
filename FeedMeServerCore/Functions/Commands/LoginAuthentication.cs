@@ -1,15 +1,11 @@
-﻿using FeedMeNetworking;
-using FeedMeSerialization;
-using FeedMeServer.Functions.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
+using FeedMeSerialization;
+using FeedMeServer.Functions.Data;
 
-namespace FeedMeServer.Functions.Commands
+namespace FeedMeServerCore.Functions.Commands
 {
     class LoginAuthentication
     {
@@ -19,10 +15,10 @@ namespace FeedMeServer.Functions.Commands
 
             //Receive Client Information
             string username = Receive.ReceiveMessage(Client);
-            string clientHashedPassword = Receive.ReceiveMessage(Client);
+            string password = Receive.ReceiveMessage(Client);
 
             //If Login is Correct send back sucess message
-            if (CheckUserCredentials(username, clientHashedPassword) == true)
+            if (CheckUserCredentials(username, password) == true)
             {
                 Send.SendUserInfo(Client, GetUserInfo(username));
                 return;
@@ -69,9 +65,7 @@ namespace FeedMeServer.Functions.Commands
 
         private static bool CheckUserCredentials(string username, string password)
         {
-            string[] HashData = GetHashData(username); //This Gets The Hash Stored in the Database
-
-            string[] serverHashData = HashPass.HashPassword(password);
+            string[] HashData = GetHashData(username);
 
             if (HashData[0] == "-1")
             {
@@ -80,12 +74,12 @@ namespace FeedMeServer.Functions.Commands
 
             string CurrentHash = HashPass.ConfirmHash(password, HashData[1]);
 
-            if (serverHashData[0] != HashData[0])
+            if (CurrentHash != HashData[0])
             {
                 return false;
             }
 
-            return CheckDetails(username, serverHashData[0]);
+            return CheckDetails(username, CurrentHash);
 
         }
 
