@@ -24,7 +24,7 @@ namespace FeedMeNetworking
         {
             byte[] data = new byte[1024];
             int size = Sock.Receive(data);
-            byte[] responseBuffer = new byte[size]; //Buffer has Specific Size of the message (Removes Extra Padding)
+            byte[] responseBuffer = new byte[size]; //use a Buffer which has a Specific Size of the message (Removes Extra Padding)
             Array.Copy(data, responseBuffer, size);
 
             return responseBuffer;

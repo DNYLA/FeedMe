@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions.Commands
@@ -19,6 +20,9 @@ namespace FeedMeServer.Functions.Commands
 
             //Receive Client Information
             string username = Receive.ReceiveMessage(Client);
+
+            Send.SendMessage(Client, GetUserSalt(username));
+
             string clientHashedPassword = Receive.ReceiveMessage(Client);
 
             //If Login is Correct send back sucess message
@@ -30,6 +34,21 @@ namespace FeedMeServer.Functions.Commands
 
             //Otherwise Return -1 as userID
             Send.SendUserInfo(Client, InvalidCredentials());
+        }
+
+        private static String GetUserSalt(string username)
+        {
+            DataTable DataResult = DAL.ExecCommand($"SELECT SALT FROM users WHERE Username = '{username}'");
+            Console.WriteLine("Continuing");
+            try
+            {
+                return DataResult.Rows[0][0].ToString();
+            }
+            catch
+            {
+                return "-1";
+            }
+            
         }
 
         private static UserInfo GetUserInfo(string username)

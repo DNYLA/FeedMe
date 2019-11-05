@@ -18,7 +18,18 @@ namespace FeedMeClient.Functions.Server
 
             Send.SendMessage(ServerConnection.ServerSock, username);
 
-            Send.SendMessage(ServerConnection.ServerSock, password);
+            string salt = Receive.ReceiveMessage(ServerConnection.ServerSock);
+
+            //If Salt Returns -1 then Username received is invalid
+            if (salt == "-1")
+            {
+                UserInfo UserInformation = new UserInfo();
+
+                UserInformation.UserID = -1;
+                return UserInformation;
+            }
+
+            Send.SendMessage(ServerConnection.ServerSock, Data.HashPass.ConfirmHash(password, salt));
 
             return Receive.ReceiveUserInfo(ServerConnection.ServerSock);
         }

@@ -15,7 +15,7 @@ namespace FeedMeClient.Forms.Authentication
 {
     public partial class LoginForm : Forms.FeedMeMainForm
     {
-        public static UserInfo ClientInfo = new UserInfo();
+        public static UserInfo ClientInfo = new UserInfo(); //Make the Client Info Object Public so other user controls can access it.
 
         #region Initializing
         public LoginForm()

@@ -34,7 +34,8 @@ namespace FeedMeServer.Functions.Data
                 conn.ConnectionString = myConString;
                 conn.Open();
 
-                adapter = new MySqlDataAdapter(command, conn);
+                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(command, conn);
+                adapter = mySqlDataAdapter;
                 adapter.Fill(myTable);
             }
             catch (MySqlException ex)
