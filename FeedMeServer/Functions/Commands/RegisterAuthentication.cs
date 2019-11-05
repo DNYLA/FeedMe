@@ -56,7 +56,7 @@ namespace FeedMeServer.Functions.Commands
 
         private static String ReHashPassword(string Password)
         {
-
+            return "No";
         }
     }
 }
