@@ -69,8 +69,6 @@ namespace FeedMeClient.Forms.Authentication
             //Add Hashing Or Encryption on password Client Side 
             UserInformation.Password = PasswordBox.Text;
 
-            
-            
             string[] HashData = Functions.Data.HashPass.HashPassword(UserInformation.Password);
 
             UserInformation.Password = HashData[0];

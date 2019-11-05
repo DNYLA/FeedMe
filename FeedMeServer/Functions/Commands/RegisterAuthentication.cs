@@ -11,7 +11,6 @@ namespace FeedMeServer.Functions.Commands
 {
     class RegisterAuthentication
     {
-        private const string SERVER_HASH = "FeedMeHash";
         public static void RegistrationHandler(Socket Client)
         {
             UserInfo UserInformation = Receive.ReceiveUserInfo(Client);
@@ -23,27 +22,19 @@ namespace FeedMeServer.Functions.Commands
             Send.SendMessage(Client, RegisterValue);
         }
 
-        private static UserInfo HashPassword(UserInfo UserInformation)
-        {
-            string[] HashData = Data.HashPass.HashPassword(UserInformation.Password);
-
-            UserInformation.Password = HashData[0];
-            UserInformation.Salt = HashData[1];
-
-            return UserInformation;
-        }
-
         private static int RegisterUser(UserInfo CI)
         {
+            //CI = HashPassword(CI);
+
             string SQLQuery = ($@"INSERT INTO users (username, firstname, lastname, email, password, salt)
                                   VALUES ('{CI.Username}', '{CI.FirstName}', '{CI.LastName}', '{CI.Email}', '{CI.Password}', '{CI.Salt}');");
-
+    
             Data.DAL.ExecCommand(SQLQuery);
 
             if (Data.DAL.ErrorCode == 1062)
             {
                 return 0; //Duplicate username
-            }
+            } 
             else if (Data.DAL.ErrorCode == -1)
             {
                 return 1; //Successfully Registerd
@@ -54,9 +45,14 @@ namespace FeedMeServer.Functions.Commands
             }
         }
 
-        private static String ReHashPassword(string Password)
+        private static UserInfo HashPassword(UserInfo UserInformation)
         {
-            return "No";
+            string[] HashData = Data.HashPass.HashPassword(UserInformation.Password);
+
+            UserInformation.Password = HashData[0];
+
+            return UserInformation;
         }
+
     }
 }
