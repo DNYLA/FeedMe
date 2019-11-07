@@ -25,7 +25,7 @@ namespace FeedMeClient.Forms
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            HomeControl.BringToFront(); //Brings Vendor List Control to Front
+            //HomeControl.BringToFront(); //Brings Vendor List Control to Front
             Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton };
 
             //Everything written Below can be easily edited using the Designer but Coding it in below ensure that if i edit the Menu Bar in the future
@@ -189,7 +189,7 @@ namespace FeedMeClient.Forms
         {
             Button ButtonObject = (Button)sender;
             AnimateIndicator(ButtonObject);
-            HomeControl.BringToFront();
+            //HomeControl.BringToFront();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
