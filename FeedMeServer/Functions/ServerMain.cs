@@ -29,106 +29,24 @@ namespace FeedMeServer.Functions
         static Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         //Move All of this to its own Class
-        private static IPAddress GetPrivateIP()
-        {
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress myIp = ipHostInfo.AddressList[0];
-            foreach (IPAddress ip in ipHostInfo.AddressList)
-            {
-                if (ip.AddressFamily.ToString() == "InterNetwork")
-                {
-                    myIp = ip;
-                    Console.WriteLine($"{ip.ToString()}:{PingChecker(myIp).ToString()}");
-                }
-            }
-
-            return myIp;
-
-        }
-
-        public class ServerInformation
-        {
-            public int Id { get; set; } = 0;
-            public string Name { get; set; } = "";
-            public string Address { get; set; } = "";
-            public string Port { get; set; } = "";
-            public string Country { get; set; } = "";
-            public DateTime UpTime { get; set; } = DateTime.Now;
-            public int UserCount { get; set; } = 0;
-        }
-
-        //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
-        static HttpClient client = new HttpClient();
-
-        static async Task<Uri> CreateProductAsync(ServerInformation ServerData)
-        {
-            HttpResponseMessage response = await client.PostAsJsonAsync(
-                "api/servers",
-                ServerData);
-            response.EnsureSuccessStatusCode();
-
-            // return URI of the created resource.
-            return response.Headers.Location;
-        }
-
-        static async Task GetServerList()
-        {
-            client.BaseAddress = new Uri("http://localhost:44362/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            try
-            {
-                ServerInformation SI = new ServerInformation
-                {
-                    Name = "John",
-                    Address = "66.44.22.33",
-                    Port = "33",
-                    Country = "UK",
-                    UpTime = DateTime.Now,
-                    UserCount = 55
-                };
-                var url = await CreateProductAsync(SI);
-                Console.WriteLine($"Created at {url}");
-
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-        }
-
-        private static void GetPublicIP()
-        {
-            var request = (HttpWebRequest)WebRequest.Create("http://ifconfig.me");
-
-            request.UserAgent = "curl"; // this will tell the server to return the information as if the request was made by the linux "curl" command
-
-            string publicIPAddress;
-
-            request.Method = "GET";
-            using (WebResponse response = request.GetResponse())
-            {
-                using (var reader = new StreamReader(response.GetResponseStream()))
-                {
-                    publicIPAddress = reader.ReadToEnd();
-                }
-            }
-            Console.WriteLine(publicIPAddress.Replace("\n", ""));
-        }
+       
         public static void InitializeClient()
         {
-
-            IPAddress IP = GetPrivateIP();
+            Console.WriteLine("Starting Server. This Can Take a few minutes...");
+            IPAddress IP = GetServerInfo.GetPrivateIP();
+            String PubIP = GetServerInfo.GetPublicIP();
+            //GetServerInfo.RunAsync();
             //string IPADD = "192.168.1.64";
             string IPADD = "127.0.0.1";
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
             //IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
-            Console.WriteLine($"IP ADDRESS: {endPoint.ToString()}");
+            ServerLogger("Server Initiaizliation Completed.");
+            ServerLogger("Searching for Clients...");
+            Console.WriteLine($"Public Server IP ADDRESS: {endPoint.ToString()}");
             serverSocket.Bind(endPoint); //Binds the EndPoint to the Socket
             serverSocket.Listen(100); //Backlog of 100 clients
-            ServerLogger("Sucessfully Started");
-            ServerLogger("Searching for Clients...");
+            
+            
 
             Socket clientSocket = default(Socket);
 
@@ -194,24 +112,6 @@ namespace FeedMeServer.Functions
             //Console.WriteLine($"{DateTime.Now}:{LogType}:{message} - Ping {PingChecker(Client).ToString()}");
         }
 
-        public static int PingChecker(IPAddress IP)
-        {
-            //https://stackoverflow.com/questions/3318610/how-to-get-client-ip-using-socket-programming-c-sharp
-            //IPAddress LIP = IPAddress.Parse(((IPEndPoint)Client.RemoteEndPoint).Address.ToString());
-            
 
-            Ping PingChecker = new Ping();
-            PingReply PR = PingChecker.Send(IP);
-
-            if (PR.Status.ToString().Equals("Success"))
-            {
-                return Convert.ToInt32(PR.RoundtripTime);
-            }
-            else
-            {
-                return -1;
-            }
-            
-        }
     }
 }

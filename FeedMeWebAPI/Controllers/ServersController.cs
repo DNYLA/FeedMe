@@ -55,8 +55,9 @@ namespace FeedMeWebAPI.Controllers
         // POST: api/Servers
         public void Post(Server s)
         {
-            string sqlQuery = ($@"INSERT INTO SERVERS(Name, Address, Port, Country, TimeStarted)
-                                  VALUES ('{s.Name}', '{s.Address}', '{s.Port}', '{s.Country}', '{s.TimeStarted}')");
+            string date = s.TimeStarted.ToString("yyyy-MM-dd H:mm:ss");
+            string sqlQuery = ($@"INSERT INTO SERVERS(Name, Address, Port, Country, TimeStarted, LastPing)
+                                  VALUES ('{s.Name}', '{s.Address}', '{s.Port}', '{s.Country}', '{date}', '{date}')");
 
             DAL.ExecCommand(sqlQuery);
         }

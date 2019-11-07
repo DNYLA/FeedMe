@@ -16,6 +16,8 @@ namespace FeedMeClient.Functions.Server
     {
         static int PORT_NO = 4030;
         //static string IP_ADDRESS = "86.180.33.203";
+        //static string IP_ADDRESS = "86.181.164.197";
+        //static string IP_ADDRESS = "192.168.1.64";
         static string IP_ADDRESS = "127.0.0.1";
         //static string IP_ADDRESS = "85.255.236.26";
 
@@ -25,13 +27,30 @@ namespace FeedMeClient.Functions.Server
         public static string GlobalCommandToSend = "";
         public static bool Connected = false;
 
-        public static void InitiailizeConnection()
+        public static void InitiailizeConnection(int retryAmount = 0)
         {
             if (!Connected)
             {
-                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP_ADDRESS), PORT_NO);
-                ServerSock.Connect(endPoint);
-                Connected = true;
+                if (retryAmount <= 20)
+                {
+                    try
+                    {
+                        IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP_ADDRESS), PORT_NO);
+                        ServerSock.Connect(endPoint);
+                        Connected = true;
+                    }
+                    catch
+                    {
+                        Thread.Sleep(500);
+                        InitiailizeConnection(retryAmount++);
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("No Servers Online.");
+                }
+                
             }
             else
             {

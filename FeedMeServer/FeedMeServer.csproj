@@ -73,9 +73,11 @@
     <Compile Include="Functions\Commands\RegisterAuthentication.cs" />
     <Compile Include="Functions\Data\DAL.cs" />
     <Compile Include="Functions\Data\HashPass.cs" />
+    <Compile Include="Functions\GetServerInfo.cs" />
     <Compile Include="Functions\ServerMain.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
