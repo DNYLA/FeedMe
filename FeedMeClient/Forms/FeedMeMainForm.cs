@@ -50,7 +50,7 @@ namespace FeedMeClient.Forms
             //Add a check to See if Its Main Form and then either Application.Exit || Form.Close
             if (Name == "MainMenu" || Name == "LoginForm" || Name == "Register")
             {
-                Functions.Server.ServerConnection.CloseConnection();
+                FeedMeLogic.Server.ServerConnection.CloseConnection();
                 Application.Exit();
             }
             else

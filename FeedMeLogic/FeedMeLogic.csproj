@@ -53,6 +53,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,12 +62,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FeedMeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FeedMeTextBox.Designer.cs">
+      <DependentUpon>FeedMeTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\DAL.cs" />
     <Compile Include="Data\HashPass.cs" />
+    <Compile Include="GenControls.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\AuthenticationHandler.cs" />
+    <Compile Include="Server\ServerConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
+      <Project>{0D28C0D9-E040-460F-B2F4-42982A5E226A}</Project>
+      <Name>FeedMeNetworking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeedMeSerialization\FeedMeSerialization.csproj">
+      <Project>{5B06A087-EA59-4960-A8EB-A26A4134379B}</Project>
+      <Name>FeedMeSerialization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

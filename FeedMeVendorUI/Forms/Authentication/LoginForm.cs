@@ -1,5 +1,4 @@
-﻿using FeedMeVendorUI.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FeedMeVendorUI
+namespace FeedMeVendorUI.Forms.Authentication
 {
-    public partial class Form1 : FeedMeVendorTemplate
+    public partial class LoginForm : FeedMeVendorTemplate
     {
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

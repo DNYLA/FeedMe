@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FeedMeClient.Functions
+namespace FeedMeLogic
 {
     /// <summary>
     /// Generate Controls is a Class Which allows you to Dynamically Create Different Objects/Controls
     /// </summary>
-    class GenControls
+    public class GenControls
     {
         #region Dynamic Control Methods
 
@@ -73,7 +73,7 @@ namespace FeedMeClient.Functions
 
                 //Setting Properties
                 Name = picBoxName + "PicBox",
-                Image = FeedMeClient.Properties.Resources.Pizza_Express, //This is Temporary until i Set up the Server. The Image won't even be handled in this function;
+                //Image = FeedMeClient.Properties.Resources.Pizza_Express, //This is Temporary until i Set up the Server. The Image won't even be handled in this function;
 
                 Location = picBoxLocation,
                 Size = picBoxSize,

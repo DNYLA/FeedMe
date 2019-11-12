@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FeedMeLogic.Data
 {
-    class HashPass
+    public class HashPass
     {
         /* Steps To Hashing A Password With a Salt
          * [x] 1. Generate A Salt

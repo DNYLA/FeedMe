@@ -116,11 +116,6 @@
     <Compile Include="Forms\Notification.Designer.cs">
       <DependentUpon>Notification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Functions\Data\DAL.cs" />
-    <Compile Include="Functions\Data\HashPass.cs" />
-    <Compile Include="Functions\GenControls.cs" />
-    <Compile Include="Functions\Server\AuthenticationHandler.cs" />
-    <Compile Include="Functions\Server\ServerConnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -202,6 +197,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FeedMeLogic\FeedMeLogic.csproj">
+      <Project>{5947dd88-2519-4bc6-a82f-77f0a1ae63c8}</Project>
+      <Name>FeedMeLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
       <Project>{0d28c0d9-e040-460f-b2f4-42982a5e226a}</Project>
       <Name>FeedMeNetworking</Name>

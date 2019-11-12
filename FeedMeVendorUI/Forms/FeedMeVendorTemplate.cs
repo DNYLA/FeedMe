@@ -40,7 +40,7 @@ namespace FeedMeVendorUI.Forms
             //Add a check to See if Its Main Form and then either Application.Exit || Form.Close
             if (Name == "MainMenu" || Name == "LoginForm" || Name == "Register")
             {
-                Functions.Server.ServerConnection.CloseConnection();
+                //Functions.Server.ServerConnection.CloseConnection();
                 Application.Exit();
             }
             else

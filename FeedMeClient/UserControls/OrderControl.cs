@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FeedMeClient.Functions.Data;
-using FeedMeClient.Functions;
-using FeedMeClient.Functions.Server;
+using FeedMeLogic.Data;
+using FeedMeLogic.Server;
+using FeedMeLogic;
 
 namespace FeedMeClient.UserControls
 {

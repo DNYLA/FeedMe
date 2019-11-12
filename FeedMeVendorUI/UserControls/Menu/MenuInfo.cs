@@ -1,21 +1,25 @@
-﻿using FeedMeVendorUI.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FeedMeVendorUI
+namespace FeedMeVendorUI.UserControls.Menu
 {
-    public partial class Form1 : FeedMeVendorTemplate
+    public partial class MenuInfo : UserControl
     {
-        public Form1()
+        public MenuInfo()
         {
             InitializeComponent();
+        }
+
+        private void MenuInfo_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
