@@ -57,7 +57,9 @@ namespace FeedMeClient.Forms.Authentication
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            ClientInfo = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text);
+
+            Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 0);
+            ClientInfo = (UserInfo)OJ;
             CheckDetails();
         }
 

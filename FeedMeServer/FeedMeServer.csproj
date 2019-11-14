@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Functions\Commands\LoginAuthentication.cs" />
     <Compile Include="Functions\Commands\RegisterAuthentication.cs" />
+    <Compile Include="Functions\Commands\Vendor\Categories.cs" />
     <Compile Include="Functions\Data\DAL.cs" />
     <Compile Include="Functions\Data\HashPass.cs" />
     <Compile Include="Functions\GetServerInfo.cs" />

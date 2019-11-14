@@ -21,5 +21,15 @@ namespace FeedMeVendorUI.UserControls.Menu
         {
             
         }
+
+        private void LoadCategories(int vendorID)
+        {
+            vendorID = 3;
+            string SQLQuery = ($@"SELECT category FROM items
+                                WHERE VendorID = {vendorID.ToString()}
+                                GROUP BY category
+                                ORDER BY category ASC; ");
+            
+        }
     }
 }

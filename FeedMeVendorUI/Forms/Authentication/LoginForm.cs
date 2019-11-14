@@ -19,7 +19,9 @@ namespace FeedMeVendorUI.Forms.Authentication
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
+            MainMenu MM = new MainMenu();
+            MM.Show();
+            this.Close();
         }
     }
 }
