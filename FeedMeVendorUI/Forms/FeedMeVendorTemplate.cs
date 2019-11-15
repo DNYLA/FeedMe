@@ -9,14 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-namespace FeedMeClient.Forms
+namespace FeedMeVendorUI.Forms
 {
-    /// <summary>
-    /// The FeedMeMainForm Is a Basic Template which Most (If Not All) Forms will use to keep the same look. This saves time & also makes sure all forms
-    /// have the same basic look.
-    /// </summary>
-    public partial class FeedMeMainForm : Form
+    public partial class FeedMeVendorTemplate : Form
     {
         #region Move Window Method
         //No Border Styled Forms Don't include a functions/Form which allows you to move the window
@@ -29,20 +24,15 @@ namespace FeedMeClient.Forms
         public static extern bool ReleaseCapture();
         #endregion
 
-        #region Load Event
-        public FeedMeMainForm()
+        public FeedMeVendorTemplate()
         {
             InitializeComponent();
-            //If I Decide to add A Dark/Light Theme System The Colours Below will be used
-            //Dark Back Color: 2D2D30
-            //Light Back Color: D2D2CF (Current) 
         }
 
-        private void FeedMeMainForm_Load(object sender, EventArgs e)
+        private void FeedMeVendorTemplate_Load(object sender, EventArgs e)
         {
             ReSizeTitle();
         }
-        #endregion
 
         #region Button Click Events
         private void TopPanelCloseButton_Click(object sender, EventArgs e)
@@ -50,14 +40,14 @@ namespace FeedMeClient.Forms
             //Add a check to See if Its Main Form and then either Application.Exit || Form.Close
             if (Name == "MainMenu" || Name == "LoginForm" || Name == "Register")
             {
-                FeedMeLogic.Server.ServerConnection.CloseConnection();
+                //Functions.Server.ServerConnection.CloseConnection();
                 Application.Exit();
             }
             else
             {
                 Close();
             }
-            
+
         }
 
         private void TopPanelMaximizeButton_Click(object sender, EventArgs e)
@@ -82,8 +72,6 @@ namespace FeedMeClient.Forms
         }
         #endregion
 
-        #region Protected Override Events
-        //All Of these Events are used to ReDraw Title in Designer View
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -96,7 +84,7 @@ namespace FeedMeClient.Forms
             ReSizeTitle();
         }
 
-        
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -109,10 +97,7 @@ namespace FeedMeClient.Forms
             ReSizeTitle();
         }
 
-        #endregion
-
         #region Move Window Events
-        //Need to Check Events For Top Panel && The Title Label
         private void TopBarPanel_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();

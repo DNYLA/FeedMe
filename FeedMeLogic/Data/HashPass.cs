@@ -6,9 +6,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeedMeClient.Functions.Data
+namespace FeedMeLogic.Data
 {
-    class HashPass
+    public class HashPass
     {
         /* Steps To Hashing A Password With a Salt
          * [x] 1. Generate A Salt

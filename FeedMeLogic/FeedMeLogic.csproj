@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4EFEB5C1-F93E-484E-B778-1C6F1FFF5CAD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>FeedMeServer</RootNamespace>
-    <AssemblyName>FeedMeServer</AssemblyName>
+    <ProjectGuid>{5947DD88-2519-4BC6-A82F-77F0A1AE63C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FeedMeLogic</RootNamespace>
+    <AssemblyName>FeedMeLogic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,11 +37,8 @@
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.17.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.0.17\lib\net452\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.18\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
@@ -57,10 +52,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,29 +62,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Functions\Commands\LoginAuthentication.cs" />
-    <Compile Include="Functions\Commands\RegisterAuthentication.cs" />
-    <Compile Include="Functions\Commands\Vendor\Categories.cs" />
-    <Compile Include="Functions\Data\DAL.cs" />
-    <Compile Include="Functions\Data\HashPass.cs" />
-    <Compile Include="Functions\GetServerInfo.cs" />
-    <Compile Include="Functions\ServerMain.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Controls\FeedMeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FeedMeTextBox.Designer.cs">
+      <DependentUpon>FeedMeTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DAL.cs" />
+    <Compile Include="Data\HashPass.cs" />
+    <Compile Include="GenControls.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerInformation.cs" />
+    <Compile Include="Server\AuthenticationHandler.cs" />
+    <Compile Include="Server\ServerConnection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
       <Project>{0D28C0D9-E040-460F-B2F4-42982A5E226A}</Project>
       <Name>FeedMeNetworking</Name>
     </ProjectReference>
     <ProjectReference Include="..\FeedMeSerialization\FeedMeSerialization.csproj">
-      <Project>{5b06a087-ea59-4960-a8eb-a26a4134379b}</Project>
+      <Project>{5B06A087-EA59-4960-A8EB-A26A4134379B}</Project>
       <Name>FeedMeSerialization</Name>
     </ProjectReference>
   </ItemGroup>

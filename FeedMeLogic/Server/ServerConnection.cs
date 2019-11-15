@@ -1,7 +1,5 @@
-﻿using FeedMeSerialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,9 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FeedMeClient.Functions.Server
+namespace FeedMeLogic.Server
 {
-    class ServerConnection
+    public class ServerConnection
     {
         static int PORT_NO = 4030;
         //static string IP_ADDRESS = "86.180.33.203";
@@ -23,7 +21,7 @@ namespace FeedMeClient.Functions.Server
 
         //Protected Internal Variables are only acessible to the assembly or from containing classes (Anything Outside of FeedMeClient.Functions.Server Is Unable To Access This Variable)
         //Microsoft Documentation: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/accessibility-levels
-        protected internal static Socket ServerSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 
+        protected internal static Socket ServerSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         public static string GlobalCommandToSend = "";
         public static bool Connected = false;
 
@@ -44,19 +42,19 @@ namespace FeedMeClient.Functions.Server
                         Thread.Sleep(500);
                         InitiailizeConnection(retryAmount++);
                     }
-                    
+
                 }
                 else
                 {
                     MessageBox.Show("No Servers Online.");
                 }
-                
+
             }
             else
             {
                 Console.WriteLine("Already Connected!");
             }
-            
+
         }
 
 

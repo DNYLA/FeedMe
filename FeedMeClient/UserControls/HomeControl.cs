@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FeedMeClient.Functions.Data;
-using FeedMeClient.Functions;
-using FeedMeClient.Functions.Server;
+using FeedMeLogic.Server;
+using FeedMeLogic;
 
 namespace FeedMeClient.UserControls
 {
@@ -124,7 +123,7 @@ namespace FeedMeClient.UserControls
             string vendorID, vendorName, vendorDescription, vendorPostcode, vendorRating;
 
             string SQLQuery = "SELECT * FROM vendors";
-            using (DataTable DataResults = DAL.ExecCommand(SQLQuery))
+            using (DataTable DataResults = FeedMeLogic.Data.DAL.ExecCommand(SQLQuery))
             {
                 int vendorAmount = DataResults.Rows.Count;
                 VendorAmountLabel.Text = String.Format("There are currently {0} restraunts/food places near you", vendorAmount.ToString()); //Updates Text to Match No of Vendors

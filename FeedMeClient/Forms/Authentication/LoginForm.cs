@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FeedMeClient.Functions.Data;
-using FeedMeClient.Functions.Server;
 using FeedMeSerialization;
 
 namespace FeedMeClient.Forms.Authentication
@@ -59,13 +57,15 @@ namespace FeedMeClient.Forms.Authentication
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            ClientInfo = AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text);
+
+            Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 0);
+            ClientInfo = (UserInfo)OJ;
             CheckDetails();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            ServerConnection.InitiailizeConnection();
+            FeedMeLogic.Server.ServerConnection.InitiailizeConnection();
         }
         #endregion
     }
