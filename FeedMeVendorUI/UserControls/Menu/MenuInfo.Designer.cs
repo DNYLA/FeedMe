@@ -64,6 +64,11 @@
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 21;
+            this.listBox1.Items.AddRange(new object[] {
+            "Burgers",
+            "Wraps",
+            "Drinks",
+            "Deserts"});
             this.listBox1.Location = new System.Drawing.Point(0, 21);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(200, 330);
@@ -205,6 +210,11 @@
             this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 21;
+            this.listBox2.Items.AddRange(new object[] {
+            "Burger 1",
+            "Burger 2",
+            "Burger 3",
+            "Burger 4"});
             this.listBox2.Location = new System.Drawing.Point(0, 21);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(200, 330);

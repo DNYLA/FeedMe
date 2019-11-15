@@ -21,7 +21,7 @@ namespace FeedMeVendorUI.Forms.Authentication
         {
             MainMenu MM = new MainMenu();
             MM.Show();
-            this.Close();
+            this.Hide();
         }
     }
 }
