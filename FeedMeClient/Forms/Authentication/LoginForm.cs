@@ -31,13 +31,13 @@ namespace FeedMeClient.Forms.Authentication
             
             if (ClientInfo.UserID != -1)
             {
-                Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
-                NotifForm.Show();
-                MessageBox.Show("Hey");
-
-                MainMenu MainMenuForm = new MainMenu();
-                MainMenuForm.Show();
-                this.Hide();
+                //Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
+                //NotifForm.Show();
+                //MessageBox.Show("Hey");
+                
+                //MainMenu MainMenuForm = new MainMenu();
+                //MainMenuForm.Show();
+                //this.Hide();
             }
             else
             {

@@ -57,8 +57,7 @@ namespace FeedMeLogic.Data
         #endregion
 
         #region Public Methods
-        public static String[] HashPassword(string PlainText
-            )
+        public static String[] HashPassword(string PlainText)
         {
             byte[] salt = GenerateSalt(32);
             string[] HashedData = new string[2]; //Password, Salt (Possibility Of Adding in Random Amount of Iterations)
