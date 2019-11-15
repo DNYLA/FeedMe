@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeNetworking", "FeedMeN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeWebAPI", "FeedMeWebAPI\FeedMeWebAPI.csproj", "{E73F5AD0-CE54-4C14-8191-4AA6E1726F44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeServerCore", "FeedMeServerCore\FeedMeServerCore.csproj", "{1253E35D-66EF-47E3-B33F-E80059975C53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedMeServerCore", "FeedMeServerCore\FeedMeServerCore.csproj", "{1253E35D-66EF-47E3-B33F-E80059975C53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
