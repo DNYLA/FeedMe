@@ -19,6 +19,10 @@ namespace FeedMeServer.Functions.Commands
             ServerMain.ServerLogger("Requested to Login", "Client");
 
             //Receive Client Information
+            string LoginType = Receive.ReceiveMessage(Client);
+
+            Thread.Sleep(300);
+
             string username = Receive.ReceiveMessage(Client);
 
             Send.SendMessage(Client, GetUserSalt(username));
@@ -26,7 +30,7 @@ namespace FeedMeServer.Functions.Commands
             string clientHashedPassword = Receive.ReceiveMessage(Client);
 
             //If Login is Correct send back sucess message
-            if (CheckUserCredentials(username, clientHashedPassword) == true)
+            if (CheckUserCredentials(username, clientHashedPassword, LoginType) == true)
             {
                 Send.SendUserInfo(Client, GetUserInfo(username));
                 return;
@@ -86,7 +90,7 @@ namespace FeedMeServer.Functions.Commands
             return UserInformation;
         }
 
-        private static bool CheckUserCredentials(string username, string password)
+        private static bool CheckUserCredentials(string username, string password, string LoginType)
         {
             string[] HashData = GetHashData(username); //This Gets The Hash Stored in the Database
 

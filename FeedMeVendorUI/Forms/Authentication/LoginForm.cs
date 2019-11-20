@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FeedMeLogic;
+using FeedMeSerialization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,16 +14,70 @@ namespace FeedMeVendorUI.Forms.Authentication
 {
     public partial class LoginForm : FeedMeVendorTemplate
     {
+        public static VendorInfo VendorDetails = new VendorInfo(); //Make the Client Info Object Public so other user controls can access it.
+
+        #region Initializing
         public LoginForm()
         {
             InitializeComponent();
         }
+        #endregion
 
-        private void Button1_Click(object sender, EventArgs e)
+        #region Methods
+        //Other Methods Were moved over to the server
+
+
+        private void CheckDetails()
+        {
+
+            if (VendorDetails.VendorID != -1)
+            {
+                //Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
+                //NotifForm.Show();
+                //MessageBox.Show("Hey");
+
+                //MainMenu MainMenuForm = new MainMenu();
+                //MainMenuForm.Show();
+                //this.Hide();
+            }
+            else
+            {
+                Notification NotifForm = new Notification("Invalid Credentials ", NotifType.error);
+                NotifForm.Show();
+            }
+        }
+        #endregion
+
+        #region Event Handlers
+        private void RegisterLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RegisterForm RF = new RegisterForm();
+            RF.Show();
+            this.Hide();
+        }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+
+            Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(usernameTBox.Text, passwordTBox.Text, 1);
+            VendorDetails = (VendorInfo)OJ;
+            CheckDetails();
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            FeedMeLogic.Server.ServerConnection.InitiailizeConnection();
+        }
+
+        private void LoginButton_Click_1(object sender, EventArgs e)
         {
             MainMenu MM = new MainMenu();
             MM.Show();
             this.Hide();
         }
+
+        #endregion
+
+
     }
 }

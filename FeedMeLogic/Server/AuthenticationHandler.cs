@@ -14,9 +14,11 @@ namespace FeedMeLogic.Server
         {
             Send.SendMessage(ServerConnection.ServerSock, "Login");
 
+            Send.SendMessage(ServerConnection.ServerSock, LoginType.ToString());
+
             if (LoginType == 1)
             {
-
+                CustomerLogin(username, password);
             }
             else if (LoginType == 2)
             {
@@ -32,7 +34,7 @@ namespace FeedMeLogic.Server
             return Receive.ReceiveUserInfo(ServerConnection.ServerSock);
         }
 
-        private string GetSalt(string password)
+        public static string GetSalt(string password)
         {
             string salt = Receive.ReceiveMessage(ServerConnection.ServerSock);
             //If Salt Returns -1 then Username received is invalid
@@ -52,22 +54,13 @@ namespace FeedMeLogic.Server
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static UserInfo CustomerLogin(string username, string password)
+        public static Object CustomerLogin(string username, string password)
         {
             Send.SendMessage(ServerConnection.ServerSock, "Login");
 
             Send.SendMessage(ServerConnection.ServerSock, username);
 
-            string salt = Receive.ReceiveMessage(ServerConnection.ServerSock);
-
-            //If Salt Returns -1 then Username received is invalid
-            if (salt == "-1")
-            {
-                UserInfo UserInformation = new UserInfo();
-
-                UserInformation.UserID = -1;
-                return UserInformation;
-            }
+            string salt = GetSalt(password);
 
             Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
 
@@ -80,7 +73,7 @@ namespace FeedMeLogic.Server
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static UserInfo VendorLogin(string username, string password)
+        public static Object VendorLogin(string username, string password)
         {
             Send.SendMessage(ServerConnection.ServerSock, "Login");
 

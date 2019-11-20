@@ -71,7 +71,18 @@
     <Compile Include="Data\DAL.cs" />
     <Compile Include="Data\HashPass.cs" />
     <Compile Include="GenControls.cs" />
+    <Compile Include="Notification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Notification.Designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Server\AuthenticationHandler.cs" />
     <Compile Include="Server\ServerConnection.cs" />
   </ItemGroup>
@@ -87,6 +98,21 @@
       <Project>{5B06A087-EA59-4960-A8EB-A26A4134379B}</Project>
       <Name>FeedMeSerialization</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Notification.resx">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Icons\Notifications\error.png" />
+    <Content Include="Images\Icons\Notifications\success.png" />
+    <Content Include="Images\Icons\Notifications\warning.png" />
+    <None Include="Resources\Image1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
