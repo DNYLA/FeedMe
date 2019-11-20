@@ -48,6 +48,11 @@ namespace FeedMeNetworking
             return (UserInfo)ProtoBufSerialization.ObjectDeserializing(ReceiveData(Sock));
         }
 
+        public static VendorInfo ReceiveVendorInfo(Socket Sock)
+        {
+            return (VendorInfo)ProtoBufSerialization.ObjectDeserializing(ReceiveData(Sock));
+        }
+
         /// <summary>
         /// Converts message from server into DataTable
         /// </summary>

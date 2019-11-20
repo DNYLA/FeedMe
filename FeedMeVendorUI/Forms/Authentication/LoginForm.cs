@@ -1,6 +1,4 @@
-﻿using FeedMeLogic;
-using FeedMeSerialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +15,7 @@ namespace FeedMeVendorUI.Forms.Authentication
         public static VendorInfo VendorDetails = new VendorInfo(); //Make the Client Info Object Public so other user controls can access it.
 
         #region Initializing
+        public static VendorInfo StoreInfo = new VendorInfo();
         public LoginForm()
         {
             InitializeComponent();
@@ -74,6 +73,8 @@ namespace FeedMeVendorUI.Forms.Authentication
             MainMenu MM = new MainMenu();
             MM.Show();
             this.Hide();
+            StoreInfo = (VendorInfo)FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(usernameTexbox.Text, PasswordTextbox.Text, 1);
+            CheckDetails();
         }
 
         #endregion

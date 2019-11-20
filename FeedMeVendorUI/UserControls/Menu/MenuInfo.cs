@@ -31,5 +31,10 @@ namespace FeedMeVendorUI.UserControls.Menu
                                 ORDER BY category ASC; ");
             
         }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

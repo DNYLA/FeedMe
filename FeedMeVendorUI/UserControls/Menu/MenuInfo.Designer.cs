@@ -33,6 +33,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -105,6 +105,22 @@
             this.panel2.Size = new System.Drawing.Size(200, 351);
             this.panel2.TabIndex = 1;
             // 
+            // listBox2
+            // 
+            this.listBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 21;
+            this.listBox2.Items.AddRange(new object[] {
+            "Burger 1",
+            "Burger 2",
+            "Burger 3",
+            "Burger 4"});
+            this.listBox2.Location = new System.Drawing.Point(0, 21);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(200, 330);
+            this.listBox2.TabIndex = 2;
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.Highlight;
@@ -151,6 +167,7 @@
             this.AddButton.TabIndex = 3;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = false;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // button2
             // 
@@ -203,22 +220,6 @@
             this.button5.TabIndex = 5;
             this.button5.Text = "Edit";
             this.button5.UseVisualStyleBackColor = false;
-            // 
-            // listBox2
-            // 
-            this.listBox2.BackColor = System.Drawing.SystemColors.Control;
-            this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 21;
-            this.listBox2.Items.AddRange(new object[] {
-            "Burger 1",
-            "Burger 2",
-            "Burger 3",
-            "Burger 4"});
-            this.listBox2.Location = new System.Drawing.Point(0, 21);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(200, 330);
-            this.listBox2.TabIndex = 2;
             // 
             // MenuInfo
             // 

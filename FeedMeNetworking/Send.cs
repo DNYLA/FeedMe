@@ -51,5 +51,10 @@ namespace FeedMeNetworking
         {
             SendData(Sock, ProtoBufSerialization.ObjectSerialization(UserInformation));
         }
+
+        public static void SendVendorInfo(Socket Sock, VendorInfo BussinessInfo)
+        {
+            SendData(Sock, ProtoBufSerialization.ObjectSerialization(BussinessInfo));
+        }
     }
 }

@@ -25,6 +25,11 @@ namespace FeedMeClient.Forms
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            Console.WriteLine(Authentication.LoginForm.ClientInfo.Email);
+            Console.WriteLine(Authentication.LoginForm.ClientInfo.Admin);
+            Console.WriteLine(Authentication.LoginForm.ClientInfo.FirstName);
+            Console.WriteLine(Authentication.LoginForm.ClientInfo.LastName);
+            Console.WriteLine(Authentication.LoginForm.ClientInfo.Password);
             HomeControl.BringToFront(); //Brings Vendor List Control to Front
             Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton };
 
