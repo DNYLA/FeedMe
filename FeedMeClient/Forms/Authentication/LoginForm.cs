@@ -31,13 +31,13 @@ namespace FeedMeClient.Forms.Authentication
             
             if (ClientInfo.UserID != -1)
             {
-                //Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
-                //NotifForm.Show();
-                //MessageBox.Show("Hey");
-                
-                //MainMenu MainMenuForm = new MainMenu();
-                //MainMenuForm.Show();
-                //this.Hide();
+                Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
+                NotifForm.Show();
+                MessageBox.Show("Hey");
+
+                MainMenu MainMenuForm = new MainMenu();
+                MainMenuForm.Show();
+                this.Hide();
             }
             else
             {
@@ -58,8 +58,7 @@ namespace FeedMeClient.Forms.Authentication
         private void LoginButton_Click(object sender, EventArgs e)
         {
 
-            Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 0);
-            ClientInfo = (UserInfo)OJ;
+            ClientInfo= (UserInfo)FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 0);
             CheckDetails();
         }
 

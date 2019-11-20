@@ -149,6 +149,31 @@ namespace FeedMeSerialization
         public bool Admin { get; set; }
     }
 
+    [ProtoContract]
+    public class VendorInfo
+    {
+        [ProtoMember(1)]
+        public int VendorID { get; set; }
+        [ProtoMember(2)]
+        public string Name { get; set; }
+        [ProtoMember(3)]
+        public string Description { get; set; }
+        [ProtoMember(4)]
+        public string Address { get; set; }
+        [ProtoMember(5)]
+        public string Email { get; set; }
+        [ProtoMember(6)]
+        public string Postcode { get; set; }
+        [ProtoMember(7)]
+        public string PhoneNo { get; set; }
+        [ProtoMember(8)]
+        public int Rating { get; set; }
+        [ProtoMember(9)]
+        public string Password { get; set; }
+        [ProtoMember(10)]
+        public string Salt { get; set; }
+    }
+
 
     #endregion
 

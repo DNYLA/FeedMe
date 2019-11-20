@@ -14,13 +14,13 @@ namespace FeedMeLogic.Server
         {
             Send.SendMessage(ServerConnection.ServerSock, "Login");
 
-            if (LoginType == 1)
+            if (LoginType == 0)
             {
-
+                return (Object)CustomerLogin(username, password);
             }
-            else if (LoginType == 2)
+            else if (LoginType == 1)
             {
-
+                return (Object)VendorLogin(username, password);
             }
 
             Send.SendMessage(ServerConnection.ServerSock, username);
@@ -54,7 +54,7 @@ namespace FeedMeLogic.Server
         /// <returns></returns>
         public static UserInfo CustomerLogin(string username, string password)
         {
-            Send.SendMessage(ServerConnection.ServerSock, "Login");
+            //Send.SendMessage(ServerConnection.ServerSock, "Login");
 
             Send.SendMessage(ServerConnection.ServerSock, username);
 
@@ -82,8 +82,6 @@ namespace FeedMeLogic.Server
         /// <returns></returns>
         public static UserInfo VendorLogin(string username, string password)
         {
-            Send.SendMessage(ServerConnection.ServerSock, "Login");
-
             Send.SendMessage(ServerConnection.ServerSock, username);
 
             string salt = Receive.ReceiveMessage(ServerConnection.ServerSock);

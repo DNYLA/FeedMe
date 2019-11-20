@@ -28,46 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.feedMeTextBox1 = new FeedMeLogic.Controls.FeedMeTextBox();
-            this.feedMeTextBox2 = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.usernameTexbox = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.PasswordTextbox = new FeedMeLogic.Controls.FeedMeTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // feedMeTextBox1
+            // usernameTexbox
             // 
-            this.feedMeTextBox1.AutoResize = false;
-            this.feedMeTextBox1.BaseColor = System.Drawing.Color.Black;
-            this.feedMeTextBox1.BorderColor = System.Drawing.Color.Black;
-            this.feedMeTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.feedMeTextBox1.FocusColor = System.Drawing.Color.White;
-            this.feedMeTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Italic);
-            this.feedMeTextBox1.ForeColor = System.Drawing.Color.Gray;
-            this.feedMeTextBox1.Location = new System.Drawing.Point(70, 82);
-            this.feedMeTextBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.feedMeTextBox1.Name = "feedMeTextBox1";
-            this.feedMeTextBox1.SingleLine = true;
-            this.feedMeTextBox1.Size = new System.Drawing.Size(246, 26);
-            this.feedMeTextBox1.TabIndex = 2;
-            this.feedMeTextBox1.Text = "username";
-            this.feedMeTextBox1.Watermark = "username";
+            this.usernameTexbox.AutoResize = false;
+            this.usernameTexbox.BaseColor = System.Drawing.Color.Black;
+            this.usernameTexbox.BorderColor = System.Drawing.Color.Black;
+            this.usernameTexbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.usernameTexbox.FocusColor = System.Drawing.Color.White;
+            this.usernameTexbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Italic);
+            this.usernameTexbox.ForeColor = System.Drawing.Color.Gray;
+            this.usernameTexbox.Location = new System.Drawing.Point(70, 82);
+            this.usernameTexbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.usernameTexbox.Name = "usernameTexbox";
+            this.usernameTexbox.SingleLine = true;
+            this.usernameTexbox.Size = new System.Drawing.Size(246, 23);
+            this.usernameTexbox.TabIndex = 2;
+            this.usernameTexbox.Text = "username";
+            this.usernameTexbox.Watermark = "username";
             // 
-            // feedMeTextBox2
+            // PasswordTextbox
             // 
-            this.feedMeTextBox2.AutoResize = false;
-            this.feedMeTextBox2.BaseColor = System.Drawing.Color.Black;
-            this.feedMeTextBox2.BorderColor = System.Drawing.Color.Black;
-            this.feedMeTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.feedMeTextBox2.FocusColor = System.Drawing.Color.White;
-            this.feedMeTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Italic);
-            this.feedMeTextBox2.ForeColor = System.Drawing.Color.Gray;
-            this.feedMeTextBox2.Location = new System.Drawing.Point(70, 134);
-            this.feedMeTextBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.feedMeTextBox2.Name = "feedMeTextBox2";
-            this.feedMeTextBox2.SingleLine = true;
-            this.feedMeTextBox2.Size = new System.Drawing.Size(246, 20);
-            this.feedMeTextBox2.TabIndex = 3;
-            this.feedMeTextBox2.Text = "password";
-            this.feedMeTextBox2.Watermark = "password";
+            this.PasswordTextbox.AutoResize = false;
+            this.PasswordTextbox.BaseColor = System.Drawing.Color.Black;
+            this.PasswordTextbox.BorderColor = System.Drawing.Color.Black;
+            this.PasswordTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.PasswordTextbox.FocusColor = System.Drawing.Color.White;
+            this.PasswordTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Italic);
+            this.PasswordTextbox.ForeColor = System.Drawing.Color.Gray;
+            this.PasswordTextbox.Location = new System.Drawing.Point(70, 134);
+            this.PasswordTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PasswordTextbox.Name = "PasswordTextbox";
+            this.PasswordTextbox.SingleLine = true;
+            this.PasswordTextbox.Size = new System.Drawing.Size(246, 23);
+            this.PasswordTextbox.TabIndex = 3;
+            this.PasswordTextbox.Text = "password";
+            this.PasswordTextbox.Watermark = "password";
             // 
             // button1
             // 
@@ -85,13 +85,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 628);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.feedMeTextBox2);
-            this.Controls.Add(this.feedMeTextBox1);
+            this.Controls.Add(this.PasswordTextbox);
+            this.Controls.Add(this.usernameTexbox);
             this.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
-            this.Controls.SetChildIndex(this.feedMeTextBox1, 0);
-            this.Controls.SetChildIndex(this.feedMeTextBox2, 0);
+            this.Controls.SetChildIndex(this.usernameTexbox, 0);
+            this.Controls.SetChildIndex(this.PasswordTextbox, 0);
             this.Controls.SetChildIndex(this.button1, 0);
             this.ResumeLayout(false);
 
@@ -99,8 +99,8 @@
 
         #endregion
 
-        private FeedMeLogic.Controls.FeedMeTextBox feedMeTextBox1;
-        private FeedMeLogic.Controls.FeedMeTextBox feedMeTextBox2;
+        private FeedMeLogic.Controls.FeedMeTextBox usernameTexbox;
+        private FeedMeLogic.Controls.FeedMeTextBox PasswordTextbox;
         private System.Windows.Forms.Button button1;
     }
 }

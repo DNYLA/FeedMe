@@ -38,11 +38,12 @@ namespace FeedMeClient.UserControls
         #region Generate Top Button Method
         private void GenerateTopButtons(int vendorID)
         {
+            ButtonsFlowPanel.Controls.Clear();
             //Querying Database for Item Types
-            string SQLQuery = ($@"SELECT MIN(ItemType)
+            string SQLQuery = ($@"SELECT MIN(Category)
                                 FROM items
                                 WHERE vendorID = {vendorID}
-                                GROUP BY ItemType");
+                                GROUP BY Category");
             DataTable QueryResults = DAL.ExecCommand(SQLQuery);
 
             //Initializing a List & Adding item Types to it.
@@ -75,7 +76,7 @@ namespace FeedMeClient.UserControls
             int ItemAmount;
             string ItemID, ItemType, ItemName, ItemDescription, ItemPrice;
 
-            string SQLCommand = ($"SELECT * FROM items WHERE vendorID = {vendorID} AND ItemType = '{itemType}'");
+            string SQLCommand = ($"SELECT * FROM items WHERE vendorID = {vendorID} AND Category = '{itemType}'");
 
             DataTable ItemResults = DAL.ExecCommand(SQLCommand);
             ItemAmount = ItemResults.Rows.Count;
