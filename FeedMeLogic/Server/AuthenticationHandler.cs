@@ -16,9 +16,9 @@ namespace FeedMeLogic.Server
 
             Send.SendMessage(ServerConnection.ServerSock, LoginType.ToString());
 
-            if (LoginType == 1)
+            if (LoginType == 0)
             {
-
+                return (Object)CustomerLogin(username, password);
             }
             else if (LoginType == 1)
             {
@@ -77,20 +77,20 @@ namespace FeedMeLogic.Server
         {
             Send.SendMessage(ServerConnection.ServerSock, username);
 
-            string salt = Receive.ReceiveMessage(ServerConnection.ServerSock);
+            string salt = GetSalt(password);
 
             //If Salt Returns -1 then Username received is invalid
             if (salt == "-1")
             {
-                UserInfo UserInformation = new UserInfo();
+                VendorInfo VendorInformation = new VendorInfo();
 
-                UserInformation.UserID = -1;
-                return UserInformation;
+                VendorInformation.VendorID = -1;
+                return VendorInformation;
             }
 
             Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
 
-            return Receive.ReceiveUserInfo(ServerConnection.ServerSock);
+            return Receive.ReceiveVendorInfo(ServerConnection.ServerSock);
         }
 
         public static int RegisterUser(UserInfo UserInformation)
@@ -101,5 +101,10 @@ namespace FeedMeLogic.Server
 
             return Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
         }
+    }
+
+    public enum ObjectType
+    {
+        VendorObject, UserObject
     }
 }

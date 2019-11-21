@@ -37,6 +37,7 @@
             this.HomeButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.menuInfo1 = new FeedMeVendorUI.UserControls.Menu.MenuInfo();
+            this.storeInfo1 = new FeedMeVendorUI.UserControls.Menu.StoreInfo();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -147,6 +148,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.storeInfo1);
             this.panel2.Controls.Add(this.menuInfo1);
             this.panel2.Location = new System.Drawing.Point(18, 84);
             this.panel2.Name = "panel2";
@@ -161,6 +163,14 @@
             this.menuInfo1.Name = "menuInfo1";
             this.menuInfo1.Size = new System.Drawing.Size(776, 451);
             this.menuInfo1.TabIndex = 0;
+            // 
+            // storeInfo1
+            // 
+            this.storeInfo1.Location = new System.Drawing.Point(-4, 0);
+            this.storeInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.storeInfo1.Name = "storeInfo1";
+            this.storeInfo1.Size = new System.Drawing.Size(776, 451);
+            this.storeInfo1.TabIndex = 1;
             // 
             // MainMenu
             // 
@@ -192,5 +202,6 @@
         private System.Windows.Forms.Button ReviewButton;
         private System.Windows.Forms.Panel panel2;
         private UserControls.Menu.MenuInfo menuInfo1;
+        private UserControls.Menu.StoreInfo storeInfo1;
     }
 }

@@ -39,27 +39,23 @@ namespace FeedMeNetworking
             return Encoding.UTF8.GetString(ReceiveData(Sock));
         }
 
+        public static DataTable ReceiveDataTable(Socket Sock)
+        {
+            return ProtoBufSerialization.DataDeserializing(ReceiveData(Sock));
+        }
+
         /// <summary>
         /// Converts Message From Server Into UserInfo Object
         /// </summary>
         /// <returns>UserInfo Object</returns>
         public static UserInfo ReceiveUserInfo(Socket Sock)
         {
-            return (UserInfo)ProtoBufSerialization.ObjectDeserializing(ReceiveData(Sock));
+            return (UserInfo)ProtoBufSerialization.ObjectDeserializing(ReceiveData(Sock), ProtoBufSerialization.ObjectType.UserObject);
         }
 
         public static VendorInfo ReceiveVendorInfo(Socket Sock)
         {
-            return (VendorInfo)ProtoBufSerialization.ObjectDeserializing(ReceiveData(Sock));
-        }
-
-        /// <summary>
-        /// Converts message from server into DataTable
-        /// </summary>
-        /// <returns>DataTable from Byte Array</returns>
-        public static DataTable ReceiveDataTable(Socket Sock)
-        {
-            return ProtoBufSerialization.DataDeserializing(ReceiveData(Sock));
+            return (VendorInfo)ProtoBufSerialization.ObjectDeserializing(ReceiveData(Sock), ProtoBufSerialization.ObjectType.VendorObject);
         }
     }
 }

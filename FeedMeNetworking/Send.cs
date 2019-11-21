@@ -1,6 +1,7 @@
 ﻿using FeedMeSerialization;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -43,6 +44,11 @@ namespace FeedMeNetworking
             SendData(Sock, Encoding.UTF8.GetBytes(message));   
         }
 
+        public static void SendDataTable(Socket Sock, DataTable dataTable)
+        {
+            SendData(Sock, ProtoBufSerialization.DataSerialization(dataTable));
+        }
+
         /// <summary>
         /// Serializes UserInfo Object and Uses SendData To Send it over the network
         /// </summary>
@@ -56,5 +62,6 @@ namespace FeedMeNetworking
         {
             SendData(Sock, ProtoBufSerialization.ObjectSerialization(BussinessInfo));
         }
+
     }
 }

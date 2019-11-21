@@ -21,9 +21,6 @@ namespace FeedMeServer.Functions.Commands
             //Receive Login Type (Customer || Vendor)
             int LoginType = Convert.ToInt32(Receive.ReceiveMessage(Client));
 
-            //Receive Client Information
-            string LoginType = Receive.ReceiveMessage(Client);
-
             Thread.Sleep(300);
 
             string username = Receive.ReceiveMessage(Client);
@@ -40,7 +37,7 @@ namespace FeedMeServer.Functions.Commands
                     Send.SendUserInfo(Client, GetUserInfo(username));
                     return;
                 }
-                Send.SendUserInfo(Client, GetUserInfo(username));
+                Send.SendVendorInfo(Client, GetVendorInfo(username));
                 return;
             }
 
@@ -102,18 +99,18 @@ namespace FeedMeServer.Functions.Commands
         {
             VendorInfo BussinessInfo = new VendorInfo();
             Console.WriteLine("Valid Username");
-            DataTable userInfoDT = DAL.ExecCommand($"SELECT * FROM vendors WHERE Name = '{username}'");
+            DataTable vendorInfoDT = DAL.ExecCommand($"SELECT * FROM vendors WHERE Name = '{username}'");
 
-            BussinessInfo.VendorID = Convert.ToInt32(userInfoDT.Rows[0][0]);
-            BussinessInfo.Name = userInfoDT.Rows[0][1].ToString();
-            BussinessInfo.Description = userInfoDT.Rows[0][2].ToString();
-            BussinessInfo.Address = userInfoDT.Rows[0][3].ToString();
-            BussinessInfo.Email = userInfoDT.Rows[0][4].ToString();
-            BussinessInfo.Postcode = userInfoDT.Rows[0][5].ToString();
-            BussinessInfo.PhoneNo = userInfoDT.Rows[0][6].ToString();
-            BussinessInfo.Rating = Convert.ToInt32(userInfoDT.Rows[0][7]);
-            BussinessInfo.Password = userInfoDT.Rows[0][8].ToString();
-            BussinessInfo.Salt = userInfoDT.Rows[0][9].ToString();
+            BussinessInfo.VendorID = Convert.ToInt32(vendorInfoDT.Rows[0][0]);
+            BussinessInfo.Name = vendorInfoDT.Rows[0][1].ToString();
+            BussinessInfo.Description = vendorInfoDT.Rows[0][2].ToString();
+            BussinessInfo.Address = vendorInfoDT.Rows[0][3].ToString();
+            BussinessInfo.Email = vendorInfoDT.Rows[0][4].ToString();
+            BussinessInfo.Postcode = vendorInfoDT.Rows[0][5].ToString();
+            BussinessInfo.PhoneNo = vendorInfoDT.Rows[0][6].ToString();
+            BussinessInfo.Rating = Convert.ToInt32(vendorInfoDT.Rows[0][7].ToString());
+            BussinessInfo.Password = vendorInfoDT.Rows[0][8].ToString();
+            BussinessInfo.Salt = vendorInfoDT.Rows[0][9].ToString();
 
             return BussinessInfo;
 
@@ -172,7 +169,7 @@ namespace FeedMeServer.Functions.Commands
             string SQLQuery = ($"SELECT * FROM users WHERE username = '{username}'");
             if (LoginType == 1)
             {
-                TableName = "vendors";
+                SQLQuery = ($"SELECT * FROM vendors WHERE Name = '{username}'");
             }
             
             using (DataTable SQLResults = DAL.ExecCommand(SQLQuery))

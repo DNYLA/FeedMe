@@ -93,6 +93,12 @@
     <Compile Include="UserControls\Menu\MenuInfo.Designer.cs">
       <DependentUpon>MenuInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Menu\StoreInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Menu\StoreInfo.Designer.cs">
+      <DependentUpon>StoreInfo.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\Authentication\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +119,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\Menu\MenuInfo.resx">
       <DependentUpon>MenuInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Menu\StoreInfo.resx">
+      <DependentUpon>StoreInfo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

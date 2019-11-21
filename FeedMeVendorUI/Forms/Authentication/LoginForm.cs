@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FeedMeLogic;
+using FeedMeSerialization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,13 +33,13 @@ namespace FeedMeVendorUI.Forms.Authentication
 
             if (VendorDetails.VendorID != -1)
             {
-                //Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
-                //NotifForm.Show();
-                //MessageBox.Show("Hey");
+                Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
+                NotifForm.Show();
+                MessageBox.Show("Hey");
 
-                //MainMenu MainMenuForm = new MainMenu();
-                //MainMenuForm.Show();
-                //this.Hide();
+                MainMenu MainMenuForm = new MainMenu();
+                MainMenuForm.Show();
+                this.Hide();
             }
             else
             {
@@ -57,8 +59,7 @@ namespace FeedMeVendorUI.Forms.Authentication
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-
-            Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(usernameTBox.Text, passwordTBox.Text, 1);
+            Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 1);
             VendorDetails = (VendorInfo)OJ;
             CheckDetails();
         }
@@ -68,17 +69,19 @@ namespace FeedMeVendorUI.Forms.Authentication
             FeedMeLogic.Server.ServerConnection.InitiailizeConnection();
         }
 
-        private void LoginButton_Click_1(object sender, EventArgs e)
-        {
-            MainMenu MM = new MainMenu();
-            MM.Show();
-            this.Hide();
-            StoreInfo = (VendorInfo)FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(usernameTexbox.Text, PasswordTextbox.Text, 1);
-            CheckDetails();
-        }
 
         #endregion
 
+        private void LoginButton_Click_1(object sender, EventArgs e)
+        {
+            Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 1);
+            VendorDetails = (VendorInfo)OJ;
+            CheckDetails();
+        }
 
+        private void LoginForm_Load_1(object sender, EventArgs e)
+        {
+            FeedMeLogic.Server.ServerConnection.InitiailizeConnection();
+        }
     }
 }

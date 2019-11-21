@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Server\AuthenticationHandler.cs" />
     <Compile Include="Server\ServerConnection.cs" />
+    <Compile Include="Vendor\StoreMenuInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -113,6 +114,9 @@
     <Content Include="Images\Icons\Notifications\success.png" />
     <Content Include="Images\Icons\Notifications\warning.png" />
     <None Include="Resources\Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Vendor\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
