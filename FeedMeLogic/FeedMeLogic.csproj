@@ -71,6 +71,7 @@
     <Compile Include="Data\DAL.cs" />
     <Compile Include="Data\HashPass.cs" />
     <Compile Include="GenControls.cs" />
+    <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Notification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +89,7 @@
     <Compile Include="Vendor\StoreMenuInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

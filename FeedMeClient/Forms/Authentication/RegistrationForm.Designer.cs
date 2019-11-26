@@ -293,7 +293,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.RegisterButton);
             this.Name = "Register";
-            this.Text = "RegistrationForm";
+            this.Text = "aaaaaaaaaaaaaaa";
             this.Load += new System.EventHandler(this.RegistrationForm_Load);
             this.Controls.SetChildIndex(this.RegisterButton, 0);
             this.Controls.SetChildIndex(this.pictureBox3, 0);

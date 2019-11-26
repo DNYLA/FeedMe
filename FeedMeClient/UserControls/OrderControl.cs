@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using FeedMeLogic.Data;
 using FeedMeLogic.Server;
 using FeedMeLogic;
+using FeedMeLogic.Models;
 
 namespace FeedMeClient.UserControls
 {
@@ -27,6 +28,7 @@ namespace FeedMeClient.UserControls
          * [X] 6. Make sure the Event Handler for Selecting an Item Type works Correctly & Generates a new List of Items
          * [] 7. Make the Place Order Button Re-Direct the User to the Checkout Control.
         */
+        private static List<ItemModel> ItemList = new List<ItemModel>();
 
         public OrderControl()
         {
@@ -267,6 +269,18 @@ namespace FeedMeClient.UserControls
             int tbIntVal = Convert.ToInt32(tb.Text);
             tbIntVal = tbIntVal + 1;
             tb.Text = tbIntVal.ToString();
+        }
+
+        private void UpdateItemList(int Change)
+        {
+            
+            if (ItemList.Count == 0)
+            {
+
+            }
+
+            
+
         }
 
         private void ItemAmountChanged(object sender, EventArgs e)
