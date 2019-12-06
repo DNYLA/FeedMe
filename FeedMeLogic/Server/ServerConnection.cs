@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeedMeNetworking.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,6 +13,8 @@ namespace FeedMeLogic.Server
 {
     public class ServerConnection
     {
+
+        public static List<ItemModel> ItemList = new List<ItemModel>();
         static int PORT_NO = 4030;
         //static string IP_ADDRESS = "86.180.33.203";
         //static string IP_ADDRESS = "86.181.164.197";
@@ -60,7 +63,7 @@ namespace FeedMeLogic.Server
 
         public static void CloseConnection()
         {
-            ServerSock.Close(1000); //Waits 1 second to send any data before closing
+            ServerSock.Close(500); //Waits 1 second to send any data before closing
         }
     }
 }

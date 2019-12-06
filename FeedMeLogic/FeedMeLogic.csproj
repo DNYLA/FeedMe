@@ -71,7 +71,6 @@
     <Compile Include="Data\DAL.cs" />
     <Compile Include="Data\HashPass.cs" />
     <Compile Include="GenControls.cs" />
-    <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Notification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,10 +84,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Server\AuthenticationHandler.cs" />
+    <Compile Include="Server\ConfirmOrder.cs" />
     <Compile Include="Server\ServerConnection.cs" />
     <Compile Include="Vendor\StoreMenuInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -96,10 +97,6 @@
     <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
       <Project>{0D28C0D9-E040-460F-B2F4-42982A5E226A}</Project>
       <Name>FeedMeNetworking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FeedMeSerialization\FeedMeSerialization.csproj">
-      <Project>{5B06A087-EA59-4960-A8EB-A26A4134379B}</Project>
-      <Name>FeedMeSerialization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

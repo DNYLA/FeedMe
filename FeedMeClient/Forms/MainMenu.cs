@@ -12,6 +12,8 @@ namespace FeedMeClient.Forms
 {
     public partial class MainMenu : FeedMeMainForm
     {
+        
+
         //Initializing Variables used globaly WITHIN the Class
         bool menuClosed = false;
         private const int CLOSED_PANEL_WDITH = 80; 

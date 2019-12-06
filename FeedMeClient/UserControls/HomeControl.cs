@@ -110,6 +110,7 @@ namespace FeedMeClient.UserControls
 
             Label TitleLabel = userControl.Controls.Find("VendorTitleLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
             TitleLabel.Text = VendorName; //Sets Vendor Title To Vendor that was just selected
+            //TitleLabel.Tag = ""
 
             userControl.BringToFront();
             #endregion
@@ -168,7 +169,7 @@ namespace FeedMeClient.UserControls
 
                     Label vendorTitleLabel = GenControls.AddLabel(vendorName, vendorName, TitleLoc, TitleFont, Color.Black, Color.Transparent, TitleSize, true);
                     Label vendorDescLabel = GenControls.AddLabel(vendorName + "Desc", vendorDescription, DescLoc, DefaultFont, Color.Black, Color.Transparent, DescSize, false);
-
+                    
                     RatingLoc = new Point(vendorTitleLabel.Location.X + vendorTitleLabel.Width - 15, vendorTitleLabel.Location.Y);
                     Label vendorRatingLabel = GenControls.AddLabel(vendorName + "Rating", vendorRating, RatingLoc, DefaultFont, Color.Black, Color.Transparent, RatingSize, true);
 

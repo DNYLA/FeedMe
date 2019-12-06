@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FeedMeNetworking;
-using FeedMeSerialization;
 using FeedMeServer.Functions.Commands;
 using FeedMeServer.Functions.Commands.Vendor;
 
@@ -93,6 +92,12 @@ namespace FeedMeServer.Functions
                             break;
                         case "StoreInfo":
                             StoreInfo.GetStoreInfo(clientSocket);
+                            break;
+                        case "ConfirmOrder":
+                            OrderHandler.CheckOrder(clientSocket);
+                            break;
+                        case "CheckForOrder":
+                            OrderHandler.CheckForOrders(clientSocket);
                             break;
                     }
 

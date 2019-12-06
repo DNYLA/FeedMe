@@ -1,5 +1,5 @@
 ﻿using FeedMeNetworking;
-using FeedMeSerialization;
+using FeedMeNetworking.Serialization;
 using FeedMeServer.Functions.Data;
 using System;
 using System.Collections.Generic;

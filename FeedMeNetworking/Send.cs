@@ -1,4 +1,4 @@
-﻿using FeedMeSerialization;
+﻿using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -56,6 +56,11 @@ namespace FeedMeNetworking
         public static void SendUserInfo(Socket Sock, UserInfo UserInformation)
         {
             SendData(Sock, ProtoBufSerialization.ObjectSerialization(UserInformation));
+        }
+
+        public static void SendOrderDetails(Socket Sock, OrderInfo OrderInformation)
+        {
+            SendData(Sock, ProtoBufSerialization.ObjectSerialization(OrderInformation));
         }
 
         public static void SendVendorInfo(Socket Sock, VendorInfo BussinessInfo)

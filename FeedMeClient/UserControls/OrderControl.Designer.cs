@@ -60,6 +60,7 @@
             this.OrderButton.TabIndex = 15;
             this.OrderButton.Text = "Place Order";
             this.OrderButton.UseVisualStyleBackColor = false;
+            this.OrderButton.Click += new System.EventHandler(this.OrderButton_Click);
             // 
             // ItemsFlowPanel
             // 

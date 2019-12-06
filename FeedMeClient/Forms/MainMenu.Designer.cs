@@ -36,8 +36,11 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
             this.UserViewPanel = new System.Windows.Forms.Panel();
+            this.reviewDesign1 = new FeedMeClient.UserControls.Designs.ReviewDesign();
+            this.reviewOrderControl = new FeedMeClient.UserControls.Order.ReviewOrderControl();
             this.OrderControl = new FeedMeClient.UserControls.OrderControl();
             this.HomeControl = new FeedMeClient.UserControls.HomeControl();
+            this.enterCredentials1 = new FeedMeClient.UserControls.Order.EnterCredentials();
             this.SideMenuPanel.SuspendLayout();
             this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
@@ -138,6 +141,9 @@
             // UserViewPanel
             // 
             this.UserViewPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.UserViewPanel.Controls.Add(this.enterCredentials1);
+            this.UserViewPanel.Controls.Add(this.reviewDesign1);
+            this.UserViewPanel.Controls.Add(this.reviewOrderControl);
             this.UserViewPanel.Controls.Add(this.OrderControl);
             this.UserViewPanel.Controls.Add(this.HomeControl);
             this.UserViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -145,6 +151,24 @@
             this.UserViewPanel.Name = "UserViewPanel";
             this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
             this.UserViewPanel.TabIndex = 2;
+            // 
+            // reviewDesign1
+            // 
+            this.reviewDesign1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reviewDesign1.Location = new System.Drawing.Point(-3, -5);
+            this.reviewDesign1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.reviewDesign1.Name = "reviewDesign1";
+            this.reviewDesign1.Size = new System.Drawing.Size(767, 677);
+            this.reviewDesign1.TabIndex = 3;
+            // 
+            // reviewOrderControl
+            // 
+            this.reviewOrderControl.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.reviewOrderControl.Location = new System.Drawing.Point(0, 0);
+            this.reviewOrderControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.reviewOrderControl.Name = "reviewOrderControl";
+            this.reviewOrderControl.Size = new System.Drawing.Size(764, 677);
+            this.reviewOrderControl.TabIndex = 2;
             // 
             // OrderControl
             // 
@@ -164,6 +188,15 @@
             this.HomeControl.Name = "HomeControl";
             this.HomeControl.Size = new System.Drawing.Size(771, 677);
             this.HomeControl.TabIndex = 0;
+            // 
+            // enterCredentials1
+            // 
+            this.enterCredentials1.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enterCredentials1.Location = new System.Drawing.Point(-3, 0);
+            this.enterCredentials1.Margin = new System.Windows.Forms.Padding(6);
+            this.enterCredentials1.Name = "enterCredentials1";
+            this.enterCredentials1.Size = new System.Drawing.Size(767, 677);
+            this.enterCredentials1.TabIndex = 4;
             // 
             // MainMenu
             // 
@@ -196,5 +229,8 @@
         private System.Windows.Forms.Panel UserViewPanel;
         private UserControls.HomeControl HomeControl;
         private UserControls.OrderControl OrderControl;
+        private UserControls.Order.ReviewOrderControl reviewOrderControl;
+        private UserControls.Designs.ReviewDesign reviewDesign1;
+        private UserControls.Order.EnterCredentials enterCredentials1;
     }
 }

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeClient", "FeedMeClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeServer", "FeedMeServer\FeedMeServer.csproj", "{4EFEB5C1-F93E-484E-B778-1C6F1FFF5CAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeSerialization", "FeedMeSerialization\FeedMeSerialization.csproj", "{5B06A087-EA59-4960-A8EB-A26A4134379B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeNetworking", "FeedMeNetworking\FeedMeNetworking.csproj", "{0D28C0D9-E040-460F-B2F4-42982A5E226A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedMeWebAPI", "FeedMeWebAPI\FeedMeWebAPI.csproj", "{E73F5AD0-CE54-4C14-8191-4AA6E1726F44}"
@@ -31,10 +29,6 @@ Global
 		{4EFEB5C1-F93E-484E-B778-1C6F1FFF5CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EFEB5C1-F93E-484E-B778-1C6F1FFF5CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EFEB5C1-F93E-484E-B778-1C6F1FFF5CAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B06A087-EA59-4960-A8EB-A26A4134379B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B06A087-EA59-4960-A8EB-A26A4134379B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B06A087-EA59-4960-A8EB-A26A4134379B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B06A087-EA59-4960-A8EB-A26A4134379B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D28C0D9-E040-460F-B2F4-42982A5E226A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D28C0D9-E040-460F-B2F4-42982A5E226A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D28C0D9-E040-460F-B2F4-42982A5E226A}.Release|Any CPU.ActiveCfg = Release|Any CPU

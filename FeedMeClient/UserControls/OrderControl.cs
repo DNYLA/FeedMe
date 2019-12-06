@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using FeedMeLogic.Data;
 using FeedMeLogic.Server;
 using FeedMeLogic;
-using FeedMeLogic.Models;
+using FeedMeNetworking.Models;
 
 namespace FeedMeClient.UserControls
 {
@@ -28,7 +28,7 @@ namespace FeedMeClient.UserControls
          * [X] 6. Make sure the Event Handler for Selecting an Item Type works Correctly & Generates a new List of Items
          * [] 7. Make the Place Order Button Re-Direct the User to the Checkout Control.
         */
-        private static List<ItemModel> ItemList = new List<ItemModel>();
+        
 
         public OrderControl()
         {
@@ -244,6 +244,7 @@ namespace FeedMeClient.UserControls
             //Need to Remove the "RemoveButton" at the end of the name and add "TextBox" instead.
             string TextBoxName = decreaseButton.Name.Substring(0, decreaseButton.Name.Length - 12);
             Console.WriteLine(TextBoxName);
+            UpdateItemList(TextBoxName, false);
             TextBoxName = TextBoxName + "TBox";
             Console.WriteLine(TextBoxName);
 
@@ -252,6 +253,7 @@ namespace FeedMeClient.UserControls
             int tbIntVal = Convert.ToInt32(tb.Text);
             tbIntVal = tbIntVal - 1;
             tb.Text = tbIntVal.ToString();
+            UpdateItemList(TextBoxName, false);
         }
 
         private void ItemIncreased(object sender, EventArgs e)
@@ -260,6 +262,7 @@ namespace FeedMeClient.UserControls
 
             //Need to Remove the "AddButton" at the end of the name and add "TextBox" instead.
             string TextBoxName = increaseButton.Name.Substring(0, increaseButton.Name.Length - 9);
+            UpdateItemList(TextBoxName, true);
             Console.WriteLine(TextBoxName);
             TextBoxName = TextBoxName + "TBox";
             Console.WriteLine(TextBoxName);
@@ -269,15 +272,68 @@ namespace FeedMeClient.UserControls
             int tbIntVal = Convert.ToInt32(tb.Text);
             tbIntVal = tbIntVal + 1;
             tb.Text = tbIntVal.ToString();
+
+            
+
+            
+        }
+
+        private void UpdateItemList(string ItemName, bool increase)
+        {
+            DataTable Req = DAL.ExecCommand($"SELECT * FROM ITEMS WHERE ItemName = '{ItemName}'");
+            bool alreadyAdded = false;
+
+            DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
+            int vendorID = Convert.ToInt32(vendorInfo[0].ToString());
+
+            foreach (ItemModel Items in ServerConnection.ItemList)
+            {
+                if (Items.ItemID == Convert.ToInt32(Req.Rows[0][0]))
+                {
+                    if (increase)
+                    {
+                        Items.Quantity++;
+                        Items.TotalPrice = Items.Quantity * Items.Price;
+                    }
+                    else
+                    {
+                        if (Items.Quantity <= 1)
+                        {
+                            ServerConnection.ItemList.Remove(Items);
+                            return;
+                        }
+                        Items.Quantity--;
+                        Items.TotalPrice = Items.Quantity * Items.Price;
+
+                    }
+                    
+                    
+                    alreadyAdded = true;
+                }
+            }
+
+            if (!alreadyAdded)
+            {
+                ItemModel IA = new ItemModel();
+                IA.ItemID = Convert.ToInt32(Req.Rows[0][0]);
+                IA.VendorID = Convert.ToInt32(vendorID);
+                IA.Name = Req.Rows[0][2].ToString();
+                IA.Price = Convert.ToInt32(Req.Rows[0][5]);
+                IA.Quantity = 1;
+                IA.TotalPrice = IA.Quantity * IA.Price;
+                IA.Type = Req.Rows[0][3].ToString();
+
+                ServerConnection.ItemList.Add(IA);
+            }
         }
 
         private void UpdateItemList(int Change)
         {
             
-            if (ItemList.Count == 0)
-            {
+            //if (ItemList.Count == 0)
+            //{
 
-            }
+            //}
 
             
 
@@ -314,7 +370,19 @@ namespace FeedMeClient.UserControls
         }
         #endregion
 
-
         #endregion
+
+        private void OrderButton_Click(object sender, EventArgs e)
+        {
+            DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
+            string vendorName = vendorInfo[1].ToString();
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("reviewOrderControl", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Label TitleLabel = userControl.Controls.Find("VendorLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = $"Order from {vendorName}"; //Sets Vendor Title To Vendor that was just selected
+
+            userControl.BringToFront();
+        }
     }
 }

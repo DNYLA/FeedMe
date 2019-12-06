@@ -135,6 +135,12 @@
     <Compile Include="UserControls\Designs\OrderDesign.Designer.cs">
       <DependentUpon>OrderDesign.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Designs\ReviewDesign.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Designs\ReviewDesign.Designer.cs">
+      <DependentUpon>ReviewDesign.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\HomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -146,6 +152,18 @@
     </Compile>
     <Compile Include="UserControls\OrderControl.Designer.cs">
       <DependentUpon>OrderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Order\EnterCredentials.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Order\EnterCredentials.Designer.cs">
+      <DependentUpon>EnterCredentials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Order\ReviewOrderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Order\ReviewOrderControl.Designer.cs">
+      <DependentUpon>ReviewOrderControl.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="CustomControls\FeedMeTextBox.resx">
       <DependentUpon>FeedMeTextBox.cs</DependentUpon>
@@ -176,11 +194,20 @@
     <EmbeddedResource Include="UserControls\Designs\OrderDesign.resx">
       <DependentUpon>OrderDesign.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Designs\ReviewDesign.resx">
+      <DependentUpon>ReviewDesign.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\OrderControl.resx">
       <DependentUpon>OrderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Order\EnterCredentials.resx">
+      <DependentUpon>EnterCredentials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Order\ReviewOrderControl.resx">
+      <DependentUpon>ReviewOrderControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -204,10 +231,6 @@
     <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
       <Project>{0d28c0d9-e040-460f-b2f4-42982a5e226a}</Project>
       <Name>FeedMeNetworking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FeedMeSerialization\FeedMeSerialization.csproj">
-      <Project>{5b06a087-ea59-4960-a8eb-a26a4134379b}</Project>
-      <Name>FeedMeSerialization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -237,5 +260,6 @@
     <Content Include="Images\PizzaLogo.png" />
     <Content Include="Images\Icons\UserIcon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

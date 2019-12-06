@@ -93,6 +93,12 @@
     <Compile Include="UserControls\Menu\MenuInfo.Designer.cs">
       <DependentUpon>MenuInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Menu\OrderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Menu\OrderControl.Designer.cs">
+      <DependentUpon>OrderControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Menu\StoreInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\Menu\MenuInfo.resx">
       <DependentUpon>MenuInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Menu\OrderControl.resx">
+      <DependentUpon>OrderControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Menu\StoreInfo.resx">
       <DependentUpon>StoreInfo.cs</DependentUpon>

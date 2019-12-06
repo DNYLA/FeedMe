@@ -1,20 +1,21 @@
-﻿using System;
+﻿using FeedMeNetworking.Models;
+using ProtoBuf;
+using ProtoBuf.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProtoBuf;
-using ProtoBuf.Data;
 
-namespace FeedMeSerialization
+namespace FeedMeNetworking.Serialization
 {
     public class ProtoBufSerialization
     {
         public enum ObjectType
         {
-            VendorObject, UserObject
+            VendorObject, UserObject, OrderObject
         }
         #region Object Serializing 
 
@@ -62,6 +63,8 @@ namespace FeedMeSerialization
                             return Serializer.Deserialize(typeof(UserInfo), ms);
                         case ObjectType.VendorObject:
                             return Serializer.Deserialize(typeof(VendorInfo), ms);
+                        case ObjectType.OrderObject:
+                            return Serializer.Deserialize(typeof(OrderInfo), ms);
                     }
                 }
             }
@@ -191,33 +194,18 @@ namespace FeedMeSerialization
 
     #endregion
 
+    #region OrderInfo
     [ProtoContract]
     public class OrderInfo
     {
         [ProtoMember(1)]
         public CardModel Card { get; set; }
-        public List<ItemModel> Items { get; set; }
-        public Decimal TotalPrice { get; set; }
-
-        
-        public int VendorID { get; set; }
         [ProtoMember(2)]
-        public string Name { get; set; }
+        public List<ItemModel> Items { get; set; }
         [ProtoMember(3)]
-        public string Description { get; set; }
+        public Decimal TotalPrice { get; set; }
         [ProtoMember(4)]
-        public string Address { get; set; }
-        [ProtoMember(5)]
-        public string Email { get; set; }
-        [ProtoMember(6)]
-        public string Postcode { get; set; }
-        [ProtoMember(7)]
-        public string PhoneNo { get; set; }
-        [ProtoMember(8)]
-        public int Rating { get; set; }
-        [ProtoMember(9)]
-        public string Password { get; set; }
-        [ProtoMember(10)]
-        public string Salt { get; set; }
+        public int VendorID { get; set; }
     }
+    #endregion
 }
