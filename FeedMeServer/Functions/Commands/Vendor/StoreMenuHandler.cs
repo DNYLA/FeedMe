@@ -12,7 +12,7 @@ namespace FeedMeServer.Functions.Commands.Vendor
 {
     class StoreMenuHandler
     {
-        private static Socket Client;
+        private static Socket Client; //Can only be acessed in this classw
         public static void MenuHandler(Socket client)
         {
             Client = client;

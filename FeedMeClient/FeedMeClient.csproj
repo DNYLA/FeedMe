@@ -229,7 +229,7 @@
       <Name>FeedMeLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
-      <Project>{0d28c0d9-e040-460f-b2f4-42982a5e226a}</Project>
+      <Project>{0D28C0D9-E040-460F-B2F4-42982A5E226A}</Project>
       <Name>FeedMeNetworking</Name>
     </ProjectReference>
   </ItemGroup>
