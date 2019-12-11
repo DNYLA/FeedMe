@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using FeedMeLogic.Server;
 using FeedMeLogic;
 using FeedMeNetworking.Models;
+using FeedMeNetworking.Serialization;
 
 namespace FeedMeClient.UserControls.Order
 {

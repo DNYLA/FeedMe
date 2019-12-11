@@ -11,6 +11,7 @@ using FeedMeLogic.Data;
 using FeedMeLogic.Server;
 using FeedMeLogic;
 using FeedMeNetworking.Models;
+using FeedMeNetworking.Serialization;
 
 namespace FeedMeClient.UserControls
 {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FeedMeNetworking.Models
 {
-    public class ItemModel
+    public class ItemModel2
     {
         public int ItemID { get; set; } = 0;
         public int VendorID { get; set; }

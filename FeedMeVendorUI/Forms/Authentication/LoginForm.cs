@@ -1,5 +1,5 @@
 ﻿using FeedMeLogic;
-using FeedMeSerialization;
+using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +35,6 @@ namespace FeedMeVendorUI.Forms.Authentication
             {
                 Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
                 NotifForm.Show();
-                MessageBox.Show("Hey");
 
                 MainMenu MainMenuForm = new MainMenu();
                 MainMenuForm.Show();

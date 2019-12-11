@@ -58,6 +58,10 @@ namespace FeedMeServer.Functions.Data
                 }
                 */
             }
+            catch (Exception ez)
+            {
+                Console.WriteLine(ez.Message);
+            }
             finally
             {
                 conn.Close();

@@ -206,6 +206,52 @@ namespace FeedMeNetworking.Serialization
         public Decimal TotalPrice { get; set; }
         [ProtoMember(4)]
         public int VendorID { get; set; }
+        [ProtoMember(5)]
+        public string CustomerName { get; set; }
+    }
+    #endregion
+
+    #region Card Model
+    [ProtoContract]
+    public class CardModel
+    {
+        [ProtoMember(1)]
+        public string CardNum { get; set; } = string.Empty;
+        [ProtoMember(2)]
+        public string ExpiryDate { get; set; } = string.Empty;
+        [ProtoMember(3)]
+        public string CVC { get; set; } = string.Empty;
+        [ProtoMember(4)]
+        public string Address { get; set; } = string.Empty;
+        [ProtoMember(5)]
+        public decimal Price { get; set; }
+        [ProtoMember(6)]
+        public string ExtraDetails { get; set; } = string.Empty;
+        [ProtoMember(7)]
+        public string Email { get; set; } = string.Empty;
+    }
+    #endregion
+
+    #region Item Model
+    [ProtoContract]
+    public class ItemModel
+    {
+        [ProtoMember(1)]
+        public int ItemID { get; set; } = 0;
+        [ProtoMember(2)]
+        public int VendorID { get; set; }
+        [ProtoMember(3)]
+        public string Name { get; set; } = string.Empty;
+        [ProtoMember(4)]
+        public string Type { get; set; } = string.Empty;
+        [ProtoMember(5)]
+        public string Description { get; set; } = string.Empty;
+        [ProtoMember(6)]
+        public int Quantity { get; set; } = 0;
+        [ProtoMember(7)]
+        public Decimal Price { get; set; } = 0;
+        [ProtoMember(8)]
+        public Decimal TotalPrice { get; set; } = 0;
     }
     #endregion
 }

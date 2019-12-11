@@ -19,12 +19,14 @@ namespace FeedMeVendorUI.Forms
 
         private void HomeButton_Click(object sender, EventArgs e)
         {
-            menuInfo1.BringToFront();
+            orderControl1.BringToFront();
             UpdatePointer(sender);
         }
 
         private void Items_Click(object sender, EventArgs e)
         {
+            menuInfo1.BringToFront();
+            menuInfo1.UpdateUI();
             UpdatePointer(sender);
         }
 
@@ -58,6 +60,7 @@ namespace FeedMeVendorUI.Forms
         private void InfoButton_Click(object sender, EventArgs e)
         {
             storeInfo1.BringToFront();
+            storeInfo1.UpdateUI();
             UpdatePointer(sender);
         }
 
