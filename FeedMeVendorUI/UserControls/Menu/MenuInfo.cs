@@ -14,9 +14,20 @@ namespace FeedMeVendorUI.UserControls.Menu
     public partial class MenuInfo : UserControl
     {
         private string vendorID;
+        public static bool Opened = false;
         public MenuInfo()
         {
             InitializeComponent();
+        }
+
+        public void UpdateUI()
+        {
+            if (!Opened)
+            {
+                string venID = Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString();
+                LoadCategories(venID);
+                Opened = true;
+            }
         }
 
         private void MenuInfo_Load(object sender, EventArgs e)
@@ -26,7 +37,7 @@ namespace FeedMeVendorUI.UserControls.Menu
                 return;
             }
             vendorID = Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString();
-            LoadCategories(vendorID);
+
         }
 
 

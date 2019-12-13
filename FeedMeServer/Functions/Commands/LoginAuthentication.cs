@@ -166,10 +166,10 @@ namespace FeedMeServer.Functions.Commands
 
         private static string[] GetHashData(string username, int LoginType)
         {
-            string SQLQuery = ($"SELECT * FROM users WHERE username = '{username}'");
+            string SQLQuery = ($"SELECT password, salt FROM users WHERE username = '{username}'");
             if (LoginType == 1)
             {
-                SQLQuery = ($"SELECT * FROM vendors WHERE Name = '{username}'");
+                SQLQuery = ($"SELECT password, salt FROM vendors WHERE Name = '{username}'");
             }
             
             using (DataTable SQLResults = DAL.ExecCommand(SQLQuery))

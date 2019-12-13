@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FeedMeNetworking.Models
 {
-    public class CardModel
+    public class CardModelOld
     {
         public string CardNum { get; set; } = string.Empty;
         public string ExpiryDate { get; set; } = string.Empty;

@@ -22,12 +22,23 @@ namespace FeedMeVendorUI.UserControls.Menu
 
         }
 
+        public void UpdateUI()
+        {
+            LoadInfo();
+        }
+
         private void StoreInfo_Load(object sender, EventArgs e)
         {
             if (!FeedMeLogic.Server.ServerConnection.Connected)
             {
                 return;
             }
+            
+
+        }
+
+        private void LoadInfo()
+        {
             string vendorID = Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString();
             DataTable StoreInfo = FeedMeLogic.Vendor.StoreMenuInfo.GetStoreInfo(vendorID);
 
@@ -38,7 +49,6 @@ namespace FeedMeVendorUI.UserControls.Menu
             PostCodeTbox.Text = StoreInfo.Rows[0][4].ToString();
             PhoneTbox.Text = StoreInfo.Rows[0][5].ToString();
             RatingTbox.Text = StoreInfo.Rows[0][6].ToString();
-
         }
     }
 }
