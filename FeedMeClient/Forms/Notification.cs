@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeClient.Forms
@@ -21,7 +15,7 @@ namespace FeedMeClient.Forms
             InitializeComponent();
 
             //Setting Background Colour & Icon Depending on NotifType
-            switch(type)
+            switch (type)
             {
                 case NotifType.success:
                     BackColor = Color.SeaGreen;
@@ -36,7 +30,7 @@ namespace FeedMeClient.Forms
                     pictureBox1.Image = Properties.Resources.warning;
                     break;
                 case NotifType.warning:
-                    BackColor = Color.FromArgb(255,221,0);
+                    BackColor = Color.FromArgb(255, 221, 0);
                     pictureBox1.Image = Properties.Resources.warning;
                     break;
             }
@@ -58,12 +52,12 @@ namespace FeedMeClient.Forms
         private void Timer1_Tick(object sender, EventArgs e)
         {
             //Changes Opacity
-            this.Opacity = Opacity - 0.01;
+            Opacity = Opacity - 0.01;
 
             //Closes Form After Changing Opacity to 1%
             if (Opacity < 0.05)
             {
-                this.Close();
+                Close();
             }
         }
 
@@ -73,7 +67,7 @@ namespace FeedMeClient.Forms
         private void Notification_Load(object sender, EventArgs e)
         {
             //On Load Center & Also Start Timer
-            this.CenterToScreen();
+            CenterToScreen();
             TopMost = true;
             NotifStartTimer.Enabled = true;
 

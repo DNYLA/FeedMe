@@ -1,12 +1,5 @@
 ﻿using FeedMeNetworking.Serialization;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeClient.Forms.Authentication
@@ -28,7 +21,7 @@ namespace FeedMeClient.Forms.Authentication
 
         private void CheckDetails()
         {
-            
+
             if (ClientInfo.UserID != -1)
             {
                 Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
@@ -37,7 +30,7 @@ namespace FeedMeClient.Forms.Authentication
 
                 MainMenu MainMenuForm = new MainMenu();
                 MainMenuForm.Show();
-                this.Hide();
+                Hide();
             }
             else
             {
@@ -52,7 +45,7 @@ namespace FeedMeClient.Forms.Authentication
         {
             Register RF = new Register();
             RF.Show();
-            this.Hide();
+            Hide();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

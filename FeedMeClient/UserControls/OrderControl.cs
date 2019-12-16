@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using FeedMeLogic;
 using FeedMeLogic.Data;
 using FeedMeLogic.Server;
-using FeedMeLogic;
-using FeedMeNetworking.Models;
 using FeedMeNetworking.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace FeedMeClient.UserControls
 {
@@ -29,7 +25,7 @@ namespace FeedMeClient.UserControls
          * [X] 6. Make sure the Event Handler for Selecting an Item Type works Correctly & Generates a new List of Items
          * [] 7. Make the Place Order Button Re-Direct the User to the Checkout Control.
         */
-        
+
 
         public OrderControl()
         {
@@ -274,9 +270,9 @@ namespace FeedMeClient.UserControls
             tbIntVal = tbIntVal + 1;
             tb.Text = tbIntVal.ToString();
 
-            
 
-            
+
+
         }
 
         private void UpdateItemList(string ItemName, bool increase)
@@ -307,20 +303,22 @@ namespace FeedMeClient.UserControls
                         Items.TotalPrice = Items.Quantity * Items.Price;
 
                     }
-                    
-                    
+
+
                     alreadyAdded = true;
                 }
             }
 
             if (!alreadyAdded)
             {
-                ItemModel IA = new ItemModel();
-                IA.ItemID = Convert.ToInt32(Req.Rows[0][0]);
-                IA.VendorID = Convert.ToInt32(vendorID);
-                IA.Name = Req.Rows[0][2].ToString();
-                IA.Price = Convert.ToInt32(Req.Rows[0][5]);
-                IA.Quantity = 1;
+                ItemModel IA = new ItemModel
+                {
+                    ItemID = Convert.ToInt32(Req.Rows[0][0]),
+                    VendorID = Convert.ToInt32(vendorID),
+                    Name = Req.Rows[0][2].ToString(),
+                    Price = Convert.ToInt32(Req.Rows[0][5]),
+                    Quantity = 1
+                };
                 IA.TotalPrice = IA.Quantity * IA.Price;
                 IA.Type = Req.Rows[0][3].ToString();
 
@@ -330,13 +328,13 @@ namespace FeedMeClient.UserControls
 
         private void UpdateItemList(int Change)
         {
-            
+
             //if (ItemList.Count == 0)
             //{
 
             //}
 
-            
+
 
         }
 

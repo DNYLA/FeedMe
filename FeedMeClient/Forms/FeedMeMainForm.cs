@@ -50,7 +50,7 @@ namespace FeedMeClient.Forms
             {
                 Close();
             }
-            
+
         }
 
         private void TopPanelMaximizeButton_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace FeedMeClient.Forms
             ReSizeTitle();
         }
 
-        
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -109,14 +109,14 @@ namespace FeedMeClient.Forms
         private void TopBarPanel_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             ReSizeTitle();
         }
 
         private void TitleLabel_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             ReSizeTitle();
         }
         #endregion

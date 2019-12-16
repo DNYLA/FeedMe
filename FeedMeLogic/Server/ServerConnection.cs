@@ -1,13 +1,9 @@
-﻿using FeedMeNetworking.Models;
-using FeedMeNetworking.Serialization;
+﻿using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeLogic.Server
@@ -16,11 +12,12 @@ namespace FeedMeLogic.Server
     {
 
         public static List<ItemModel> ItemList = new List<ItemModel>();
-        static int PORT_NO = 4030;
+        private static readonly int PORT_NO = 4030;
+
         //static string IP_ADDRESS = "86.180.33.203";
         //static string IP_ADDRESS = "86.181.164.197";
         //static string IP_ADDRESS = "192.168.1.64";
-        static string IP_ADDRESS = "127.0.0.1";
+        private static readonly string IP_ADDRESS = "127.0.0.1";
         //static string IP_ADDRESS = "85.255.236.26";
 
         //Protected Internal Variables are only acessible to the assembly or from containing classes (Anything Outside of FeedMeClient.Functions.Server Is Unable To Access This Variable)

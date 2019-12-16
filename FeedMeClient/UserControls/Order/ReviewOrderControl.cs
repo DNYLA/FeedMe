@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using FeedMeLogic;
 using FeedMeLogic.Server;
-using FeedMeLogic;
-using FeedMeNetworking.Models;
 using FeedMeNetworking.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace FeedMeClient.UserControls.Order
 {
@@ -35,7 +30,6 @@ namespace FeedMeClient.UserControls.Order
         private void GenerateItemList()
         {
             #region Initiaizling Variables & DataTable
-            int ItemAmount;
             string ItemID, ItemType, ItemName, ItemDescription, ItemTotalPrice, ItemQuantity;
 
             #endregion
@@ -65,8 +59,7 @@ namespace FeedMeClient.UserControls.Order
             MessageBox.Show("Items Happened");
 
             #region Iterating Through DataTable
-            int differentTypes = 0;
-            List<String> CatList = new List<String>();
+            List<string> CatList = new List<string>();
             foreach (ItemModel Items in ServerConnection.ItemList)
             {
                 if (!CatList.Contains(Items.Type))
@@ -75,10 +68,7 @@ namespace FeedMeClient.UserControls.Order
                 }
             }
 
-            int itemsAdded = 0;
-            int catsAdded = 0;
-
-            foreach(string category in CatList)
+            foreach (string category in CatList)
             {
                 Label TitleLabel = GenControls.AddLabel(category + "CatLabel", category, ItemCatLoc, ItemCatFont, BlackColour, TransparentColour, EmptySize, true);
                 ItemPanel.Controls.Add(TitleLabel);
@@ -113,10 +103,10 @@ namespace FeedMeClient.UserControls.Order
             foreach (ItemModel Item in ServerConnection.ItemList)
             {
                 #region Getting Item Information
-                
+
                 #endregion
 
-                
+
 
                 #region Creating Dynamic Item Controls
 
@@ -196,7 +186,7 @@ namespace FeedMeClient.UserControls.Order
 
         private void VendorAmountLabel_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void VendorLabel_TextChanged(object sender, EventArgs e)

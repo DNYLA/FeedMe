@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeLogic.Controls
 {
     public partial class FeedMeTextBox : TextBox
     {
-        private Font Fnt;
+        private readonly Font Fnt;
         private readonly float FntSize;
 
         #region Initialize Class
@@ -68,7 +64,7 @@ namespace FeedMeLogic.Controls
             base.OnGotFocus(e);
             if (Text == watermark)
             {
-                Font = new Font(Font.FontFamily, Font.Size, this.Font.Style | FontStyle.Italic);
+                Font = new Font(Font.FontFamily, Font.Size, Font.Style | FontStyle.Italic);
                 ResetText();
                 Text = string.Empty;
             }
@@ -159,25 +155,25 @@ namespace FeedMeLogic.Controls
 
         public bool SingleLine
         {
-            get { return _singleLine; }
+            get => _singleLine;
             set { _singleLine = value; CheckBorder(); }
         }
 
         public bool AutoResize
         {
-            get { return _autoResize; }
-            set { _autoResize = value; }
+            get => _autoResize;
+            set => _autoResize = value;
         }
 
         public Color BaseColor
         {
-            get { return _baseColor; }
-            set { _baseColor = value; }
+            get => _baseColor;
+            set => _baseColor = value;
         }
 
         public string Watermark
         {
-            get { return watermark; }
+            get => watermark;
             set { watermark = value; Text = watermark; CheckWatermark(); }
         }
 
@@ -185,13 +181,13 @@ namespace FeedMeLogic.Controls
         [Browsable(false)]
         public new BorderStyle BorderStyle
         {
-            get { return base.BorderStyle; }
-            set { base.BorderStyle = value; }
+            get => base.BorderStyle;
+            set => base.BorderStyle = value;
         }
 
         public Color BorderColor
         {
-            get { return _borderColor; }
+            get => _borderColor;
             set
             {
                 _borderColor = value;
@@ -201,11 +197,8 @@ namespace FeedMeLogic.Controls
 
         public Color FocusColor
         {
-            get { return _FocusColor; }
-            set
-            {
-                _FocusColor = value;
-            }
+            get => _FocusColor;
+            set => _FocusColor = value;
         }
         #endregion
 
@@ -252,7 +245,7 @@ namespace FeedMeLogic.Controls
                 Controls.Add(new Label
                 {
                     Name = "LeftBorder",
-                    Height = this.Height,
+                    Height = Height,
                     Width = 1,
                     Dock = DockStyle.Left,
                     BackColor = _borderColor
@@ -261,7 +254,7 @@ namespace FeedMeLogic.Controls
                 Controls.Add(new Label
                 {
                     Name = "RightBorder",
-                    Height = this.Height,
+                    Height = Height,
                     Width = 1,
                     Dock = DockStyle.Right,
                     BackColor = _borderColor
@@ -272,7 +265,7 @@ namespace FeedMeLogic.Controls
         private void RemoveBorder()
         {
             string[] LabelList = new string[] { "TopBorder", "LeftBorder", "RightBorder" };
-            foreach (String BorderSide in LabelList)
+            foreach (string BorderSide in LabelList)
             {
                 Label CurrentLabel = Controls.Find(BorderSide, true).OfType<Label>().SingleOrDefault();
                 Controls.Remove(CurrentLabel);

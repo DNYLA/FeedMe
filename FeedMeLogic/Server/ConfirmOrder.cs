@@ -2,9 +2,6 @@
 using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeLogic.Server
 {
@@ -23,7 +20,7 @@ namespace FeedMeLogic.Server
 
         public static List<OrderInfo> CheckForOrders(int vendorID)
         {
-            
+
             List<OrderInfo> OIList = new List<OrderInfo>();
 
             Send.SendMessage(ServerConnection.ServerSock, "CheckForOrder");

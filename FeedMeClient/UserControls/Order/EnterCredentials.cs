@@ -1,14 +1,7 @@
-﻿using System;
+﻿using FeedMeNetworking.Serialization;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FeedMeNetworking.Serialization;
-using FeedMeNetworking.Models;
 
 namespace FeedMeClient.UserControls.Order
 {
@@ -37,7 +30,7 @@ namespace FeedMeClient.UserControls.Order
         private decimal GetTotalPrice(List<ItemModel> items)
         {
             decimal price = 0;
-            foreach(ItemModel item in items)
+            foreach (ItemModel item in items)
             {
                 price += item.TotalPrice;
             }
@@ -47,17 +40,18 @@ namespace FeedMeClient.UserControls.Order
 
         private CardModel AddItemDetails()
         {
-            CardModel cardDetails = new CardModel();
-
-            cardDetails.CardNum = CardNoBox.Text;
-            cardDetails.ExpiryDate = MonthExpiry + "/" + YearExpiry;
-            cardDetails.CVC = SecCode.Text;
-            cardDetails.Address = AddressTbox.Text;
-            cardDetails.ExtraDetails = ExtraTbox.Text;
-            cardDetails.Email = Forms.Authentication.LoginForm.ClientInfo.Email;
+            CardModel cardDetails = new CardModel
+            {
+                CardNum = CardNoBox.Text,
+                ExpiryDate = MonthExpiry + "/" + YearExpiry,
+                CVC = SecCode.Text,
+                Address = AddressTbox.Text,
+                ExtraDetails = ExtraTbox.Text,
+                Email = Forms.Authentication.LoginForm.ClientInfo.Email
+            };
 
             return cardDetails;
-    }
+        }
 
         private void EnterCredentials_Load(object sender, EventArgs e)
         {

@@ -1,16 +1,12 @@
 ﻿using FeedMeNetworking;
 using FeedMeNetworking.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeLogic.Server
 {
     public class AuthenticationHandler
     {
-        public static Object AuthenticateLogin(string username, string password, int LoginType)
+        public static object AuthenticateLogin(string username, string password, int LoginType)
         {
             Send.SendMessage(ServerConnection.ServerSock, "Login");
 
@@ -18,18 +14,14 @@ namespace FeedMeLogic.Server
 
             if (LoginType == 0)
             {
-                return (Object)CustomerLogin(username, password);
+                return CustomerLogin(username, password);
             }
             else if (LoginType == 1)
             {
-                return (Object)VendorLogin(username, password);
+                return VendorLogin(username, password);
             }
 
             Send.SendMessage(ServerConnection.ServerSock, username);
-
-            
-
-           
 
             return Receive.ReceiveUserInfo(ServerConnection.ServerSock);
         }
@@ -54,7 +46,7 @@ namespace FeedMeLogic.Server
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static Object CustomerLogin(string username, string password)
+        public static object CustomerLogin(string username, string password)
         {
             //Send.SendMessage(ServerConnection.ServerSock, "Login");
 
@@ -73,7 +65,7 @@ namespace FeedMeLogic.Server
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static Object VendorLogin(string username, string password)
+        public static object VendorLogin(string username, string password)
         {
             Send.SendMessage(ServerConnection.ServerSock, username);
 
@@ -82,9 +74,10 @@ namespace FeedMeLogic.Server
             //If Salt Returns -1 then Username received is invalid
             if (salt == "-1")
             {
-                VendorInfo VendorInformation = new VendorInfo();
-
-                VendorInformation.VendorID = -1;
+                VendorInfo VendorInformation = new VendorInfo
+                {
+                    VendorID = -1
+                };
                 return VendorInformation;
             }
 

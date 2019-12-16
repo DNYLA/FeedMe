@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
+﻿using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeLogic.Data
 {
@@ -22,7 +17,7 @@ namespace FeedMeLogic.Data
          * [X] 3. If They are the same then the Password is correct.
          */
 
-        static int HASH_ITERATIONS = 100000; //This can be increased when i create a server because once the program is complete the server should be hosted on dedicated Host.
+        private static readonly int HASH_ITERATIONS = 100000; //This can be increased when i create a server because once the program is complete the server should be hosted on dedicated Host.
 
         #region Generate Methods
         private static byte[] GenerateSalt(int length)
@@ -57,7 +52,7 @@ namespace FeedMeLogic.Data
         #endregion
 
         #region Public Methods
-        public static String[] HashPassword(string PlainText)
+        public static string[] HashPassword(string PlainText)
         {
             byte[] salt = GenerateSalt(32);
             string[] HashedData = new string[2]; //Password, Salt (Possibility Of Adding in Random Amount of Iterations)

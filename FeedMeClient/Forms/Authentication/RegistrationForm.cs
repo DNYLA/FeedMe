@@ -1,12 +1,6 @@
 ﻿using FeedMeNetworking.Serialization;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeClient.Forms.Authentication
@@ -51,9 +45,9 @@ namespace FeedMeClient.Forms.Authentication
             return true;
         }
 
-        public Boolean PresenceCheck(string stringToCheck)
+        public bool PresenceCheck(string stringToCheck)
         {
-            if (String.IsNullOrWhiteSpace(stringToCheck))
+            if (string.IsNullOrWhiteSpace(stringToCheck))
             {
                 return false;
             }
@@ -72,15 +66,16 @@ namespace FeedMeClient.Forms.Authentication
                 return;
             }
 
-            UserInfo UserInformation = new UserInfo();
+            UserInfo UserInformation = new UserInfo
+            {
+                Username = UsernameBox.Text,
+                FirstName = FirstNameBox.Text,
+                LastName = LastNameBox.Text,
+                Email = EmailBox.Text,
 
-            UserInformation.Username = UsernameBox.Text;
-            UserInformation.FirstName = FirstNameBox.Text;
-            UserInformation.LastName = LastNameBox.Text;
-            UserInformation.Email = EmailBox.Text;
-
-            //Add Hashing Or Encryption on password Client Side 
-            UserInformation.Password = PasswordBox.Text;
+                //Add Hashing Or Encryption on password Client Side 
+                Password = PasswordBox.Text
+            };
 
             string[] HashData = FeedMeLogic.Data.HashPass.HashPassword(UserInformation.Password);
 
@@ -148,12 +143,12 @@ namespace FeedMeClient.Forms.Authentication
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void NoAccountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Close();
+            Close();
             LoginForm LF = new LoginForm();
             LF.Show();
         }

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,13 +7,13 @@ namespace FeedMeClient.Forms
 {
     public partial class MainMenu : FeedMeMainForm
     {
-        
+
 
         //Initializing Variables used globaly WITHIN the Class
-        bool menuClosed = false;
-        private const int CLOSED_PANEL_WDITH = 80; 
-        private const int OPENED_PANEL_WIDTH = 139; 
-        String[] MenuButtonNames = new string[3]; 
+        private bool menuClosed = false;
+        private const int CLOSED_PANEL_WDITH = 80;
+        private const int OPENED_PANEL_WIDTH = 139;
+        private readonly string[] MenuButtonNames = new string[3];
         //
         public MainMenu()
         {
@@ -58,97 +53,97 @@ namespace FeedMeClient.Forms
 
         private void MenuButton_Click(object sender, EventArgs e)
         {
-           Task ThreadMenu = new Task(() =>
-           {
-
-
-               //Slow Down Animation When approaching Button.
-               Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton }; // Coppied from Above not making it a Global Variable to prevent any changes
-
-            if (menuClosed)
+            Task ThreadMenu = new Task(() =>
             {
-                while (SideMenuPanel.Width != OPENED_PANEL_WIDTH)
+
+
+                //Slow Down Animation When approaching Button.
+                Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton }; // Coppied from Above not making it a Global Variable to prevent any changes
+
+                if (menuClosed)
                 {
-                    MethodInvoker updateIt = delegate
+                    while (SideMenuPanel.Width != OPENED_PANEL_WIDTH)
                     {
-                        SideMenuPanel.Width += 1;
-                    };
-                    this.SideMenuPanel.BeginInvoke(updateIt);
-                       //Add User Control ReSizing Below
-                       //Adding a Panel & Then Docking it to the centre removes the need to resize controls as it is handled within the docking.
-                       MethodInvoker UiThread = delegate
+                        MethodInvoker updateIt = delegate
                        {
-                           if (MenuIndicatorPanel.Width != 15)
-                           {
-                               MenuIndicatorPanel.Width += 1;
-                               System.Threading.Thread.Sleep(30);
-                           }
-                           else
-                           {
-                               MenuIndicatorPanel.BackColor = Color.DodgerBlue;
-                               System.Threading.Thread.Sleep(10);
-                           }
+                           SideMenuPanel.Width += 1;
                        };
-                       MenuIndicatorPanel.BeginInvoke(UiThread);
-                }
-
-                for (int i = 0; i < 3; i++)
-                {
-                    OpenButton(MenuButtonArray[i], MenuButtonNames[i]);
-                }
-
-                OpenButton(SettingsButton, "    Settings");
-
-                menuClosed = false;
-            }
-            else
-            {
-                while (SideMenuPanel.Width != CLOSED_PANEL_WDITH)
-                {
-                    MethodInvoker updateIt = delegate
-                    {
-                        SideMenuPanel.Width -= 1;
-                    };
-                    this.SideMenuPanel.BeginInvoke(updateIt);
-                    Application.DoEvents();
-                    if (MenuIndicatorPanel.Width != 5)
-                    {
-                           MethodInvoker updateIt2 = delegate
-                           {
-                               MenuIndicatorPanel.Width -= 1;
-                           };
-                           this.MenuIndicatorPanel.BeginInvoke(updateIt2);
-                           Application.DoEvents();
-                        System.Threading.Thread.Sleep(30);
+                        SideMenuPanel.BeginInvoke(updateIt);
+                        //Add User Control ReSizing Below
+                        //Adding a Panel & Then Docking it to the centre removes the need to resize controls as it is handled within the docking.
+                        MethodInvoker UiThread = delegate
+                         {
+                             if (MenuIndicatorPanel.Width != 15)
+                             {
+                                 MenuIndicatorPanel.Width += 1;
+                                 System.Threading.Thread.Sleep(30);
+                             }
+                             else
+                             {
+                                 MenuIndicatorPanel.BackColor = Color.DodgerBlue;
+                                 System.Threading.Thread.Sleep(10);
+                             }
+                         };
+                        MenuIndicatorPanel.BeginInvoke(UiThread);
                     }
-                    else
+
+                    for (int i = 0; i < 3; i++)
                     {
-                        MenuIndicatorPanel.BackColor = Color.Blue;
-                        System.Threading.Thread.Sleep(10);
+                        OpenButton(MenuButtonArray[i], MenuButtonNames[i]);
                     }
-                    
-                    
 
-                    //Add User Control ReSizing Below
-                    
+                    OpenButton(SettingsButton, "    Settings");
+
+                    menuClosed = false;
                 }
-
-                menuClosed = true;
-
-                for (int i = 0; i < 3; i++)
+                else
                 {
-                    CloseButton(MenuButtonArray[i]);
-                }
-                CloseButton(SettingsButton);
+                    while (SideMenuPanel.Width != CLOSED_PANEL_WDITH)
+                    {
+                        MethodInvoker updateIt = delegate
+                       {
+                           SideMenuPanel.Width -= 1;
+                       };
+                        SideMenuPanel.BeginInvoke(updateIt);
+                        Application.DoEvents();
+                        if (MenuIndicatorPanel.Width != 5)
+                        {
+                            MethodInvoker updateIt2 = delegate
+                            {
+                                MenuIndicatorPanel.Width -= 1;
+                            };
+                            MenuIndicatorPanel.BeginInvoke(updateIt2);
+                            Application.DoEvents();
+                            System.Threading.Thread.Sleep(30);
+                        }
+                        else
+                        {
+                            MenuIndicatorPanel.BackColor = Color.Blue;
+                            System.Threading.Thread.Sleep(10);
+                        }
 
-            }
-           });
+
+
+                        //Add User Control ReSizing Below
+
+                    }
+
+                    menuClosed = true;
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        CloseButton(MenuButtonArray[i]);
+                    }
+                    CloseButton(SettingsButton);
+
+                }
+            });
             ThreadMenu.Start();
         }
 
         private void AnimateIndicator(Button ButtonObject)
         {
-            while(MenuIndicatorPanel.Location.Y != ButtonObject.Location.Y)
+            while (MenuIndicatorPanel.Location.Y != ButtonObject.Location.Y)
             {
                 if (MenuIndicatorPanel.Location.Y > ButtonObject.Location.Y)
                 {
@@ -173,7 +168,7 @@ namespace FeedMeClient.Forms
                 ButtonObject.ImageAlign = ContentAlignment.MiddleLeft;
                 ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 12, ButtonObject.Location.Y);
             };
-            this.MenuIndicatorPanel.BeginInvoke(updateIt2);
+            MenuIndicatorPanel.BeginInvoke(updateIt2);
 
         }
 
@@ -186,7 +181,7 @@ namespace FeedMeClient.Forms
                 ButtonObject.ImageAlign = ContentAlignment.MiddleCenter;
                 ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 3, ButtonObject.Location.Y);
             };
-            this.MenuIndicatorPanel.BeginInvoke(updateIt2);
+            MenuIndicatorPanel.BeginInvoke(updateIt2);
             Application.DoEvents();
 
 

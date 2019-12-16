@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using FeedMeLogic;
 using FeedMeLogic.Server;
-using FeedMeLogic;
+using System;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace FeedMeClient.UserControls
 {
@@ -56,7 +52,7 @@ namespace FeedMeClient.UserControls
                 return;
             }
 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoSize = true;
 
             MasterGenerator();
@@ -127,7 +123,7 @@ namespace FeedMeClient.UserControls
             using (DataTable DataResults = FeedMeLogic.Data.DAL.ExecCommand(SQLQuery))
             {
                 int vendorAmount = DataResults.Rows.Count;
-                VendorAmountLabel.Text = String.Format("There are currently {0} restraunts/food places near you", vendorAmount.ToString()); //Updates Text to Match No of Vendors
+                VendorAmountLabel.Text = string.Format("There are currently {0} restraunts/food places near you", vendorAmount.ToString()); //Updates Text to Match No of Vendors
 
                 #region Initiaizling Location & Size For Controls
                 //Initializing Height & Location Variables (Information from Design Version)
@@ -169,7 +165,7 @@ namespace FeedMeClient.UserControls
 
                     Label vendorTitleLabel = GenControls.AddLabel(vendorName, vendorName, TitleLoc, TitleFont, Color.Black, Color.Transparent, TitleSize, true);
                     Label vendorDescLabel = GenControls.AddLabel(vendorName + "Desc", vendorDescription, DescLoc, DefaultFont, Color.Black, Color.Transparent, DescSize, false);
-                    
+
                     RatingLoc = new Point(vendorTitleLabel.Location.X + vendorTitleLabel.Width - 15, vendorTitleLabel.Location.Y);
                     Label vendorRatingLabel = GenControls.AddLabel(vendorName + "Rating", vendorRating, RatingLoc, DefaultFont, Color.Black, Color.Transparent, RatingSize, true);
 
