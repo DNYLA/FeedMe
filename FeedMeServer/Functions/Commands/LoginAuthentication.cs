@@ -149,15 +149,15 @@ namespace FeedMeServer.Functions.Commands
 
         private static bool CheckDetails(string username, string password, int LoginType)
         {
-            DataTable dt = new DataTable();
+            DataTable LoginDataTable = new DataTable();
             string SQLQuery = ($"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'");
             if (LoginType == 1)
             {
                 SQLQuery = ($"SELECT * FROM vendors WHERE Name = '{username}' AND password = '{password}'");
             }
-            dt = DAL.ExecCommand(SQLQuery);
+            LoginDataTable = DAL.ExecCommand(SQLQuery);
 
-            if (dt.Rows.Count <= 0)
+            if (LoginDataTable.Rows.Count <= 0)
             {
                 return false;
             }

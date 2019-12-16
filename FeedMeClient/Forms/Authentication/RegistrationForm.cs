@@ -51,6 +51,20 @@ namespace FeedMeClient.Forms.Authentication
             return true;
         }
 
+        public Boolean PresenceCheck(string stringToCheck)
+        {
+            if (String.IsNullOrWhiteSpace(stringToCheck))
+            {
+                return false;
+            }
+            if (stringToCheck.Contains(" ")) //Checks for any Spaces  as a username should only be one word.
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         private void RegisterUser()
         {
             if (!CheckPassword())

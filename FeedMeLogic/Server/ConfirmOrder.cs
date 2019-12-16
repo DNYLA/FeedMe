@@ -23,6 +23,7 @@ namespace FeedMeLogic.Server
 
         public static List<OrderInfo> CheckForOrders(int vendorID)
         {
+            
             List<OrderInfo> OIList = new List<OrderInfo>();
 
             Send.SendMessage(ServerConnection.ServerSock, "CheckForOrder");
