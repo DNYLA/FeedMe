@@ -9,19 +9,20 @@ namespace FeedMeClient.Forms.Authentication
         public static UserInfo ClientInfo = new UserInfo(); //Make the Client Info Object Public so other user controls can access it.
 
         #region Initializing
+
         public LoginForm()
         {
             InitializeComponent();
         }
-        #endregion
+
+        #endregion Initializing
 
         #region Methods
-        //Other Methods Were moved over to the server
 
+        //Other Methods Were moved over to the server
 
         private void CheckDetails()
         {
-
             if (ClientInfo.UserID != -1)
             {
                 Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
@@ -38,9 +39,11 @@ namespace FeedMeClient.Forms.Authentication
                 NotifForm.Show();
             }
         }
-        #endregion
+
+        #endregion Methods
 
         #region Event Handlers
+
         private void NoAccountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Register RF = new Register();
@@ -50,7 +53,6 @@ namespace FeedMeClient.Forms.Authentication
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-
             ClientInfo = (UserInfo)FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 0);
             CheckDetails();
         }
@@ -59,6 +61,7 @@ namespace FeedMeClient.Forms.Authentication
         {
             FeedMeLogic.Server.ServerConnection.InitiailizeConnection();
         }
-        #endregion
+
+        #endregion Event Handlers
     }
 }

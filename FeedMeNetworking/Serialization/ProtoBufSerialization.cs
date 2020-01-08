@@ -1,13 +1,8 @@
-﻿using FeedMeNetworking.Models;
-using ProtoBuf;
+﻿using ProtoBuf;
 using ProtoBuf.Data;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeNetworking.Serialization
 {
@@ -17,9 +12,11 @@ namespace FeedMeNetworking.Serialization
         {
             VendorObject, UserObject, OrderObject
         }
-        #region Object Serializing 
+
+        #region Object Serializing
 
         #region Serializing
+
         public static byte[] ObjectSerialization(object obj)
         {
             if (obj == null)
@@ -40,7 +37,8 @@ namespace FeedMeNetworking.Serialization
                 throw; //Add Error Handling later
             }
         }
-        #endregion
+
+        #endregion Serializing
 
         #region De-Serializing
 
@@ -59,10 +57,13 @@ namespace FeedMeNetworking.Serialization
                     {
                         default:
                             return string.Empty;
+
                         case ObjectType.UserObject:
                             return Serializer.Deserialize(typeof(UserInfo), ms);
+
                         case ObjectType.VendorObject:
                             return Serializer.Deserialize(typeof(VendorInfo), ms);
+
                         case ObjectType.OrderObject:
                             return Serializer.Deserialize(typeof(OrderInfo), ms);
                     }
@@ -74,13 +75,14 @@ namespace FeedMeNetworking.Serialization
             }
         }
 
-        #endregion
+        #endregion De-Serializing
 
-        #endregion
+        #endregion Object Serializing
 
         #region Data Serialization
 
         #region Serializing
+
         public static byte[] DataSerialization(DataTable dt)
         {
             if (dt == null)
@@ -90,12 +92,11 @@ namespace FeedMeNetworking.Serialization
 
             try
             {
-
                 using (MemoryStream ms = new MemoryStream())
                 {
                     using (IDataReader dr = dt.CreateDataReader())
                     {
-                        DataSerializer.Serialize(ms, dr); //Stream & Dataset 
+                        DataSerializer.Serialize(ms, dr); //Stream & Dataset
                     }
                     return ms.ToArray(); //Converts it to ByteArray
                 }
@@ -106,9 +107,10 @@ namespace FeedMeNetworking.Serialization
             }
         }
 
-        #endregion
+        #endregion Serializing
 
         #region De-Serializing
+
         public static DataTable DataDeserializing(byte[] data)
         {
             if (data == null)
@@ -130,17 +132,17 @@ namespace FeedMeNetworking.Serialization
                     {
                         throw; //Add Error Handling Later
                     }
-
                 }
             }
         }
 
-        #endregion
+        #endregion De-Serializing
 
-        #endregion
+        #endregion Data Serialization
     }
 
     #region User Object
+
     //If More Objects are created move this to its own class.
     //Password & Salt Values will only ever Be Received by the server when registering every other time it will be Blank.
     [ProtoContract]
@@ -148,110 +150,150 @@ namespace FeedMeNetworking.Serialization
     {
         [ProtoMember(1)]
         public int UserID { get; set; }
+
         [ProtoMember(2)]
         public string Username { get; set; }
+
         [ProtoMember(3)]
         public string FirstName { get; set; }
+
         [ProtoMember(4)]
         public string LastName { get; set; }
+
         [ProtoMember(5)]
         public string Email { get; set; }
+
         [ProtoMember(6)]
         public string Password { get; set; }
+
         [ProtoMember(7)]
         public string Salt { get; set; }
+
         [ProtoMember(8)]
         public bool Admin { get; set; }
     }
-    #endregion
+
+    #endregion User Object
 
     #region Vendor Object
+
     [ProtoContract]
     public class VendorInfo
     {
         [ProtoMember(1)]
         public int VendorID { get; set; }
+
         [ProtoMember(2)]
         public string Name { get; set; }
+
         [ProtoMember(3)]
         public string Description { get; set; }
+
         [ProtoMember(4)]
         public string Address { get; set; }
+
         [ProtoMember(5)]
         public string Email { get; set; }
+
         [ProtoMember(6)]
         public string Postcode { get; set; }
+
         [ProtoMember(7)]
         public string PhoneNo { get; set; }
+
         [ProtoMember(8)]
         public int Rating { get; set; }
+
         [ProtoMember(9)]
         public string Password { get; set; }
+
         [ProtoMember(10)]
         public string Salt { get; set; }
     }
 
-
-    #endregion
+    #endregion Vendor Object
 
     #region OrderInfo
+
     [ProtoContract]
     public class OrderInfo
     {
         [ProtoMember(1)]
         public CardModel Card { get; set; }
+
         [ProtoMember(2)]
         public List<ItemModel> Items { get; set; }
+
         [ProtoMember(3)]
-        public Decimal TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
+
         [ProtoMember(4)]
         public int VendorID { get; set; }
+
         [ProtoMember(5)]
         public string CustomerName { get; set; }
     }
-    #endregion
+
+    #endregion OrderInfo
 
     #region Card Model
+
     [ProtoContract]
     public class CardModel
     {
         [ProtoMember(1)]
         public string CardNum { get; set; } = string.Empty;
+
         [ProtoMember(2)]
         public string ExpiryDate { get; set; } = string.Empty;
+
         [ProtoMember(3)]
         public string CVC { get; set; } = string.Empty;
+
         [ProtoMember(4)]
         public string Address { get; set; } = string.Empty;
+
         [ProtoMember(5)]
         public decimal Price { get; set; }
+
         [ProtoMember(6)]
         public string ExtraDetails { get; set; } = string.Empty;
+
         [ProtoMember(7)]
         public string Email { get; set; } = string.Empty;
     }
-    #endregion
+
+    #endregion Card Model
 
     #region Item Model
+
     [ProtoContract]
     public class ItemModel
     {
         [ProtoMember(1)]
         public int ItemID { get; set; } = 0;
+
         [ProtoMember(2)]
         public int VendorID { get; set; }
+
         [ProtoMember(3)]
         public string Name { get; set; } = string.Empty;
+
         [ProtoMember(4)]
         public string Type { get; set; } = string.Empty;
+
         [ProtoMember(5)]
         public string Description { get; set; } = string.Empty;
+
         [ProtoMember(6)]
         public int Quantity { get; set; } = 0;
+
         [ProtoMember(7)]
-        public Decimal Price { get; set; } = 0;
+        public decimal Price { get; set; } = 0;
+
         [ProtoMember(8)]
-        public Decimal TotalPrice { get; set; } = 0;
+        public decimal TotalPrice { get; set; } = 0;
     }
-    #endregion
+
+    #endregion Item Model
 }

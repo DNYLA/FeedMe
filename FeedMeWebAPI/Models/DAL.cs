@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 
 namespace FeedMeWebAPI.Models
 {
@@ -35,7 +32,6 @@ namespace FeedMeWebAPI.Models
 
             try
             {
-                
             }
             catch (MySqlException ex)
             {
@@ -51,6 +47,7 @@ namespace FeedMeWebAPI.Models
                     case 0:
                         Console.WriteLine("Undiagnosed Error Occured");
                         break;
+
                     case 1062:
                         Console.WriteLine("Duplicate user!");
                         break;

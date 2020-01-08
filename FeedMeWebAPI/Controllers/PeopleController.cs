@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace FeedMeWebAPI.Controllers
@@ -13,7 +11,7 @@ namespace FeedMeWebAPI.Controllers
     /// </summary>
     public class PeopleController : ApiController
     {
-        List<Person> people = new List<Person>();
+        private List<Person> people = new List<Person>();
 
         public PeopleController()
         {

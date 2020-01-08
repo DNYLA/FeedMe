@@ -1,13 +1,6 @@
 ﻿using FeedMeLogic;
 using FeedMeNetworking.Serialization;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeVendorUI.Forms.Authentication
@@ -17,20 +10,22 @@ namespace FeedMeVendorUI.Forms.Authentication
         public static VendorInfo VendorDetails = new VendorInfo(); //Make the Client Info Object Public so other user controls can access it.
 
         #region Initializing
+
         public static VendorInfo StoreInfo = new VendorInfo();
+
         public LoginForm()
         {
             InitializeComponent();
         }
-        #endregion
+
+        #endregion Initializing
 
         #region Methods
-        //Other Methods Were moved over to the server
 
+        //Other Methods Were moved over to the server
 
         private void CheckDetails()
         {
-
             if (VendorDetails.VendorID != -1)
             {
                 Notification NotifForm = new Notification("Successfully Logged In", NotifType.success);
@@ -46,9 +41,11 @@ namespace FeedMeVendorUI.Forms.Authentication
                 NotifForm.Show();
             }
         }
-        #endregion
+
+        #endregion Methods
 
         #region Event Handlers
+
         private void RegisterLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RegisterForm RF = new RegisterForm();
@@ -68,8 +65,7 @@ namespace FeedMeVendorUI.Forms.Authentication
             FeedMeLogic.Server.ServerConnection.InitiailizeConnection();
         }
 
-
-        #endregion
+        #endregion Event Handlers
 
         private void LoginButton_Click_1(object sender, EventArgs e)
         {

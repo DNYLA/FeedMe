@@ -30,11 +30,13 @@ namespace FeedMeClient.UserControls.Order
         private void GenerateItemList()
         {
             #region Initiaizling Variables & DataTable
+
             string ItemID, ItemType, ItemName, ItemDescription, ItemTotalPrice, ItemQuantity;
 
-            #endregion
+            #endregion Initiaizling Variables & DataTable
 
             #region Initiaizling Common Variables for Dynamic Controls
+
             //Size & Location Variables
             Size EmptySize = new Size(0, 0);
             Size PanelSize = new Size(590, 451);
@@ -55,10 +57,13 @@ namespace FeedMeClient.UserControls.Order
             Color WhiteColour = Color.White;
             Color TransparentColour = Color.Transparent;
             Color DimGrayColour = Color.DimGray;
-            #endregion
+
+            #endregion Initiaizling Common Variables for Dynamic Controls
+
             MessageBox.Show("Items Happened");
 
             #region Iterating Through DataTable
+
             List<string> CatList = new List<string>();
             foreach (ItemModel Items in ServerConnection.ItemList)
             {
@@ -102,22 +107,13 @@ namespace FeedMeClient.UserControls.Order
             //Getting Data From Table & Creating Controls
             foreach (ItemModel Item in ServerConnection.ItemList)
             {
-                #region Getting Item Information
-
-                #endregion
-
-
-
-                #region Creating Dynamic Item Controls
-
-                #endregion
             }
-            #endregion
+
+            #endregion Iterating Through DataTable
         }
 
         public static void StartChange()
         {
-
         }
 
         private void ItemDecreased(object sender, EventArgs e)
@@ -160,7 +156,6 @@ namespace FeedMeClient.UserControls.Order
             TextBox ItemAmountTextBox = (TextBox)sender;
             if ((ItemAmountTextBox.Text != "")) //Prevents an error if the user backspaces to enter another value E.G user tries to enter 2. 0 >> Backspace >> "" >> "2" but instead user would get ERROR
             {
-
                 try
                 {
                     int ItemAmountInt = Convert.ToInt32(ItemAmountTextBox.Text);
@@ -180,13 +175,11 @@ namespace FeedMeClient.UserControls.Order
                 {
                     ItemAmountTextBox.Text = "0";
                 }
-
             }
         }
 
         private void VendorAmountLabel_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void VendorLabel_TextChanged(object sender, EventArgs e)

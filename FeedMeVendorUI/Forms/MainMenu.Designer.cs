@@ -36,9 +36,10 @@
             this.SelectedPanel = new System.Windows.Forms.Panel();
             this.HomeButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.orderControl1 = new FeedMeVendorUI.UserControls.Menu.OrderControl();
             this.storeInfo1 = new FeedMeVendorUI.UserControls.Menu.StoreInfo();
             this.menuInfo1 = new FeedMeVendorUI.UserControls.Menu.MenuInfo();
-            this.orderControl1 = new FeedMeVendorUI.UserControls.Menu.OrderControl();
+            this.viewOrder1 = new FeedMeVendorUI.UserControls.Menu.ViewOrder();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -149,6 +150,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.viewOrder1);
             this.panel2.Controls.Add(this.orderControl1);
             this.panel2.Controls.Add(this.storeInfo1);
             this.panel2.Controls.Add(this.menuInfo1);
@@ -156,6 +158,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(776, 451);
             this.panel2.TabIndex = 3;
+            // 
+            // orderControl1
+            // 
+            this.orderControl1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orderControl1.Location = new System.Drawing.Point(-4, -5);
+            this.orderControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.orderControl1.Name = "orderControl1";
+            this.orderControl1.Size = new System.Drawing.Size(776, 451);
+            this.orderControl1.TabIndex = 2;
             // 
             // storeInfo1
             // 
@@ -174,14 +185,13 @@
             this.menuInfo1.Size = new System.Drawing.Size(776, 451);
             this.menuInfo1.TabIndex = 0;
             // 
-            // orderControl1
+            // viewOrder1
             // 
-            this.orderControl1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.orderControl1.Location = new System.Drawing.Point(-4, -5);
-            this.orderControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.orderControl1.Name = "orderControl1";
-            this.orderControl1.Size = new System.Drawing.Size(776, 451);
-            this.orderControl1.TabIndex = 2;
+            this.viewOrder1.Location = new System.Drawing.Point(4, 5);
+            this.viewOrder1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.viewOrder1.Name = "viewOrder1";
+            this.viewOrder1.Size = new System.Drawing.Size(772, 446);
+            this.viewOrder1.TabIndex = 3;
             // 
             // MainMenu
             // 
@@ -215,5 +225,6 @@
         private UserControls.Menu.MenuInfo menuInfo1;
         private UserControls.Menu.StoreInfo storeInfo1;
         private UserControls.Menu.OrderControl orderControl1;
+        private UserControls.Menu.ViewOrder viewOrder1;
     }
 }

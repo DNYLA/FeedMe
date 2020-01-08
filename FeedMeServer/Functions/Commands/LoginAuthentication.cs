@@ -2,17 +2,13 @@
 using FeedMeNetworking.Serialization;
 using FeedMeServer.Functions.Data;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions.Commands
 {
-    class LoginAuthentication
+    internal class LoginAuthentication
     {
         public static void LoginHandler(Socket Client)
         {
@@ -54,7 +50,7 @@ namespace FeedMeServer.Functions.Commands
             }
 
             DataTable DataResult = DAL.ExecCommand(Query);
-            
+
             try
             {
                 Console.WriteLine("Continuing");
@@ -65,7 +61,6 @@ namespace FeedMeServer.Functions.Commands
                 Console.WriteLine("Invalid");
                 return "-1";
             }
-            
         }
 
         private static UserInfo GetUserInfo(string username)
@@ -92,7 +87,6 @@ namespace FeedMeServer.Functions.Commands
             }
 
             return UserInformation;
-
         }
 
         private static VendorInfo GetVendorInfo(string username)
@@ -113,7 +107,6 @@ namespace FeedMeServer.Functions.Commands
             BussinessInfo.Salt = vendorInfoDT.Rows[0][9].ToString();
 
             return BussinessInfo;
-
         }
 
         private static UserInfo InvalidCredentials()
@@ -144,7 +137,6 @@ namespace FeedMeServer.Functions.Commands
             }
 
             return CheckDetails(username, serverHashData[0], LoginType);
-
         }
 
         private static bool CheckDetails(string username, string password, int LoginType)
@@ -171,7 +163,7 @@ namespace FeedMeServer.Functions.Commands
             {
                 SQLQuery = ($"SELECT password, salt FROM vendors WHERE Name = '{username}'");
             }
-            
+
             using (DataTable SQLResults = DAL.ExecCommand(SQLQuery))
             {
                 string[] HashData = new string[2];

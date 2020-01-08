@@ -7,13 +7,13 @@ namespace FeedMeClient.Forms
 {
     public partial class MainMenu : FeedMeMainForm
     {
-
-
         //Initializing Variables used globaly WITHIN the Class
         private bool menuClosed = false;
+
         private const int CLOSED_PANEL_WDITH = 80;
         private const int OPENED_PANEL_WIDTH = 139;
         private readonly string[] MenuButtonNames = new string[3];
+
         //
         public MainMenu()
         {
@@ -39,7 +39,6 @@ namespace FeedMeClient.Forms
 
             int IterationLength = MenuButtonArray.Length;
 
-
             for (int i = 0; i < IterationLength; i++)
             {
                 //Set Each Buttons Location Manually
@@ -55,8 +54,6 @@ namespace FeedMeClient.Forms
         {
             Task ThreadMenu = new Task(() =>
             {
-
-
                 //Slow Down Animation When approaching Button.
                 Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton }; // Coppied from Above not making it a Global Variable to prevent any changes
 
@@ -122,10 +119,7 @@ namespace FeedMeClient.Forms
                             System.Threading.Thread.Sleep(10);
                         }
 
-
-
                         //Add User Control ReSizing Below
-
                     }
 
                     menuClosed = true;
@@ -135,7 +129,6 @@ namespace FeedMeClient.Forms
                         CloseButton(MenuButtonArray[i]);
                     }
                     CloseButton(SettingsButton);
-
                 }
             });
             ThreadMenu.Start();
@@ -169,7 +162,6 @@ namespace FeedMeClient.Forms
                 ButtonObject.Location = new Point(MenuIndicatorPanel.Location.X + 12, ButtonObject.Location.Y);
             };
             MenuIndicatorPanel.BeginInvoke(updateIt2);
-
         }
 
         private void CloseButton(Button ButtonObject)
@@ -183,8 +175,6 @@ namespace FeedMeClient.Forms
             };
             MenuIndicatorPanel.BeginInvoke(updateIt2);
             Application.DoEvents();
-
-
         }
 
         private void HomeButton_Click(object sender, EventArgs e)

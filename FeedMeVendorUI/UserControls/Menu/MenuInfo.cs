@@ -1,13 +1,9 @@
-﻿using System;
+﻿using FeedMeLogic.Vendor;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FeedMeLogic.Vendor;
 
 namespace FeedMeVendorUI.UserControls.Menu
 {
@@ -15,6 +11,7 @@ namespace FeedMeVendorUI.UserControls.Menu
     {
         private string vendorID;
         public static bool Opened = false;
+
         public MenuInfo()
         {
             InitializeComponent();
@@ -37,23 +34,21 @@ namespace FeedMeVendorUI.UserControls.Menu
                 return;
             }
             vendorID = Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString();
-
         }
-
 
         private void LoadCategories(string vendorID)
         {
             CatLBox.Items.Clear();
             DataTable MenuTable = StoreMenuInfo.GetMenuInfo(vendorID);
             List<string> CategoryList = new List<string>();
-            foreach(DataRow Item in MenuTable.Rows)
+            foreach (DataRow Item in MenuTable.Rows)
             {
                 CategoryList.Add(Item[3].ToString());
             }
 
             List<string> NewCatList = CategoryList.Distinct().ToList();
             CategoryList.Sort();
-            foreach(string Item in CategoryList)
+            foreach (string Item in CategoryList)
             {
                 CatLBox.Items.Add(Item);
             }
@@ -68,7 +63,7 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             ItemLBox.Items.Clear();
 
-            foreach(DataRow Item in ItemInfo.Rows)
+            foreach (DataRow Item in ItemInfo.Rows)
             {
                 ItemLBox.Items.Add(Item[2].ToString());
             }
@@ -76,7 +71,6 @@ namespace FeedMeVendorUI.UserControls.Menu
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void EditCatButton_Click(object sender, EventArgs e)

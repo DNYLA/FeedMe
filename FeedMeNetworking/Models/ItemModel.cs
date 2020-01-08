@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FeedMeNetworking.Models
+﻿namespace FeedMeNetworking.Models
 {
     public class ItemModel2
     {
@@ -15,6 +9,6 @@ namespace FeedMeNetworking.Models
         public string Description { get; set; } = string.Empty;
         public int Quantity { get; set; } = 0;
         public int Price { get; set; } = 0;
-        public Decimal TotalPrice { get; set; } = 0;
+        public decimal TotalPrice { get; set; } = 0;
     }
 }

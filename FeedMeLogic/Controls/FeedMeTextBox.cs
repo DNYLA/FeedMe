@@ -12,6 +12,7 @@ namespace FeedMeLogic.Controls
         private readonly float FntSize;
 
         #region Initialize Class
+
         public FeedMeTextBox()
         {
             BorderStyle = BorderStyle.None;
@@ -37,11 +38,13 @@ namespace FeedMeLogic.Controls
 
             InitializeComponent();
         }
-        #endregion
+
+        #endregion Initialize Class
 
         #region Protected Override Events
 
         #region WaterMark Events
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -89,7 +92,6 @@ namespace FeedMeLogic.Controls
                 Text = Text.Substring(0, Text.Length - Watermark.Length);
             }
 
-
             if (Text == watermark || Text == string.Empty)
             {
                 return;
@@ -99,9 +101,11 @@ namespace FeedMeLogic.Controls
             Size size = TextRenderer.MeasureText(Text, Font);
             Height = size.Height + 5;
         }
-        #endregion
+
+        #endregion WaterMark Events
 
         #region Border Events
+
         protected override void OnEnter(EventArgs e)
         {
             base.OnEnter(e);
@@ -118,7 +122,6 @@ namespace FeedMeLogic.Controls
                 Controls[2].BackColor = _FocusColor;
                 Controls[3].BackColor = _FocusColor;
             }
-
         }
 
         protected override void OnLeave(EventArgs e)
@@ -137,15 +140,19 @@ namespace FeedMeLogic.Controls
                 Controls[3].BackColor = _borderColor;
             }
         }
-        #endregion
+
+        #endregion Border Events
 
         #region Other Events
-        //Empty But Events Might Be Added Later
-        #endregion
 
-        #endregion
+        //Empty But Events Might Be Added Later
+
+        #endregion Other Events
+
+        #endregion Protected Override Events
 
         #region Custom Properties
+
         private Color _baseColor = Color.Black;
         private Color _borderColor = Color.Black;
         private Color _FocusColor = Color.White;
@@ -200,7 +207,8 @@ namespace FeedMeLogic.Controls
             get => _FocusColor;
             set => _FocusColor = value;
         }
-        #endregion
+
+        #endregion Custom Properties
 
         #region Helper Methods
 
@@ -271,9 +279,11 @@ namespace FeedMeLogic.Controls
                 Controls.Remove(CurrentLabel);
             }
         }
-        #endregion
+
+        #endregion Border Methods
 
         #region Other Helpers
+
         private void ReSizeTextBox()
         {
             Size size = TextRenderer.MeasureText(Text, Font); // Gets The Size
@@ -296,9 +306,9 @@ namespace FeedMeLogic.Controls
                 ReSizeTextBox();
             }
         }
-        #endregion
 
-        #endregion
+        #endregion Other Helpers
 
+        #endregion Helper Methods
     }
 }

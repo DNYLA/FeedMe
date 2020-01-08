@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeVendorUI.UserControls.Menu
@@ -19,7 +13,6 @@ namespace FeedMeVendorUI.UserControls.Menu
 
         private void Panel5_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         public void UpdateUI()
@@ -33,8 +26,6 @@ namespace FeedMeVendorUI.UserControls.Menu
             {
                 return;
             }
-            
-
         }
 
         private void LoadInfo()

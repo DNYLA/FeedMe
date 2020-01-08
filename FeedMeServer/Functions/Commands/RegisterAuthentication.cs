@@ -1,15 +1,10 @@
 ﻿using FeedMeNetworking;
 using FeedMeNetworking.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions.Commands
 {
-    class RegisterAuthentication
+    internal class RegisterAuthentication
     {
         public static void RegistrationHandler(Socket Client)
         {
@@ -28,13 +23,13 @@ namespace FeedMeServer.Functions.Commands
 
             string SQLQuery = ($@"INSERT INTO users (username, firstname, lastname, email, password, salt)
                                   VALUES ('{CI.Username}', '{CI.FirstName}', '{CI.LastName}', '{CI.Email}', '{CI.Password}', '{CI.Salt}');");
-    
+
             Data.DAL.ExecCommand(SQLQuery);
 
             if (Data.DAL.ErrorCode == 1062)
             {
                 return 0; //Duplicate username
-            } 
+            }
             else if (Data.DAL.ErrorCode == -1)
             {
                 return 1; //Successfully Registerd
@@ -53,6 +48,5 @@ namespace FeedMeServer.Functions.Commands
 
             return UserInformation;
         }
-
     }
 }

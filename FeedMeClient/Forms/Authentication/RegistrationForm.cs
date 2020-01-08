@@ -8,13 +8,16 @@ namespace FeedMeClient.Forms.Authentication
     public partial class Register : FeedMeMainForm
     {
         #region Initializing
+
         public Register()
         {
             InitializeComponent();
         }
-        #endregion
+
+        #endregion Initializing
 
         #region Methods
+
         private void UpdateUI()
         {
             //Fix this later on
@@ -73,7 +76,7 @@ namespace FeedMeClient.Forms.Authentication
                 LastName = LastNameBox.Text,
                 Email = EmailBox.Text,
 
-                //Add Hashing Or Encryption on password Client Side 
+                //Add Hashing Or Encryption on password Client Side
                 Password = PasswordBox.Text
             };
 
@@ -96,14 +99,14 @@ namespace FeedMeClient.Forms.Authentication
             {
                 MessageBox.Show("Undiagnosed Error!");
             }
-
-
         }
-        #endregion
+
+        #endregion Methods
 
         #region Event Handlers
 
         #region Password UI Handlers
+
         private void PasswordBox_TextChanged(object sender, EventArgs e)
         {
             UpdateUI();
@@ -133,9 +136,11 @@ namespace FeedMeClient.Forms.Authentication
         {
             UpdateUI();
         }
-        #endregion
+
+        #endregion Password UI Handlers
 
         #region Other Handlers
+
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             RegisterUser();
@@ -143,7 +148,6 @@ namespace FeedMeClient.Forms.Authentication
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void NoAccountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -152,8 +156,9 @@ namespace FeedMeClient.Forms.Authentication
             LoginForm LF = new LoginForm();
             LF.Show();
         }
-        #endregion
 
-        #endregion
+        #endregion Other Handlers
+
+        #endregion Event Handlers
     }
 }

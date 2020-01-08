@@ -1,8 +1,8 @@
+using FeedMeWebAPI.Areas.HelpPage.ModelDescriptions;
+using FeedMeWebAPI.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using FeedMeWebAPI.Areas.HelpPage.ModelDescriptions;
-using FeedMeWebAPI.Areas.HelpPage.Models;
 
 namespace FeedMeWebAPI.Areas.HelpPage.Controllers
 {

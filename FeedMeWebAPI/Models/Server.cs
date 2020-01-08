@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace FeedMeWebAPI.Models
 {
@@ -14,6 +11,5 @@ namespace FeedMeWebAPI.Models
         public string Country { get; set; } = "";
         public DateTime TimeStarted { get; set; } = DateTime.Now;
         public int UserCount { get; set; } = 0;
-
     }
 }

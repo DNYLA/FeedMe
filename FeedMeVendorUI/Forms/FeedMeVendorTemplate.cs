@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeVendorUI.Forms
@@ -14,15 +7,20 @@ namespace FeedMeVendorUI.Forms
     public partial class FeedMeVendorTemplate : Form
     {
         #region Move Window Method
+
         //No Border Styled Forms Don't include a functions/Form which allows you to move the window
         //Credit To: https://stackoverflow.com/questions/1592876/make-a-borderless-form-movable/1592924
         public const int WM_NCLBUTTONDOWN = 0xA1;
+
         public const int HT_CAPTION = 0x2;
+
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
-        #endregion
+
+        #endregion Move Window Method
 
         public FeedMeVendorTemplate()
         {
@@ -35,6 +33,7 @@ namespace FeedMeVendorUI.Forms
         }
 
         #region Button Click Events
+
         private void TopPanelCloseButton_Click(object sender, EventArgs e)
         {
             //Add a check to See if Its Main Form and then either Application.Exit || Form.Close
@@ -47,7 +46,6 @@ namespace FeedMeVendorUI.Forms
             {
                 Close();
             }
-
         }
 
         private void TopPanelMaximizeButton_Click(object sender, EventArgs e)
@@ -62,7 +60,6 @@ namespace FeedMeVendorUI.Forms
                 WindowState = FormWindowState.Normal;
             }
             ReSizeTitle();
-
         }
 
         private void TopPanelMinimizeButton_Click(object sender, EventArgs e)
@@ -70,7 +67,8 @@ namespace FeedMeVendorUI.Forms
             //Minimizes Form to background
             WindowState = FormWindowState.Minimized;
         }
-        #endregion
+
+        #endregion Button Click Events
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -83,7 +81,6 @@ namespace FeedMeVendorUI.Forms
             base.OnPaintBackground(e);
             ReSizeTitle();
         }
-
 
         protected override void OnResize(EventArgs e)
         {
@@ -98,6 +95,7 @@ namespace FeedMeVendorUI.Forms
         }
 
         #region Move Window Events
+
         private void TopBarPanel_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
@@ -111,9 +109,11 @@ namespace FeedMeVendorUI.Forms
             SendMessage(this.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             ReSizeTitle();
         }
-        #endregion
+
+        #endregion Move Window Events
 
         #region Form Helpers
+
         /// <summary>
         /// Simple Function Which positions the Title Label in the "Centre" of the screen. Its Called On Maximized/Minimized && On Form Load
         /// </summary>
@@ -124,6 +124,6 @@ namespace FeedMeVendorUI.Forms
             TitleLabel.Top = ((TopBarPanel.ClientSize.Height - TitleLabel.Height) / 2);
         }
 
-        #endregion
+        #endregion Form Helpers
     }
 }

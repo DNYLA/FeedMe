@@ -1,8 +1,8 @@
+using FeedMeWebAPI.Areas.HelpPage.ModelDescriptions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using FeedMeWebAPI.Areas.HelpPage.ModelDescriptions;
 
 namespace FeedMeWebAPI.Areas.HelpPage.Models
 {

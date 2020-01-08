@@ -1,17 +1,13 @@
 ﻿using FeedMeNetworking.Serialization;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeNetworking
 {
     public class Receive
     {
-
         /*
          * Add Function to Encrypt All BYTES not unserialized data
          */
@@ -34,7 +30,7 @@ namespace FeedMeNetworking
         /// Uses Receive Data To convert Byte Received into a String
         /// </summary>
         /// <returns>The Message From Server As a String</returns>
-        public static String ReceiveMessage(Socket Sock)
+        public static string ReceiveMessage(Socket Sock)
         {
             return Encoding.UTF8.GetString(ReceiveData(Sock));
         }

@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions
 {
-    class GetServerInfo
+    internal class GetServerInfo
     {
         public static IPAddress GetPrivateIP()
         {
@@ -28,7 +26,6 @@ namespace FeedMeServer.Functions
             }
 
             return myIp;
-
         }
 
         public static string GetPublicIP()
@@ -52,7 +49,7 @@ namespace FeedMeServer.Functions
         }
 
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client
-        static HttpClient client = new HttpClient();
+        private static HttpClient client = new HttpClient();
 
         public static async Task<Uri> CreateServerAsync(ServerInformation ServerData)
         {
@@ -93,7 +90,6 @@ namespace FeedMeServer.Functions
             return true;
         }
 
-
         private static async Task<Boolean> AddServer()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
@@ -120,7 +116,6 @@ namespace FeedMeServer.Functions
                 var url = await CreateServerAsync(SI);
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
                 Console.WriteLine($"Created at {url}");
-
             }
             catch (HttpRequestException e)
             {
@@ -147,15 +142,12 @@ namespace FeedMeServer.Functions
             task.Wait();
 
             return APIResponse;
-            
-
         }
 
         public static int PingChecker(IPAddress IP)
         {
             //https://stackoverflow.com/questions/3318610/how-to-get-client-ip-using-socket-programming-c-sharp
             //IPAddress LIP = IPAddress.Parse(((IPEndPoint)Client.RemoteEndPoint).Address.ToString());
-
 
             Ping PingChecker = new Ping();
             PingReply PR = PingChecker.Send(IP);
@@ -168,9 +160,6 @@ namespace FeedMeServer.Functions
             {
                 return -1;
             }
-
         }
-
-
     }
 }

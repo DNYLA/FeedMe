@@ -17,7 +17,7 @@ namespace FeedMeClient.UserControls
          *[X] 1. Query The Database for the Item Types
          *   [X] a. Use The VendorID for the current Vendor/Store Selected (This is stored in the Tag of the Control)
          *   [X] b. Only Show the Item Types for the specific vendor
-         *   [X] c. Remove any duplicate item types from the query using MIN 
+         *   [X] c. Remove any duplicate item types from the query using MIN
          * [X] 2. Generate & Add Item Types To Item Panel
          * [X] 3. Iterate using a for loop through the default/first Item Type Selected for Each Item inside
          * [X] 4. Add A Panel for each Item Inside and Fill The Item with the correct information/controls
@@ -25,7 +25,6 @@ namespace FeedMeClient.UserControls
          * [X] 6. Make sure the Event Handler for Selecting an Item Type works Correctly & Generates a new List of Items
          * [] 7. Make the Place Order Button Re-Direct the User to the Checkout Control.
         */
-
 
         public OrderControl()
         {
@@ -35,6 +34,7 @@ namespace FeedMeClient.UserControls
         #region Dynamic Generator Methods
 
         #region Generate Top Button Method
+
         private void GenerateTopButtons(int vendorID)
         {
             ButtonsFlowPanel.Controls.Clear();
@@ -66,12 +66,15 @@ namespace FeedMeClient.UserControls
                 ButtonsFlowPanel.Controls.Add(ItemTypeButton);
             }
         }
-        #endregion
+
+        #endregion Generate Top Button Method
 
         #region Generate Items Method
+
         private void GenerateItems(int vendorID, string itemType)
         {
             #region Initiaizling Variables & DataTable
+
             int ItemAmount;
             string ItemID, ItemType, ItemName, ItemDescription, ItemPrice;
 
@@ -79,9 +82,11 @@ namespace FeedMeClient.UserControls
 
             DataTable ItemResults = DAL.ExecCommand(SQLCommand);
             ItemAmount = ItemResults.Rows.Count;
-            #endregion
+
+            #endregion Initiaizling Variables & DataTable
 
             #region Initiaizling Common Variables for Dynamic Controls
+
             //Size & Location Variables
             Size EmptySize = new Size(0, 0);
             Size PanelSize = new Size(678, 133);
@@ -107,21 +112,26 @@ namespace FeedMeClient.UserControls
             Color WhiteColour = Color.White;
             Color TransparentColour = Color.Transparent;
             Color DimGrayColour = Color.DimGray;
-            #endregion
+
+            #endregion Initiaizling Common Variables for Dynamic Controls
 
             #region Iterating Through DataTable
+
             //Getting Data From Table & Creating Controls
             foreach (DataRow Item in ItemResults.Rows)
             {
                 #region Getting Item Information
+
                 ItemID = Item[0].ToString();
                 ItemName = Item[2].ToString();
                 ItemType = Item[3].ToString();
                 ItemDescription = Item[4].ToString();
                 ItemPrice = Item[5].ToString();
-                #endregion
+
+                #endregion Getting Item Information
 
                 #region Creating Dynamic Item Controls
+
                 Panel ItemPanel = GenControls.AddPanel(ItemName, Color.White, PanelSize);
 
                 Label TitleLabel = GenControls.AddLabel(ItemName + "Title", ItemName, TitleLoc, TitleFont, BlackColour, TransparentColour, EmptySize, true);
@@ -133,9 +143,11 @@ namespace FeedMeClient.UserControls
                 PictureBox ItemPictureBox = GenControls.AddPictureBox(ItemName, PicBoxLoc, PicBoxSize);
 
                 ItemPictureBox.Image = FeedMeClient.Properties.Resources.ChickenBurger;
-                #endregion
+
+                #endregion Creating Dynamic Item Controls
 
                 #region Adding to Form & Setting Event Handlers
+
                 Control[] PanelControls = new Control[] { TitleLabel, DescLabel, PriceLabel, RemoveButton, ItemAmountTBox, AddButton, ItemPictureBox };
 
                 foreach (Control CurrentItemControl in PanelControls)
@@ -147,15 +159,19 @@ namespace FeedMeClient.UserControls
                 AddButton.Click += new EventHandler(ItemIncreased);
                 ItemAmountTBox.TextChanged += new EventHandler(ItemAmountChanged);
                 ItemsFlowPanel.Controls.Add(ItemPanel);
-                #endregion
-            }
-            #endregion
-        }
-        #endregion
 
-        #endregion
+                #endregion Adding to Form & Setting Event Handlers
+            }
+
+            #endregion Iterating Through DataTable
+        }
+
+        #endregion Generate Items Method
+
+        #endregion Dynamic Generator Methods
 
         #region Helper Methods
+
         private DataRow getVendorDetails(string vendorName)
         {
             DataTable QueryResults = DAL.ExecCommand($"SELECT * FROM vendors WHERE Name = '{vendorName}'");
@@ -164,37 +180,37 @@ namespace FeedMeClient.UserControls
 
             return VendorDetail;
         }
-        #endregion
+
+        #endregion Helper Methods
 
         #region Event Handlers
+
         #region Control Load Event
+
         private void OrderControl_Load(object sender, EventArgs e)
         {
-            //Prevents Any Errors When Loading MainMenu Form in Design View 
+            //Prevents Any Errors When Loading MainMenu Form in Design View
             if (!ServerConnection.Connected)
             {
                 return;
             }
-
-
 
             GenerateTopButtons(2);
             GenerateItems(0, "Burgers");
 
             try
             {
-
-
-
             }
             catch
             {
                 MessageBox.Show("Unexpected Error.");
             }
         }
-        #endregion
+
+        #endregion Control Load Event
 
         #region Other Events
+
         private void VendorTitleLabel_TextChanged(object sender, EventArgs e)
         {
             DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
@@ -206,12 +222,10 @@ namespace FeedMeClient.UserControls
             //Adding New Controls to Flow Panels
             GenerateTopButtons(vendorID);
 
-
             Button FirstItemType = (Button)ButtonsFlowPanel.Controls[0];
             string ItemType = FirstItemType.Name.Substring(0, FirstItemType.Name.Length - 6); //Removes the "Button" part at the end of the name.
 
             GenerateItems(vendorID, ItemType);
-
         }
 
         private void PanelButtonClicked(object sender, EventArgs e)
@@ -221,8 +235,6 @@ namespace FeedMeClient.UserControls
             DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
             int vendorID = Convert.ToInt32(vendorInfo[0]);
 
-
-
             ItemsFlowPanel.Controls.Clear();
 
             //Naming Scheme is Name + Button So removing the "Button" Part from the name is needed to get the item Type
@@ -231,9 +243,11 @@ namespace FeedMeClient.UserControls
 
             GenerateItems(vendorID, ItemTypeName);
         }
-        #endregion
+
+        #endregion Other Events
 
         #region Item Event Handlers
+
         private void ItemDecreased(object sender, EventArgs e)
         {
             Button decreaseButton = (Button)sender;
@@ -269,10 +283,6 @@ namespace FeedMeClient.UserControls
             int tbIntVal = Convert.ToInt32(tb.Text);
             tbIntVal = tbIntVal + 1;
             tb.Text = tbIntVal.ToString();
-
-
-
-
         }
 
         private void UpdateItemList(string ItemName, bool increase)
@@ -301,9 +311,7 @@ namespace FeedMeClient.UserControls
                         }
                         Items.Quantity--;
                         Items.TotalPrice = Items.Quantity * Items.Price;
-
                     }
-
 
                     alreadyAdded = true;
                 }
@@ -328,14 +336,9 @@ namespace FeedMeClient.UserControls
 
         private void UpdateItemList(int Change)
         {
-
             //if (ItemList.Count == 0)
             //{
-
             //}
-
-
-
         }
 
         private void ItemAmountChanged(object sender, EventArgs e)
@@ -344,7 +347,6 @@ namespace FeedMeClient.UserControls
             TextBox ItemAmountTextBox = (TextBox)sender;
             if ((ItemAmountTextBox.Text != "")) //Prevents an error if the user backspaces to enter another value E.G user tries to enter 2. 0 >> Backspace >> "" >> "2" but instead user would get ERROR
             {
-
                 try
                 {
                     int ItemAmountInt = Convert.ToInt32(ItemAmountTextBox.Text);
@@ -364,12 +366,12 @@ namespace FeedMeClient.UserControls
                 {
                     ItemAmountTextBox.Text = "0";
                 }
-
             }
         }
-        #endregion
 
-        #endregion
+        #endregion Item Event Handlers
+
+        #endregion Event Handlers
 
         private void OrderButton_Click(object sender, EventArgs e)
         {

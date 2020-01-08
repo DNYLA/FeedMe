@@ -1,16 +1,11 @@
-﻿using System;
+﻿using FeedMeLogic;
+using FeedMeLogic.Server;
+using FeedMeNetworking.Serialization;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using FeedMeNetworking.Serialization;
-using FeedMeLogic;
-using FeedMeLogic.Server;
 
 namespace FeedMeVendorUI.UserControls.Menu
 {
@@ -33,14 +28,15 @@ namespace FeedMeVendorUI.UserControls.Menu
         private List<OrderInfo> GetUpdates()
         {
             List<OrderInfo> OrderInfo = new List<OrderInfo>();
-            Task UpdateThread = new Task(() =>
+            Task UpdateThread = Task.Factory.StartNew(() =>
             {
                 OrderInfo = CheckForOrders();
+                Console.WriteLine("Getting Update");
             });
-            UpdateThread.Start();
-
+            Console.WriteLine("Getting Update V2");
             UpdateThread.Wait();
-
+            Console.WriteLine("Getting Update V3");
+            Console.WriteLine(OrderInfo.Count.ToString());
             return OrderInfo;
         }
 
@@ -53,6 +49,7 @@ namespace FeedMeVendorUI.UserControls.Menu
         private void GenerateControls()
         {
             #region Initializing Variables
+
             Size EmptySize = new Size(0, 0);
             Size vendorPanelSize = new Size(219, 135);
             Size StatusSize = new Size(134, 21);
@@ -64,11 +61,11 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             Font DefaultFont = new Font("Nirmala UI", 12, FontStyle.Regular);
             Font OrderFont = new Font("Nirmala UI", 14, FontStyle.Bold);
-            #endregion
 
-
+            #endregion Initializing Variables
 
             List<OrderInfo> OIList = GetUpdates();
+
             if (OIList.Count == 0)
             {
                 return;
@@ -76,7 +73,6 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             foreach (OrderInfo Order in OIList)
             {
-
                 string orderText = "Order";
                 string customerName = $"Customer: {Order.CustomerName}";
                 string PriceText = $"Price: {Order.TotalPrice.ToString()}";
@@ -88,10 +84,8 @@ namespace FeedMeVendorUI.UserControls.Menu
                 Label orderCustLabel = GenControls.AddLabel(customerName, customerName, CustomerLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
                 Label orderPriceLabel = GenControls.AddLabel(PriceText + "Rating", PriceText, PriceLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
                 Label orderStatusLabel = GenControls.AddLabel(orderStatus + "Rating", orderStatus, StatusLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
-            
 
                 Control[] controlArray = new Control[] { orderTitleLabel, orderCustLabel, orderPriceLabel, orderStatusLabel };
-
 
                 foreach (Control curControl in controlArray)
                 {
@@ -99,12 +93,12 @@ namespace FeedMeVendorUI.UserControls.Menu
                     //curControl.Click += new EventHandler(OpenVendor);
                     //curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
                     vendorPanelObject.Controls.Add(curControl);
-
                 }
 
                 OrdersFlowPanel.Controls.Add(vendorPanelObject);
                 //vendorPanelObject.Click += new EventHandler(OpenVendor);
                 //vendorPanelObject.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                //GenerateControls();
             }
         }
     }

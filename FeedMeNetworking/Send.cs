@@ -1,12 +1,8 @@
 ﻿using FeedMeNetworking.Serialization;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace FeedMeNetworking
 {
@@ -16,6 +12,42 @@ namespace FeedMeNetworking
          * ADD Function to decrypt BYTES.
          */
 
+        public static void SendDataTable(Socket Sock, DataTable dataTable)
+        {
+            SendData(Sock, ProtoBufSerialization.DataSerialization(dataTable));
+        }
+
+        /// <summary>
+        /// Encodes a String message and sends it to the given socket
+        /// </summary>
+        /// <param name="Sock">Socket Which is sending the message</param>
+        /// <param name="message">The Message to Encode and Send</param>
+        public static void SendMessage(Socket Sock, string message)
+        {
+            //If Data is sent too quickly the server might read seperate messages as one string sometimes
+            Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
+
+            SendData(Sock, Encoding.UTF8.GetBytes(message));
+        }
+
+        public static void SendOrderDetails(Socket Sock, OrderInfo OrderInformation)
+        {
+            SendData(Sock, ProtoBufSerialization.ObjectSerialization(OrderInformation));
+        }
+
+        /// <summary>
+        /// Serializes UserInfo Object and Uses SendData To Send it over the network
+        /// </summary>
+        /// <param name="UserInformation">Object That Needs to be Serialized</param>
+        public static void SendUserInfo(Socket Sock, UserInfo UserInformation)
+        {
+            SendData(Sock, ProtoBufSerialization.ObjectSerialization(UserInformation));
+        }
+
+        public static void SendVendorInfo(Socket Sock, VendorInfo BussinessInfo)
+        {
+            SendData(Sock, ProtoBufSerialization.ObjectSerialization(BussinessInfo));
+        }
 
         /// <summary>
         /// Simple Function which streams data over a network
@@ -29,44 +61,5 @@ namespace FeedMeNetworking
             //If Data is sent too quickly the server might read seperate messages as one string sometimes
             Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
         }
-
-
-        /// <summary>
-        /// Simple Function which executes a single command. Makes it quicker than writing everything out each time & if i ever decide to change the 
-        /// Encoding Type from UTF8 to something different like UTF16 then i only have to change this function
-        /// </summary>
-        /// <param name="message">The String That Needs to be Serialized</param>
-        public static void SendMessage(Socket Sock, string message)
-        {
-            //If Data is sent too quickly the server might read seperate messages as one string sometimes
-            Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
-
-            SendData(Sock, Encoding.UTF8.GetBytes(message));   
-        }
-
-        public static void SendDataTable(Socket Sock, DataTable dataTable)
-        {
-            SendData(Sock, ProtoBufSerialization.DataSerialization(dataTable));
-        }
-
-        /// <summary>
-        /// Serializes UserInfo Object and Uses SendData To Send it over the network
-        /// </summary>
-        /// <param name="UserInformation">Object That Needs to be Serialized</param>
-        public static void SendUserInfo(Socket Sock, UserInfo UserInformation)
-        {
-            SendData(Sock, ProtoBufSerialization.ObjectSerialization(UserInformation));
-        }
-
-        public static void SendOrderDetails(Socket Sock, OrderInfo OrderInformation)
-        {
-            SendData(Sock, ProtoBufSerialization.ObjectSerialization(OrderInformation));
-        }
-
-        public static void SendVendorInfo(Socket Sock, VendorInfo BussinessInfo)
-        {
-            SendData(Sock, ProtoBufSerialization.ObjectSerialization(BussinessInfo));
-        }
-
     }
 }

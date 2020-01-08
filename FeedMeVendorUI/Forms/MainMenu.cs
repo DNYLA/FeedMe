@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FeedMeVendorUI.Forms
@@ -39,17 +33,18 @@ namespace FeedMeVendorUI.Forms
         }
 
         #region UI Helpers
+
         private void UpdatePointer(object buttonObject)
         {
             Button currentButton = (Button)buttonObject;
             SelectedPanel.Width = currentButton.Width - 10;
             SelectedPanel.Location = new Point(currentButton.Location.X + 4, 42);
         }
-        #endregion
+
+        #endregion UI Helpers
 
         private void Panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)

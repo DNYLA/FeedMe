@@ -1,18 +1,15 @@
 ﻿using FeedMeNetworking;
 using FeedMeServer.Functions.Data;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions.Commands.Vendor
 {
-    class StoreMenuHandler
+    internal class StoreMenuHandler
     {
         private static Socket Client; //Can only be acessed in this classw
+
         public static void MenuHandler(Socket client)
         {
             Client = client;
@@ -26,24 +23,31 @@ namespace FeedMeServer.Functions.Commands.Vendor
                 case "GetCategories":
                     GetCategories(vendorID);
                     break;
+
                 case "GetItemList":
                     GetItems(vendorID);
                     break;
+
                 case "AddCat":
                     AddCategory(vendorID);
                     break;
+
                 case "EditCat":
                     EditCategory(vendorID);
                     break;
+
                 case "RmoveCat":
                     RemoveCategory(vendorID);
                     break;
+
                 case "AddItem":
                     AddItem(vendorID);
                     break;
+
                 case "EditItem":
                     EditItem(vendorID);
                     break;
+
                 case "RemoveItem":
                     RemoveItem(vendorID);
                     break;
@@ -68,8 +72,8 @@ namespace FeedMeServer.Functions.Commands.Vendor
         private static void AddCategory(string vendorID)
         {
             string CategoryName = Receive.ReceiveMessage(Client);
-
         }
+
         private static void EditCategory(string vendorID)
         {
             string curCatName = Receive.ReceiveMessage(Client);
@@ -114,7 +118,7 @@ namespace FeedMeServer.Functions.Commands.Vendor
         {
             string cat = Receive.ReceiveMessage(Client);
             string itemName = Receive.ReceiveMessage(Client);
-            
+
             string query = ($"DELETE FROM items WHERE Category = '{cat}' AND vendorID = '{vendorID}' AND ItemName = '{itemName}';");
             DAL.ExecCommand(query);
             SendSuccessMessage();

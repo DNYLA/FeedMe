@@ -1,18 +1,14 @@
 ﻿using FeedMeNetworking;
-using FeedMeNetworking.Models;
 using FeedMeNetworking.Serialization;
 using FeedMeServer.Functions.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions.Commands
 {
-    class OrderHandler
+    internal class OrderHandler
     {
         public static void CheckOrder(Socket Client)
         {
@@ -39,7 +35,6 @@ namespace FeedMeServer.Functions.Commands
             }
 
             return 0;
-
         }
 
         internal static void CheckForOrders(Socket clientSocket)
@@ -53,7 +48,6 @@ namespace FeedMeServer.Functions.Commands
 
             Send.SendMessage(clientSocket, DT.Rows.Count.ToString());
 
-            
             foreach (DataRow Order in DT.Rows)
             {
                 OrderInfo OI = new OrderInfo();
@@ -67,8 +61,8 @@ namespace FeedMeServer.Functions.Commands
                 foreach (DataRow OrderItem in orderInfo.Rows)
                 {
                     ItemModel ItemInfo = new ItemModel();
-                    DataTable Item = DAL.ExecCommand($"SELECT * FROM items WHERE ItemID = {Convert.ToInt32(OrderItem[0])}");
-                    Console.WriteLine($"SELECT * FROM items WHERE ItemID = {Convert.ToInt32(OrderItem[0])}");
+                    DataTable Item = DAL.ExecCommand($"SELECT * FROM items WHERE ItemID = {Convert.ToInt32(OrderItem[2])}");
+                    Console.WriteLine($"SELECT * FROM items WHERE ItemID = {Convert.ToInt32(OrderItem[2])}");
 
                     ItemInfo.ItemID = Convert.ToInt32(Item.Rows[0][0].ToString());
                     ItemInfo.VendorID = Convert.ToInt32(Item.Rows[0][1].ToString());
@@ -87,7 +81,6 @@ namespace FeedMeServer.Functions.Commands
                     {
                         Console.WriteLine(ex.Message);
                     }
-                    
                 }
 
                 foreach (ItemModel Item in OI.Items)
@@ -97,6 +90,54 @@ namespace FeedMeServer.Functions.Commands
 
                 Send.SendOrderDetails(clientSocket, OI);
             }
+        }
+
+        internal static void GetSpecificOrder(Socket clientSocket)
+        {
+            string orderID = Receive.ReceiveMessage(clientSocket);
+
+            string sqlQuery = $"SELECT * FROM `order` WHERE ID = {orderID};";
+            DataTable DT = DAL.ExecCommand(sqlQuery);
+
+            Send.SendMessage(clientSocket, DT.Rows.Count.ToString());
+            DataRow Order = DT.Rows[0];
+            OrderInfo OI = new OrderInfo();
+            OI.VendorID = Convert.ToInt32(Order[2]);
+            OI.CustomerName = Order[4].ToString();
+            OI.Items = new List<ItemModel>();
+
+            DataTable orderInfo = DAL.ExecCommand($"SELECT * FROM `orderline` WHERE OrderID = {orderID}");
+
+            foreach (DataRow OrderItem in orderInfo.Rows)
+            {
+                ItemModel ItemInfo = new ItemModel();
+                DataTable Item = DAL.ExecCommand($"SELECT * FROM items WHERE ItemID = {Convert.ToInt32(OrderItem[2])}");
+
+                ItemInfo.ItemID = Convert.ToInt32(Item.Rows[0][0].ToString());
+                ItemInfo.VendorID = Convert.ToInt32(Item.Rows[0][1].ToString());
+                ItemInfo.Name = Item.Rows[0][2].ToString();
+                ItemInfo.Type = Item.Rows[0][3].ToString();
+                ItemInfo.Description = Item.Rows[0][4].ToString();
+                ItemInfo.Quantity = Convert.ToInt32(OrderItem[3]);
+                ItemInfo.Price = Convert.ToDecimal(Item.Rows[0][5].ToString());
+                ItemInfo.TotalPrice = ItemInfo.Price * ItemInfo.Quantity;
+
+                try
+                {
+                    OI.Items.Add(ItemInfo);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            foreach (ItemModel Item in OI.Items)
+            {
+                OI.TotalPrice += Item.TotalPrice;
+            }
+
+            Send.SendOrderDetails(clientSocket, OI);
         }
     }
 }

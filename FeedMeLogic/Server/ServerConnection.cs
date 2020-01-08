@@ -10,7 +10,6 @@ namespace FeedMeLogic.Server
 {
     public class ServerConnection
     {
-
         public static List<ItemModel> ItemList = new List<ItemModel>();
         private static readonly int PORT_NO = 4030;
 
@@ -18,11 +17,13 @@ namespace FeedMeLogic.Server
         //static string IP_ADDRESS = "86.181.164.197";
         //static string IP_ADDRESS = "192.168.1.64";
         private static readonly string IP_ADDRESS = "127.0.0.1";
+
         //static string IP_ADDRESS = "85.255.236.26";
 
         //Protected Internal Variables are only acessible to the assembly or from containing classes (Anything Outside of FeedMeClient.Functions.Server Is Unable To Access This Variable)
         //Microsoft Documentation: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/accessibility-levels
         protected internal static Socket ServerSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
         public static string GlobalCommandToSend = "";
         public static bool Connected = false;
 
@@ -43,21 +44,17 @@ namespace FeedMeLogic.Server
                         Thread.Sleep(500);
                         InitiailizeConnection(retryAmount++);
                     }
-
                 }
                 else
                 {
                     MessageBox.Show("No Servers Online.");
                 }
-
             }
             else
             {
                 Console.WriteLine("Already Connected!");
             }
-
         }
-
 
         public static void CloseConnection()
         {

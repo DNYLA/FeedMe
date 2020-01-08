@@ -20,7 +20,6 @@ namespace FeedMeLogic.Server
 
         public static List<OrderInfo> CheckForOrders(int vendorID)
         {
-
             List<OrderInfo> OIList = new List<OrderInfo>();
 
             Send.SendMessage(ServerConnection.ServerSock, "CheckForOrder");
@@ -33,6 +32,17 @@ namespace FeedMeLogic.Server
                 OIList.Add(Receive.ReceiveOrderInfo(ServerConnection.ServerSock));
             }
             return OIList;
+        }
+
+        public static OrderInfo GetSpecificOrder(string orderID)
+        {
+            Send.SendMessage(ServerConnection.ServerSock, "GetSpecificOrder");
+
+            Send.SendMessage(ServerConnection.ServerSock, orderID.ToString());
+
+            OrderInfo CustOrder = Receive.ReceiveOrderInfo(ServerConnection.ServerSock);
+
+            return CustOrder;
         }
     }
 }

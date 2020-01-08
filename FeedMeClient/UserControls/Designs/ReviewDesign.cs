@@ -12,7 +12,6 @@ namespace FeedMeClient.UserControls.Designs
 
         private void OrderButton_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

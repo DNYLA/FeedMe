@@ -1,14 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions.Data
 {
-    class DAL
+    internal class DAL
     {
         //Declaring This Variable Now so i remember to Add Error Handling Later on (This will probably be Done On The Server)
         public static int ErrorCode;
@@ -16,8 +12,6 @@ namespace FeedMeServer.Functions.Data
         /* When Using This im not sure how variables will get passed through so you will have to reference them using this.
         // One Problem with this Function is that it executes Non-Paraterized queries which could be a problem with SQL Injections. This should be updated
         // to allow paraterized queries. */
-
-
 
         public static DataTable ExecCommand(string command)
         {
@@ -52,6 +46,7 @@ namespace FeedMeServer.Functions.Data
                     case 0:
                         Console.WriteLine("Undiagnosed Error Occured");
                         break;
+
                     case 1062:
                         Console.WriteLine("Duplicate user!");
                         break;

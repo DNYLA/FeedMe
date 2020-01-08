@@ -13,13 +13,12 @@ namespace FeedMeLogic.Data
         // One Problem with this Function is that it executes Non-Paraterized queries which could be a problem with SQL Injections. This should be updated
         // to allow paraterized queries. */
 
-
         [Obsolete("Not Used Anymore As Everything is done Server Side Now")]
         public static DataTable ExecCommand(string command)
         {
             //string myConString = "server=77.102.93.95; port=3307; uid=root; pwd=blopdop; database=feedme; persistsecurityinfo=True;";
             string myConString = "server=213.48.11.122; port=3307; uid=FeedMe_User; pwd=2En6vo; database=feedme; persistsecurityinfo=True;";
-            // 
+            //
 
             MySqlConnection conn = new MySqlConnection();
             MySqlDataAdapter adapter;

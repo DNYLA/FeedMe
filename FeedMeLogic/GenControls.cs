@@ -11,6 +11,7 @@ namespace FeedMeLogic
         #region Dynamic Control Methods
 
         #region Panel Method
+
         public static Panel AddPanel(string panelName, Color panelColour, Size panelSize)
         {
             Panel panelObject = new Panel
@@ -25,14 +26,15 @@ namespace FeedMeLogic
 
             return panelObject;
         }
-        #endregion
+
+        #endregion Panel Method
 
         #region Label Method
+
         public static Label AddLabel(string labelName, string labelText, Point labelLocation, Font labelFont, Color labelForeColor, Color labelBackColor, Size labelSize, bool autoSize)
         {
             Label labelObject = new Label
             {
-
                 //Set Properties
                 Name = labelName + "Label",
                 Text = labelText,
@@ -58,14 +60,15 @@ namespace FeedMeLogic
 
             return labelObject;
         }
-        #endregion
+
+        #endregion Label Method
 
         #region PictureBox Method
+
         public static PictureBox AddPictureBox(string picBoxName, Point picBoxLocation, Size picBoxSize)
         {
             PictureBox picBoxObject = new PictureBox
             {
-
                 //Setting Properties
                 Name = picBoxName + "PicBox",
                 //Image = FeedMeClient.Properties.Resources.Pizza_Express, //This is Temporary until i Set up the Server. The Image won't even be handled in this function;
@@ -76,11 +79,10 @@ namespace FeedMeLogic
                 SizeMode = PictureBoxSizeMode.Zoom
             };
 
-
-
             return picBoxObject;
         }
-        #endregion
+
+        #endregion PictureBox Method
 
         #region Button Method
 
@@ -115,7 +117,7 @@ namespace FeedMeLogic
             return buttonObject;
         }
 
-        #endregion
+        #endregion Button Method
 
         #region TextBox Method
 
@@ -139,8 +141,8 @@ namespace FeedMeLogic
             return textBoxObject;
         }
 
-        #endregion
+        #endregion TextBox Method
 
-        #endregion
+        #endregion Dynamic Control Methods
     }
 }
