@@ -38,6 +38,38 @@ namespace FeedMeLogic
         }
 
         #endregion Initiaizling Components
+
+        private void NotifOpacityTimer_Tick(object sender, System.EventArgs e)
+        {
+            //Changes Opacity
+            Opacity = Opacity - 0.01;
+
+            //Closes Form After Changing Opacity to 1%
+            if (Opacity < 0.05)
+            {
+                Close();
+            }
+        }
+
+        private void NotifStartTimer_Tick(object sender, System.EventArgs e)
+        {
+            //Starts Timer for Changing Opacity & Also Disables Current Timer
+            NotifOpacityTimer.Enabled = true;
+            NotifStartTimer.Enabled = false;
+        }
+
+        private void Notification_Load(object sender, System.EventArgs e)
+        {
+            //On Load Center & Also Start Timer
+            CenterToScreen();
+            TopMost = true;
+            NotifStartTimer.Enabled = true;
+        }
+
+        private void Label2_Click(object sender, System.EventArgs e)
+        {
+            Close();
+        }
     }
 
     #region Notification Enum

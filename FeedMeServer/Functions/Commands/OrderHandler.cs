@@ -51,6 +51,7 @@ namespace FeedMeServer.Functions.Commands
             foreach (DataRow Order in DT.Rows)
             {
                 OrderInfo OI = new OrderInfo();
+                OI.OrderID = Convert.ToInt32(Order[0]);
                 OI.VendorID = Convert.ToInt32(Order[2]);
                 OI.CustomerName = Order[4].ToString();
                 Console.WriteLine(OI.CustomerName);
@@ -96,22 +97,28 @@ namespace FeedMeServer.Functions.Commands
         {
             string orderID = Receive.ReceiveMessage(clientSocket);
 
-            string sqlQuery = $"SELECT * FROM `order` WHERE ID = {orderID};";
+            string sqlQuery = $"SELECT ID, CustomerID, VendorID, STATUS, firstname, lastname FROM `order`, `users` WHERE ID = {orderID};";
+            Console.WriteLine(sqlQuery + "5");
             DataTable DT = DAL.ExecCommand(sqlQuery);
 
-            Send.SendMessage(clientSocket, DT.Rows.Count.ToString());
+            Console.WriteLine(DT.Rows.Count.ToString());
+
             DataRow Order = DT.Rows[0];
             OrderInfo OI = new OrderInfo();
             OI.VendorID = Convert.ToInt32(Order[2]);
-            OI.CustomerName = Order[4].ToString();
+            OI.CustomerName = Order[4].ToString() + Order[5].ToString();
             OI.Items = new List<ItemModel>();
 
             DataTable orderInfo = DAL.ExecCommand($"SELECT * FROM `orderline` WHERE OrderID = {orderID}");
+
+            Console.WriteLine($"SELECT * FROM `orderline` WHERE OrderID = {orderID}; //5");
 
             foreach (DataRow OrderItem in orderInfo.Rows)
             {
                 ItemModel ItemInfo = new ItemModel();
                 DataTable Item = DAL.ExecCommand($"SELECT * FROM items WHERE ItemID = {Convert.ToInt32(OrderItem[2])}");
+
+                Console.WriteLine($"SELECT * FROM items WHERE ItemID = {Convert.ToInt32(OrderItem[2])}; //5");
 
                 ItemInfo.ItemID = Convert.ToInt32(Item.Rows[0][0].ToString());
                 ItemInfo.VendorID = Convert.ToInt32(Item.Rows[0][1].ToString());
@@ -138,6 +145,15 @@ namespace FeedMeServer.Functions.Commands
             }
 
             Send.SendOrderDetails(clientSocket, OI);
+        }
+
+        internal static void UpdateOrderStatus(Socket clientSocket)
+        {
+            string orderID = Receive.ReceiveMessage(clientSocket);
+
+            string orderStatus = Receive.ReceiveMessage(clientSocket);
+
+            DAL.ExecCommand($"UPDATE `order` SET `status` = '{orderStatus}' WHERE `ID` = {orderID};");
         }
     }
 }

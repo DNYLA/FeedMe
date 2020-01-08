@@ -98,6 +98,9 @@ namespace FeedMeServer.Functions
                         case "GetSpecificOrder":
                             OrderHandler.GetSpecificOrder(clientSocket);
                             break;
+                        case "UpdateOrderStatus":
+                            OrderHandler.UpdateOrderStatus(clientSocket);
+                            break;
                     }
                 }
                 catch (Exception)

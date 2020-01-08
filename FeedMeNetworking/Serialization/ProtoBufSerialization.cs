@@ -232,6 +232,8 @@ namespace FeedMeNetworking.Serialization
 
         [ProtoMember(5)]
         public string CustomerName { get; set; }
+        [ProtoMember(6)]
+        public int OrderID { get; set; }
     }
 
     #endregion OrderInfo

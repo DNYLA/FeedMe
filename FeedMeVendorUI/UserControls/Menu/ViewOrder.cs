@@ -20,7 +20,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             InitializeComponent();
         }
 
-        private void GenerateItemList()
+        private void GenerateItemList(string OrderID)
         {
             #region Initiaizling Variables & DataTable
 
@@ -58,7 +58,10 @@ namespace FeedMeVendorUI.UserControls.Menu
             #region Iterating Through DataTable
 
             List<string> CatList = new List<string>();
-            foreach (ItemModel Items in ServerConnection.ItemList)
+
+            OrderInfo OI = FeedMeLogic.Server.ConfirmOrder.GetSpecificOrder(OrderID);
+
+            foreach (ItemModel Items in OI.Items)
             {
                 if (!CatList.Contains(Items.Type))
                 {
@@ -106,6 +109,44 @@ namespace FeedMeVendorUI.UserControls.Menu
             }
 
             #endregion Iterating Through DataTable
+        }
+
+        private void ViewOrder_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void OrderIDLabel_TextChanged(object sender, EventArgs e)
+        {
+            string orderID = OrderIDLabel.Text.Remove(0, 9);
+            Console.WriteLine($"THE ORDER ID IS {orderID} OKAYT");
+            GenerateItemList(orderID);
+        }
+
+        private void UpdateOrderStatus(string newStatus)
+        {
+            string orderID = OrderIDLabel.Text.Remove(0, 9);
+            ConfirmOrder.UpdateOrderStatus(orderID, newStatus);
+        }
+
+        private void CookingButton_Click(object sender, EventArgs e)
+        {
+            UpdateOrderStatus("Cooking");
+        }
+
+        private void DeliveringButton_Click(object sender, EventArgs e)
+        {
+            UpdateOrderStatus("Delivering");
+        }
+
+        private void CompletedButton_Click(object sender, EventArgs e)
+        {
+            UpdateOrderStatus("Completed");
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            UpdateOrderStatus("Cancelled");
         }
     }
 }

@@ -47,6 +47,7 @@
             this.label2.Size = new System.Drawing.Size(22, 24);
             this.label2.TabIndex = 5;
             this.label2.Text = "X";
+            this.label2.Click += new System.EventHandler(this.Label2_Click);
             // 
             // MessageLabel
             // 
@@ -70,11 +71,11 @@
             // 
             // NotifOpacityTimer
             // 
-            this.NotifOpacityTimer.Interval = 50;
+            this.NotifOpacityTimer.Tick += new System.EventHandler(this.NotifOpacityTimer_Tick);
             // 
             // NotifStartTimer
             // 
-            this.NotifStartTimer.Interval = 4000;
+            this.NotifStartTimer.Tick += new System.EventHandler(this.NotifStartTimer_Tick);
             // 
             // Notification
             // 
@@ -88,7 +89,9 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Notification";
+            this.ShowInTaskbar = false;
             this.Text = "Notification";
+            this.Load += new System.EventHandler(this.Notification_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -44,5 +44,14 @@ namespace FeedMeLogic.Server
 
             return CustOrder;
         }
+
+        public static void UpdateOrderStatus(string orderID, string orderStatus)
+        {
+            Send.SendMessage(ServerConnection.ServerSock, "UpdateOrderStatus");
+
+            Send.SendMessage(ServerConnection.ServerSock, orderID.ToString());
+
+            Send.SendMessage(ServerConnection.ServerSock, orderStatus);
+        }
     }
 }

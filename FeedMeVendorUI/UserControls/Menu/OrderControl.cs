@@ -4,6 +4,7 @@ using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -90,16 +91,38 @@ namespace FeedMeVendorUI.UserControls.Menu
                 foreach (Control curControl in controlArray)
                 {
                     //Add Event Handlers Below
-                    //curControl.Click += new EventHandler(OpenVendor);
-                    //curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                    curControl.Click += new EventHandler(OpenOrder);
+                    curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
                     vendorPanelObject.Controls.Add(curControl);
+                    curControl.Tag = Order.OrderID.ToString();
                 }
 
                 OrdersFlowPanel.Controls.Add(vendorPanelObject);
-                //vendorPanelObject.Click += new EventHandler(OpenVendor);
-                //vendorPanelObject.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                vendorPanelObject.Click += new EventHandler(OpenOrder);
+                vendorPanelObject.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                vendorPanelObject.Tag = Order.OrderID.ToString();
                 //GenerateControls();
             }
         }
+        private void CursorChangeArgs(object sender, MouseEventArgs e)
+        {
+            Cursor.Current = Cursors.Hand;
+        }
+
+        private void OpenOrder(object sender, EventArgs e)
+        {
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("ViewOrder1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Control Con = (Control)sender;
+
+            Label TitleLabel = userControl.Controls.Find("OrderIDLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = $"OrderID: {Con.Tag.ToString()}";
+            TitleLabel.Tag = Con.Tag; //Sets Vendor Title To Vendor that was just selected
+            //TitleLabel.Tag = ""
+
+            userControl.BringToFront();
+        }
+
     }
 }
