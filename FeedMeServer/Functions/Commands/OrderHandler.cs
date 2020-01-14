@@ -1,5 +1,6 @@
 ﻿using FeedMeNetworking;
 using FeedMeNetworking.Serialization;
+using FeedMeServer.Functions.Commands.Stripe;
 using FeedMeServer.Functions.Data;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,13 @@ namespace FeedMeServer.Functions.Commands
 
         private static int AddOrderToDB(OrderInfo orderInfo, UserInfo userDetails)
         {
+            bool cardValid = ChargeCard.CheckCard(orderInfo);
+
+            if (!cardValid)
+            {
+                return -1;
+            }
+
             DAL.ExecCommand($"INSERT INTO `order` (CustomerID, VendorID) VALUES ({userDetails.UserID}, {orderInfo.VendorID})");
             DataTable IdDT = DAL.ExecCommand($"SELECT id FROM `order` WHERE `CustomerID` = {userDetails.UserID} ORDER BY id DESC LIMIT 1");
             int OrderID = Convert.ToInt32(IdDT.Rows[0][0]);

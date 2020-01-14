@@ -124,5 +124,9 @@ namespace FeedMeVendorUI.UserControls.Menu
             userControl.BringToFront();
         }
 
+        private void FlowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

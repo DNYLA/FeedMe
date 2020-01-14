@@ -36,7 +36,7 @@
             // 
             this.OrdersFlowPanel.Location = new System.Drawing.Point(20, 61);
             this.OrdersFlowPanel.Name = "OrdersFlowPanel";
-            this.OrdersFlowPanel.Size = new System.Drawing.Size(731, 235);
+            this.OrdersFlowPanel.Size = new System.Drawing.Size(731, 333);
             this.OrdersFlowPanel.TabIndex = 1;
             // 
             // label17
