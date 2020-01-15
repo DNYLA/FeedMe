@@ -1,4 +1,5 @@
-﻿using FeedMeNetworking.Serialization;
+﻿using FeedMeLogic;
+using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -24,7 +25,23 @@ namespace FeedMeClient.UserControls.Order
             order.TotalPrice = GetTotalPrice(itemList);
             order.VendorID = order.Items[0].VendorID;
 
-            FeedMeLogic.Server.ConfirmOrder.SendOrder(order, Forms.Authentication.LoginForm.ClientInfo);
+            string resp = FeedMeLogic.Server.ConfirmOrder.SendOrder(order, Forms.Authentication.LoginForm.ClientInfo);
+            
+            if (resp == "0") //Card Error
+            {
+                Notification NotifForm = new Notification("Card Details Invalid", NotifType.error);
+                NotifForm.Show();
+            }
+            else if (resp == "1") //Database Error
+            {
+                Notification NotifForm = new Notification("Error Processing Payment", NotifType.error);
+                NotifForm.Show();
+            }
+            else //Success
+            {
+                Notification NotifForm = new Notification("Successfully Processed Order", NotifType.success);
+                NotifForm.Show();
+            }
         }
 
         private decimal GetTotalPrice(List<ItemModel> items)

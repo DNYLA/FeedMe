@@ -165,6 +165,12 @@
     <Compile Include="UserControls\Order\ReviewOrderControl.Designer.cs">
       <DependentUpon>ReviewOrderControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Order\ViewOrders.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Order\ViewOrders.Designer.cs">
+      <DependentUpon>ViewOrders.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CustomControls\FeedMeTextBox.resx">
       <DependentUpon>FeedMeTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Order\ReviewOrderControl.resx">
       <DependentUpon>ReviewOrderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Order\ViewOrders.resx">
+      <DependentUpon>ViewOrders.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

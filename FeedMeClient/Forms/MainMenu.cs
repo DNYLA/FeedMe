@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -28,7 +29,7 @@ namespace FeedMeClient.Forms
             Console.WriteLine(Authentication.LoginForm.ClientInfo.LastName);
             Console.WriteLine(Authentication.LoginForm.ClientInfo.Password);
             HomeControl.BringToFront(); //Brings Vendor List Control to Front
-            Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton };
+            Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, OrdersButton };
 
             //Everything written Below can be easily edited using the Designer but Coding it in below ensure that if i edit the Menu Bar in the future
             //It will still function correctly and any new buttons or sizes i add will also work.
@@ -55,7 +56,7 @@ namespace FeedMeClient.Forms
             Task ThreadMenu = new Task(() =>
             {
                 //Slow Down Animation When approaching Button.
-                Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, ProfileButton }; // Coppied from Above not making it a Global Variable to prevent any changes
+                Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, OrdersButton }; // Coppied from Above not making it a Global Variable to prevent any changes
 
                 if (menuClosed)
                 {
@@ -194,8 +195,7 @@ namespace FeedMeClient.Forms
         {
             Button ButtonObject = (Button)sender;
             AnimateIndicator(ButtonObject);
-            Notification NotifForm = new Notification("Success ", NotifType.error);
-            NotifForm.Show();
+            viewOrders1.BringToFront();
         }
     }
 }

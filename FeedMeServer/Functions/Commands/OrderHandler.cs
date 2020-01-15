@@ -24,7 +24,7 @@ namespace FeedMeServer.Functions.Commands
 
             if (!cardValid)
             {
-                return -1;
+                return 0;
             }
 
             DAL.ExecCommand($"INSERT INTO `order` (CustomerID, VendorID) VALUES ({userDetails.UserID}, {orderInfo.VendorID})");
@@ -42,7 +42,7 @@ namespace FeedMeServer.Functions.Commands
                 return 1;
             }
 
-            return 0;
+            return 2;
         }
 
         internal static void CheckForOrders(Socket clientSocket)

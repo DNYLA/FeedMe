@@ -32,15 +32,17 @@
             this.MenuButton = new System.Windows.Forms.Button();
             this.MenuIndicatorPanel = new System.Windows.Forms.Panel();
             this.SettingsButton = new System.Windows.Forms.Button();
-            this.ProfileButton = new System.Windows.Forms.Button();
+            this.OrdersButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
             this.UserViewPanel = new System.Windows.Forms.Panel();
+            this.enterCredentials1 = new FeedMeClient.UserControls.Order.EnterCredentials();
             this.reviewDesign1 = new FeedMeClient.UserControls.Designs.ReviewDesign();
             this.reviewOrderControl = new FeedMeClient.UserControls.Order.ReviewOrderControl();
             this.OrderControl = new FeedMeClient.UserControls.OrderControl();
             this.HomeControl = new FeedMeClient.UserControls.HomeControl();
-            this.enterCredentials1 = new FeedMeClient.UserControls.Order.EnterCredentials();
+            this.viewOrders1 = new FeedMeClient.UserControls.Order.ViewOrders();
+            this.button1 = new System.Windows.Forms.Button();
             this.SideMenuPanel.SuspendLayout();
             this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
@@ -48,10 +50,11 @@
             // SideMenuPanel
             // 
             this.SideMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(161)))), ((int)(((byte)(180)))));
+            this.SideMenuPanel.Controls.Add(this.button1);
             this.SideMenuPanel.Controls.Add(this.MenuButton);
             this.SideMenuPanel.Controls.Add(this.MenuIndicatorPanel);
             this.SideMenuPanel.Controls.Add(this.SettingsButton);
-            this.SideMenuPanel.Controls.Add(this.ProfileButton);
+            this.SideMenuPanel.Controls.Add(this.OrdersButton);
             this.SideMenuPanel.Controls.Add(this.SearchButton);
             this.SideMenuPanel.Controls.Add(this.HomeButton);
             this.SideMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -93,20 +96,20 @@
             this.SettingsButton.Text = "       Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
             // 
-            // ProfileButton
+            // OrdersButton
             // 
-            this.ProfileButton.FlatAppearance.BorderSize = 0;
-            this.ProfileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProfileButton.ForeColor = System.Drawing.Color.White;
-            this.ProfileButton.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
-            this.ProfileButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ProfileButton.Location = new System.Drawing.Point(12, 162);
-            this.ProfileButton.Name = "ProfileButton";
-            this.ProfileButton.Size = new System.Drawing.Size(123, 51);
-            this.ProfileButton.TabIndex = 2;
-            this.ProfileButton.Text = "     Profile";
-            this.ProfileButton.UseVisualStyleBackColor = true;
-            this.ProfileButton.Click += new System.EventHandler(this.ProfileButton_Click);
+            this.OrdersButton.FlatAppearance.BorderSize = 0;
+            this.OrdersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OrdersButton.ForeColor = System.Drawing.Color.White;
+            this.OrdersButton.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
+            this.OrdersButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OrdersButton.Location = new System.Drawing.Point(12, 162);
+            this.OrdersButton.Name = "OrdersButton";
+            this.OrdersButton.Size = new System.Drawing.Size(123, 51);
+            this.OrdersButton.TabIndex = 2;
+            this.OrdersButton.Text = "     Orders";
+            this.OrdersButton.UseVisualStyleBackColor = true;
+            this.OrdersButton.Click += new System.EventHandler(this.ProfileButton_Click);
             // 
             // SearchButton
             // 
@@ -141,6 +144,7 @@
             // UserViewPanel
             // 
             this.UserViewPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.UserViewPanel.Controls.Add(this.viewOrders1);
             this.UserViewPanel.Controls.Add(this.enterCredentials1);
             this.UserViewPanel.Controls.Add(this.reviewDesign1);
             this.UserViewPanel.Controls.Add(this.reviewOrderControl);
@@ -151,6 +155,15 @@
             this.UserViewPanel.Name = "UserViewPanel";
             this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
             this.UserViewPanel.TabIndex = 2;
+            // 
+            // enterCredentials1
+            // 
+            this.enterCredentials1.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enterCredentials1.Location = new System.Drawing.Point(-3, 0);
+            this.enterCredentials1.Margin = new System.Windows.Forms.Padding(6);
+            this.enterCredentials1.Name = "enterCredentials1";
+            this.enterCredentials1.Size = new System.Drawing.Size(767, 677);
+            this.enterCredentials1.TabIndex = 4;
             // 
             // reviewDesign1
             // 
@@ -189,14 +202,28 @@
             this.HomeControl.Size = new System.Drawing.Size(771, 677);
             this.HomeControl.TabIndex = 0;
             // 
-            // enterCredentials1
+            // viewOrders1
             // 
-            this.enterCredentials1.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enterCredentials1.Location = new System.Drawing.Point(-3, 0);
-            this.enterCredentials1.Margin = new System.Windows.Forms.Padding(6);
-            this.enterCredentials1.Name = "enterCredentials1";
-            this.enterCredentials1.Size = new System.Drawing.Size(767, 677);
-            this.enterCredentials1.TabIndex = 4;
+            this.viewOrders1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.viewOrders1.Location = new System.Drawing.Point(-3, 0);
+            this.viewOrders1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.viewOrders1.Name = "viewOrders1";
+            this.viewOrders1.Size = new System.Drawing.Size(767, 677);
+            this.viewOrders1.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(8, 237);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(123, 51);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "     Profile";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // MainMenu
             // 
@@ -223,7 +250,7 @@
         private System.Windows.Forms.Panel MenuIndicatorPanel;
         private System.Windows.Forms.Button HomeButton;
         private System.Windows.Forms.Button SettingsButton;
-        private System.Windows.Forms.Button ProfileButton;
+        private System.Windows.Forms.Button OrdersButton;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button MenuButton;
         private System.Windows.Forms.Panel UserViewPanel;
@@ -232,5 +259,7 @@
         private UserControls.Order.ReviewOrderControl reviewOrderControl;
         private UserControls.Designs.ReviewDesign reviewDesign1;
         private UserControls.Order.EnterCredentials enterCredentials1;
+        private UserControls.Order.ViewOrders viewOrders1;
+        private System.Windows.Forms.Button button1;
     }
 }

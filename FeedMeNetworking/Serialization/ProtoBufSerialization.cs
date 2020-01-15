@@ -1,5 +1,6 @@
 ﻿using ProtoBuf;
 using ProtoBuf.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -234,6 +235,10 @@ namespace FeedMeNetworking.Serialization
         public string CustomerName { get; set; }
         [ProtoMember(6)]
         public int OrderID { get; set; }
+        [ProtoMember(7)]
+        public DateTime StartPurchase { get; set; }
+        [ProtoMember(8)]
+        public DateTime EndPurchase { get; set; }
     }
 
     #endregion OrderInfo
