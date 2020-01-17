@@ -53,5 +53,23 @@ namespace FeedMeLogic.Server
 
             Send.SendMessage(ServerConnection.ServerSock, orderStatus);
         }
+
+        public static List<OrderInfo> GetCustomerOrders(string customerID)
+        {
+            List<OrderInfo> OIList = new List<OrderInfo>();
+
+            Send.SendMessage(ServerConnection.ServerSock, "GetCustomerOrder");
+
+            Send.SendMessage(ServerConnection.ServerSock, customerID);
+
+            int newOrderAmount = Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
+
+            for (int i = 0; i < newOrderAmount; i++)
+            {
+                OIList.Add(Receive.ReceiveOrderInfo(ServerConnection.ServerSock));
+            }
+
+            return OIList;
+        }
     }
 }

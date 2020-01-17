@@ -236,9 +236,11 @@ namespace FeedMeNetworking.Serialization
         [ProtoMember(6)]
         public int OrderID { get; set; }
         [ProtoMember(7)]
-        public DateTime StartPurchase { get; set; }
+        public string StartPurchase { get; set; }
         [ProtoMember(8)]
-        public DateTime EndPurchase { get; set; }
+        public string EndPurchase { get; set; }
+        [ProtoMember(9)]
+        public string VendorName { get; set; }
     }
 
     #endregion OrderInfo

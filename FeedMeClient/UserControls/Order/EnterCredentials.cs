@@ -2,6 +2,7 @@
 using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FeedMeClient.UserControls.Order
@@ -41,6 +42,17 @@ namespace FeedMeClient.UserControls.Order
             {
                 Notification NotifForm = new Notification("Successfully Processed Order", NotifType.success);
                 NotifForm.Show();
+                Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+                UserControl userControl = CurrentForm.Controls.Find("ViewOrder1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+
+                Label TitleLabel = userControl.Controls.Find("OrderIDLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+                TitleLabel.Text = $"OrderID: {order.OrderID}";
+                
+                TitleLabel.Tag = order.OrderID; //Sets Vendor Title To Vendor that was just selected
+                                          //TitleLabel.Tag = ""
+
+                userControl.BringToFront();
             }
         }
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.SideMenuPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.MenuButton = new System.Windows.Forms.Button();
             this.MenuIndicatorPanel = new System.Windows.Forms.Panel();
             this.SettingsButton = new System.Windows.Forms.Button();
@@ -36,13 +37,13 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
             this.UserViewPanel = new System.Windows.Forms.Panel();
+            this.viewOrders1 = new FeedMeClient.UserControls.Order.ViewOrders();
             this.enterCredentials1 = new FeedMeClient.UserControls.Order.EnterCredentials();
             this.reviewDesign1 = new FeedMeClient.UserControls.Designs.ReviewDesign();
             this.reviewOrderControl = new FeedMeClient.UserControls.Order.ReviewOrderControl();
             this.OrderControl = new FeedMeClient.UserControls.OrderControl();
             this.HomeControl = new FeedMeClient.UserControls.HomeControl();
-            this.viewOrders1 = new FeedMeClient.UserControls.Order.ViewOrders();
-            this.button1 = new System.Windows.Forms.Button();
+            this.viewOrder1 = new FeedMeVendorUI.UserControls.Menu.ViewOrder();
             this.SideMenuPanel.SuspendLayout();
             this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,20 @@
             this.SideMenuPanel.Name = "SideMenuPanel";
             this.SideMenuPanel.Size = new System.Drawing.Size(139, 677);
             this.SideMenuPanel.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(8, 237);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(123, 51);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "     Profile";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // MenuButton
             // 
@@ -144,6 +159,7 @@
             // UserViewPanel
             // 
             this.UserViewPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.UserViewPanel.Controls.Add(this.viewOrder1);
             this.UserViewPanel.Controls.Add(this.viewOrders1);
             this.UserViewPanel.Controls.Add(this.enterCredentials1);
             this.UserViewPanel.Controls.Add(this.reviewDesign1);
@@ -155,6 +171,15 @@
             this.UserViewPanel.Name = "UserViewPanel";
             this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
             this.UserViewPanel.TabIndex = 2;
+            // 
+            // viewOrders1
+            // 
+            this.viewOrders1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.viewOrders1.Location = new System.Drawing.Point(-3, 0);
+            this.viewOrders1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.viewOrders1.Name = "viewOrders1";
+            this.viewOrders1.Size = new System.Drawing.Size(767, 677);
+            this.viewOrders1.TabIndex = 5;
             // 
             // enterCredentials1
             // 
@@ -202,28 +227,14 @@
             this.HomeControl.Size = new System.Drawing.Size(771, 677);
             this.HomeControl.TabIndex = 0;
             // 
-            // viewOrders1
+            // viewOrder1
             // 
-            this.viewOrders1.Font = new System.Drawing.Font("Nirmala UI", 12F);
-            this.viewOrders1.Location = new System.Drawing.Point(-3, 0);
-            this.viewOrders1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.viewOrders1.Name = "viewOrders1";
-            this.viewOrders1.Size = new System.Drawing.Size(767, 677);
-            this.viewOrders1.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(8, 237);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 51);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "     Profile";
-            this.button1.UseVisualStyleBackColor = true;
+            this.viewOrder1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewOrder1.Location = new System.Drawing.Point(-1, -5);
+            this.viewOrder1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.viewOrder1.Name = "viewOrder1";
+            this.viewOrder1.Size = new System.Drawing.Size(767, 677);
+            this.viewOrder1.TabIndex = 6;
             // 
             // MainMenu
             // 
@@ -261,5 +272,6 @@
         private UserControls.Order.EnterCredentials enterCredentials1;
         private UserControls.Order.ViewOrders viewOrders1;
         private System.Windows.Forms.Button button1;
+        private FeedMeVendorUI.UserControls.Menu.ViewOrder viewOrder1;
     }
 }

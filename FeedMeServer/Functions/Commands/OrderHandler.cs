@@ -24,6 +24,7 @@ namespace FeedMeServer.Functions.Commands
 
             if (!cardValid)
             {
+                Console.WriteLine("Card Invalid");
                 return 0;
             }
 
@@ -37,7 +38,7 @@ namespace FeedMeServer.Functions.Commands
                 DAL.ExecCommand(SQLQuery);
             }
 
-            if (DAL.ErrorCode == -1)
+            if (DAL.ErrorCode != -1)
             {
                 return 1;
             }
@@ -162,6 +163,36 @@ namespace FeedMeServer.Functions.Commands
             string orderStatus = Receive.ReceiveMessage(clientSocket);
 
             DAL.ExecCommand($"UPDATE `order` SET `status` = '{orderStatus}' WHERE `ID` = {orderID};");
+        }
+
+        internal static void GetCustomerOrder(Socket clientSocket)
+        {
+            string custID = Receive.ReceiveMessage(clientSocket);
+
+            string sqlQuery = $"SELECT * FROM `order` WHERE CustomerID = {custID}";
+
+            DataTable custOrders = DAL.ExecCommand(sqlQuery);
+
+            List<OrderInfo> OIList = new List<OrderInfo>();
+
+            Send.SendMessage(clientSocket, custOrders.Rows.Count.ToString());
+
+            Console.WriteLine(custOrders.Rows.Count.ToString() + "THERE IS THAT MUANY");
+            foreach (DataRow order in custOrders.Rows)
+            {
+                OrderInfo curOrder = new OrderInfo();
+                curOrder.OrderID = Convert.ToInt32(order[0]);
+                curOrder.VendorID = Convert.ToInt32(order[2]);
+
+                
+                DataTable DT = DAL.ExecCommand($"SELECT Name FROM vendors WHERE vendorID = {order[2].ToString()}");
+
+
+                curOrder.VendorName = DT.Rows[0][0].ToString();
+                curOrder.StartPurchase = "10/10/11 20:30";
+                curOrder.EndPurchase = "10/10/11 21:30";
+                Send.SendOrderDetails(clientSocket, curOrder);
+            }
         }
     }
 }

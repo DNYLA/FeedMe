@@ -34,20 +34,17 @@ namespace FeedMeClient.UserControls.Order
             #region Initializing Variables
 
             Size EmptySize = new Size(0, 0);
-            Size orderPanelSize = new Size(660, 125);
-            Size StatusSize = new Size(134, 21);
+            Size orderPanelSize = new Size(660, 94);
+            Size StatusSize = new Size(300, 21);
 
             Point VendorLoc = new Point(264, 10);
-            Point DeliveryTimeLoc = new Point(75, 44);
-            Point TotalPriceLoc = new Point(283, 44);
-            Point TotalItemsLoc = new Point(420, 44);
-            Point DeliveryStartLoc = new Point(41, 85);
-            Point DeliveryEndLoc = new Point(334, 85);
+            Point DeliveryStartLoc = new Point(41, 49);
+            Point DeliveryEndLoc = new Point(334, 49);
 
 
 
             Font DefaultFont = new Font("Nirmala UI", 12, FontStyle.Regular);
-            Font TextFont = new Font("Nirmala UI", 14, FontStyle.Bold);
+            Font TextFont = new Font("Nirmala UI", 14, FontStyle.Regular);
 
             #endregion Initializing Variables
 
@@ -60,55 +57,59 @@ namespace FeedMeClient.UserControls.Order
 
             foreach (OrderInfo Order in OIList)
             {
-                string VendorStr = "Vendor: ";
-                string DeliveryTimeStr = $"Delivery Time: {Order.CustomerName}";
-                string TotalItemsStr = $"Total Items: {Order.TotalPrice.ToString()}";
-                string TotalPriceStr = $"Total Price: {Order.TotalPrice.ToString()}";
-                string DeliveryStartStr = "Date Purchased: Processing";
-                string DeliveryEndStr = "Date Delivered: Processing";
+                string VendorStr = $"Vendor: {Order.VendorName}";
+                string DeliveryStartStr = $"Date Purchased: {Order.StartPurchase}";
+                string DeliveryEndStr = $"Date Delivered: {Order.EndPurchase}";
 
                 string PanelName = "ObjPanelName";
 
                 Panel vendorPanelObject = GenControls.AddPanel(PanelName, Color.White, orderPanelSize);
 
-                Label VendorTitleLabel = GenControls.AddLabel(VendorStr, VendorStr, VendorLoc, TextFont, Color.Black, Color.Transparent, EmptySize, true);
-                Label DeliveryTimeLabel = GenControls.AddLabel(DeliveryTimeStr, DeliveryTimeStr, DeliveryTimeLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
-                Label TotalItemLabel = GenControls.AddLabel(TotalItemsStr, TotalItemsStr, TotalItemsLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
-                Label TotalPriceLabel = GenControls.AddLabel(TotalPriceStr, TotalPriceStr, TotalPriceLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
-                Label DeliveryStartLabel = GenControls.AddLabel(DeliveryStartStr, DeliveryStartStr, DeliveryStartLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
-                Label DeliveryEndLabel = GenControls.AddLabel(DeliveryEndStr, DeliveryEndStr, DeliveryEndLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
+                Label VendorTitleLabel = GenControls.AddLabel(VendorStr, VendorStr, VendorLoc, TextFont, Color.Black, Color.Transparent, StatusSize, false);
+                Label DeliveryStartLabel = GenControls.AddLabel(DeliveryStartStr, DeliveryStartStr, DeliveryStartLoc, TextFont, Color.Black, Color.Transparent, StatusSize, false);
+                Label DeliveryEndLabel = GenControls.AddLabel(DeliveryEndStr, DeliveryEndStr, DeliveryEndLoc, TextFont, Color.Black, Color.Transparent, StatusSize, false);
 
-                Control[] controlArray = new Control[] { VendorTitleLabel, DeliveryTimeLabel, TotalItemLabel, TotalPriceLabel, DeliveryStartLabel, DeliveryEndLabel };
+                Control[] controlArray = new Control[] { VendorTitleLabel, DeliveryStartLabel, DeliveryEndLabel };
 
                 foreach (Control curControl in controlArray)
                 {
                     //Add Event Handlers Below
-                    //curControl.Click += new EventHandler(OpenOrder);
-                    //curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                    curControl.Click += new EventHandler(OpenOrder);
+                    curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
                     vendorPanelObject.Controls.Add(curControl);
                     curControl.Tag = Order.OrderID.ToString();
                 }
 
                 OrderFlowPanel.Controls.Add(vendorPanelObject);
-                //vendorPanelObject.Click += new EventHandler(OpenOrder);
-                //vendorPanelObject.MouseMove += new MouseEventHandler(CursorChangeArgs);
-                //vendorPanelObject.Tag = Order.OrderID.ToString();
-                //GenerateControls();
+                vendorPanelObject.Click += new EventHandler(OpenOrder);
+                vendorPanelObject.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                vendorPanelObject.Tag = Order.OrderID.ToString();
             }
+        }
+
+        private void CursorChangeArgs(object sender, MouseEventArgs e)
+        {
+            Cursor.Current = Cursors.Hand;
+        }
+
+        private void OpenOrder(object sender, EventArgs e)
+        {
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("ViewOrder1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Control Con = (Control)sender;
+
+            Label TitleLabel = userControl.Controls.Find("OrderIDLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = $"OrderID: {Con.Tag.ToString()}";
+            TitleLabel.Tag = Con.Tag; //Sets Vendor Title To Vendor that was just selected
+            //TitleLabel.Tag = ""
+
+            userControl.BringToFront();
         }
 
         private List<OrderInfo> GetOrders()
         {
-            List<OrderInfo> OI = new List<OrderInfo>(); 
-            for (int i = 0; i < 5; i++)
-            {
-                OrderInfo OX = new OrderInfo();
-                OX.CustomerName = ("%%");
-                OX.EndPurchase = DateTime.Parse("10/10/10 11:11:11");
-                OX.StartPurchase = DateTime.Parse("10/10/10 11:11:11");
-                OX.VendorID = 1;
-                OI.Add(OX);
-            }
+            List<OrderInfo> OI = ConfirmOrder.GetCustomerOrders(Forms.Authentication.LoginForm.ClientInfo.UserID.ToString());
 
             return OI;
         }
