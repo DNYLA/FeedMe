@@ -47,9 +47,9 @@ namespace FeedMeClient.UserControls.Order
 
 
                 Label TitleLabel = userControl.Controls.Find("OrderIDLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
-                TitleLabel.Text = $"OrderID: {order.OrderID}";
+                TitleLabel.Text = $"OrderID: 16";
                 
-                TitleLabel.Tag = order.OrderID; //Sets Vendor Title To Vendor that was just selected
+                TitleLabel.Tag = 16; //Sets Vendor Title To Vendor that was just selected
                                           //TitleLabel.Tag = ""
 
                 userControl.BringToFront();
