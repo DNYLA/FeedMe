@@ -18,13 +18,15 @@ namespace FeedMeLogic.Server
             return Receive.ReceiveMessage(ServerConnection.ServerSock);
         }
 
-        public static List<OrderInfo> CheckForOrders(int vendorID)
+        public static List<OrderInfo> CheckForOrders(int vendorID, string status)
         {
             List<OrderInfo> OIList = new List<OrderInfo>();
 
             Send.SendMessage(ServerConnection.ServerSock, "CheckForOrder");
 
             Send.SendMessage(ServerConnection.ServerSock, vendorID.ToString());
+
+            Send.SendMessage(ServerConnection.ServerSock, status);
 
             int newOrderAmount = Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
             for (int i = 0; i < newOrderAmount; i++)

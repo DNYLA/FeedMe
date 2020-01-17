@@ -30,13 +30,15 @@
         {
             this.OrdersFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label17 = new System.Windows.Forms.Label();
+            this.CookingFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.DeliveryFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // OrdersFlowPanel
             // 
             this.OrdersFlowPanel.Location = new System.Drawing.Point(20, 61);
             this.OrdersFlowPanel.Name = "OrdersFlowPanel";
-            this.OrdersFlowPanel.Size = new System.Drawing.Size(731, 333);
+            this.OrdersFlowPanel.Size = new System.Drawing.Size(731, 122);
             this.OrdersFlowPanel.TabIndex = 1;
             // 
             // label17
@@ -49,11 +51,27 @@
             this.label17.TabIndex = 2;
             this.label17.Text = "New Orders";
             // 
+            // CookingFlowPanel
+            // 
+            this.CookingFlowPanel.Location = new System.Drawing.Point(20, 189);
+            this.CookingFlowPanel.Name = "CookingFlowPanel";
+            this.CookingFlowPanel.Size = new System.Drawing.Size(731, 122);
+            this.CookingFlowPanel.TabIndex = 1;
+            // 
+            // DeliveryFlowPanel
+            // 
+            this.DeliveryFlowPanel.Location = new System.Drawing.Point(20, 317);
+            this.DeliveryFlowPanel.Name = "DeliveryFlowPanel";
+            this.DeliveryFlowPanel.Size = new System.Drawing.Size(731, 122);
+            this.DeliveryFlowPanel.TabIndex = 1;
+            // 
             // OrderControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label17);
+            this.Controls.Add(this.DeliveryFlowPanel);
+            this.Controls.Add(this.CookingFlowPanel);
             this.Controls.Add(this.OrdersFlowPanel);
             this.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -68,5 +86,7 @@
         #endregion
         private System.Windows.Forms.FlowLayoutPanel OrdersFlowPanel;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.FlowLayoutPanel CookingFlowPanel;
+        private System.Windows.Forms.FlowLayoutPanel DeliveryFlowPanel;
     }
 }

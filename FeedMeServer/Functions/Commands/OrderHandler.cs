@@ -50,7 +50,9 @@ namespace FeedMeServer.Functions.Commands
         {
             string venID = Receive.ReceiveMessage(clientSocket);
 
-            string sqlQuery = $"SELECT ID, CustomerID, VendorID, status, username FROM `order`, users WHERE VendorID = {venID} AND status = 'processing' AND userID = CustomerID;";
+            string status = Receive.ReceiveMessage(clientSocket);
+
+            string sqlQuery = $"SELECT ID, CustomerID, VendorID, status, username FROM `order`, users WHERE VendorID = {venID} AND status = '{status}' AND userID = CustomerID;";
             DataTable DT = DAL.ExecCommand(sqlQuery);
 
             Console.WriteLine(sqlQuery);

@@ -23,15 +23,17 @@ namespace FeedMeVendorUI.UserControls.Menu
             {
                 return;
             }
-            GenerateControls();
+            GenerateControls("processing");
+            GenerateControls("cooking");
+            GenerateControls("Delivering");
         }
 
-        private List<OrderInfo> GetUpdates()
+        private List<OrderInfo> GetUpdates(string status)
         {
             List<OrderInfo> OrderInfo = new List<OrderInfo>();
             Task UpdateThread = Task.Factory.StartNew(() =>
             {
-                OrderInfo = CheckForOrders();
+                OrderInfo = CheckForOrders(status);
                 Console.WriteLine("Getting Update");
             });
             Console.WriteLine("Getting Update V2");
@@ -41,13 +43,13 @@ namespace FeedMeVendorUI.UserControls.Menu
             return OrderInfo;
         }
 
-        private List<OrderInfo> CheckForOrders()
+        private List<OrderInfo> CheckForOrders(string status)
         {
             Console.WriteLine(Forms.Authentication.LoginForm.VendorDetails.VendorID);
-            return FeedMeLogic.Server.ConfirmOrder.CheckForOrders(Forms.Authentication.LoginForm.VendorDetails.VendorID);
+            return FeedMeLogic.Server.ConfirmOrder.CheckForOrders(Forms.Authentication.LoginForm.VendorDetails.VendorID, status);
         }
 
-        private void GenerateControls()
+        private void GenerateControls(string status)
         {
             #region Initializing Variables
 
@@ -65,7 +67,7 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             #endregion Initializing Variables
 
-            List<OrderInfo> OIList = GetUpdates();
+            List<OrderInfo> OIList = GetUpdates(status);
 
             if (OIList.Count == 0)
             {
@@ -77,7 +79,7 @@ namespace FeedMeVendorUI.UserControls.Menu
                 string orderText = "Order";
                 string customerName = $"Customer: {Order.CustomerName}";
                 string PriceText = $"Price: {Order.TotalPrice.ToString()}";
-                string orderStatus = "Status: Processing";
+                string orderStatus = $"Status: {status}";
 
                 Panel vendorPanelObject = GenControls.AddPanel(orderText, Color.White, vendorPanelSize);
 
@@ -97,7 +99,19 @@ namespace FeedMeVendorUI.UserControls.Menu
                     curControl.Tag = Order.OrderID.ToString();
                 }
 
-                OrdersFlowPanel.Controls.Add(vendorPanelObject);
+                if (status == "processing")
+                {
+                    OrdersFlowPanel.Controls.Add(vendorPanelObject);
+                }
+                else if (status == "Cooking")
+                {
+                    CookingFlowPanel.Controls.Add(vendorPanelObject);
+                }
+                else if (status == "Delivering")
+                {
+                    DeliveryFlowPanel.Controls.Add(vendorPanelObject);
+                }
+                
                 vendorPanelObject.Click += new EventHandler(OpenOrder);
                 vendorPanelObject.MouseMove += new MouseEventHandler(CursorChangeArgs);
                 vendorPanelObject.Tag = Order.OrderID.ToString();
