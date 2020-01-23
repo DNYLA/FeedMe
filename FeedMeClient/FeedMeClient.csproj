@@ -123,6 +123,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Admin_\Refund.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin_\Refund.Designer.cs">
+      <DependentUpon>Refund.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin_\ViewRefunds.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin_\ViewRefunds.Designer.cs">
+      <DependentUpon>ViewRefunds.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Designs\HomeDesign.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -199,6 +211,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin_\Refund.resx">
+      <DependentUpon>Refund.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin_\ViewRefunds.resx">
+      <DependentUpon>ViewRefunds.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Designs\HomeDesign.resx">
       <DependentUpon>HomeDesign.cs</DependentUpon>

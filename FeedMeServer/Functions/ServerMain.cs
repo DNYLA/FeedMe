@@ -101,8 +101,14 @@ namespace FeedMeServer.Functions
                         case "UpdateOrderStatus":
                             OrderHandler.UpdateOrderStatus(clientSocket);
                             break;
+                        case "UpdateRefundStatus":
+                            OrderHandler.UpdateRefundStatus(clientSocket);
+                            break;
                         case "GetCustomerOrder":
                             OrderHandler.GetCustomerOrder(clientSocket);
+                            break;
+                        case "GetRefunds":
+                            OrderHandler.GetRefunds(clientSocket);
                             break;
                     }
                 }
