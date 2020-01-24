@@ -29,7 +29,7 @@ namespace FeedMeClient.UserControls.Admin_
             GenerateControls();
         }
 
-        private void GenerateControls()
+        public void GenerateControls()
         {
             #region Initializing Variables
 

@@ -203,6 +203,7 @@ namespace FeedMeClient.Forms
             Button ButtonObject = (Button)sender;
             AnimateIndicator(ButtonObject);
             viewRefunds1.BringToFront();
+            viewRefunds1.GenerateControls();
         }
     }
 }

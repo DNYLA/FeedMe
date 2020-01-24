@@ -107,6 +107,9 @@
             // 
             // NextButton
             // 
+            this.NextButton.FlatAppearance.BorderSize = 0;
+            this.NextButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NextButton.ForeColor = System.Drawing.Color.Coral;
             this.NextButton.Location = new System.Drawing.Point(692, 290);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(57, 44);
@@ -117,6 +120,9 @@
             // 
             // PrevButton
             // 
+            this.PrevButton.FlatAppearance.BorderSize = 0;
+            this.PrevButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PrevButton.ForeColor = System.Drawing.Color.Coral;
             this.PrevButton.Location = new System.Drawing.Point(20, 290);
             this.PrevButton.Name = "PrevButton";
             this.PrevButton.Size = new System.Drawing.Size(57, 44);
