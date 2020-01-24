@@ -41,5 +41,10 @@ namespace FeedMeVendorUI.UserControls.Menu
             PhoneTbox.Text = StoreInfo.Rows[0][5].ToString();
             RatingTbox.Text = StoreInfo.Rows[0][6].ToString();
         }
+
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
