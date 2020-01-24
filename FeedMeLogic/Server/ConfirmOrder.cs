@@ -56,6 +56,15 @@ namespace FeedMeLogic.Server
             Send.SendMessage(ServerConnection.ServerSock, orderStatus);
         }
 
+        public static void UpdateRefundStatus(string orderID, string refundStatus)
+        {
+            Send.SendMessage(ServerConnection.ServerSock, "UpdateRefundStatus");
+
+            Send.SendMessage(ServerConnection.ServerSock, orderID.ToString());
+
+            Send.SendMessage(ServerConnection.ServerSock, refundStatus);
+        }
+
         public static List<OrderInfo> GetCustomerOrders(string customerID)
         {
             List<OrderInfo> OIList = new List<OrderInfo>();
@@ -63,6 +72,22 @@ namespace FeedMeLogic.Server
             Send.SendMessage(ServerConnection.ServerSock, "GetCustomerOrder");
 
             Send.SendMessage(ServerConnection.ServerSock, customerID);
+
+            int newOrderAmount = Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
+
+            for (int i = 0; i < newOrderAmount; i++)
+            {
+                OIList.Add(Receive.ReceiveOrderInfo(ServerConnection.ServerSock));
+            }
+
+            return OIList;
+        }
+        
+        public static List<OrderInfo> GetRefunds()
+        {
+            List<OrderInfo> OIList = new List<OrderInfo>();
+
+            Send.SendMessage(ServerConnection.ServerSock, "GetRefunds");
 
             int newOrderAmount = Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
 

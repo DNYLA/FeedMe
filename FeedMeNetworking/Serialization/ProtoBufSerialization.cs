@@ -241,6 +241,10 @@ namespace FeedMeNetworking.Serialization
         public string EndPurchase { get; set; }
         [ProtoMember(9)]
         public string VendorName { get; set; }
+        [ProtoMember(10)]
+        public string refundStatus { get; set; }
+        [ProtoMember(11)]
+        public string refundMessage { get; set; }
     }
 
     #endregion OrderInfo

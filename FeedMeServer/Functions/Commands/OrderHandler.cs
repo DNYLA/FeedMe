@@ -108,8 +108,8 @@ namespace FeedMeServer.Functions.Commands
         {
             string orderID = Receive.ReceiveMessage(clientSocket);
 
-            string sqlQuery = $"SELECT ID, CustomerID, VendorID, STATUS, firstname, lastname FROM `order`, `users` WHERE ID = {orderID};";
-            Console.WriteLine(sqlQuery + "5");
+            string sqlQuery = $"SELECT ID, CustomerID, VendorID, STATUS, firstname, lastname, refunded, refundMessage FROM `order`, `users` WHERE ID = {orderID};";
+            Console.WriteLine(sqlQuery);
             DataTable DT = DAL.ExecCommand(sqlQuery);
 
             Console.WriteLine(DT.Rows.Count.ToString());
@@ -119,6 +119,8 @@ namespace FeedMeServer.Functions.Commands
             OI.VendorID = Convert.ToInt32(Order[2]);
             OI.CustomerName = Order[4].ToString() + Order[5].ToString();
             OI.Items = new List<ItemModel>();
+            OI.refundStatus = Order[6].ToString();
+            OI.refundMessage = Order[7].ToString();
 
             DataTable orderInfo = DAL.ExecCommand($"SELECT * FROM `orderline` WHERE OrderID = {orderID}");
 
@@ -156,6 +158,43 @@ namespace FeedMeServer.Functions.Commands
             }
 
             Send.SendOrderDetails(clientSocket, OI);
+        }
+
+        internal static void UpdateRefundStatus(Socket clientSocket)
+        {
+            string orderID = Receive.ReceiveMessage(clientSocket);
+
+            string refundStatus = Receive.ReceiveMessage(clientSocket);
+
+            DAL.ExecCommand($"UPDATE `order` SET `refunded` = '{refundStatus}' WHERE `ID` = {orderID};");
+        }
+
+        internal static void GetRefunds(Socket clientSocket)
+        {
+            string sqlQuery = $"SELECT * FROM `order` WHERE refunded = 'Processing'";
+
+            DataTable custOrders = DAL.ExecCommand(sqlQuery);
+
+            Send.SendMessage(clientSocket, custOrders.Rows.Count.ToString());
+
+            Console.WriteLine(custOrders.Rows.Count.ToString() + "THERE IS THAT MUANY XXX");
+            foreach (DataRow order in custOrders.Rows)
+            {
+                OrderInfo curOrder = new OrderInfo();
+                curOrder.OrderID = Convert.ToInt32(order[0]);
+                curOrder.VendorID = Convert.ToInt32(order[2]);
+
+
+                DataTable DT = DAL.ExecCommand($"SELECT Name FROM vendors WHERE vendorID = {order[2].ToString()}");
+
+
+                curOrder.VendorName = DT.Rows[0][0].ToString();
+                curOrder.StartPurchase = "10/10/11 20:30";
+                curOrder.EndPurchase = "10/10/11 21:30";
+                curOrder.refundStatus = order[4].ToString();
+                curOrder.refundMessage = order[5].ToString();
+                Send.SendOrderDetails(clientSocket, curOrder);
+            }
         }
 
         internal static void UpdateOrderStatus(Socket clientSocket)

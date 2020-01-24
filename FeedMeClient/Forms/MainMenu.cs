@@ -197,5 +197,12 @@ namespace FeedMeClient.Forms
             AnimateIndicator(ButtonObject);
             viewOrders1.BringToFront();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Button ButtonObject = (Button)sender;
+            AnimateIndicator(ButtonObject);
+            viewRefunds1.BringToFront();
+        }
     }
 }
