@@ -1,5 +1,6 @@
 ﻿using FeedMeLogic.Server;
 using FeedMeNetworking;
+using FeedMeNetworking.Serialization;
 using System.Data;
 using System.Threading;
 
@@ -79,6 +80,12 @@ namespace FeedMeLogic.Vendor
             Send.SendMessage(ServerConnection.ServerSock, vendorID);
 
             return Receive.ReceiveDataTable(ServerConnection.ServerSock);
+        }
+
+        public void UpdateStoreInfo(VendorInfo VI)
+        {
+            Send.SendMessage(ServerConnection.ServerSock, "UpdateStoreInfo");
+            Send.SendVendorInfo(ServerConnection.ServerSock, VI);
         }
     }
 }

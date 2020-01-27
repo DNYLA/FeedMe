@@ -50,6 +50,7 @@ namespace FeedMeVendorUI.Forms
         private void SettingsButton_Click(object sender, EventArgs e)
         {
             UpdatePointer(sender);
+            storeInfo1.BringToFront();
         }
 
         private void InfoButton_Click(object sender, EventArgs e)

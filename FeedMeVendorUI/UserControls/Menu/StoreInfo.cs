@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeedMeNetworking.Serialization;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -44,7 +45,16 @@ namespace FeedMeVendorUI.UserControls.Menu
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-
+            VendorInfo VI = new VendorInfo();
+            VI.VendorID = Forms.Authentication.LoginForm.VendorDetails.VendorID;
+            VI.Name = NameTBox.Text;
+            VI.Description = DescrTbox.Text;
+            VI.Address = AddressTbox.Text;
+            VI.Email = EmailTbox.Text;
+            VI.Postcode = PostCodeTbox.Text;
+            VI.PhoneNo = PhoneTbox.Text;
+            FeedMeLogic.Vendor.StoreMenuInfo StoreClass = new FeedMeLogic.Vendor.StoreMenuInfo();
+            StoreClass.UpdateStoreInfo(VI);
         }
     }
 }

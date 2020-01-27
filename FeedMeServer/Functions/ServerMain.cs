@@ -87,7 +87,9 @@ namespace FeedMeServer.Functions
                         case "StoreInfo":
                             StoreInfo.GetStoreInfo(clientSocket);
                             break;
-
+                        case "UpdateStoreInfo":
+                            StoreInfo.UpdateStoreInfo(clientSocket);
+                            break;
                         case "ConfirmOrder":
                             OrderHandler.CheckOrder(clientSocket);
                             break;
