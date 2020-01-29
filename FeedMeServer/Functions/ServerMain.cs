@@ -112,6 +112,12 @@ namespace FeedMeServer.Functions
                         case "GetRefunds":
                             OrderHandler.GetRefunds(clientSocket);
                             break;
+                        case "GetUserInfo":
+                            CustomerHandler.GetCustomerInfo(clientSocket);
+                            break;
+                        case "UpdateUserInfo":
+                            CustomerHandler.UpdateUserInfo(clientSocket);
+                            break;
                     }
                 }
                 catch (Exception)

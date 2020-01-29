@@ -37,6 +37,7 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
             this.UserViewPanel = new System.Windows.Forms.Panel();
+            this.refund1 = new FeedMeClient.UserControls.Admin_.Refund();
             this.viewRefunds1 = new FeedMeClient.UserControls.Admin_.ViewRefunds();
             this.viewOrder1 = new FeedMeVendorUI.UserControls.Menu.ViewOrder();
             this.viewOrders1 = new FeedMeClient.UserControls.Order.ViewOrders();
@@ -45,7 +46,7 @@
             this.reviewOrderControl = new FeedMeClient.UserControls.Order.ReviewOrderControl();
             this.OrderControl = new FeedMeClient.UserControls.OrderControl();
             this.HomeControl = new FeedMeClient.UserControls.HomeControl();
-            this.refund1 = new FeedMeClient.UserControls.Admin_.Refund();
+            this.settings1 = new FeedMeClient.UserControls.settings();
             this.SideMenuPanel.SuspendLayout();
             this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +114,7 @@
             this.SettingsButton.TabIndex = 2;
             this.SettingsButton.Text = "       Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // OrdersButton
             // 
@@ -162,6 +164,7 @@
             // UserViewPanel
             // 
             this.UserViewPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.UserViewPanel.Controls.Add(this.settings1);
             this.UserViewPanel.Controls.Add(this.refund1);
             this.UserViewPanel.Controls.Add(this.viewRefunds1);
             this.UserViewPanel.Controls.Add(this.viewOrder1);
@@ -176,6 +179,15 @@
             this.UserViewPanel.Name = "UserViewPanel";
             this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
             this.UserViewPanel.TabIndex = 2;
+            // 
+            // refund1
+            // 
+            this.refund1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.refund1.Location = new System.Drawing.Point(-1, 0);
+            this.refund1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.refund1.Name = "refund1";
+            this.refund1.Size = new System.Drawing.Size(767, 677);
+            this.refund1.TabIndex = 8;
             // 
             // viewRefunds1
             // 
@@ -250,14 +262,14 @@
             this.HomeControl.Size = new System.Drawing.Size(771, 677);
             this.HomeControl.TabIndex = 0;
             // 
-            // refund1
+            // settings1
             // 
-            this.refund1.Font = new System.Drawing.Font("Nirmala UI", 12F);
-            this.refund1.Location = new System.Drawing.Point(-1, 0);
-            this.refund1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.refund1.Name = "refund1";
-            this.refund1.Size = new System.Drawing.Size(767, 677);
-            this.refund1.TabIndex = 8;
+            this.settings1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settings1.Location = new System.Drawing.Point(-2, 0);
+            this.settings1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.settings1.Name = "settings1";
+            this.settings1.Size = new System.Drawing.Size(767, 677);
+            this.settings1.TabIndex = 9;
             // 
             // MainMenu
             // 
@@ -298,5 +310,6 @@
         private FeedMeVendorUI.UserControls.Menu.ViewOrder viewOrder1;
         private UserControls.Admin_.ViewRefunds viewRefunds1;
         private UserControls.Admin_.Refund refund1;
+        private UserControls.settings settings1;
     }
 }

@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\Commands\CustomerHandler.cs" />
     <Compile Include="Functions\Commands\LoginAuthentication.cs" />
     <Compile Include="Functions\Commands\OrderHandler.cs" />
     <Compile Include="Functions\Commands\RegisterAuthentication.cs" />

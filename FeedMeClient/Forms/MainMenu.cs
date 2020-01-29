@@ -205,5 +205,11 @@ namespace FeedMeClient.Forms
             viewRefunds1.BringToFront();
             viewRefunds1.GenerateControls();
         }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            settings1.BringToFront();
+            settings1.LoadInfo();
+        }
     }
 }

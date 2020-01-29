@@ -86,6 +86,7 @@
     <Compile Include="Server\AuthenticationHandler.cs" />
     <Compile Include="Server\ConfirmOrder.cs" />
     <Compile Include="Server\ServerConnection.cs" />
+    <Compile Include="Server\UserHandler.cs" />
     <Compile Include="Vendor\StoreMenuInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -172,6 +172,10 @@ namespace FeedMeNetworking.Serialization
 
         [ProtoMember(8)]
         public bool Admin { get; set; }
+        [ProtoMember(9)]
+        public string Postcode { get; set; }
+        [ProtoMember(10)]
+        public string Address { get; set; }
     }
 
     #endregion User Object
