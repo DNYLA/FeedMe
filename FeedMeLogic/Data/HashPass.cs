@@ -48,8 +48,13 @@ namespace FeedMeLogic.Data
         }
 
         private static byte[] StringToByteArray(string HexString)
-        {   
-            SoapHexBinary SHB = SoapHexBinary.Parse(HexString);
+        {
+            if (HexString == "-1")
+            {
+                return new byte[8];
+            }
+            SoapHexBinary SHB = new SoapHexBinary();
+            SHB = SoapHexBinary.Parse(HexString);
             return SHB.Value;
         }
 

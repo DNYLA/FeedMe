@@ -72,14 +72,14 @@ namespace FeedMeLogic.Server
             string salt = GetSalt(password);
 
             //If Salt Returns -1 then Username received is invalid
-            if (salt == "-1")
-            {
-                VendorInfo VendorInformation = new VendorInfo
-                {
-                    VendorID = -1
-                };
-                return VendorInformation;
-            }
+            //if (salt == "-1")
+            //{
+            //    VendorInfo VendorInformation = new VendorInfo
+            //    {
+            //        VendorID = -1
+            //    };
+            //    return VendorInformation;
+            //}
 
             Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
 
@@ -90,7 +90,20 @@ namespace FeedMeLogic.Server
         {
             Send.SendMessage(ServerConnection.ServerSock, "Register");
 
+            Send.SendMessage(ServerConnection.ServerSock, "User");
+
             Send.SendUserInfo(ServerConnection.ServerSock, UserInformation);
+
+            return Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
+        }
+
+        public static int RegisterVendor(VendorInfo VendorInformation)
+        {
+            Send.SendMessage(ServerConnection.ServerSock, "Register");
+
+            Send.SendMessage(ServerConnection.ServerSock, "Vendor");
+
+            Send.SendVendorInfo(ServerConnection.ServerSock, VendorInformation);
 
             return Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
         }

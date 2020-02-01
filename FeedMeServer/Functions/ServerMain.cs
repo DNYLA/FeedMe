@@ -83,7 +83,6 @@ namespace FeedMeServer.Functions
                         case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement
                             StoreMenuHandler.MenuHandler(clientSocket);
                             break;
-
                         case "StoreInfo":
                             StoreInfo.GetStoreInfo(clientSocket);
                             break;

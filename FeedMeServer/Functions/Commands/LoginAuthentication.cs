@@ -118,6 +118,7 @@ namespace FeedMeServer.Functions.Commands
             return UserInformation;
         }
 
+
         private static bool CheckUserCredentials(string username, string password, int LoginType)
         {
             string[] HashData = GetHashData(username, LoginType); //This Gets The Hash Stored in the Database

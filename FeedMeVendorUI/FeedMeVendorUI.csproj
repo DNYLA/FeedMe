@@ -114,6 +114,9 @@
     <EmbeddedResource Include="Forms\Authentication\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Authentication\RegisterForm.resx">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FeedMeVendorTemplate.resx">
       <DependentUpon>FeedMeVendorTemplate.cs</DependentUpon>
     </EmbeddedResource>

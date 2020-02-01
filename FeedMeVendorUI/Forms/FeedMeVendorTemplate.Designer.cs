@@ -30,9 +30,9 @@
         {
             this.TopBarPanel = new System.Windows.Forms.Panel();
             this.TopPanelMinimizeButton = new System.Windows.Forms.Button();
+            this.TitleLabel = new System.Windows.Forms.Label();
             this.TopPanelCloseButton = new System.Windows.Forms.Button();
             this.TopPanelMaximizeButton = new System.Windows.Forms.Button();
-            this.TitleLabel = new System.Windows.Forms.Label();
             this.TopBarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +69,20 @@
             this.TopPanelMinimizeButton.Text = "0";
             this.TopPanelMinimizeButton.UseVisualStyleBackColor = true;
             this.TopPanelMinimizeButton.Click += new System.EventHandler(this.TopPanelMinimizeButton_Click);
+            // 
+            // TitleLabel
+            // 
+            this.TitleLabel.AutoSize = true;
+            this.TitleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.TitleLabel.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.TitleLabel.Location = new System.Drawing.Point(372, 2);
+            this.TitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.Size = new System.Drawing.Size(104, 17);
+            this.TitleLabel.TabIndex = 0;
+            this.TitleLabel.Text = "FeedMe - Login";
+            this.TitleLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBarPanel_MouseDown);
             // 
             // TopPanelCloseButton
             // 
@@ -108,24 +122,11 @@
             this.TopPanelMaximizeButton.UseVisualStyleBackColor = true;
             this.TopPanelMaximizeButton.Click += new System.EventHandler(this.TopPanelMaximizeButton_Click);
             // 
-            // TitleLabel
-            // 
-            this.TitleLabel.AutoSize = true;
-            this.TitleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.TitleLabel.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.TitleLabel.Location = new System.Drawing.Point(372, 2);
-            this.TitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(104, 17);
-            this.TitleLabel.TabIndex = 0;
-            this.TitleLabel.Text = "FeedMe - Login";
-            this.TitleLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBarPanel_MouseDown);
-            // 
             // FeedMeVendorTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.TopBarPanel);
             this.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

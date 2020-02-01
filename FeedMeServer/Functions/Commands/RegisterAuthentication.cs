@@ -1,5 +1,6 @@
 ﻿using FeedMeNetworking;
 using FeedMeNetworking.Serialization;
+using System;
 using System.Net.Sockets;
 
 namespace FeedMeServer.Functions.Commands
@@ -8,23 +9,50 @@ namespace FeedMeServer.Functions.Commands
     {
         public static void RegistrationHandler(Socket Client)
         {
-            UserInfo UserInformation = Receive.ReceiveUserInfo(Client);
+            string regType = Receive.ReceiveMessage(Client);
+            string registerValue;
 
-            UserInformation = HashPassword(UserInformation);
+            if (regType == "User")
+            {
+                UserInfo UserInformation = Receive.ReceiveUserInfo(Client);
+                UserInformation = HashPassword(UserInformation);
+                object userObj = UserInformation;
+                registerValue = RegisterClient(userObj, 1).ToString();
+            }
+            else if (regType == "Vendor")
+            {
+                VendorInfo VendorInformation = Receive.ReceiveVendorInfo(Client);
+                VendorInformation = HashPassword(VendorInformation);
+                object venObj = VendorInformation;
+                registerValue = RegisterClient(venObj, 2).ToString();
+            }
+            else
+            {
+                return; //Invalid Message Received
+            }
 
-            string RegisterValue = RegisterUser(UserInformation).ToString();
-
-            Send.SendMessage(Client, RegisterValue);
+            Send.SendMessage(Client, registerValue);
         }
 
-        private static int RegisterUser(UserInfo CI)
+        private static int RegisterClient(object ClientInformation, int clientType)
         {
             //CI = HashPassword(CI);
 
-            string SQLQuery = ($@"INSERT INTO users (username, firstname, lastname, email, password, salt)
-                                  VALUES ('{CI.Username}', '{CI.FirstName}', '{CI.LastName}', '{CI.Email}', '{CI.Password}', '{CI.Salt}');");
+            string sqlQuery;
+            if (clientType == 1)
+            {
+                UserInfo userInfo = (UserInfo)ClientInformation;
+                sqlQuery = ($@"INSERT INTO users (username, firstname, lastname, email, password, salt)
+                                  VALUES ('{userInfo.Username}', '{userInfo.FirstName}', '{userInfo.LastName}', '{userInfo.Email}', '{userInfo.Password}', '{userInfo.Salt}');");
+            }
+            else
+            {
+                VendorInfo vendorInfo = (VendorInfo)ClientInformation;
+                sqlQuery = ($@"INSERT INTO vendors (`Name`, Description, Address, Email, Postcode, PhoneNo, `Password`, `Salt`)
+	                            VALUES ('{vendorInfo.Name}', '{vendorInfo.Description}', '{vendorInfo.Address}', '{vendorInfo.Email}', '{vendorInfo.Postcode}', '{vendorInfo.PhoneNo}', '{vendorInfo.Password}', '{vendorInfo.Salt}');");
+            }
 
-            Data.DAL.ExecCommand(SQLQuery);
+            Data.DAL.ExecCommand(sqlQuery);
 
             if (Data.DAL.ErrorCode == 1062)
             {
@@ -47,6 +75,15 @@ namespace FeedMeServer.Functions.Commands
             UserInformation.Password = HashData[0];
 
             return UserInformation;
+        }
+
+        private static VendorInfo HashPassword(VendorInfo VendorInformation)
+        {
+            string[] HashData = Data.HashPass.HashPassword(VendorInformation.Password);
+
+            VendorInformation.Password = HashData[0];
+
+            return VendorInformation;
         }
     }
 }

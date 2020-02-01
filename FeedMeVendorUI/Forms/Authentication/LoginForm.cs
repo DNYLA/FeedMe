@@ -70,7 +70,7 @@ namespace FeedMeVendorUI.Forms.Authentication
         private void LoginButton_Click_1(object sender, EventArgs e)
         {
             Object OJ = FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 1);
-            VendorDetails = (VendorInfo)OJ; //Reserialioze
+            VendorDetails = (VendorInfo)OJ; //Re-Serialize
             CheckDetails();
         }
 
