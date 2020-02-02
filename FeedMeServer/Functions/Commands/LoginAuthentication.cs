@@ -74,6 +74,7 @@ namespace FeedMeServer.Functions.Commands
             UserInformation.FirstName = userInfoDT.Rows[0][2].ToString();
             UserInformation.LastName = userInfoDT.Rows[0][3].ToString();
             UserInformation.Email = userInfoDT.Rows[0][4].ToString();
+            UserInformation.avatarName = userInfoDT.Rows[0][10].ToString();
 
             string TempAdminValue = userInfoDT.Rows[0][7].ToString();
 
@@ -105,6 +106,7 @@ namespace FeedMeServer.Functions.Commands
             BussinessInfo.Rating = Convert.ToInt32(vendorInfoDT.Rows[0][7].ToString());
             BussinessInfo.Password = vendorInfoDT.Rows[0][8].ToString();
             BussinessInfo.Salt = vendorInfoDT.Rows[0][9].ToString();
+            BussinessInfo.avatarName = vendorInfoDT.Rows[0][10].ToString();
 
             return BussinessInfo;
         }

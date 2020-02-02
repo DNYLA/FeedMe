@@ -87,11 +87,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\Menu\CategoroyViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Menu\CategoroyViewer.Designer.cs">
+      <DependentUpon>CategoroyViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Menu\MenuInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\Menu\MenuInfo.Designer.cs">
       <DependentUpon>MenuInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Menu\MenuInfoDesign.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Menu\MenuInfoDesign.Designer.cs">
+      <DependentUpon>MenuInfoDesign.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Menu\OrderControl.cs">
       <SubType>UserControl</SubType>
@@ -132,8 +144,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\Menu\CategoroyViewer.resx">
+      <DependentUpon>CategoroyViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Menu\MenuInfo.resx">
       <DependentUpon>MenuInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Menu\MenuInfoDesign.resx">
+      <DependentUpon>MenuInfoDesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Menu\OrderControl.resx">
       <DependentUpon>OrderControl.cs</DependentUpon>

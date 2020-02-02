@@ -71,16 +71,6 @@ namespace FeedMeLogic.Server
 
             string salt = GetSalt(password);
 
-            //If Salt Returns -1 then Username received is invalid
-            //if (salt == "-1")
-            //{
-            //    VendorInfo VendorInformation = new VendorInfo
-            //    {
-            //        VendorID = -1
-            //    };
-            //    return VendorInformation;
-            //}
-
             Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
 
             return Receive.ReceiveVendorInfo(ServerConnection.ServerSock);

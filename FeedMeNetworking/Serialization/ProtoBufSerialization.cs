@@ -176,6 +176,8 @@ namespace FeedMeNetworking.Serialization
         public string Postcode { get; set; }
         [ProtoMember(10)]
         public string Address { get; set; }
+        [ProtoMember(11)]
+        public string avatarName { get; set; }
     }
 
     #endregion User Object
@@ -214,6 +216,8 @@ namespace FeedMeNetworking.Serialization
 
         [ProtoMember(10)]
         public string Salt { get; set; }
+        [ProtoMember(11)]
+        public string avatarName { get; set; }
     }
 
     #endregion Vendor Object
@@ -310,6 +314,8 @@ namespace FeedMeNetworking.Serialization
 
         [ProtoMember(8)]
         public decimal TotalPrice { get; set; } = 0;
+        [ProtoMember(11)]
+        public string imageLoc { get; set; }
     }
 
     #endregion Item Model

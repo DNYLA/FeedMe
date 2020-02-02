@@ -1,6 +1,10 @@
 ﻿using FeedMeNetworking.Serialization;
 using System;
 using System.Windows.Forms;
+using System.Net;
+using System.IO;
+using System.Text;
+using System.Collections.Specialized;
 
 namespace FeedMeClient.Forms.Authentication
 {
@@ -63,5 +67,65 @@ namespace FeedMeClient.Forms.Authentication
         }
 
         #endregion Event Handlers
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+
+        //    string url = "https://p.sbond.co/dansite/upload.php";
+        //    string pagesource = string.Empty;
+        //    using (WebClient client = new WebClient())
+        //    {
+        //        try
+        //        {
+        //            NameValueCollection postData = new NameValueCollection()
+        //            {
+        //                { "destfile", "destfile" },  //order: {"parameter name", "parameter value"}
+        //            };
+
+        //            // client.UploadValues returns page's source as byte array (byte[])
+        //            // so it must be transformed into a string
+        //            client.UploadValues(url, postData);
+
+        //            MessageBox.Show(pagesource);
+        //        }
+        //        catch (Exception)
+        //        {
+        //            MessageBox.Show("Unable To Connect to Server...");
+        //        }
+        //    }
+        //}
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    System.Net.WebClient Client = new System.Net.WebClient();
+
+        //    Client.Headers.Add("Content-Type", "binary/octet-stream");
+
+        //    Client.UploadString("https://p.sbond.co/dansite/test.php", "POST",
+        //                                      @"Test");
+
+        //    byte[] result = Client.UploadFile("https://p.sbond.co/dansite/test.php", "POST",
+        //                                      @"maxresdefault.jpg");
+
+        //    string s = System.Text.Encoding.UTF8.GetString(result, 0, result.Length);
+        //    MessageBox.Show(s);
+        //}
+
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        //create WebClient object
+        //        WebClient client = new WebClient();
+        //        string myFile = @"maxresdefault.jpg";
+        //        client.Credentials = CredentialCache.DefaultCredentials;
+        //        client.UploadFile(@"https://p.sbond.co/dansite/images/", "PUT", myFile);
+        //        client.Dispose();
+        //    }
+        //    catch (Exception err)
+        //    {
+        //        MessageBox.Show(err.Message);
+        //    }
+        //}
     }
 }

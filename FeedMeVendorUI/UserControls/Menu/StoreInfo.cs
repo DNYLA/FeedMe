@@ -27,10 +27,19 @@ namespace FeedMeVendorUI.UserControls.Menu
             {
                 return;
             }
+
+
         }
 
         private void LoadInfo()
         {
+            string imgLoc = "https://p.sbond.co/dansite/img/Avatars/";
+            string imgName = Forms.Authentication.LoginForm.VendorDetails.avatarName;
+            imgLoc += imgName;
+            avatarPBox.ImageLocation = imgLoc;
+            Console.WriteLine(avatarPBox.ImageLocation);
+            Console.WriteLine("NAME: " + imgName);
+
             string vendorID = Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString();
             DataTable StoreInfo = FeedMeLogic.Vendor.StoreMenuInfo.GetStoreInfo(vendorID);
 

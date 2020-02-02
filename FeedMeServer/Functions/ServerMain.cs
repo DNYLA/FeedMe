@@ -71,15 +71,12 @@ namespace FeedMeServer.Functions
                         default:
                             //Do Stuff
                             break;
-
                         case "Login":
                             LoginAuthentication.LoginHandler(clientSocket);
                             break;
-
                         case "Register":
                             RegisterAuthentication.RegistrationHandler(clientSocket);
                             break;
-
                         case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement
                             StoreMenuHandler.MenuHandler(clientSocket);
                             break;
@@ -92,7 +89,6 @@ namespace FeedMeServer.Functions
                         case "ConfirmOrder":
                             OrderHandler.CheckOrder(clientSocket);
                             break;
-
                         case "CheckForOrder":
                             OrderHandler.CheckForOrders(clientSocket);
                             break;
