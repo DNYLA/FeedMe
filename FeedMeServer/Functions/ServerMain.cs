@@ -2,8 +2,10 @@
 using FeedMeServer.Functions.Commands;
 using FeedMeServer.Functions.Commands.Vendor;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 
 namespace FeedMeServer.Functions
@@ -14,7 +16,8 @@ namespace FeedMeServer.Functions
 
         private const int PORT_NO = 4030;
         private const string IP_ADDRESS = "127.0.0.1";
-
+        public static List<string> bannedIPS = new List<string>();
+        public static List<string> clients = new List<string>();
         //Only able to bind to localhost
         //const string IP_ADDRESS = "85.255.236.26";
 
@@ -29,7 +32,7 @@ namespace FeedMeServer.Functions
             String PubIP = GetServerInfo.GetPublicIP();
             //GetServerInfo.RunAsync();
             //string IPADD = "192.168.1.64";
-            string IPADD = "127.0.0.1";
+            string IPADD = "172.16.23.162";
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
             //IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
             ServerLogger("Server Initiaizliation Completed.");
@@ -50,26 +53,75 @@ namespace FeedMeServer.Functions
             {
                 clientAmount++;
                 clientSocket = serverSocket.Accept();
-                ServerLogger("Client Connected To FeedMe Server!");
-                Console.WriteLine("Dumping Client Information & Requests");
-                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientSocket)));
-                clientThread.Start();
+                if (bannedIPS.Contains(clientSocket.LocalEndPoint.ToString()))
+                {
+                    Console.WriteLine("BANNED IP");
+                }
+                else if(clients.Contains(clientSocket.LocalEndPoint.ToString()))
+                {
+                    Console.WriteLine("Client Already Connected");
+                }
+                else
+                {
+                    ServerLogger("Client Connected To FeedMe Server!");
+                    Console.WriteLine("Dumping Client Information & Requests");
+                    Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientSocket)));
+                    clients.Add(clientSocket.LocalEndPoint.ToString());
+                    clientThread.Start();
+
+                }
+
             }
         }
 
         public void ClientInterface(Socket clientSocket)
         {
             bool clientConnected = true; //Add Some Sort of Return method later on
+            List<string> reqList = new List<string>();
             while (clientConnected)
             {
+                if (bannedIPS.Contains(clientSocket.LocalEndPoint.ToString()))
+                {
+                    clientSocket.Disconnect(false);
+                }
+                //else if (clients.Contains(clientSocket.LocalEndPoint.ToString()))
+                //{ 
+                //    clientSocket.Disconnect(false);
+                //}
+
                 //Console.WriteLine($"Client Ping {PingChecker(clientSocket).ToString()}");
                 try
                 {
                     string request = Receive.ReceiveMessage(clientSocket);
+                    reqList.Add(request);
+                    int reqAmmount = 0;
+                    foreach (string req in reqList)
+                    {
+                        Console.WriteLine(req);
+                        if (req == "Login" || req == "Register")
+                        {
+                            reqAmmount++;
+                            
+                        }
+                    }
+
+                    if (reqAmmount > 5)
+                    {
+                        Console.WriteLine("!B")
+                        string ipadd = clientSocket.LocalEndPoint.ToString();
+                        bannedIPS.Add(ipadd);
+                        clientSocket.Disconnect(false);
+                    }
+                    //Console.WriteLine(request);
                     switch (request)
                     {
                         default:
                             //Do Stuff
+                            //Send.SendMessage(clientSocket, "Invalid request socket killed")
+                            string ipadd = clientSocket.LocalEndPoint.ToString();
+                            bannedIPS.Add(ipadd);
+                            Console.WriteLine("test");
+                            clientSocket.Disconnect(false);
                             break;
                         case "Login":
                             LoginAuthentication.LoginHandler(clientSocket);
