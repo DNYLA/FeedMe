@@ -68,7 +68,7 @@ namespace FeedMeServer.Functions
             }
         }
 
-        private static string GenerateSessiontoken()
+        public static string GenerateSessiontoken()
         {
             Random rnd = new Random();
             int length = 20;
@@ -95,7 +95,7 @@ namespace FeedMeServer.Functions
 
             clients.Add(clientInf);
             tTokens.Add(clientInf.TToken);
-
+            Console.WriteLine(clientInf.TToken + "TToken");
 
             Send.SendMessage(cSock, clientInf.TToken);
 
@@ -119,17 +119,21 @@ namespace FeedMeServer.Functions
 
                     int lastResp = clientM.GetLastResponseSpan() - DateTime.Now.Minute;
 
+                    Console.WriteLine(clientM.TToken + "TToken");
+
                     if (lastResp > 5)
                     {
                         //Renew Token
                     }
                     else
                     {
+                        Console.WriteLine("Less Dan 5");
                         clientM.LastResponse = DateTime.Now;
                     }
 
                     if (token == clientM.TToken)
                     {
+                        Console.WriteLine("In T Tokens");
                         //Temporary Tokens are only able to Login Or Register
                         switch (request)
                         {
@@ -149,6 +153,7 @@ namespace FeedMeServer.Functions
                     else if (token == clientM.SToken)
                     {
                         //Clients with a Session token can send any command.
+                        Console.WriteLine("In S Tokens");
                         switch (request)
                         {
                             case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement

@@ -29,6 +29,9 @@ namespace FeedMeServer.Functions.Commands
             //If Login is Correct send back sucess message
             if (CheckUserCredentials(username, clientHashedPassword, LoginType) == true)
             {
+                clientM.SToken = ServerMain.GenerateSessiontoken();
+                ServerMain.sessionTokens.Add(clientM.SToken);
+                Send.SendMessage(Client, clientM.SToken);
                 if (LoginType == 0)
                 {
                     Send.SendUserInfo(Client, GetUserInfo(username, clientM));

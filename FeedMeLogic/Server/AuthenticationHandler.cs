@@ -14,10 +14,12 @@ namespace FeedMeLogic.Server
 
             if (LoginType == 0)
             {
+                Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
                 return CustomerLogin(username, password);
             }
             else if (LoginType == 1)
             {
+                Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
                 return VendorLogin(username, password);
             }
 

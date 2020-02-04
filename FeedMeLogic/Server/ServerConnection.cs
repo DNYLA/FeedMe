@@ -40,6 +40,7 @@ namespace FeedMeLogic.Server
                         ServerSock.Connect(endPoint);
                         Connected = true;
                         Send.token = Receive.ReceiveMessage(ServerSock);
+                        Console.WriteLine(Send.token + "TToken");
                     }
                     catch
                     {
