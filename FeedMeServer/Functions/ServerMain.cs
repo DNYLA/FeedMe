@@ -107,7 +107,7 @@ namespace FeedMeServer.Functions
 
                     if (reqAmmount > 5)
                     {
-                        Console.WriteLine("!B")
+                        Console.WriteLine("!B");
                         string ipadd = clientSocket.LocalEndPoint.ToString();
                         bannedIPS.Add(ipadd);
                         clientSocket.Disconnect(false);
