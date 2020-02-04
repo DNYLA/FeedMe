@@ -1,6 +1,7 @@
 ﻿using FeedMeNetworking;
 using FeedMeNetworking.Serialization;
 using FeedMeServer.Functions.Data;
+using FeedMeServer.Models;
 using System;
 using System.Data;
 using System.Net.Sockets;
@@ -10,7 +11,7 @@ namespace FeedMeServer.Functions.Commands
 {
     internal class LoginAuthentication
     {
-        public static void LoginHandler(Socket Client)
+        public static void LoginHandler(Socket Client, Client clientM)
         {
             ServerMain.ServerLogger("Requested to Login", "Client");
 
@@ -30,10 +31,10 @@ namespace FeedMeServer.Functions.Commands
             {
                 if (LoginType == 0)
                 {
-                    Send.SendUserInfo(Client, GetUserInfo(username));
+                    Send.SendUserInfo(Client, GetUserInfo(username, clientM));
                     return;
                 }
-                Send.SendVendorInfo(Client, GetVendorInfo(username));
+                Send.SendVendorInfo(Client, GetVendorInfo(username, clientM));
                 return;
             }
 
@@ -63,7 +64,7 @@ namespace FeedMeServer.Functions.Commands
             }
         }
 
-        private static UserInfo GetUserInfo(string username)
+        private static UserInfo GetUserInfo(string username, Client clientM)
         {
             UserInfo UserInformation = new UserInfo();
             Console.WriteLine("Valid Username");
@@ -87,10 +88,14 @@ namespace FeedMeServer.Functions.Commands
                 UserInformation.Admin = true;
             }
 
+            clientM.ClientID = UserInformation.UserID;
+            clientM.IsVendor = false;
+
+
             return UserInformation;
         }
 
-        private static VendorInfo GetVendorInfo(string username)
+        private static VendorInfo GetVendorInfo(string username, Client clientM)
         {
             VendorInfo BussinessInfo = new VendorInfo();
             Console.WriteLine("Valid Username");
@@ -107,6 +112,9 @@ namespace FeedMeServer.Functions.Commands
             BussinessInfo.Password = vendorInfoDT.Rows[0][8].ToString();
             BussinessInfo.Salt = vendorInfoDT.Rows[0][9].ToString();
             BussinessInfo.avatarName = vendorInfoDT.Rows[0][10].ToString();
+
+            clientM.ClientID = BussinessInfo.VendorID;
+            clientM.IsVendor = true;
 
             return BussinessInfo;
         }

@@ -87,6 +87,7 @@
     <Compile Include="Functions\Data\HashPass.cs" />
     <Compile Include="Functions\GetServerInfo.cs" />
     <Compile Include="Functions\ServerMain.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerInformation.cs" />

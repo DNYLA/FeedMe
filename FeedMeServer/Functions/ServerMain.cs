@@ -1,6 +1,7 @@
 ﻿using FeedMeNetworking;
 using FeedMeServer.Functions.Commands;
 using FeedMeServer.Functions.Commands.Vendor;
+using FeedMeServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -18,8 +19,8 @@ namespace FeedMeServer.Functions
 
         private const int PORT_NO = 4030;
         private const string IP_ADDRESS = "127.0.0.1";
-        public static List<string> bannedIPS = new List<string>();
-        public static List<string> clients = new List<string>();
+        public static List<Client> clients = new List<Client>();
+        public static List<string> tTokens = new List<string>(); //Temporary Session Tokens
         public static List<string> sessionTokens = new List<string>();
         //Only able to bind to localhost
         //const string IP_ADDRESS = "85.255.236.26";
@@ -34,8 +35,8 @@ namespace FeedMeServer.Functions
             IPAddress IP = GetServerInfo.GetPrivateIP();
             String PubIP = GetServerInfo.GetPublicIP();
             //GetServerInfo.RunAsync();
-            //string IPADD = "192.168.1.64";
-            string IPADD = "172.16.23.162";
+            string IPADD = "127.0.0.1";
+            //string IPADD = "172.16.23.162";
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
             //IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
             ServerLogger("Server Initiaizliation Completed.");
@@ -58,11 +59,10 @@ namespace FeedMeServer.Functions
                 clientSocket = serverSocket.Accept();
                 ServerLogger("Client Connected To FeedMe Server!");
                 Console.WriteLine("Dumping Client Information & Requests");
-                string sessToken = GenerateSessiontoken();
-                sessionTokens.Add(sessToken);
-                Send.SendMessage(clientSocket, sessToken);
-                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientSocket, sessToken)));
-                clients.Add(clientSocket.LocalEndPoint.ToString());
+                Client clientModel = CreateClientInfo(clientSocket);
+                
+                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel)));
+                
                 clientThread.Start();
                 
             }
@@ -85,74 +85,113 @@ namespace FeedMeServer.Functions
 
         }
 
-        public void ClientInterface(Socket clientSocket, string sessToken)
+        private static Client CreateClientInfo(Socket cSock)
+        {
+            Client clientInf = new Client();
+            clientInf.TToken = GenerateSessiontoken();
+            clientInf.TimeConnected = DateTime.Now;
+            clientInf.LastResponse = DateTime.Now;
+            clientInf.ClientSocket = cSock;
+
+            clients.Add(clientInf);
+            tTokens.Add(clientInf.TToken);
+
+
+            Send.SendMessage(cSock, clientInf.TToken);
+
+            return clientInf;
+        }
+
+        public void ClientInterface(Client clientM)
         {
             bool clientConnected = true; //Add Some Sort of Return method later on
             List<string> reqList = new List<string>();
+            Socket cSock = clientM.ClientSocket;
+
             while (clientConnected)
             {
 
                 //Console.WriteLine($"Client Ping {PingChecker(clientSocket).ToString()}");
                 try
                 {
-                    string request = Receive.ReceiveMessage(clientSocket);
-                    string token = Receive.ReceiveMessage(clientSocket);
-                    if (token != sessToken)
+                    string request = Receive.ReceiveMessage(cSock);
+                    string token = Receive.ReceiveMessage(cSock);
+
+                    int lastResp = clientM.GetLastResponseSpan() - DateTime.Now.Minute;
+
+                    if (lastResp > 5)
                     {
-                        return;
+                        //Renew Token
                     }
-                    switch (request)
+                    else
                     {
-                        default:
-                            //Do Stuff
-                            //Send.SendMessage(clientSocket, "Invalid request socket killed")
-                            string ipadd = clientSocket.LocalEndPoint.ToString();
-                            bannedIPS.Add(ipadd);
-                            Console.WriteLine("test");
-                            clientSocket.Disconnect(false);
-                            break;
-                        case "Login":
-                            LoginAuthentication.LoginHandler(clientSocket);
-                            break;
-                        case "Register":
-                            RegisterAuthentication.RegistrationHandler(clientSocket);
-                            break;
-                        case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement
-                            StoreMenuHandler.MenuHandler(clientSocket);
-                            break;
-                        case "StoreInfo":
-                            StoreInfo.GetStoreInfo(clientSocket);
-                            break;
-                        case "UpdateStoreInfo":
-                            StoreInfo.UpdateStoreInfo(clientSocket);
-                            break;
-                        case "ConfirmOrder":
-                            OrderHandler.CheckOrder(clientSocket);
-                            break;
-                        case "CheckForOrder":
-                            OrderHandler.CheckForOrders(clientSocket);
-                            break;
-                        case "GetSpecificOrder":
-                            OrderHandler.GetSpecificOrder(clientSocket);
-                            break;
-                        case "UpdateOrderStatus":
-                            OrderHandler.UpdateOrderStatus(clientSocket);
-                            break;
-                        case "UpdateRefundStatus":
-                            OrderHandler.UpdateRefundStatus(clientSocket);
-                            break;
-                        case "GetCustomerOrder":
-                            OrderHandler.GetCustomerOrder(clientSocket);
-                            break;
-                        case "GetRefunds":
-                            OrderHandler.GetRefunds(clientSocket);
-                            break;
-                        case "GetUserInfo":
-                            CustomerHandler.GetCustomerInfo(clientSocket);
-                            break;
-                        case "UpdateUserInfo":
-                            CustomerHandler.UpdateUserInfo(clientSocket);
-                            break;
+                        clientM.LastResponse = DateTime.Now;
+                    }
+
+                    if (token == clientM.TToken)
+                    {
+                        //Temporary Tokens are only able to Login Or Register
+                        switch (request)
+                        {
+                            default:
+                                //Do Stuff
+                                //Send.SendMessage(clientSocket, "Invalid request socket killed")
+                                string ipadd = cSock.LocalEndPoint.ToString();
+                                break;
+                            case "Login":
+                                LoginAuthentication.LoginHandler(cSock, clientM);
+                                break;
+                            case "Register":
+                                RegisterAuthentication.RegistrationHandler(cSock);
+                                break;
+                        }
+                    }
+                    else if (token == clientM.SToken)
+                    {
+                        //Clients with a Session token can send any command.
+                        switch (request)
+                        {
+                            case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement
+                                StoreMenuHandler.MenuHandler(cSock);
+                                break;
+                            case "StoreInfo":
+                                StoreInfo.GetStoreInfo(cSock);
+                                break;
+                            case "UpdateStoreInfo":
+                                StoreInfo.UpdateStoreInfo(cSock);
+                                break;
+                            case "ConfirmOrder":
+                                OrderHandler.CheckOrder(cSock);
+                                break;
+                            case "CheckForOrder":
+                                OrderHandler.CheckForOrders(cSock);
+                                break;
+                            case "GetSpecificOrder":
+                                OrderHandler.GetSpecificOrder(cSock);
+                                break;
+                            case "UpdateOrderStatus":
+                                OrderHandler.UpdateOrderStatus(cSock);
+                                break;
+                            case "UpdateRefundStatus":
+                                OrderHandler.UpdateRefundStatus(cSock);
+                                break;
+                            case "GetCustomerOrder":
+                                OrderHandler.GetCustomerOrder(cSock);
+                                break;
+                            case "GetRefunds":
+                                OrderHandler.GetRefunds(cSock);
+                                break;
+                            case "GetUserInfo":
+                                CustomerHandler.GetCustomerInfo(cSock);
+                                break;
+                            case "UpdateUserInfo":
+                                CustomerHandler.UpdateUserInfo(cSock);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        //Add Some sort of handling || just leave blank
                     }
                 }
                 catch (Exception)
