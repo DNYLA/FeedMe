@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading;
+using System.Web.SessionState;
 
 namespace FeedMeServer.Functions
 {
@@ -18,6 +20,7 @@ namespace FeedMeServer.Functions
         private const string IP_ADDRESS = "127.0.0.1";
         public static List<string> bannedIPS = new List<string>();
         public static List<string> clients = new List<string>();
+        public static List<string> sessionTokens = new List<string>();
         //Only able to bind to localhost
         //const string IP_ADDRESS = "85.255.236.26";
 
@@ -53,66 +56,51 @@ namespace FeedMeServer.Functions
             {
                 clientAmount++;
                 clientSocket = serverSocket.Accept();
-                if (bannedIPS.Contains(clientSocket.LocalEndPoint.ToString()))
-                {
-                    Console.WriteLine("BANNED IP");
-                }
-                else if(clients.Contains(clientSocket.LocalEndPoint.ToString()))
-                {
-                    Console.WriteLine("Client Already Connected");
-                }
-                else
-                {
-                    ServerLogger("Client Connected To FeedMe Server!");
-                    Console.WriteLine("Dumping Client Information & Requests");
-                    Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientSocket)));
-                    clients.Add(clientSocket.LocalEndPoint.ToString());
-                    clientThread.Start();
-
-                }
-
+                ServerLogger("Client Connected To FeedMe Server!");
+                Console.WriteLine("Dumping Client Information & Requests");
+                string sessToken = GenerateSessiontoken();
+                sessionTokens.Add(sessToken);
+                Send.SendMessage(clientSocket, sessToken);
+                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientSocket, sessToken)));
+                clients.Add(clientSocket.LocalEndPoint.ToString());
+                clientThread.Start();
+                
             }
         }
 
-        public void ClientInterface(Socket clientSocket)
+        private static string GenerateSessiontoken()
+        {
+            Random rnd = new Random();
+            int length = 20;
+            var str = "";
+            for (var i = 0; i < length; i++)
+            {
+                str += ((char)(rnd.Next(1, 26) + 64)).ToString();
+            }
+            if (sessionTokens.Contains(str))
+            {
+                return GenerateSessiontoken();
+            }
+            return str;
+
+        }
+
+        public void ClientInterface(Socket clientSocket, string sessToken)
         {
             bool clientConnected = true; //Add Some Sort of Return method later on
             List<string> reqList = new List<string>();
             while (clientConnected)
             {
-                if (bannedIPS.Contains(clientSocket.LocalEndPoint.ToString()))
-                {
-                    clientSocket.Disconnect(false);
-                }
-                //else if (clients.Contains(clientSocket.LocalEndPoint.ToString()))
-                //{ 
-                //    clientSocket.Disconnect(false);
-                //}
 
                 //Console.WriteLine($"Client Ping {PingChecker(clientSocket).ToString()}");
                 try
                 {
                     string request = Receive.ReceiveMessage(clientSocket);
-                    reqList.Add(request);
-                    int reqAmmount = 0;
-                    foreach (string req in reqList)
+                    string token = Receive.ReceiveMessage(clientSocket);
+                    if (token != sessToken)
                     {
-                        Console.WriteLine(req);
-                        if (req == "Login" || req == "Register")
-                        {
-                            reqAmmount++;
-                            
-                        }
+                        return;
                     }
-
-                    if (reqAmmount > 5)
-                    {
-                        Console.WriteLine("!B");
-                        string ipadd = clientSocket.LocalEndPoint.ToString();
-                        bannedIPS.Add(ipadd);
-                        clientSocket.Disconnect(false);
-                    }
-                    //Console.WriteLine(request);
                     switch (request)
                     {
                         default:

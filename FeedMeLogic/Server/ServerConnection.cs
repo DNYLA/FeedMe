@@ -1,4 +1,5 @@
-﻿using FeedMeNetworking.Serialization;
+﻿using FeedMeNetworking;
+using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -15,7 +16,7 @@ namespace FeedMeLogic.Server
         //static string IP_ADDRESS = "86.180.33.203";
         //static string IP_ADDRESS = "86.181.164.197";
         //static string IP_ADDRESS = "192.168.1.64";
-        private static readonly string IP_ADDRESS = "127.0.0.1";
+        private static readonly string IP_ADDRESS = "172.16.23.162";
 
         //static string IP_ADDRESS = "85.255.236.26";
 
@@ -25,6 +26,7 @@ namespace FeedMeLogic.Server
 
         public static string GlobalCommandToSend = "";
         public static bool Connected = false;
+        public static string sToken = "";
 
         public static void InitiailizeConnection(int retryAmount = 0)
         {
@@ -37,6 +39,7 @@ namespace FeedMeLogic.Server
                         IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP_ADDRESS), PORT_NO);
                         ServerSock.Connect(endPoint);
                         Connected = true;
+                        Send.sToken = Receive.ReceiveMessage(ServerSock);
                     }
                     catch
                     {

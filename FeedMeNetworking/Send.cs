@@ -12,6 +12,7 @@ namespace FeedMeNetworking
          * ADD Function to decrypt BYTES.
          */
 
+        public static string sToken = "";
         public static void SendDataTable(Socket Sock, DataTable dataTable)
         {
             SendData(Sock, ProtoBufSerialization.DataSerialization(dataTable));
@@ -56,10 +57,13 @@ namespace FeedMeNetworking
         /// <param name="data"> Byte Array of Data that will be send</param>
         private static void SendData(Socket Sock, byte[] data)
         {
+            Send.SendMessage(Sock, sToken);
             Sock.Send(data, 0, data.Length, SocketFlags.None);
 
             //If Data is sent too quickly the server might read seperate messages as one string sometimes
             Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
         }
+
+        
     }
 }
