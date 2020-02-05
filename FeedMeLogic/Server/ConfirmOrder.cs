@@ -2,14 +2,23 @@
 using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FeedMeLogic.Server
 {
     public class ConfirmOrder
     {
+        private static void SendMainCommand(string command)
+        {
+            Send.SendToken(ServerConnection.ServerSock);
+
+            Send.SendMessage(ServerConnection.ServerSock, "OrderHandling");
+
+            Send.SendMessage(ServerConnection.ServerSock, command);
+        }
         public static string SendOrder(OrderInfo orderInfo, UserInfo userInformation)
         {
-            Send.SendMessage(ServerConnection.ServerSock, "ConfirmOrder");
+            SendMainCommand("ConfirmOrder");
 
             Send.SendOrderDetails(ServerConnection.ServerSock, orderInfo);
 
@@ -22,7 +31,7 @@ namespace FeedMeLogic.Server
         {
             List<OrderInfo> OIList = new List<OrderInfo>();
 
-            Send.SendMessage(ServerConnection.ServerSock, "CheckForOrder");
+            SendMainCommand("CheckForOrder");
 
             Send.SendMessage(ServerConnection.ServerSock, vendorID.ToString());
 
@@ -38,7 +47,7 @@ namespace FeedMeLogic.Server
 
         public static OrderInfo GetSpecificOrder(string orderID)
         {
-            Send.SendMessage(ServerConnection.ServerSock, "GetSpecificOrder");
+            SendMainCommand("GetSpecificOrder");
 
             Send.SendMessage(ServerConnection.ServerSock, orderID.ToString());
 
@@ -49,7 +58,7 @@ namespace FeedMeLogic.Server
 
         public static void UpdateOrderStatus(string orderID, string orderStatus)
         {
-            Send.SendMessage(ServerConnection.ServerSock, "UpdateOrderStatus");
+            SendMainCommand("UpdateOrderStatus");
 
             Send.SendMessage(ServerConnection.ServerSock, orderID.ToString());
 
@@ -58,7 +67,7 @@ namespace FeedMeLogic.Server
 
         public static void UpdateRefundStatus(string orderID, string refundStatus)
         {
-            Send.SendMessage(ServerConnection.ServerSock, "UpdateRefundStatus");
+            SendMainCommand("UpdateRefundStatus");
 
             Send.SendMessage(ServerConnection.ServerSock, orderID.ToString());
 
@@ -69,7 +78,7 @@ namespace FeedMeLogic.Server
         {
             List<OrderInfo> OIList = new List<OrderInfo>();
 
-            Send.SendMessage(ServerConnection.ServerSock, "GetCustomerOrder");
+            SendMainCommand("GetCustomerOrder");
 
             Send.SendMessage(ServerConnection.ServerSock, customerID);
 
@@ -87,7 +96,7 @@ namespace FeedMeLogic.Server
         {
             List<OrderInfo> OIList = new List<OrderInfo>();
 
-            Send.SendMessage(ServerConnection.ServerSock, "GetRefunds");
+            SendMainCommand("GetRefunds");
 
             int newOrderAmount = Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
 

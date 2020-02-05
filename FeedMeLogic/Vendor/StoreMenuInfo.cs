@@ -10,6 +10,8 @@ namespace FeedMeLogic.Vendor
     {
         private static void SendRequestCommand(string vendorID, string command)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+            Thread.Sleep(100);
             Send.SendMessage(ServerConnection.ServerSock, "StoreMenuInfo");
             Thread.Sleep(100);
             Send.SendMessage(ServerConnection.ServerSock, vendorID);

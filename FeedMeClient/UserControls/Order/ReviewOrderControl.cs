@@ -24,10 +24,10 @@ namespace FeedMeClient.UserControls.Order
                 return;
             }
 
-            GenerateItemList();
+            //GenerateItemList();
         }
 
-        private void GenerateItemList()
+        public void GenerateItemList()
         {
             #region Initiaizling Variables & DataTable
 

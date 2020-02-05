@@ -11,7 +11,7 @@ namespace FeedMeServer.Functions.Commands
 {
     internal class LoginAuthentication
     {
-        public static void LoginHandler(Socket Client, Client clientM)
+        public static void LoginHandler(Socket Client, ref Client clientM)
         {
             ServerMain.ServerLogger("Requested to Login", "Client");
 

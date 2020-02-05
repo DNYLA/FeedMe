@@ -8,13 +8,15 @@ namespace FeedMeLogic.Server
     {
         public static object AuthenticateLogin(string username, string password, int LoginType)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+
             Send.SendMessage(ServerConnection.ServerSock, "Login");
 
             Send.SendMessage(ServerConnection.ServerSock, LoginType.ToString());
 
             if (LoginType == 0)
             {
-                Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
+                
                 return CustomerLogin(username, password);
             }
             else if (LoginType == 1)
@@ -58,6 +60,8 @@ namespace FeedMeLogic.Server
 
             Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
 
+            Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
+
             return Receive.ReceiveUserInfo(ServerConnection.ServerSock);
         }
 
@@ -80,6 +84,8 @@ namespace FeedMeLogic.Server
 
         public static int RegisterUser(UserInfo UserInformation)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+
             Send.SendMessage(ServerConnection.ServerSock, "Register");
 
             Send.SendMessage(ServerConnection.ServerSock, "User");
@@ -91,6 +97,8 @@ namespace FeedMeLogic.Server
 
         public static int RegisterVendor(VendorInfo VendorInformation)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+
             Send.SendMessage(ServerConnection.ServerSock, "Register");
 
             Send.SendMessage(ServerConnection.ServerSock, "Vendor");

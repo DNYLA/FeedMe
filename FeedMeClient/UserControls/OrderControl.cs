@@ -384,6 +384,7 @@ namespace FeedMeClient.UserControls
             TitleLabel.Text = $"Order from {vendorName}"; //Sets Vendor Title To Vendor that was just selected
 
             userControl.BringToFront();
+
         }
     }
 }

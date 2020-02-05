@@ -57,13 +57,17 @@ namespace FeedMeNetworking
         /// <param name="data"> Byte Array of Data that will be send</param>
         private static void SendData(Socket Sock, byte[] data)
         {
-            Sock.Send(Encoding.UTF8.GetBytes(token));
             Sock.Send(data, 0, data.Length, SocketFlags.None);
 
             //If Data is sent too quickly the server might read seperate messages as one string sometimes
             Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
         }
 
+        public static void SendToken(Socket Sock)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(token);
+            Sock.Send(data, 0, data.Length, SocketFlags.None);
+        }
 
         
     }

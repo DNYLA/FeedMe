@@ -26,7 +26,6 @@ namespace FeedMeClient.UserControls.Admin_
             {
                 return;
             }
-            GenerateControls();
         }
 
         public void GenerateControls()

@@ -183,6 +183,7 @@ namespace FeedMeClient.Forms
             Button ButtonObject = (Button)sender;
             AnimateIndicator(ButtonObject);
             HomeControl.BringToFront();
+            HomeControl.GenerateCon();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -196,6 +197,7 @@ namespace FeedMeClient.Forms
             Button ButtonObject = (Button)sender;
             AnimateIndicator(ButtonObject);
             viewOrders1.BringToFront();
+            viewOrders1.GenerateControls();
         }
 
         private void button1_Click(object sender, EventArgs e)

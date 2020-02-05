@@ -2,6 +2,7 @@
 using FeedMeNetworking.Serialization;
 using FeedMeServer.Functions.Commands.Stripe;
 using FeedMeServer.Functions.Data;
+using FeedMeServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,11 +12,47 @@ namespace FeedMeServer.Functions.Commands
 {
     internal class OrderHandler
     {
-        public static void CheckOrder(Socket Client)
+        private Client clientInf;
+
+        public void HandleOrder(ref Client clientM)
         {
-            OrderInfo orderInfo = Receive.ReceiveOrderInfo(Client);
-            UserInfo userDetails = Receive.ReceiveUserInfo(Client);
-            Send.SendMessage(Client, AddOrderToDB(orderInfo, userDetails).ToString());
+            clientInf = clientM;
+
+            Socket client = clientM.ClientSocket;
+
+            string specificCommand = Receive.ReceiveMessage(client);
+
+            switch (specificCommand)
+            {
+                case "ConfirmOrder":
+                    CheckOrder();
+                    break;
+                case "CheckForOrder":
+                    CheckForOrders();
+                    break;
+                case "GetSpecificOrder":
+                    GetSpecificOrder();
+                    break;
+                case "UpdateOrderStatus":
+                    UpdateOrderStatus();
+                    break;
+                case "UpdateRefundStatus":
+                    UpdateRefundStatus();
+                    break;
+                case "GetCustomerOrder":
+                    GetCustomerOrder();
+                    break;
+                case "GetRefunds":
+                    GetRefunds();
+                    break;
+            }
+        }
+
+        private void CheckOrder()
+        {
+            OrderInfo orderInfo = Receive.ReceiveOrderInfo(clientInf.ClientSocket);
+            UserInfo userDetails = Receive.ReceiveUserInfo(clientInf.ClientSocket);
+            Send.SendMessage(clientInf.ClientSocket, AddOrderToDB(orderInfo, userDetails).ToString());
         }
 
         private static int AddOrderToDB(OrderInfo orderInfo, UserInfo userDetails)
@@ -46,18 +83,18 @@ namespace FeedMeServer.Functions.Commands
             return 2;
         }
 
-        internal static void CheckForOrders(Socket clientSocket)
+        internal void CheckForOrders()
         {
-            string venID = Receive.ReceiveMessage(clientSocket);
+            string venID = Receive.ReceiveMessage(clientInf.ClientSocket);
 
-            string status = Receive.ReceiveMessage(clientSocket);
+            string status = Receive.ReceiveMessage(clientInf.ClientSocket);
 
             string sqlQuery = $"SELECT ID, CustomerID, VendorID, status, username FROM `order`, users WHERE VendorID = {venID} AND status = '{status}' AND userID = CustomerID;";
             DataTable DT = DAL.ExecCommand(sqlQuery);
 
             Console.WriteLine(sqlQuery);
 
-            Send.SendMessage(clientSocket, DT.Rows.Count.ToString());
+            Send.SendMessage(clientInf.ClientSocket, DT.Rows.Count.ToString());
 
             foreach (DataRow Order in DT.Rows)
             {
@@ -100,13 +137,13 @@ namespace FeedMeServer.Functions.Commands
                     OI.TotalPrice += Item.TotalPrice;
                 }
 
-                Send.SendOrderDetails(clientSocket, OI);
+                Send.SendOrderDetails(clientInf.ClientSocket, OI);
             }
         }
 
-        internal static void GetSpecificOrder(Socket clientSocket)
+        internal void GetSpecificOrder()
         {
-            string orderID = Receive.ReceiveMessage(clientSocket);
+            string orderID = Receive.ReceiveMessage(clientInf.ClientSocket);
 
             string sqlQuery = $"SELECT ID, CustomerID, VendorID, STATUS, firstname, lastname, refunded, refundMessage FROM `order`, `users` WHERE ID = {orderID};";
             Console.WriteLine(sqlQuery);
@@ -157,25 +194,27 @@ namespace FeedMeServer.Functions.Commands
                 OI.TotalPrice += Item.TotalPrice;
             }
 
-            Send.SendOrderDetails(clientSocket, OI);
+            Send.SendOrderDetails(clientInf.ClientSocket, OI);
         }
 
-        internal static void UpdateRefundStatus(Socket clientSocket)
+        internal void UpdateRefundStatus()
         {
-            string orderID = Receive.ReceiveMessage(clientSocket);
+            string orderID = Receive.ReceiveMessage(clientInf.ClientSocket);
 
-            string refundStatus = Receive.ReceiveMessage(clientSocket);
+            string refundStatus = Receive.ReceiveMessage(clientInf.ClientSocket);
 
             DAL.ExecCommand($"UPDATE `order` SET `refunded` = '{refundStatus}' WHERE `ID` = {orderID};");
         }
 
-        internal static void GetRefunds(Socket clientSocket)
+       
+
+        internal void GetRefunds()
         {
             string sqlQuery = $"SELECT * FROM `order` WHERE refunded = 'Processing'";
 
             DataTable custOrders = DAL.ExecCommand(sqlQuery);
 
-            Send.SendMessage(clientSocket, custOrders.Rows.Count.ToString());
+            Send.SendMessage(clientInf.ClientSocket, custOrders.Rows.Count.ToString());
 
             Console.WriteLine(custOrders.Rows.Count.ToString() + "THERE IS THAT MUANY XXX");
             foreach (DataRow order in custOrders.Rows)
@@ -193,22 +232,22 @@ namespace FeedMeServer.Functions.Commands
                 curOrder.EndPurchase = "10/10/11 21:30";
                 curOrder.refundStatus = order[4].ToString();
                 curOrder.refundMessage = order[5].ToString();
-                Send.SendOrderDetails(clientSocket, curOrder);
+                Send.SendOrderDetails(clientInf.ClientSocket, curOrder);
             }
         }
 
-        internal static void UpdateOrderStatus(Socket clientSocket)
+        internal void UpdateOrderStatus()
         {
-            string orderID = Receive.ReceiveMessage(clientSocket);
+            string orderID = Receive.ReceiveMessage(clientInf.ClientSocket);
 
-            string orderStatus = Receive.ReceiveMessage(clientSocket);
+            string orderStatus = Receive.ReceiveMessage(clientInf.ClientSocket);
 
             DAL.ExecCommand($"UPDATE `order` SET `status` = '{orderStatus}' WHERE `ID` = {orderID};");
         }
 
-        internal static void GetCustomerOrder(Socket clientSocket)
+        internal void GetCustomerOrder()
         {
-            string custID = Receive.ReceiveMessage(clientSocket);
+            string custID = Receive.ReceiveMessage(clientInf.ClientSocket);
 
             string sqlQuery = $"SELECT * FROM `order` WHERE CustomerID = {custID}";
 
@@ -216,7 +255,7 @@ namespace FeedMeServer.Functions.Commands
 
             List<OrderInfo> OIList = new List<OrderInfo>();
 
-            Send.SendMessage(clientSocket, custOrders.Rows.Count.ToString());
+            Send.SendMessage(clientInf.ClientSocket, custOrders.Rows.Count.ToString());
 
             Console.WriteLine(custOrders.Rows.Count.ToString() + "THERE IS THAT MUANY");
             foreach (DataRow order in custOrders.Rows)
@@ -232,7 +271,7 @@ namespace FeedMeServer.Functions.Commands
                 curOrder.VendorName = DT.Rows[0][0].ToString();
                 curOrder.StartPurchase = "10/10/11 20:30";
                 curOrder.EndPurchase = "10/10/11 21:30";
-                Send.SendOrderDetails(clientSocket, curOrder);
+                Send.SendOrderDetails(clientInf.ClientSocket, curOrder);
             }
         }
     }

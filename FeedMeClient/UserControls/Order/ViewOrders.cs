@@ -26,10 +26,9 @@ namespace FeedMeClient.UserControls.Order
             {
                 return;
             }
-            GenerateControls();
         }
 
-        private void GenerateControls()
+        public void GenerateControls()
         {
             #region Initializing Variables
 

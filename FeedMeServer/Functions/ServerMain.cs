@@ -105,7 +105,6 @@ namespace FeedMeServer.Functions
         public void ClientInterface(Client clientM)
         {
             bool clientConnected = true; //Add Some Sort of Return method later on
-            List<string> reqList = new List<string>();
             Socket cSock = clientM.ClientSocket;
 
             while (clientConnected)
@@ -114,13 +113,12 @@ namespace FeedMeServer.Functions
                 //Console.WriteLine($"Client Ping {PingChecker(clientSocket).ToString()}");
                 try
                 {
-                    string request = Receive.ReceiveMessage(cSock);
                     string token = Receive.ReceiveMessage(cSock);
+                    string request = Receive.ReceiveMessage(cSock);
 
                     int lastResp = clientM.GetLastResponseSpan() - DateTime.Now.Minute;
 
                     Console.WriteLine(clientM.TToken + "TToken");
-
                     if (lastResp > 5)
                     {
                         //Renew Token
@@ -140,10 +138,10 @@ namespace FeedMeServer.Functions
                             default:
                                 //Do Stuff
                                 //Send.SendMessage(clientSocket, "Invalid request socket killed")
-                                string ipadd = cSock.LocalEndPoint.ToString();
+                                //string ipadd = cSock.LocalEndPoint.ToString();
                                 break;
                             case "Login":
-                                LoginAuthentication.LoginHandler(cSock, clientM);
+                                LoginAuthentication.LoginHandler(cSock, ref clientM);
                                 break;
                             case "Register":
                                 RegisterAuthentication.RegistrationHandler(cSock);
@@ -165,26 +163,9 @@ namespace FeedMeServer.Functions
                             case "UpdateStoreInfo":
                                 StoreInfo.UpdateStoreInfo(cSock);
                                 break;
-                            case "ConfirmOrder":
-                                OrderHandler.CheckOrder(cSock);
-                                break;
-                            case "CheckForOrder":
-                                OrderHandler.CheckForOrders(cSock);
-                                break;
-                            case "GetSpecificOrder":
-                                OrderHandler.GetSpecificOrder(cSock);
-                                break;
-                            case "UpdateOrderStatus":
-                                OrderHandler.UpdateOrderStatus(cSock);
-                                break;
-                            case "UpdateRefundStatus":
-                                OrderHandler.UpdateRefundStatus(cSock);
-                                break;
-                            case "GetCustomerOrder":
-                                OrderHandler.GetCustomerOrder(cSock);
-                                break;
-                            case "GetRefunds":
-                                OrderHandler.GetRefunds(cSock);
+                            case "OrderHandling":
+                                OrderHandler orderHand = new OrderHandler();
+                                orderHand.HandleOrder(ref clientM);
                                 break;
                             case "GetUserInfo":
                                 CustomerHandler.GetCustomerInfo(cSock);
@@ -196,7 +177,9 @@ namespace FeedMeServer.Functions
                     }
                     else
                     {
+                        Console.WriteLine(clientM.SToken + "Street Token");
                         //Add Some sort of handling || just leave blank
+                        Console.WriteLine("Token No Match");
                     }
                 }
                 catch (Exception)

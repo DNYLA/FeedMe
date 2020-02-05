@@ -119,6 +119,11 @@ namespace FeedMeClient.UserControls
 
         #endregion Event Handlers
 
+        public void GenerateCon()
+        {
+            MasterGenerator();
+        }
+
         #region Dynamic Control Generator Method
 
         private void MasterGenerator()
