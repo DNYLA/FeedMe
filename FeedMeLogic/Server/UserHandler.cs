@@ -12,6 +12,8 @@ namespace FeedMeLogic.Server
     {
         public static UserInfo GetUserInfo(int userID)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+
             Send.SendMessage(ServerConnection.ServerSock, "GetUserInfo");
             Send.SendMessage(ServerConnection.ServerSock, userID.ToString());
 
@@ -20,6 +22,8 @@ namespace FeedMeLogic.Server
         
         public static void UpdateUserInfo(UserInfo UI)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+
             Send.SendMessage(ServerConnection.ServerSock, "UpdateUserInfo");
             Send.SendUserInfo(ServerConnection.ServerSock, UI);
         }

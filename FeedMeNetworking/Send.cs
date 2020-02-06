@@ -12,7 +12,7 @@ namespace FeedMeNetworking
          * ADD Function to decrypt BYTES.
          */
 
-        public static string token = "";
+        public static string token;
         public static void SendDataTable(Socket Sock, DataTable dataTable)
         {
             SendData(Sock, ProtoBufSerialization.DataSerialization(dataTable));
@@ -67,6 +67,7 @@ namespace FeedMeNetworking
         {
             byte[] data = Encoding.UTF8.GetBytes(token);
             Sock.Send(data, 0, data.Length, SocketFlags.None);
+            Thread.Sleep(100);
         }
 
         
