@@ -39,7 +39,7 @@ namespace FeedMeLogic.Server
                 return "-1";
             }
 
-            Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
+            //Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
 
             return salt;
         }
@@ -58,7 +58,9 @@ namespace FeedMeLogic.Server
 
             string salt = GetSalt(password);
 
-            Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
+            string hash = FeedMeLogic.Data.HashPass.ConfirmHash(password, salt);
+
+            Send.SendMessage(ServerConnection.ServerSock, hash);
 
             Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
 
