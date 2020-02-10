@@ -78,6 +78,8 @@ namespace FeedMeLogic.Vendor
 
         public static DataTable GetStoreInfo(string vendorID)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+
             Send.SendMessage(ServerConnection.ServerSock, "StoreInfo");
             Send.SendMessage(ServerConnection.ServerSock, vendorID);
 
@@ -86,6 +88,8 @@ namespace FeedMeLogic.Vendor
 
         public void UpdateStoreInfo(VendorInfo VI)
         {
+            Send.SendToken(ServerConnection.ServerSock);
+
             Send.SendMessage(ServerConnection.ServerSock, "UpdateStoreInfo");
             Send.SendVendorInfo(ServerConnection.ServerSock, VI);
         }
