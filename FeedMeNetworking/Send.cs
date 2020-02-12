@@ -63,6 +63,10 @@ namespace FeedMeNetworking
             Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
         }
 
+        /// <summary>
+        /// Sends Clients Unique Token to the server to verify the message
+        /// </summary>
+        /// <param name="Sock">Server Socket</param>
         public static void SendToken(Socket Sock)
         {
             byte[] data = Encoding.UTF8.GetBytes(token);

@@ -6,10 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Threading;
-using System.Web.SessionState;
 
 namespace FeedMeServer.Functions
 {
@@ -19,9 +16,7 @@ namespace FeedMeServer.Functions
 
         private const int PORT_NO = 4030;
         private const string IP_ADDRESS = "127.0.0.1";
-        public static List<Client> clients = new List<Client>();
-        public static List<string> tTokens = new List<string>(); //Temporary Session Tokens
-        public static List<string> sessionTokens = new List<string>();
+        private static List<Client> clients = new List<Client>();
         //Only able to bind to localhost
         //const string IP_ADDRESS = "85.255.236.26";
 
@@ -55,47 +50,44 @@ namespace FeedMeServer.Functions
             //Searching for clients
             while (true)
             {
+                //Increase Client Amount & Read Client Socket
                 clientAmount++;
                 clientSocket = serverSocket.Accept();
+
                 ServerLogger("Client Connected To FeedMe Server!");
-                Console.WriteLine("Dumping Client Information & Requests");
-                Client clientModel = CreateClientInfo(clientSocket);
+                Client clientModel = CreateClientInfo(clientSocket); //Create a New Client Object for new Client
                 
-                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel)));
+                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel))); //Createsa a New Instance of  ClientInterface
                 
-                clientThread.Start();
+                clientThread.Start(); //Start The Thread
                 
             }
         }
 
         public static string GenerateSessiontoken()
         {
-            Random rnd = new Random();
-            int length = 20;
+            Random rnd = new Random();  
+            int length = 20; //String is 20 Characters Long
             var str = "";
+
             for (var i = 0; i < length; i++)
             {
-                str += ((char)(rnd.Next(1, 26) + 64)).ToString();
+                str += ((char)(rnd.Next(1, 26) + 64)).ToString(); //Gets a random Character from 1, 120 in ascii and appends it to the string.
             }
-            if (sessionTokens.Contains(str))
-            {
-                return GenerateSessiontoken();
-            }
+
             return str;
 
         }
 
         private static Client CreateClientInfo(Socket cSock)
         {
-            Client clientInf = new Client();
-            clientInf.TToken = GenerateSessiontoken();
-            clientInf.TimeConnected = DateTime.Now;
+            Client clientInf = new Client(); //Instansiates Object
+            clientInf.TToken = GenerateSessiontoken(); //Gets a New Session Token1
+            clientInf.TimeConnected = DateTime.Now; 
             clientInf.LastResponse = DateTime.Now;
             clientInf.ClientSocket = cSock;
 
-            clients.Add(clientInf);
-            tTokens.Add(clientInf.TToken);
-            Console.WriteLine(clientInf.TToken + "TToken");
+            clients.Add(clientInf); //Adds it to the global list.
 
             Send.SendMessage(cSock, clientInf.TToken);
 
@@ -109,8 +101,6 @@ namespace FeedMeServer.Functions
 
             while (clientConnected)
             {
-
-                //Console.WriteLine($"Client Ping {PingChecker(clientSocket).ToString()}");
                 try
                 {
                     string token = Receive.ReceiveMessage(cSock);
@@ -125,18 +115,15 @@ namespace FeedMeServer.Functions
                     }
                     else
                     {
-                        Console.WriteLine("Less Dan 5");
                         clientM.LastResponse = DateTime.Now;
                     }
 
                     if (token == clientM.TToken)
                     {
-                        Console.WriteLine("In T Tokens");
                         //Temporary Tokens are only able to Login Or Register
                         switch (request)
                         {
                             default:
-                                //Do Stuff
                                 //Send.SendMessage(clientSocket, "Invalid request socket killed")
                                 //string ipadd = cSock.LocalEndPoint.ToString();
                                 break;
@@ -157,20 +144,20 @@ namespace FeedMeServer.Functions
                             case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement
                                 StoreMenuHandler.MenuHandler(cSock);
                                 break;
-                            case "StoreInfo":
+                            case "StoreInfo": //Handles Store Info Transaction from Vendor
                                 StoreInfo.GetStoreInfo(cSock);
                                 break;
-                            case "UpdateStoreInfo":
+                            case "UpdateStoreInfo": //Handles Settings For Vendor
                                 StoreInfo.UpdateStoreInfo(cSock);
                                 break;
-                            case "OrderHandling":
+                            case "OrderHandling": //Used to Edit Orders
                                 OrderHandler orderHand = new OrderHandler();
                                 orderHand.HandleOrder(ref clientM);
                                 break;
-                            case "GetUserInfo":
+                            case "GetUserInfo": //Used to Set & Retreive user Information
                                 CustomerHandler.GetCustomerInfo(cSock);
                                 break;
-                            case "UpdateUserInfo":
+                            case "UpdateUserInfo": //Same as UpdateStoreInfo but is used for Customers.
                                 CustomerHandler.UpdateUserInfo(cSock);
                                 break;
                         }

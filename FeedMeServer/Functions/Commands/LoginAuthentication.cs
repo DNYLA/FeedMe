@@ -30,7 +30,6 @@ namespace FeedMeServer.Functions.Commands
             if (CheckUserCredentials(username, clientHashedPassword, LoginType) == true)
             {
                 clientM.SToken = ServerMain.GenerateSessiontoken();
-                ServerMain.sessionTokens.Add(clientM.SToken);
                 Send.SendMessage(Client, clientM.SToken);
                 if (LoginType == 0)
                 {
