@@ -28,7 +28,7 @@ namespace FeedMeServer.Functions
         {
             Console.WriteLine("Starting Server. This Can Take a few minutes...");
             IPAddress IP = GetServerInfo.GetPrivateIP();
-            String PubIP = GetServerInfo.GetPublicIP();
+            string PubIP = GetServerInfo.GetPublicIP();
             //GetServerInfo.RunAsync();
             string IPADD = "127.0.0.1";
             //string IPADD = "172.16.23.162";
@@ -53,26 +53,26 @@ namespace FeedMeServer.Functions
                 //Increase Client Amount & Read Client Socket
                 clientAmount++;
                 clientSocket = serverSocket.Accept();
-
-                ServerLogger("Client Connected To FeedMe Server!");
-                Client clientModel = CreateClientInfo(clientSocket); //Create a New Client Object for new Client
+                ServerLogger("Client Connected To FeedMe Server!"); //Informing Interface
+                Client clientModel = CreateClientInfo(clientSocket); //Creates a New Client Model for each client
                 
-                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel))); //Createsa a New Instance of  ClientInterface
+                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel))); //Initializes new thread for each client for the new Class Instance
                 
-                clientThread.Start(); //Start The Thread
+                clientThread.Start(); //Starts the Thread
                 
             }
         }
 
         public static string GenerateSessiontoken()
         {
-            Random rnd = new Random();  
-            int length = 20; //String is 20 Characters Long
-            var str = "";
+            Random rnd = new Random(); 
+            int tokenLength = 25; //Length Of Token
+            var str = string.Empty;
 
-            for (var i = 0; i < length; i++)
+
+            for (var i = 0; i < tokenLength; i++)
             {
-                str += ((char)(rnd.Next(1, 26) + 64)).ToString(); //Gets a random Character from 1, 120 in ascii and appends it to the string.
+                str += ((char)rnd.Next(33, 125)).ToString(); //Adds 64 for ascii Equivalent
             }
 
             return str;
@@ -138,7 +138,6 @@ namespace FeedMeServer.Functions
                     else if (token == clientM.SToken)
                     {
                         //Clients with a Session token can send any command.
-                        Console.WriteLine("In S Tokens");
                         switch (request)
                         {
                             case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement
@@ -150,7 +149,7 @@ namespace FeedMeServer.Functions
                             case "UpdateStoreInfo": //Handles Settings For Vendor
                                 StoreInfo.UpdateStoreInfo(cSock);
                                 break;
-                            case "OrderHandling": //Used to Edit Orders
+                            case "OrderHandling": // Handles all Order Requests from Customers & Vendors
                                 OrderHandler orderHand = new OrderHandler();
                                 orderHand.HandleOrder(ref clientM);
                                 break;
@@ -164,20 +163,20 @@ namespace FeedMeServer.Functions
                     }
                     else
                     {
-                        Console.WriteLine(clientM.SToken + "Street Token");
                         //Add Some sort of handling || just leave blank
-                        Console.WriteLine("Token No Match");
+                        ServerLogger($"Invalid Token Received From Client {token}", cSock);
                     }
                 }
                 catch (Exception)
                 {
+                    ServerLogger("Undiagnosed Error Uccored When Contacting Client Retrying...", cSock);
                 }
             }
         }
 
-        public static void ServerLogger(string message)
+        public static void ServerLogger(string message, Socket sock)
         {
-            Console.WriteLine($"{DateTime.Now}:{message}");
+            Console.WriteLine($"{DateTime.Now}:{sock.RemoteEndPoint}:{message}");
         }
 
         public static void ServerLogger(string message, string LogType = "Server")
