@@ -19,8 +19,10 @@ namespace FeedMeVendorUI.Forms
 
         private void Items_Click(object sender, EventArgs e)
         {
-            menuInfo1.BringToFront();
-            menuInfo1.UpdateUI();
+            categoroyViewer1.BringToFront();
+            categoroyViewer1.ShowCategories();
+            //menuInfo1.BringToFront();
+            //menuInfo1.UpdateUI();
             UpdatePointer(sender);
         }
 

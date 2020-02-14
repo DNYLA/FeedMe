@@ -21,7 +21,7 @@ namespace FeedMeLogic.Server
             }
             else if (LoginType == 1)
             {
-                Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
+                //Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
                 return VendorLogin(username, password);
             }
 
@@ -81,9 +81,16 @@ namespace FeedMeLogic.Server
 
             Send.SendMessage(ServerConnection.ServerSock, FeedMeLogic.Data.HashPass.ConfirmHash(password, salt));
 
+            Send.token = Receive.ReceiveMessage(ServerConnection.ServerSock);
+
             return Receive.ReceiveVendorInfo(ServerConnection.ServerSock);
         }
 
+        /// <summary>
+        /// Sends Registration Information to the Client where it will processed
+        /// </summary>
+        /// <param name="UserInformation">User Information</param>
+        /// <returns>Value Indicating if the registration was successfull</returns>
         public static int RegisterUser(UserInfo UserInformation)
         {
             Send.SendToken(ServerConnection.ServerSock);
@@ -97,6 +104,11 @@ namespace FeedMeLogic.Server
             return Convert.ToInt32(Receive.ReceiveMessage(ServerConnection.ServerSock));
         }
 
+        /// <summary>
+        /// Sends REgistration Information with Vendor Information.
+        /// </summary>
+        /// <param name="VendorInformation">Vendor Information which needs to be registered</param>
+        /// <returns>Value Indicating if the registration was successfull</returns>
         public static int RegisterVendor(VendorInfo VendorInformation)
         {
             Send.SendToken(ServerConnection.ServerSock);
@@ -111,8 +123,4 @@ namespace FeedMeLogic.Server
         }
     }
 
-    public enum ObjectType
-    {
-        VendorObject, UserObject
-    }
 }

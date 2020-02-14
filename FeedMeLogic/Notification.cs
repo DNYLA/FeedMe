@@ -7,6 +7,11 @@ namespace FeedMeLogic
     {
         #region Initiaizling Components
 
+        /// <summary>
+        /// Constructor for the Notification Class
+        /// </summary>
+        /// <param name="notifMessage">The Message to be displayed</param>
+        /// <param name="type">Notification Type is a custom Enum which includes the multiple notification type</param>
         public Notification(string notifMessage, NotifType type)
         {
             InitializeComponent();

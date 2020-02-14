@@ -54,7 +54,7 @@
             this.OrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.OrderButton.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.OrderButton.Location = new System.Drawing.Point(131, 611);
+            this.OrderButton.Location = new System.Drawing.Point(142, 609);
             this.OrderButton.Name = "OrderButton";
             this.OrderButton.Size = new System.Drawing.Size(487, 55);
             this.OrderButton.TabIndex = 15;

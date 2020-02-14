@@ -5,6 +5,9 @@ using System.Text;
 
 namespace FeedMeServer.Functions.Data
 {
+    /// <summary>
+    /// Modified Version of the FeedMeLogic Hash Password Class which re-hashes client side.
+    /// </summary>
     internal class HashPass
     {
         /* Steps To Hashing A Password With a Salt
@@ -23,15 +26,6 @@ namespace FeedMeServer.Functions.Data
         private static string SERVER_SALT = "G0QgcjMKDUDuIhEBmbHCLUM6XDelVPHB";
 
         #region Generate Methods
-
-        private static byte[] GenerateSalt(int length)
-        {
-            RNGCryptoServiceProvider RNGProvider = new RNGCryptoServiceProvider();
-            byte[] salt = new byte[length];
-            RNGProvider.GetBytes(salt);
-
-            return salt;
-        }
 
         private static string GenerateHash(string password, byte[] salt, int iterations)
         {

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FeedMeNetworking.Serialization;
 using Stripe;
 
 namespace FeedMeServer.Functions.Commands.Stripe
 {
-   class ChargeCard
+    class ChargeCard
     {
         public static string PubKey = "pk_test_YQJKZKyYgy5Yxcm5xRS9SNtx00S8lExmz2"; //Public Key
         public static string SecretKey = "sk_test_hUXfz1JlyFizkc5aYs1RQEXs00IcYtIlfB"; //Secret Key
@@ -24,18 +20,17 @@ namespace FeedMeServer.Functions.Commands.Stripe
                 * Using Stripe's library to make request
                 * Everything below is from the Official Documentation
                 * From https://stripe.com/docs/api
-                *
                 */
 
             //Set To public key so we can create a Card Card Object
             StripeConfiguration.ApiKey = PubKey;
 
             //Getting Card & Price Information // No Error Checks added so it can crash the program
-
             string CardNo = OI.Card.CardNum;
-            CardNo = "4242 4242 4242 4242";
+            //CardNo = "4242 4242 4242 4242";
             string CVCText = OI.Card.CVC;
-            CVCText = "198";
+            //CVCText = "198";
+
             string UserEmail = "Dan@Gmail.com";
             string DescriptionText = "Tes It is";
 

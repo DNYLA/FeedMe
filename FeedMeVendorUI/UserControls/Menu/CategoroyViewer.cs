@@ -48,11 +48,11 @@ namespace FeedMeVendorUI.UserControls.Menu
             return CategoryList;
         }
 
-        private void ShowCategories()
+        public void ShowCategories()
         {
             Size EmptySize = new Size(0, 0);
             Size catPanelSize = new Size(228, 136);
-            Size picBoxSize = new Size(225, 79);
+            Size picBoxSize = new Size(228, 79);
             Size catNameSize = new Size(82, 25);
             Size catAmmSize = new Size(57, 17);
 
@@ -65,47 +65,56 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             List<string> catList = GetCategories(Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString());
 
-            //foreach (string category in catList)
-            //{
-            //    string orderStatus = $"16 Items:"; //hard Coded right now change later
+            foreach (string category in catList)
+            {
+                string orderStatus = $"16 Items:"; //hard Coded right now change later
 
-            //    Panel catPanel = GenControls.AddPanel("cat", Color.White, catPanelSize);
-            //    PictureBox catImage = GenControls.AddPictureBox("catImg", emptyLoc, picBoxSize);
+                Panel catPanel = GenControls.AddPanel(category, Color.White, catPanelSize);
+                PictureBox catImage = GenControls.AddPictureBox(category, emptyLoc, picBoxSize);
+                catImage.ImageLocation = "https://p.sbond.co/dansite/img/Categories/download.jpg";
+                catImage.SizeMode = PictureBoxSizeMode.CenterImage;
+                catImage.Name = category + "picBox";
+                Label catTitleLabel = GenControls.AddLabel(category, category, catNameLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
+                Label catAmountLabel = GenControls.AddLabel(category, orderStatus, catAmmLoc, catAmmFont, Color.Black, Color.Transparent, EmptySize, true);
+                //Label orderPriceLabel = GenControls.AddLabel(PriceText + "Rating", PriceText, PriceLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
+                //Label orderStatusLabel = GenControls.AddLabel(orderStatus + "Rating", orderStatus, StatusLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
 
-            //    Label catNameLabel = GenControls.AddLabel(orderText, orderText, OrderLoc, catAmmFont, Color.Black, Color.Transparent, EmptySize, true);
-            //    Label catAmountLabel = GenControls.AddLabel(orderStatus, orderStatus, catAmmLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
-            //    Label orderPriceLabel = GenControls.AddLabel(PriceText + "Rating", PriceText, PriceLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
-            //    Label orderStatusLabel = GenControls.AddLabel(orderStatus + "Rating", orderStatus, StatusLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
+                Control[] controlArray = new Control[] { catImage, catTitleLabel, catAmountLabel };
 
-            //    Control[] controlArray = new Control[] { orderTitleLabel, orderCustLabel, orderPriceLabel, orderStatusLabel };
+                foreach (Control curControl in controlArray)
+                {
+                    //Add Event Handlers Below
+                    curControl.Click += new EventHandler(OpenOrder);
+                    curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                    catPanel.Controls.Add(curControl);
+                    curControl.Tag = category;
+                }
 
-            //    foreach (Control curControl in controlArray)
-            //    {
-            //        //Add Event Handlers Below
-            //        curControl.Click += new EventHandler(OpenOrder);
-            //        curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
-            //        itemPanel.Controls.Add(curControl);
-            //        curControl.Tag = Order.OrderID.ToString();
-            //    }
+                flowLayoutPanel1.Controls.Add(catPanel);
 
-            //    if (status == "processing")
-            //    {
-            //        OrdersFlowPanel.Controls.Add(itemPanel);
-            //    }
-            //    else if (status == "Cooking")
-            //    {
-            //        CookingFlowPanel.Controls.Add(itemPanel);
-            //    }
-            //    else if (status == "Delivering")
-            //    {
-            //        DeliveryFlowPanel.Controls.Add(itemPanel);
-            //    }
+                flowLayoutPanel1.Click += new EventHandler(OpenOrder);
+                flowLayoutPanel1.MouseMove += new MouseEventHandler(CursorChangeArgs);
+                flowLayoutPanel1.Tag = category;
+            }
+        }
 
-            //    itemPanel.Click += new EventHandler(OpenOrder);
-            //    itemPanel.MouseMove += new MouseEventHandler(CursorChangeArgs);
-            //    itemPanel.Tag = Order.OrderID.ToString();
-            //    //GenerateControls();
-            //}//
+        private void CursorChangeArgs(object sender, MouseEventArgs e)
+        {
+            Cursor.Current = Cursors.Hand;
+        }
+
+        private void OpenOrder(object sender, EventArgs e)
+        {
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("itemViewer1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Control Con = (Control)sender;
+
+            Label TitleLabel = userControl.Controls.Find("CategoryNameLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+
+            TitleLabel.Text = Con.Tag.ToString();
+
+            userControl.BringToFront();
         }
     }
 }

@@ -6,13 +6,16 @@ using System.Windows.Forms;
 
 namespace FeedMeLogic.Controls
 {
-    public partial class FeedMeTextBox : TextBox
+    public partial class FeedMeTextBox : TextBox //Inherits Everything From TextBox Class
     {
         private readonly Font Fnt;
         private readonly float FntSize;
 
         #region Initialize Class
 
+        /// <summary>
+        /// Constructor which adds the Single Border onto the control
+        /// </summary>
         public FeedMeTextBox()
         {
             BorderStyle = BorderStyle.None;
@@ -44,6 +47,8 @@ namespace FeedMeLogic.Controls
         #region Protected Override Events
 
         #region WaterMark Events
+
+        //Overrides Default TextBox Methods
 
         protected override void OnResize(EventArgs e)
         {
@@ -85,9 +90,9 @@ namespace FeedMeLogic.Controls
 
         protected override void OnTextChanged(EventArgs e)
         {
-            base.OnTextChanged(e);
+            base.OnTextChanged(e); //The Base Function is used to access variables and members in the original object method
 
-            if (Text.EndsWith(watermark) && Text.Length != watermark.Length)
+            if (Text.EndsWith(watermark) && Text.Length != watermark.Length) //Checks if Watermark should be added onto textbox
             {
                 Text = Text.Substring(0, Text.Length - Watermark.Length);
             }
@@ -96,7 +101,8 @@ namespace FeedMeLogic.Controls
             {
                 return;
             }
-            CheckWatermark();
+
+            CheckWatermark(); 
             Font = new Font(Font.FontFamily, Font.Size, FontStyle.Regular);
             Size size = TextRenderer.MeasureText(Text, Font);
             Height = size.Height + 5;
@@ -113,8 +119,10 @@ namespace FeedMeLogic.Controls
             {
                 Text = string.Empty;
             }
+            //Single Border
             Controls[0].BackColor = _FocusColor;
 
+            //Creates 4 Borders Around the Control
             if (!SingleLine)
             {
                 Controls[0].BackColor = _FocusColor;
@@ -124,6 +132,10 @@ namespace FeedMeLogic.Controls
             }
         }
 
+        /// <summary>
+        /// Updates Colour On Leave
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnLeave(EventArgs e)
         {
             base.OnLeave(e);
@@ -152,13 +164,15 @@ namespace FeedMeLogic.Controls
         #endregion Protected Override Events
 
         #region Custom Properties
-
+        //Custom Atributes added to the object
         private Color _baseColor = Color.Black;
         private Color _borderColor = Color.Black;
         private Color _FocusColor = Color.White;
         private string watermark = string.Empty;
         private bool _autoResize = false;
         private bool _singleLine = true;
+
+        //Each Function here Gets & Sets each of the private atributes above
 
         public bool SingleLine
         {
@@ -238,6 +252,9 @@ namespace FeedMeLogic.Controls
             }
         }
 
+        /// <summary>
+        /// Adds A Single or Multiple Border Around the TextBox.
+        /// </summary>
         private void AddBorders()
         {
             if (!SingleLine)
@@ -270,6 +287,9 @@ namespace FeedMeLogic.Controls
             }
         }
 
+        /// <summary>
+        /// Removes Border around the Control
+        /// </summary>
         private void RemoveBorder()
         {
             string[] LabelList = new string[] { "TopBorder", "LeftBorder", "RightBorder" };
@@ -294,12 +314,13 @@ namespace FeedMeLogic.Controls
         {
             if (Text == watermark || Text == string.Empty)
             {
+                //Updates Text To include watermark
                 ForeColor = Color.Gray;
                 Text = watermark;
                 Font = new Font(Font.FontFamily, FntSize - 1.0F, FontStyle.Italic);
                 Invalidate();
             }
-            else
+            else 
             {
                 Font = new Font(Font.FontFamily, FntSize + 3.0F, FontStyle.Regular);
                 ForeColor = _baseColor;

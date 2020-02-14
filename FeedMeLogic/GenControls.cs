@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace FeedMeLogic
 {
     /// <summary>
-    /// Generate Controls is a Class Which allows you to Dynamically Create Different Objects/Controls
+    /// Generate Controls is a Class Which allows you to Dynamically Create Different Objects/Controls which can be added to a UI.
     /// </summary>
     public class GenControls
     {
@@ -51,7 +51,7 @@ namespace FeedMeLogic
             }
             else
             {
-                labelObject.AutoSize = false;
+                labelObject.AutoSize = true;
             }
 
             labelObject.Location = labelLocation;
