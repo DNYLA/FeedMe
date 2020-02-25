@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.SideMenuPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.adminButton = new System.Windows.Forms.Button();
             this.MenuButton = new System.Windows.Forms.Button();
             this.MenuIndicatorPanel = new System.Windows.Forms.Panel();
             this.SettingsButton = new System.Windows.Forms.Button();
@@ -37,6 +37,7 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
             this.UserViewPanel = new System.Windows.Forms.Panel();
+            this.settings1 = new FeedMeClient.UserControls.settings();
             this.refund1 = new FeedMeClient.UserControls.Admin_.Refund();
             this.viewRefunds1 = new FeedMeClient.UserControls.Admin_.ViewRefunds();
             this.viewOrder1 = new FeedMeVendorUI.UserControls.Menu.ViewOrder();
@@ -46,7 +47,6 @@
             this.reviewOrderControl = new FeedMeClient.UserControls.Order.ReviewOrderControl();
             this.OrderControl = new FeedMeClient.UserControls.OrderControl();
             this.HomeControl = new FeedMeClient.UserControls.HomeControl();
-            this.settings1 = new FeedMeClient.UserControls.settings();
             this.SideMenuPanel.SuspendLayout();
             this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +54,7 @@
             // SideMenuPanel
             // 
             this.SideMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(161)))), ((int)(((byte)(180)))));
-            this.SideMenuPanel.Controls.Add(this.button1);
+            this.SideMenuPanel.Controls.Add(this.adminButton);
             this.SideMenuPanel.Controls.Add(this.MenuButton);
             this.SideMenuPanel.Controls.Add(this.MenuIndicatorPanel);
             this.SideMenuPanel.Controls.Add(this.SettingsButton);
@@ -67,20 +67,20 @@
             this.SideMenuPanel.Size = new System.Drawing.Size(139, 677);
             this.SideMenuPanel.TabIndex = 1;
             // 
-            // button1
+            // adminButton
             // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(14, 210);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 51);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "    Admin";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.adminButton.FlatAppearance.BorderSize = 0;
+            this.adminButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.adminButton.ForeColor = System.Drawing.Color.White;
+            this.adminButton.Image = global::FeedMeClient.Properties.Resources.ProfileIcon;
+            this.adminButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.adminButton.Location = new System.Drawing.Point(14, 210);
+            this.adminButton.Name = "adminButton";
+            this.adminButton.Size = new System.Drawing.Size(123, 51);
+            this.adminButton.TabIndex = 4;
+            this.adminButton.Text = "    Admin";
+            this.adminButton.UseVisualStyleBackColor = true;
+            this.adminButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // MenuButton
             // 
@@ -180,6 +180,15 @@
             this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
             this.UserViewPanel.TabIndex = 2;
             // 
+            // settings1
+            // 
+            this.settings1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settings1.Location = new System.Drawing.Point(-2, -5);
+            this.settings1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.settings1.Name = "settings1";
+            this.settings1.Size = new System.Drawing.Size(767, 677);
+            this.settings1.TabIndex = 9;
+            // 
             // refund1
             // 
             this.refund1.Font = new System.Drawing.Font("Nirmala UI", 12F);
@@ -262,15 +271,6 @@
             this.HomeControl.Size = new System.Drawing.Size(771, 677);
             this.HomeControl.TabIndex = 0;
             // 
-            // settings1
-            // 
-            this.settings1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settings1.Location = new System.Drawing.Point(-2, 0);
-            this.settings1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.settings1.Name = "settings1";
-            this.settings1.Size = new System.Drawing.Size(767, 677);
-            this.settings1.TabIndex = 9;
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
@@ -306,7 +306,7 @@
         private UserControls.Designs.ReviewDesign reviewDesign1;
         private UserControls.Order.EnterCredentials enterCredentials1;
         private UserControls.Order.ViewOrders viewOrders1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button adminButton;
         private FeedMeVendorUI.UserControls.Menu.ViewOrder viewOrder1;
         private UserControls.Admin_.ViewRefunds viewRefunds1;
         private UserControls.Admin_.Refund refund1;

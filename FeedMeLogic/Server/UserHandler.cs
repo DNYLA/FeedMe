@@ -1,15 +1,15 @@
 ﻿using FeedMeNetworking;
 using FeedMeNetworking.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeLogic.Server
 {
     public class UserHandler
     {
+        /// <summary>
+        /// Gets UserInformation based on a UserID
+        /// </summary>
+        /// <param name="userID">UserID to retreive the data of</param>
+        /// <returns>UserInfo Object with information about the requested user</returns>
         public static UserInfo GetUserInfo(int userID)
         {
             Send.SendToken(ServerConnection.ServerSock);
@@ -20,6 +20,10 @@ namespace FeedMeLogic.Server
             return Receive.ReceiveUserInfo(ServerConnection.ServerSock);
         }
         
+        /// <summary>
+        /// Updates UserInfo based on UserInfo Object
+        /// </summary>
+        /// <param name="UI">Userinfo Object with new information</param>
         public static void UpdateUserInfo(UserInfo UI)
         {
             Send.SendToken(ServerConnection.ServerSock);

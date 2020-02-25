@@ -30,22 +30,21 @@ namespace FeedMeLogic.Server
 
         public static void InitiailizeConnection(int retryAmount = 0)
         {
-            if (!Connected)
+            if (!Connected) //No Need to reconnect
             {
-                if (retryAmount <= 20)
+                if (retryAmount <= 20) //Maximum Retry Amount of 20
                 {
                     try
                     {
-                        IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP_ADDRESS), PORT_NO);
-                        ServerSock.Connect(endPoint);
+                        IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP_ADDRESS), PORT_NO); //Creates IPEndPoint with Server IP & Port
+                        ServerSock.Connect(endPoint); //Connects to Server
                         Connected = true;
                         Send.token = Receive.ReceiveMessage(ServerSock);
-                        Console.WriteLine(Send.token + "TToken");
                     }
                     catch
                     {
                         Thread.Sleep(500);
-                        InitiailizeConnection(retryAmount++);
+                        InitiailizeConnection(retryAmount++); //Reconnect
                     }
                 }
                 else

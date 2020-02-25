@@ -56,13 +56,13 @@
             this.MessageLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.MessageLabel.Location = new System.Drawing.Point(118, 49);
             this.MessageLabel.Name = "MessageLabel";
-            this.MessageLabel.Size = new System.Drawing.Size(226, 25);
+            this.MessageLabel.Size = new System.Drawing.Size(170, 25);
             this.MessageLabel.TabIndex = 4;
-            this.MessageLabel.Text = "Sucessfully Purchased";
+            this.MessageLabel.Text = "Sample Message";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 22);
+            this.pictureBox1.Location = new System.Drawing.Point(6, 18);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(106, 86);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

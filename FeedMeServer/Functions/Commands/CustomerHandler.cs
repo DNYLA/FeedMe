@@ -2,17 +2,17 @@
 using FeedMeNetworking.Serialization;
 using FeedMeServer.Functions.Data;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FeedMeServer.Functions.Commands
 {
     class CustomerHandler
     {
+        /// <summary>
+        /// Gets Customer Information from Database
+        /// </summary>
+        /// <param name="clientSocket">Client which requested Customer Information</param>
         internal static void GetCustomerInfo(Socket clientSocket)
         {
             string userID = Receive.ReceiveMessage(clientSocket);
@@ -46,6 +46,10 @@ namespace FeedMeServer.Functions.Commands
             Send.SendUserInfo(clientSocket, UI);
         }
 
+        /// <summary>
+        /// Updates Database with users new information
+        /// </summary>
+        /// <param name="clientSocket">Client who requested information update</param>
         internal static void UpdateUserInfo(Socket clientSocket)
         {
             UserInfo UI = Receive.ReceiveUserInfo(clientSocket);
