@@ -55,6 +55,9 @@ namespace FeedMeServer.Functions.Commands.Vendor
                 case "RemoveItem":
                     RemoveItem(vendorID);
                     break;
+                case "GetSpecificItem":
+                    GetSpecificItem(vendorID);
+                    break;
             }
         }
 
@@ -81,11 +84,20 @@ namespace FeedMeServer.Functions.Commands.Vendor
             Send.SendDataTable(Client, ItemInfo);
         }
 
+        private static void GetSpecificItem(string vendorID)
+        {
+            string itemID = Receive.ReceiveMessage(Client);
+            string SQLQuery = ($"SELECT * FROM items WHERE VendorID = {vendorID} AND ItemID = '{itemID}'");
+            DataTable ItemInfo = Data.DAL.ExecCommand(SQLQuery);
+            Send.SendDataTable(Client, ItemInfo);
+
+        }
+
         /// <summary>
         /// Adds a Category to the database
         /// </summary>
         /// <param name="vendorID">Vendor which requested the data</param>
-        private static void AddCategory(string vendorID)
+            private static void AddCategory(string vendorID)
         {
             string CategoryName = Receive.ReceiveMessage(Client);
         }

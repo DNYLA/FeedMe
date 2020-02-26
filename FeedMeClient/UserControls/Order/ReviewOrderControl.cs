@@ -1,8 +1,10 @@
 ﻿using FeedMeLogic;
+using FeedMeLogic.Data;
 using FeedMeLogic.Server;
 using FeedMeNetworking.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -184,7 +186,6 @@ namespace FeedMeClient.UserControls.Order
 
         private void VendorLabel_TextChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show("Yeet Skeet Peet Leet");
             GenerateItemList();
         }
 
@@ -192,6 +193,10 @@ namespace FeedMeClient.UserControls.Order
         {
             Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
             UserControl userControl = CurrentForm.Controls.Find("enterCredentials1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Label TitleLabel = userControl.Controls.Find("VendorLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = VendorLabel.Text; //Sets Vendor Title To Current Vendor
+
             userControl.BringToFront();
         }
     }

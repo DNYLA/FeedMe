@@ -33,6 +33,7 @@
             // 
             // OrderFlowPanel
             // 
+            this.OrderFlowPanel.AutoScroll = true;
             this.OrderFlowPanel.Location = new System.Drawing.Point(34, 60);
             this.OrderFlowPanel.Name = "OrderFlowPanel";
             this.OrderFlowPanel.Size = new System.Drawing.Size(691, 539);

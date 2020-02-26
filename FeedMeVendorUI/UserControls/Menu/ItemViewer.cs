@@ -24,8 +24,6 @@ namespace FeedMeVendorUI.UserControls.Menu
             string currentCat = CategoryNameLabel.Text;
             DataTable ItemInfo = StoreMenuInfo.GetItemList(vendorID, currentCat);
 
-            List<string> ItemList = new List<string>();
-
             return ItemInfo;
         }
 
@@ -46,40 +44,42 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             DataTable ItemsList = GetItems(Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString());
 
-            flowLayoutPanel1.Controls.Clear();
+            EditCategory.Click += new EventHandler(OpenEditorCat);
+            EditCategory.MouseMove += new MouseEventHandler(CursorChangeArgs);
 
+            Panel EditCategoryPanel = EditCategory;
+
+            flowLayoutPanel1.Controls.Clear();
+        
             foreach (DataRow Item in ItemsList.Rows)
             {
                 string orderStatus = $"16 Items:"; //hard Coded right now change later
                 string ItemName = Item[2].ToString();
                 string ItemPrice = "£" + Item[5].ToString();
+                string ItemID = Item[0].ToString();
 
                 Panel catPanel = GenControls.AddPanel(ItemName, Color.White, catPanelSize);
-                PictureBox catImage = GenControls.AddPictureBox(ItemName, emptyLoc, picBoxSize);
+                PictureBox catImage = GenControls.AddPictureBox(ItemID, emptyLoc, picBoxSize);
                 catImage.ImageLocation = "https://p.sbond.co/dansite/img/Categories/download.jpg";
                 catImage.SizeMode = PictureBoxSizeMode.CenterImage;
 
-                Label ItemNameLabel = GenControls.AddLabel(ItemName, ItemName, ItemNameLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
-                Label ItemPriceLabel = GenControls.AddLabel(ItemName, ItemPrice, catAmmLoc, catAmmFont, Color.Black, Color.Transparent, EmptySize, true);
-                //Label orderPriceLabel = GenControls.AddLabel(PriceText + "Rating", PriceText, PriceLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
-                //Label orderStatusLabel = GenControls.AddLabel(orderStatus + "Rating", orderStatus, StatusLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
+                Label ItemNameLabel = GenControls.AddLabel(ItemID, ItemName, ItemNameLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
+                Label ItemPriceLabel = GenControls.AddLabel(ItemID, ItemPrice, catAmmLoc, catAmmFont, Color.Black, Color.Transparent, EmptySize, true);
 
                 Control[] controlArray = new Control[] { catImage, ItemNameLabel, ItemPriceLabel };
 
                 foreach (Control curControl in controlArray)
                 {
                     //Add Event Handlers Below
-                    curControl.Click += new EventHandler(OpenOrder);
+                    curControl.Click += new EventHandler(OpenEditor);
                     curControl.MouseMove += new MouseEventHandler(CursorChangeArgs);
                     catPanel.Controls.Add(curControl);
-                    curControl.Tag = ItemName;
+                    curControl.Tag = (string)ItemID; //Store the ItemID so it can be referenced later on
                 }
-
+                catPanel.Tag = (string)ItemID;
                 flowLayoutPanel1.Controls.Add(catPanel);
+                flowLayoutPanel1.Controls.Add(EditCategoryPanel);
 
-                flowLayoutPanel1.Click += new EventHandler(OpenOrder);
-                flowLayoutPanel1.MouseMove += new MouseEventHandler(CursorChangeArgs);
-                flowLayoutPanel1.Tag = ItemName;
             }
         }
 
@@ -88,17 +88,33 @@ namespace FeedMeVendorUI.UserControls.Menu
             Cursor.Current = Cursors.Hand;
         }
 
-        private void OpenOrder(object sender, EventArgs e)
+        private void OpenEditor(object sender, EventArgs e)
         {
-            //Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
-            //UserControl userControl = CurrentForm.Controls.Find("ItemViewer1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("EditItem1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
 
-            //Control Con = (Control)sender;
+            Control Con = (Control)sender;
 
-            //Label TitleLabel = userControl.Controls.Find("CategoryNameLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
-            //TitleLabel.Text = Con.Text;
+            Label TitleLabel = userControl.Controls.Find("ItemName", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = Con.Name;
 
-            //userControl.BringToFront();
+            //Label itemID = userControl.Controls.Find("ItemID", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            //itemID.Text = (string)Con.Tag;
+            
+            userControl.BringToFront();
+        }
+
+        private void OpenEditorCat(object sender, EventArgs e)
+        {
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("EditItem1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Control Con = (Control)sender;
+
+            Label TitleLabel = userControl.Controls.Find("ItemName", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = CategoryNameLabel.Text + " Category";
+
+            userControl.BringToFront();
         }
 
         private void CategoryNameLabel_TextChanged(object sender, EventArgs e)

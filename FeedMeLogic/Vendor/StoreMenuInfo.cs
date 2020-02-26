@@ -55,11 +55,25 @@ namespace FeedMeLogic.Vendor
             return Receive.ReceiveMessage(ServerConnection.ServerSock);
         }
 
+        public static string EditItem(string vendorID, string oldItemName, string newItemName, string category, string desc, string price)
+        {
+            SendRequestCommand(vendorID, "EditItem");
+
+
+            Send.SendMessage(ServerConnection.ServerSock, oldItemName);
+            Send.SendMessage(ServerConnection.ServerSock, newItemName);
+            Send.SendMessage(ServerConnection.ServerSock, category);
+            Send.SendMessage(ServerConnection.ServerSock, desc);
+            Send.SendMessage(ServerConnection.ServerSock, price);
+
+            return Receive.ReceiveMessage(ServerConnection.ServerSock);
+        }
+
         /// <summary>
         /// Adds an Item To the database
         /// </summary>
         /// <param name="vendorID">VendorID which requested to add an item</param>
-        /// <param name="oldItemName">N/A (Does Nothing)</param>
+        /// <param name="oldItemName"></param>
         /// <param name="item">Item Name</param>
         /// <param name="catName">Category the Item is in</param>
         /// <param name="desc">Description of item</param>
@@ -147,6 +161,15 @@ namespace FeedMeLogic.Vendor
 
             Send.SendMessage(ServerConnection.ServerSock, "UpdateStoreInfo");
             Send.SendVendorInfo(ServerConnection.ServerSock, VI);
+        }
+
+        public static DataTable GetSpecificItem(string vendorID, string ItemID)
+        {
+            SendRequestCommand(vendorID, "GetSpecificItem");
+
+            Send.SendMessage(ServerConnection.ServerSock, ItemID);
+
+            return Receive.ReceiveDataTable(ServerConnection.ServerSock);
         }
     }
 }
