@@ -62,8 +62,6 @@ namespace FeedMeClient.UserControls.Order
 
             #endregion Initiaizling Common Variables for Dynamic Controls
 
-            MessageBox.Show("Items Happened");
-
             #region Iterating Through DataTable
 
             List<string> CatList = new List<string>();
