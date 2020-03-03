@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,7 +12,7 @@ namespace FeedMeClient.Forms
 
         private const int CLOSED_PANEL_WDITH = 80;
         private const int OPENED_PANEL_WIDTH = 139;
-        private readonly string[] MenuButtonNames = new string[3];
+        private readonly string[] MenuButtonNames = new string[4];
 
         //
         public MainMenu()
@@ -23,13 +22,8 @@ namespace FeedMeClient.Forms
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            Console.WriteLine(Authentication.LoginForm.ClientInfo.Email);
-            Console.WriteLine(Authentication.LoginForm.ClientInfo.Admin);
-            Console.WriteLine(Authentication.LoginForm.ClientInfo.FirstName);
-            Console.WriteLine(Authentication.LoginForm.ClientInfo.LastName);
-            Console.WriteLine(Authentication.LoginForm.ClientInfo.Password);
             HomeControl.BringToFront(); //Brings Vendor List Control to Front
-            Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, OrdersButton };
+            Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, OrdersButton, adminButton };
 
             //Everything written Below can be easily edited using the Designer but Coding it in below ensure that if i edit the Menu Bar in the future
             //It will still function correctly and any new buttons or sizes i add will also work.
@@ -56,7 +50,7 @@ namespace FeedMeClient.Forms
             Task ThreadMenu = new Task(() =>
             {
                 //Slow Down Animation When approaching Button.
-                Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, OrdersButton }; // Coppied from Above not making it a Global Variable to prevent any changes
+                Button[] MenuButtonArray = new Button[] { HomeButton, SearchButton, OrdersButton, adminButton }; // Coppied from Above not making it a Global Variable to prevent any changes
 
                 if (menuClosed)
                 {
@@ -85,7 +79,7 @@ namespace FeedMeClient.Forms
                         MenuIndicatorPanel.BeginInvoke(UiThread);
                     }
 
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         OpenButton(MenuButtonArray[i], MenuButtonNames[i]);
                     }

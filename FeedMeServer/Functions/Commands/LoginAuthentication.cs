@@ -30,7 +30,6 @@ namespace FeedMeServer.Functions.Commands
             if (CheckUserCredentials(username, clientHashedPassword, LoginType) == true)
             {
                 clientM.SToken = ServerMain.GenerateSessiontoken();
-                ServerMain.sessionTokens.Add(clientM.SToken);
                 Send.SendMessage(Client, clientM.SToken);
                 if (LoginType == 0)
                 {
@@ -47,26 +46,31 @@ namespace FeedMeServer.Functions.Commands
 
         private static String GetUserSalt(string username, int LoginType)
         {
-            string Query = ($"SELECT SALT FROM users WHERE Username = '{username}'");
+            string Query = ($"SELECT SALT FROM users WHERE Username = '{username}'"); //Customer Query
             if (LoginType == 1)
             {
-                Query = ($"SELECT SALT FROM vendors WHERE Name = '{username}'");
+                Query = ($"SELECT SALT FROM vendors WHERE Name = '{username}'"); //Vendor Query
             }
 
             DataTable DataResult = DAL.ExecCommand(Query);
 
+            //Incase There is no data retreived from the SQL query a try catch is used
             try
             {
-                Console.WriteLine("Continuing");
                 return DataResult.Rows[0][0].ToString();
             }
             catch
             {
-                Console.WriteLine("Invalid");
                 return "-1";
             }
         }
 
+        /// <summary>
+        /// Generates the UserInfo Object for a customer Client
+        /// </summary>
+        /// <param name="username">Username of client to retreive data</param>
+        /// <param name="clientM">clientM Object is used to set the ClientID of the object & to set isVendor to False</param>
+        /// <returns>UserInfo Object with the correct information in it</returns>
         private static UserInfo GetUserInfo(string username, Client clientM)
         {
             UserInfo UserInformation = new UserInfo();
@@ -98,10 +102,15 @@ namespace FeedMeServer.Functions.Commands
             return UserInformation;
         }
 
+        /// <summary>
+        /// Generates the VendorInfo Object for a customer Client
+        /// </summary>
+        /// <param name="username">Username of client to retreive data</param>
+        /// <param name="clientM">clientM Object is used to set the ClientID of the object & to set isVendor to False</param>
+        /// <returns>VendorInfo Object with the correct information in it</returns>
         private static VendorInfo GetVendorInfo(string username, Client clientM)
         {
             VendorInfo BussinessInfo = new VendorInfo();
-            Console.WriteLine("Valid Username");
             DataTable vendorInfoDT = DAL.ExecCommand($"SELECT * FROM vendors WHERE Name = '{username}'");
 
             BussinessInfo.VendorID = Convert.ToInt32(vendorInfoDT.Rows[0][0]);
@@ -122,6 +131,10 @@ namespace FeedMeServer.Functions.Commands
             return BussinessInfo;
         }
 
+        /// <summary>
+        /// Sets UserInfo Model if Credenttials are invalid
+        /// </summary>
+        /// <returns>UserInfo Model with Invalid UserID</returns>
         private static UserInfo InvalidCredentials()
         {
             UserInfo UserInformation = new UserInfo();
@@ -136,34 +149,35 @@ namespace FeedMeServer.Functions.Commands
         {
             string[] HashData = GetHashData(username, LoginType); //This Gets The Hash Stored in the Database
 
-            string[] serverHashData = HashPass.HashPassword(password);
+            string[] serverHashData = HashPass.HashPassword(password); //Re-Hashes Server Password
 
-            if (HashData[0] == "-1")
+            if (HashData[0] == "-1") //If Hash Is Invalid
+            {
+                return false; 
+            }
+
+            //string CurrentHash = HashPass.ConfirmHash(password, HashData[1]);
+
+            if (serverHashData[0] != HashData[0]) //Checks ServerHash Against Database Hash
             {
                 return false;
             }
 
-            string CurrentHash = HashPass.ConfirmHash(password, HashData[1]);
-
-            if (serverHashData[0] != HashData[0])
-            {
-                return false;
-            }
-
-            return CheckDetails(username, serverHashData[0], LoginType);
+            return CheckDetails(username, serverHashData[0], LoginType); //Returns the Hash Data weather it is valid or False
         }
 
         private static bool CheckDetails(string username, string password, int LoginType)
         {
             DataTable LoginDataTable = new DataTable();
-            string SQLQuery = ($"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'");
+            string SQLQuery = ($"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"); //Customer Query
             if (LoginType == 1)
             {
-                SQLQuery = ($"SELECT * FROM vendors WHERE Name = '{username}' AND password = '{password}'");
+                SQLQuery = ($"SELECT * FROM vendors WHERE Name = '{username}' AND password = '{password}'"); //Vendor Query
             }
-            LoginDataTable = DAL.ExecCommand(SQLQuery);
 
-            if (LoginDataTable.Rows.Count <= 0)
+            LoginDataTable = DAL.ExecCommand(SQLQuery); //Executes Query
+
+            if (LoginDataTable.Rows.Count <= 0) //If No Results then Invalid
             {
                 return false;
             }
@@ -173,6 +187,7 @@ namespace FeedMeServer.Functions.Commands
         private static string[] GetHashData(string username, int LoginType)
         {
             string SQLQuery = ($"SELECT password, salt FROM users WHERE username = '{username}'");
+
             if (LoginType == 1)
             {
                 SQLQuery = ($"SELECT password, salt FROM vendors WHERE Name = '{username}'");
@@ -181,8 +196,12 @@ namespace FeedMeServer.Functions.Commands
             using (DataTable SQLResults = DAL.ExecCommand(SQLQuery))
             {
                 string[] HashData = new string[2];
+                
+                //Sets Hash Data to Invalid at the Start
                 HashData[0] = "-1";
                 HashData[1] = "Invalid";
+
+                //If Hashdata is Valid set Data to data in Database
                 if (SQLResults.Rows.Count > 0)
                 {
                     HashData[0] = SQLResults.Rows[0]["password"].ToString();

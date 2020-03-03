@@ -115,7 +115,7 @@
             // 
             this.VendorLabel.AutoSize = true;
             this.VendorLabel.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VendorLabel.Location = new System.Drawing.Point(247, 96);
+            this.VendorLabel.Location = new System.Drawing.Point(267, 96);
             this.VendorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.VendorLabel.Name = "VendorLabel";
             this.VendorLabel.Size = new System.Drawing.Size(168, 32);

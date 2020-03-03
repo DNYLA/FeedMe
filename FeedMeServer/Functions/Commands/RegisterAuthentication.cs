@@ -9,12 +9,14 @@ namespace FeedMeServer.Functions.Commands
     {
         public static void RegistrationHandler(Socket Client)
         {
-            Console.WriteLine("Requested Regisrtewr");
-            string regType = Receive.ReceiveMessage(Client);
+            Console.WriteLine("Client Requested Register"); //Update Interface with new Request
+            string regType = Receive.ReceiveMessage(Client); // RegType User || Vendor
             string registerValue;
+
 
             if (regType == "User")
             {
+                //Starts Customer Registration Process
                 UserInfo UserInformation = Receive.ReceiveUserInfo(Client);
                 UserInformation = HashPassword(UserInformation);
                 object userObj = UserInformation;
@@ -22,6 +24,7 @@ namespace FeedMeServer.Functions.Commands
             }
             else if (regType == "Vendor")
             {
+                //Starts Vendor Registration Process
                 VendorInfo VendorInformation = Receive.ReceiveVendorInfo(Client);
                 VendorInformation = HashPassword(VendorInformation);
                 object venObj = VendorInformation;
@@ -40,6 +43,8 @@ namespace FeedMeServer.Functions.Commands
             //CI = HashPassword(CI);
 
             string sqlQuery;
+            
+            //Get Correct Query
             if (clientType == 1)
             {
                 UserInfo userInfo = (UserInfo)ClientInformation;
@@ -53,7 +58,7 @@ namespace FeedMeServer.Functions.Commands
 	                            VALUES ('{vendorInfo.Name}', '{vendorInfo.Description}', '{vendorInfo.Address}', '{vendorInfo.Email}', '{vendorInfo.Postcode}', '{vendorInfo.PhoneNo}', '{vendorInfo.Password}', '{vendorInfo.Salt}');");
             }
 
-            Data.DAL.ExecCommand(sqlQuery);
+            Data.DAL.ExecCommand(sqlQuery); //Execute Query
 
             if (Data.DAL.ErrorCode == 1062)
             {
@@ -65,10 +70,15 @@ namespace FeedMeServer.Functions.Commands
             }
             else
             {
-                return 3; //Undiagnosed Error (Will Add More Error Handling Later);
+                return 3; //Undiagnosed Error
             }
         }
 
+        /// <summary>
+        /// Gets HashData for Customer
+        /// </summary>
+        /// <param name="UserInformation">UserInfo Object which is local</param>
+        /// <returns>UserInfo Object with Hashed Password</returns>
         private static UserInfo HashPassword(UserInfo UserInformation)
         {
             string[] HashData = Data.HashPass.HashPassword(UserInformation.Password);
@@ -78,6 +88,11 @@ namespace FeedMeServer.Functions.Commands
             return UserInformation;
         }
 
+        /// <summary>
+        /// Gets HashData for Customer
+        /// </summary>
+        /// <param name="VendorInformation">VendorInfo Object which is local</param>
+        /// <returns>VendorInfo Object with Hashed Password</returns>
         private static VendorInfo HashPassword(VendorInfo VendorInformation)
         {
             string[] HashData = Data.HashPass.HashPassword(VendorInformation.Password);

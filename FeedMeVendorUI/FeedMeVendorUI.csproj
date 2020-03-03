@@ -36,9 +36,6 @@
     <Reference Include="FeedMeNetworking">
       <HintPath>..\FeedMeNetworking\bin\Debug\FeedMeNetworking.dll</HintPath>
     </Reference>
-    <Reference Include="FeedMeSerialization">
-      <HintPath>..\FeedMeSerialization\bin\Debug\FeedMeSerialization.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.8.0.18\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -93,6 +90,18 @@
     <Compile Include="UserControls\Menu\CategoroyViewer.Designer.cs">
       <DependentUpon>CategoroyViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Menu\EditItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Menu\EditItem.Designer.cs">
+      <DependentUpon>EditItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Menu\ItemViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Menu\ItemViewer.Designer.cs">
+      <DependentUpon>ItemViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Menu\MenuInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -146,6 +155,12 @@
     </Compile>
     <EmbeddedResource Include="UserControls\Menu\CategoroyViewer.resx">
       <DependentUpon>CategoroyViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Menu\EditItem.resx">
+      <DependentUpon>EditItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Menu\ItemViewer.resx">
+      <DependentUpon>ItemViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Menu\MenuInfo.resx">
       <DependentUpon>MenuInfo.cs</DependentUpon>

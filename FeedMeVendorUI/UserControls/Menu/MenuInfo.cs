@@ -83,5 +83,9 @@ namespace FeedMeVendorUI.UserControls.Menu
         {
             AddItems();
         }
+
+        private void EditItemButton_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

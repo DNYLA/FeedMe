@@ -20,7 +20,7 @@ namespace FeedMeClient.Forms.Authentication
 
         private void UpdateUI()
         {
-            //Fix this later on
+            //Updates Colour Of Both password Boxes
             PasswordBox.FocusColor = Color.Red;
             PasswordBox.BaseColor = Color.Red;
             PasswordBox.ForeColor = Color.Red;
@@ -40,6 +40,7 @@ namespace FeedMeClient.Forms.Authentication
 
         private bool CheckPassword()
         {
+            //Checks If both Password   
             if (PasswordBox.Text != ConfirmPasswordBox.Text)
             {
                 MessageBox.Show("Passwords Don't Match!");
@@ -50,6 +51,7 @@ namespace FeedMeClient.Forms.Authentication
 
         public bool PresenceCheck(string stringToCheck)
         {
+            //Checks if the textbox is empty
             if (string.IsNullOrWhiteSpace(stringToCheck))
             {
                 return false;
@@ -62,6 +64,9 @@ namespace FeedMeClient.Forms.Authentication
             return true;
         }
 
+        /// <summary>
+        /// Sends the Registration Data to the server
+        /// </summary>
         private void RegisterUser()
         {
             if (!CheckPassword())
@@ -106,7 +111,7 @@ namespace FeedMeClient.Forms.Authentication
         #region Event Handlers
 
         #region Password UI Handlers
-
+        //Event Handlers to UpdateUI
         private void PasswordBox_TextChanged(object sender, EventArgs e)
         {
             UpdateUI();

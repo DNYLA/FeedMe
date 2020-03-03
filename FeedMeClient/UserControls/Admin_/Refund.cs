@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeLogic.Server;
 using FeedMeNetworking.Serialization;
@@ -135,8 +130,6 @@ namespace FeedMeClient.UserControls.Admin_
 
         private void OrderIDLabel_TextChanged(object sender, EventArgs e)
         {
-            //string orderID = OrderIDLabel.Tag.ToString();
-            //Console.WriteLine($"THE ORDER ID IS {orderID} OKAYT");
             GenerateItemList("11");
         }
 

@@ -236,6 +236,7 @@
             this.EditItemButton.TabIndex = 5;
             this.EditItemButton.Text = "Edit";
             this.EditItemButton.UseVisualStyleBackColor = false;
+            this.EditItemButton.Click += new System.EventHandler(this.EditItemButton_Click);
             // 
             // panel5
             // 

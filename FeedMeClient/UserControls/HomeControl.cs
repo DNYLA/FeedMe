@@ -15,33 +15,6 @@ namespace FeedMeClient.UserControls
             InitializeComponent();
         }
 
-        #region Obsolete
-
-        [Obsolete("Master Generator Updated which doesn't require this function anymore.")]
-        private void ControlGenerator(int CurrentGen, int HighGen)
-        {
-            /*
-             * RULES/MATH INVOLVED
-             * YOU CAN ONLY GENERATE A MAX OF 4 PANELS WITHOUT CUTTING A PANEL IN HALF
-             * When The user scrolls down you need to generate the next four panels BUT
-             * if their are only 3 more panels instead of 4 there will be a Out of Index ERROR
-             * to stop this you need to use the curGenLow & curGenHigh Variables to determine what
-             * values must be .
-             *
-             */
-            try
-            {
-                MasterGenerator();
-                CurrentGen = 4;
-                HighGen = 7;
-            }
-            catch
-            {
-            }
-        }
-
-        #endregion Obsolete
-
         #region Event Handlers
 
         private void HomeControl_Load(object sender, EventArgs e)
