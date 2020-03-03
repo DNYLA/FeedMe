@@ -35,8 +35,8 @@ namespace FeedMeServer.Functions
             IPAddress IP = GetServerInfo.GetPrivateIP();
             String PubIP = GetServerInfo.GetPublicIP();
             //GetServerInfo.RunAsync();
-            string IPADD = "127.0.0.1";
-            //string IPADD = "172.16.23.162";
+            //string IPADD = "127.0.0.1";
+            string IPADD = "172.16.23.162";
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
             //IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
             ServerLogger("Server Initiaizliation Completed.");
@@ -125,13 +125,13 @@ namespace FeedMeServer.Functions
                     }
                     else
                     {
-                        Console.WriteLine("Less Dan 5");
+                        //Console.WriteLine("Less Dan 5");
                         clientM.LastResponse = DateTime.Now;
                     }
 
                     if (token == clientM.TToken)
                     {
-                        Console.WriteLine("In T Tokens");
+                        //Console.WriteLine("In T Tokens");
                         //Temporary Tokens are only able to Login Or Register
                         switch (request)
                         {

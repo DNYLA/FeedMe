@@ -9,6 +9,7 @@ namespace FeedMeServer.Functions.Commands
     {
         public static void RegistrationHandler(Socket Client)
         {
+            Console.WriteLine("Requested Regisrtewr");
             string regType = Receive.ReceiveMessage(Client);
             string registerValue;
 
