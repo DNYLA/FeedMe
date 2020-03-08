@@ -1,4 +1,5 @@
 ﻿using FeedMeNetworking.Serialization;
+using System;
 using System.Data;
 using System.Net.Sockets;
 using System.Text;
@@ -16,6 +17,11 @@ namespace FeedMeNetworking
         public static void SendDataTable(Socket Sock, DataTable dataTable)
         {
             SendData(Sock, ProtoBufSerialization.DataSerialization(dataTable));
+        }
+
+        public static void SendToken(object serverSock)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

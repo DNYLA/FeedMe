@@ -39,7 +39,6 @@
             this.itemViewer1 = new FeedMeVendorUI.UserControls.Menu.ItemViewer();
             this.categoroyViewer1 = new FeedMeVendorUI.UserControls.Menu.CategoroyViewer();
             this.storeInfo1 = new FeedMeVendorUI.UserControls.Menu.StoreInfo();
-            this.menuInfo1 = new FeedMeVendorUI.UserControls.Menu.MenuInfo();
             this.viewOrder1 = new FeedMeVendorUI.UserControls.Menu.ViewOrder();
             this.orderControl1 = new FeedMeVendorUI.UserControls.Menu.OrderControl();
             this.editItem1 = new FeedMeVendorUI.UserControls.Menu.EditItem();
@@ -157,7 +156,6 @@
             this.panel2.Controls.Add(this.itemViewer1);
             this.panel2.Controls.Add(this.categoroyViewer1);
             this.panel2.Controls.Add(this.storeInfo1);
-            this.panel2.Controls.Add(this.menuInfo1);
             this.panel2.Controls.Add(this.viewOrder1);
             this.panel2.Controls.Add(this.orderControl1);
             this.panel2.Location = new System.Drawing.Point(18, 84);
@@ -191,15 +189,6 @@
             this.storeInfo1.Name = "storeInfo1";
             this.storeInfo1.Size = new System.Drawing.Size(776, 451);
             this.storeInfo1.TabIndex = 4;
-            // 
-            // menuInfo1
-            // 
-            this.menuInfo1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuInfo1.Location = new System.Drawing.Point(-4, 0);
-            this.menuInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.menuInfo1.Name = "menuInfo1";
-            this.menuInfo1.Size = new System.Drawing.Size(776, 451);
-            this.menuInfo1.TabIndex = 0;
             // 
             // viewOrder1
             // 
@@ -257,7 +246,6 @@
         private System.Windows.Forms.Button InfoButton;
         private System.Windows.Forms.Button ReviewButton;
         private System.Windows.Forms.Panel panel2;
-        private UserControls.Menu.MenuInfo menuInfo1;
         private UserControls.Menu.OrderControl orderControl1;
         private UserControls.Menu.ViewOrder viewOrder1;
         private UserControls.Menu.StoreInfo storeInfo1;

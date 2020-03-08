@@ -222,6 +222,11 @@ namespace FeedMeServer.Functions.Commands
             Send.SendOrderDetails(clientInf.ClientSocket, OI);
         }
 
+        internal static void CreateReview(Socket cSock)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Updates Refund Status
         /// </summary>
@@ -309,5 +314,7 @@ namespace FeedMeServer.Functions.Commands
                 Send.SendOrderDetails(clientInf.ClientSocket, curOrder);
             }
         }
+
+
     }
 }

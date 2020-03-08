@@ -271,6 +271,7 @@
             this.PasswordBox.ForeColor = System.Drawing.Color.Gray;
             this.PasswordBox.Location = new System.Drawing.Point(60, 456);
             this.PasswordBox.Name = "PasswordBox";
+            this.PasswordBox.PasswordChar = '*';
             this.PasswordBox.SingleLine = false;
             this.PasswordBox.Size = new System.Drawing.Size(308, 26);
             this.PasswordBox.TabIndex = 38;
@@ -288,6 +289,7 @@
             this.ConfirmPasswordBox.ForeColor = System.Drawing.Color.Gray;
             this.ConfirmPasswordBox.Location = new System.Drawing.Point(60, 503);
             this.ConfirmPasswordBox.Name = "ConfirmPasswordBox";
+            this.ConfirmPasswordBox.PasswordChar = '*';
             this.ConfirmPasswordBox.SingleLine = false;
             this.ConfirmPasswordBox.Size = new System.Drawing.Size(308, 26);
             this.ConfirmPasswordBox.TabIndex = 38;

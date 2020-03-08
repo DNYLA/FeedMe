@@ -65,8 +65,15 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             List<string> catList = GetCategories(Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString());
 
+
+            AddCategory.Click += new EventHandler(OpenAddCat);
+            AddCategory.MouseMove += new MouseEventHandler(CursorChangeArgs);
+            Panel AddCatPanel = AddCategory;
+
+            flowLayoutPanel1.Controls.Clear();
             foreach (string category in catList)
             {
+
                 string orderStatus = $"16 Items:"; //hard Coded right now change later
 
                 Panel catPanel = GenControls.AddPanel(category, Color.White, catPanelSize);
@@ -91,6 +98,7 @@ namespace FeedMeVendorUI.UserControls.Menu
                 }
 
                 flowLayoutPanel1.Controls.Add(catPanel);
+                flowLayoutPanel1.Controls.Add(AddCatPanel);
 
                 flowLayoutPanel1.Click += new EventHandler(OpenOrder);
                 flowLayoutPanel1.MouseMove += new MouseEventHandler(CursorChangeArgs);

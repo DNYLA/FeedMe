@@ -31,5 +31,7 @@ namespace FeedMeLogic.Server
             Send.SendMessage(ServerConnection.ServerSock, "UpdateUserInfo");
             Send.SendUserInfo(ServerConnection.ServerSock, UI);
         }
+
+
     }
 }

@@ -30,8 +30,7 @@ namespace FeedMeVendorUI.Forms
         {
             SelectedPanel.Width = HomeButton.Width - 10;
             SelectedPanel.Location = new Point(HomeButton.Location.X + 6, 42);
-
-            menuInfo1.BringToFront();
+            orderControl1.BringToFront();
         }
 
         #region UI Helpers

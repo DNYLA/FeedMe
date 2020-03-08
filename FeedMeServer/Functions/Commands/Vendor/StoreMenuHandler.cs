@@ -32,7 +32,7 @@ namespace FeedMeServer.Functions.Commands.Vendor
                     GetItems(vendorID);
                     break;
 
-                case "AddCat":
+                case "AddCategory":
                     AddCategory(vendorID);
                     break;
 
@@ -97,9 +97,19 @@ namespace FeedMeServer.Functions.Commands.Vendor
         /// Adds a Category to the database
         /// </summary>
         /// <param name="vendorID">Vendor which requested the data</param>
-            private static void AddCategory(string vendorID)
+        private static void AddCategory(string vendorID)
         {
-            string CategoryName = Receive.ReceiveMessage(Client);
+            string item = Receive.ReceiveMessage(Client);
+            string cat = Receive.ReceiveMessage(Client);
+            string desc = Receive.ReceiveMessage(Client);
+            decimal price = Convert.ToDecimal(Receive.ReceiveMessage(Client));
+
+            string query = ($"INSERT INTO items VALUES (vendorID = {vendorID}, ItemName = '{item}', Category = '{cat}', Description = '{desc}', Price = {price});");
+
+            Console.WriteLine(query);
+
+            DAL.ExecCommand(query);
+            SendSuccessMessage();
         }
 
         /// <summary>
@@ -154,6 +164,9 @@ namespace FeedMeServer.Functions.Commands.Vendor
             string desc = Receive.ReceiveMessage(Client);
             decimal price = Convert.ToDecimal(Receive.ReceiveMessage(Client));
             string query = ($"UPDATE items SET ItemName = '{item}', Category = '{cat}', Description = '{desc}', Price = {price} WHERE vendorID = {vendorID} AND ItemName = '{oldItemName}';");
+
+            Console.WriteLine(query);
+            
             DAL.ExecCommand(query);
             SendSuccessMessage();
         }

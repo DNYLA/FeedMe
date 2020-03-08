@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.CategoryNameLabel = new System.Windows.Forms.Label();
             this.EditCategory = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.CategoryNameLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.EditCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -46,18 +46,6 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(744, 394);
             this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // CategoryNameLabel
-            // 
-            this.CategoryNameLabel.AutoSize = true;
-            this.CategoryNameLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.CategoryNameLabel.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CategoryNameLabel.Location = new System.Drawing.Point(333, 14);
-            this.CategoryNameLabel.Name = "CategoryNameLabel";
-            this.CategoryNameLabel.Size = new System.Drawing.Size(146, 25);
-            this.CategoryNameLabel.TabIndex = 1;
-            this.CategoryNameLabel.Text = "CategoryName";
-            this.CategoryNameLabel.TextChanged += new System.EventHandler(this.CategoryNameLabel_TextChanged);
             // 
             // EditCategory
             // 
@@ -77,9 +65,9 @@
             this.label6.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(48, 90);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(133, 25);
+            this.label6.Size = new System.Drawing.Size(91, 25);
             this.label6.TabIndex = 1;
-            this.label6.Text = "Edit Category";
+            this.label6.Text = "Edit Item";
             // 
             // pictureBox3
             // 
@@ -91,6 +79,18 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
+            // 
+            // CategoryNameLabel
+            // 
+            this.CategoryNameLabel.AutoSize = true;
+            this.CategoryNameLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.CategoryNameLabel.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CategoryNameLabel.Location = new System.Drawing.Point(333, 14);
+            this.CategoryNameLabel.Name = "CategoryNameLabel";
+            this.CategoryNameLabel.Size = new System.Drawing.Size(146, 25);
+            this.CategoryNameLabel.TabIndex = 1;
+            this.CategoryNameLabel.Text = "CategoryName";
+            this.CategoryNameLabel.TextChanged += new System.EventHandler(this.CategoryNameLabel_TextChanged);
             // 
             // ItemViewer
             // 

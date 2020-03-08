@@ -47,6 +47,7 @@
             this.reviewOrderControl = new FeedMeClient.UserControls.Order.ReviewOrderControl();
             this.OrderControl = new FeedMeClient.UserControls.OrderControl();
             this.HomeControl = new FeedMeClient.UserControls.HomeControl();
+            this.createReview1 = new FeedMeClient.UserControls.Order.CreateReview();
             this.SideMenuPanel.SuspendLayout();
             this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
@@ -164,6 +165,7 @@
             // UserViewPanel
             // 
             this.UserViewPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.UserViewPanel.Controls.Add(this.createReview1);
             this.UserViewPanel.Controls.Add(this.settings1);
             this.UserViewPanel.Controls.Add(this.refund1);
             this.UserViewPanel.Controls.Add(this.viewRefunds1);
@@ -271,6 +273,15 @@
             this.HomeControl.Size = new System.Drawing.Size(771, 677);
             this.HomeControl.TabIndex = 0;
             // 
+            // createReview1
+            // 
+            this.createReview1.Font = new System.Drawing.Font("Nirmala UI", 14.25F);
+            this.createReview1.Location = new System.Drawing.Point(-2, 0);
+            this.createReview1.Margin = new System.Windows.Forms.Padding(6);
+            this.createReview1.Name = "createReview1";
+            this.createReview1.Size = new System.Drawing.Size(767, 677);
+            this.createReview1.TabIndex = 10;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
@@ -311,5 +322,6 @@
         private UserControls.Admin_.ViewRefunds viewRefunds1;
         private UserControls.Admin_.Refund refund1;
         private UserControls.settings settings1;
+        private UserControls.Order.CreateReview createReview1;
     }
 }

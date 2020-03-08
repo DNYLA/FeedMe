@@ -154,5 +154,18 @@ namespace FeedMeVendorUI.UserControls.Menu
         {
             UpdateOrderStatus("Cancelled");
         }
+
+        private void CreateReview_Click(object sender, EventArgs e)
+        {
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("CreateReview1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Control Con = (Control)sender;
+
+            Label OrderID = userControl.Controls.Find("orderIDT", true).OfType<Label>().SingleOrDefault(); // Searched for the OrderID Label inside the Order Control
+            OrderID.Text = $"OrderID: {OrderIDLabel.Text}";
+
+            userControl.BringToFront();
+        }
     }
 }

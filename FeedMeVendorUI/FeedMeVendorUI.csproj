@@ -102,12 +102,6 @@
     <Compile Include="UserControls\Menu\ItemViewer.Designer.cs">
       <DependentUpon>ItemViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Menu\MenuInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Menu\MenuInfo.Designer.cs">
-      <DependentUpon>MenuInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Menu\MenuInfoDesign.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -161,9 +155,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Menu\ItemViewer.resx">
       <DependentUpon>ItemViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Menu\MenuInfo.resx">
-      <DependentUpon>MenuInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Menu\MenuInfoDesign.resx">
       <DependentUpon>MenuInfoDesign.cs</DependentUpon>

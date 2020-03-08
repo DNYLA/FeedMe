@@ -96,7 +96,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             Control Con = (Control)sender;
 
             Label TitleLabel = userControl.Controls.Find("ItemName", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
-            TitleLabel.Text = Con.Name;
+            TitleLabel.Text = Con.Text;
 
             //Label itemID = userControl.Controls.Find("ItemID", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
             //itemID.Text = (string)Con.Tag;

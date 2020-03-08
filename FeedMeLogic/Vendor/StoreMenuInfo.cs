@@ -69,6 +69,19 @@ namespace FeedMeLogic.Vendor
             return Receive.ReceiveMessage(ServerConnection.ServerSock);
         }
 
+        public static string AddCategory(string vendorID, string ItemName, string category, string desc, string price)
+        {
+            SendRequestCommand(vendorID, "AddCategory");
+
+            Send.SendMessage(ServerConnection.ServerSock, ItemName);
+            Send.SendMessage(ServerConnection.ServerSock, category);
+            Send.SendMessage(ServerConnection.ServerSock, desc);
+            Send.SendMessage(ServerConnection.ServerSock, price);
+
+            return Receive.ReceiveMessage(ServerConnection.ServerSock);
+        }
+
+
         /// <summary>
         /// Adds an Item To the database
         /// </summary>

@@ -32,7 +32,7 @@
             this.ItemPanel = new System.Windows.Forms.Panel();
             this.OrderIDLabel = new System.Windows.Forms.Label();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.CreateReview = new System.Windows.Forms.Button();
             this.TotalCostLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -78,19 +78,19 @@
             this.CancelButton.UseVisualStyleBackColor = false;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // button2
+            // CreateReview
             // 
-            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(166, 559);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(211, 67);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Create Review";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CreateReview.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CreateReview.BackColor = System.Drawing.Color.Transparent;
+            this.CreateReview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CreateReview.ForeColor = System.Drawing.Color.Black;
+            this.CreateReview.Location = new System.Drawing.Point(166, 559);
+            this.CreateReview.Name = "CreateReview";
+            this.CreateReview.Size = new System.Drawing.Size(211, 67);
+            this.CreateReview.TabIndex = 6;
+            this.CreateReview.Text = "Create Review";
+            this.CreateReview.UseVisualStyleBackColor = false;
+            this.CreateReview.Click += new System.EventHandler(this.CreateReview_Click);
             // 
             // TotalCostLabel
             // 
@@ -106,7 +106,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.CreateReview);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.TotalCostLabel);
             this.Controls.Add(this.OrderIDLabel);
@@ -128,7 +128,7 @@
         private System.Windows.Forms.Panel ItemPanel;
         private System.Windows.Forms.Label OrderIDLabel;
         private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button CreateReview;
         private System.Windows.Forms.Label TotalCostLabel;
     }
 }

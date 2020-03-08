@@ -108,6 +108,11 @@ namespace FeedMeVendorUI.UserControls.Menu
         {
             category, item
         }
+
+        private void AddNewCat_Click(object sender, EventArgs e)
+        {
+            StoreMenuInfo.AddCategory(vendorID, NameTBox.Text, CategoryTBox.Text, DescTBox.Text, PriceTBox.Text);
+        }
     }
 
 
