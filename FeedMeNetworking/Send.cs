@@ -1,4 +1,5 @@
 ﻿using FeedMeNetworking.Serialization;
+using System;
 using System.Data;
 using System.Net.Sockets;
 using System.Text;
@@ -16,6 +17,11 @@ namespace FeedMeNetworking
         public static void SendDataTable(Socket Sock, DataTable dataTable)
         {
             SendData(Sock, ProtoBufSerialization.DataSerialization(dataTable));
+        }
+
+        public static void SendToken(object serverSock)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -63,6 +69,10 @@ namespace FeedMeNetworking
             Thread.Sleep(100); //Small Sleep to prevent multiple messages stacking into one
         }
 
+        /// <summary>
+        /// Sends Clients Unique Token to the server to verify the message
+        /// </summary>
+        /// <param name="Sock">Server Socket</param>
         public static void SendToken(Socket Sock)
         {
             byte[] data = Encoding.UTF8.GetBytes(token);

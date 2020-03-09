@@ -8,15 +8,19 @@ namespace FeedMeServer.Functions.Commands.Vendor
 {
     internal class StoreMenuHandler
     {
-        private static Socket Client; //Can only be acessed in this classw
+        private static Socket Client; //Can only be acessed in this class
 
+        /// <summary>
+        /// Receives Specific Request and calls the correct method based on the request
+        /// </summary>
+        /// <param name="client"></param>
         public static void MenuHandler(Socket client)
         {
             Client = client;
 
             string vendorID = Receive.ReceiveMessage(client);
 
-            string specificCommand = Receive.ReceiveMessage(client);
+            string specificCommand = Receive.ReceiveMessage(client); //Command from the Client
 
             switch (specificCommand)
             {
@@ -28,7 +32,7 @@ namespace FeedMeServer.Functions.Commands.Vendor
                     GetItems(vendorID);
                     break;
 
-                case "AddCat":
+                case "AddCategory":
                     AddCategory(vendorID);
                     break;
 
@@ -51,9 +55,16 @@ namespace FeedMeServer.Functions.Commands.Vendor
                 case "RemoveItem":
                     RemoveItem(vendorID);
                     break;
+                case "GetSpecificItem":
+                    GetSpecificItem(vendorID);
+                    break;
             }
         }
 
+        /// <summary>
+        /// Gets Category From a specific vendor in the database
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
         private static void GetCategories(string vendorID)
         {
             string SQLQuery = ($"SELECT* FROM items WHERE VendorID = {vendorID}");
@@ -61,6 +72,10 @@ namespace FeedMeServer.Functions.Commands.Vendor
             Send.SendDataTable(Client, ItemInfo);
         }
 
+        /// <summary>
+        /// Gets A specific Item from a vendor in the database
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
         private static void GetItems(string vendorID)
         {
             string category = Receive.ReceiveMessage(Client);
@@ -69,11 +84,38 @@ namespace FeedMeServer.Functions.Commands.Vendor
             Send.SendDataTable(Client, ItemInfo);
         }
 
-        private static void AddCategory(string vendorID)
+        private static void GetSpecificItem(string vendorID)
         {
-            string CategoryName = Receive.ReceiveMessage(Client);
+            string itemID = Receive.ReceiveMessage(Client);
+            string SQLQuery = ($"SELECT * FROM items WHERE VendorID = {vendorID} AND ItemID = '{itemID}'");
+            DataTable ItemInfo = Data.DAL.ExecCommand(SQLQuery);
+            Send.SendDataTable(Client, ItemInfo);
+
         }
 
+        /// <summary>
+        /// Adds a Category to the database
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
+        private static void AddCategory(string vendorID)
+        {
+            string item = Receive.ReceiveMessage(Client);
+            string cat = Receive.ReceiveMessage(Client);
+            string desc = Receive.ReceiveMessage(Client);
+            decimal price = Convert.ToDecimal(Receive.ReceiveMessage(Client));
+
+            string query = ($"INSERT INTO items VALUES (vendorID = {vendorID}, ItemName = '{item}', Category = '{cat}', Description = '{desc}', Price = {price});");
+
+            Console.WriteLine(query);
+
+            DAL.ExecCommand(query);
+            SendSuccessMessage();
+        }
+
+        /// <summary>
+        /// Edits a Category which has been requested from the vendor
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
         private static void EditCategory(string vendorID)
         {
             string curCatName = Receive.ReceiveMessage(Client);
@@ -83,6 +125,10 @@ namespace FeedMeServer.Functions.Commands.Vendor
             SendSuccessMessage();
         }
 
+        /// <summary>
+        /// Removes a category from the database
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
         private static void RemoveCategory(string vendorID)
         {
             string catName = Receive.ReceiveMessage(Client);
@@ -91,6 +137,10 @@ namespace FeedMeServer.Functions.Commands.Vendor
             SendSuccessMessage();
         }
 
+        /// <summary>
+        /// Adds an item to the database 
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
         private static void AddItem(string vendorID)
         {
             string item = Receive.ReceiveMessage(Client);
@@ -102,6 +152,10 @@ namespace FeedMeServer.Functions.Commands.Vendor
             SendSuccessMessage();
         }
 
+        /// <summary>
+        /// Edits an item in the database which is linked to the vendor
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
         private static void EditItem(string vendorID)
         {
             string oldItemName = Receive.ReceiveMessage(Client);
@@ -110,10 +164,17 @@ namespace FeedMeServer.Functions.Commands.Vendor
             string desc = Receive.ReceiveMessage(Client);
             decimal price = Convert.ToDecimal(Receive.ReceiveMessage(Client));
             string query = ($"UPDATE items SET ItemName = '{item}', Category = '{cat}', Description = '{desc}', Price = {price} WHERE vendorID = {vendorID} AND ItemName = '{oldItemName}';");
+
+            Console.WriteLine(query);
+            
             DAL.ExecCommand(query);
             SendSuccessMessage();
         }
 
+        /// <summary>
+        /// Removes an item from the database which is linked with the vendor
+        /// </summary>
+        /// <param name="vendorID">Vendor which requested the data</param>
         private static void RemoveItem(string vendorID)
         {
             string cat = Receive.ReceiveMessage(Client);
@@ -124,6 +185,9 @@ namespace FeedMeServer.Functions.Commands.Vendor
             SendSuccessMessage();
         }
 
+        /// <summary>
+        /// Sends Success Message Indicating everything has been processed
+        /// </summary>
         private static void SendSuccessMessage()
         {
             Send.SendMessage(Client, "Success");

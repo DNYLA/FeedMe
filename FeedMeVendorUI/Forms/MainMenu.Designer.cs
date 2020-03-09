@@ -36,10 +36,12 @@
             this.SelectedPanel = new System.Windows.Forms.Panel();
             this.HomeButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.itemViewer1 = new FeedMeVendorUI.UserControls.Menu.ItemViewer();
+            this.categoroyViewer1 = new FeedMeVendorUI.UserControls.Menu.CategoroyViewer();
+            this.storeInfo1 = new FeedMeVendorUI.UserControls.Menu.StoreInfo();
             this.viewOrder1 = new FeedMeVendorUI.UserControls.Menu.ViewOrder();
             this.orderControl1 = new FeedMeVendorUI.UserControls.Menu.OrderControl();
-            this.menuInfo1 = new FeedMeVendorUI.UserControls.Menu.MenuInfo();
-            this.storeInfo1 = new FeedMeVendorUI.UserControls.Menu.StoreInfo();
+            this.editItem1 = new FeedMeVendorUI.UserControls.Menu.EditItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -150,14 +152,43 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.editItem1);
+            this.panel2.Controls.Add(this.itemViewer1);
+            this.panel2.Controls.Add(this.categoroyViewer1);
             this.panel2.Controls.Add(this.storeInfo1);
-            this.panel2.Controls.Add(this.menuInfo1);
             this.panel2.Controls.Add(this.viewOrder1);
             this.panel2.Controls.Add(this.orderControl1);
             this.panel2.Location = new System.Drawing.Point(18, 84);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(776, 451);
             this.panel2.TabIndex = 3;
+            // 
+            // itemViewer1
+            // 
+            this.itemViewer1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.itemViewer1.Location = new System.Drawing.Point(0, 5);
+            this.itemViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.itemViewer1.Name = "itemViewer1";
+            this.itemViewer1.Size = new System.Drawing.Size(776, 451);
+            this.itemViewer1.TabIndex = 6;
+            // 
+            // categoroyViewer1
+            // 
+            this.categoroyViewer1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.categoroyViewer1.Location = new System.Drawing.Point(-4, 1);
+            this.categoroyViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.categoroyViewer1.Name = "categoroyViewer1";
+            this.categoroyViewer1.Size = new System.Drawing.Size(776, 451);
+            this.categoroyViewer1.TabIndex = 5;
+            // 
+            // storeInfo1
+            // 
+            this.storeInfo1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.storeInfo1.Location = new System.Drawing.Point(0, -5);
+            this.storeInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.storeInfo1.Name = "storeInfo1";
+            this.storeInfo1.Size = new System.Drawing.Size(776, 451);
+            this.storeInfo1.TabIndex = 4;
             // 
             // viewOrder1
             // 
@@ -177,22 +208,14 @@
             this.orderControl1.Size = new System.Drawing.Size(776, 451);
             this.orderControl1.TabIndex = 2;
             // 
-            // menuInfo1
+            // editItem1
             // 
-            this.menuInfo1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuInfo1.Location = new System.Drawing.Point(-4, 0);
-            this.menuInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.menuInfo1.Name = "menuInfo1";
-            this.menuInfo1.Size = new System.Drawing.Size(776, 451);
-            this.menuInfo1.TabIndex = 0;
-            // 
-            // storeInfo1
-            // 
-            this.storeInfo1.Location = new System.Drawing.Point(0, -5);
-            this.storeInfo1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.storeInfo1.Name = "storeInfo1";
-            this.storeInfo1.Size = new System.Drawing.Size(776, 451);
-            this.storeInfo1.TabIndex = 4;
+            this.editItem1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.editItem1.Location = new System.Drawing.Point(0, 1);
+            this.editItem1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.editItem1.Name = "editItem1";
+            this.editItem1.Size = new System.Drawing.Size(776, 451);
+            this.editItem1.TabIndex = 7;
             // 
             // MainMenu
             // 
@@ -223,9 +246,11 @@
         private System.Windows.Forms.Button InfoButton;
         private System.Windows.Forms.Button ReviewButton;
         private System.Windows.Forms.Panel panel2;
-        private UserControls.Menu.MenuInfo menuInfo1;
         private UserControls.Menu.OrderControl orderControl1;
         private UserControls.Menu.ViewOrder viewOrder1;
         private UserControls.Menu.StoreInfo storeInfo1;
+        private UserControls.Menu.CategoroyViewer categoroyViewer1;
+        private UserControls.Menu.ItemViewer itemViewer1;
+        private UserControls.Menu.EditItem editItem1;
     }
 }

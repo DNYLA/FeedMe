@@ -1,6 +1,5 @@
 ﻿using ProtoBuf;
 using ProtoBuf.Data;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -9,6 +8,7 @@ namespace FeedMeNetworking.Serialization
 {
     public class ProtoBufSerialization
     {
+        //Enum is used to find out what object is going to be serialized or deserialized. Minimizes Human Error
         public enum ObjectType
         {
             VendorObject, UserObject, OrderObject
@@ -58,7 +58,6 @@ namespace FeedMeNetworking.Serialization
                     {
                         default:
                             return string.Empty;
-
                         case ObjectType.UserObject:
                             return Serializer.Deserialize(typeof(UserInfo), ms);
 
@@ -143,7 +142,6 @@ namespace FeedMeNetworking.Serialization
     }
 
     #region User Object
-
     //If More Objects are created move this to its own class.
     //Password & Salt Values will only ever Be Received by the server when registering every other time it will be Blank.
     [ProtoContract]
@@ -229,16 +227,12 @@ namespace FeedMeNetworking.Serialization
     {
         [ProtoMember(1)]
         public CardModel Card { get; set; }
-
         [ProtoMember(2)]
         public List<ItemModel> Items { get; set; }
-
         [ProtoMember(3)]
         public decimal TotalPrice { get; set; }
-
         [ProtoMember(4)]
         public int VendorID { get; set; }
-
         [ProtoMember(5)]
         public string CustomerName { get; set; }
         [ProtoMember(6)]

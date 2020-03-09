@@ -6,10 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Threading;
-using System.Web.SessionState;
 
 namespace FeedMeServer.Functions
 {
@@ -19,9 +16,7 @@ namespace FeedMeServer.Functions
 
         private const int PORT_NO = 4030;
         private const string IP_ADDRESS = "127.0.0.1";
-        public static List<Client> clients = new List<Client>();
-        public static List<string> tTokens = new List<string>(); //Temporary Session Tokens
-        public static List<string> sessionTokens = new List<string>();
+        private static List<Client> clients = new List<Client>();
         //Only able to bind to localhost
         //const string IP_ADDRESS = "85.255.236.26";
 
@@ -33,7 +28,7 @@ namespace FeedMeServer.Functions
         {
             Console.WriteLine("Starting Server. This Can Take a few minutes...");
             IPAddress IP = GetServerInfo.GetPrivateIP();
-            String PubIP = GetServerInfo.GetPublicIP();
+            string PubIP = GetServerInfo.GetPublicIP();
             //GetServerInfo.RunAsync();
             //string IPADD = "127.0.0.1";
             string IPADD = "172.16.23.162";
@@ -55,47 +50,44 @@ namespace FeedMeServer.Functions
             //Searching for clients
             while (true)
             {
+                //Increase Client Amount & Read Client Socket
                 clientAmount++;
                 clientSocket = serverSocket.Accept();
-                ServerLogger("Client Connected To FeedMe Server!");
-                Console.WriteLine("Dumping Client Information & Requests");
-                Client clientModel = CreateClientInfo(clientSocket);
+                ServerLogger("Client Connected To FeedMe Server!"); //Informing Interface
+                Client clientModel = CreateClientInfo(clientSocket); //Creates a New Client Model for each client
                 
-                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel)));
+                Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel))); //Initializes new thread for each client for the new Class Instance
                 
-                clientThread.Start();
+                clientThread.Start(); //Starts the Thread
                 
             }
         }
 
         public static string GenerateSessiontoken()
         {
-            Random rnd = new Random();
-            int length = 20;
-            var str = "";
-            for (var i = 0; i < length; i++)
+            Random rnd = new Random(); 
+            int tokenLength = 25; //Length Of Token
+            var str = string.Empty;
+
+
+            for (var i = 0; i < tokenLength; i++)
             {
-                str += ((char)(rnd.Next(1, 26) + 64)).ToString();
+                str += ((char)rnd.Next(33, 125)).ToString(); //Adds 64 for ascii Equivalent
             }
-            if (sessionTokens.Contains(str))
-            {
-                return GenerateSessiontoken();
-            }
+
             return str;
 
         }
 
         private static Client CreateClientInfo(Socket cSock)
         {
-            Client clientInf = new Client();
-            clientInf.TToken = GenerateSessiontoken();
-            clientInf.TimeConnected = DateTime.Now;
+            Client clientInf = new Client(); //Instansiates Object
+            clientInf.TToken = GenerateSessiontoken(); //Gets a New Session Token1
+            clientInf.TimeConnected = DateTime.Now; 
             clientInf.LastResponse = DateTime.Now;
             clientInf.ClientSocket = cSock;
 
-            clients.Add(clientInf);
-            tTokens.Add(clientInf.TToken);
-            Console.WriteLine(clientInf.TToken + "TToken");
+            clients.Add(clientInf); //Adds it to the global list.
 
             Send.SendMessage(cSock, clientInf.TToken);
 
@@ -109,8 +101,6 @@ namespace FeedMeServer.Functions
 
             while (clientConnected)
             {
-
-                //Console.WriteLine($"Client Ping {PingChecker(clientSocket).ToString()}");
                 try
                 {
                     string token = Receive.ReceiveMessage(cSock);
@@ -125,18 +115,15 @@ namespace FeedMeServer.Functions
                     }
                     else
                     {
-                        //Console.WriteLine("Less Dan 5");
                         clientM.LastResponse = DateTime.Now;
                     }
 
                     if (token == clientM.TToken)
                     {
-                        //Console.WriteLine("In T Tokens");
                         //Temporary Tokens are only able to Login Or Register
                         switch (request)
                         {
                             default:
-                                //Do Stuff
                                 //Send.SendMessage(clientSocket, "Invalid request socket killed")
                                 //string ipadd = cSock.LocalEndPoint.ToString();
                                 break;
@@ -151,46 +138,49 @@ namespace FeedMeServer.Functions
                     else if (token == clientM.SToken)
                     {
                         //Clients with a Session token can send any command.
-                        Console.WriteLine("In S Tokens");
                         switch (request)
                         {
                             case "StoreMenuInfo": //Single Command Which Handles all Menu Related commands to prevent 20 different requests in the switch statement
                                 StoreMenuHandler.MenuHandler(cSock);
                                 break;
-                            case "StoreInfo":
+                            case "StoreInfo": //Handles Store Info Transaction from Vendor
                                 StoreInfo.GetStoreInfo(cSock);
                                 break;
-                            case "UpdateStoreInfo":
+                            case "UpdateStoreInfo": //Handles Settings For Vendor
                                 StoreInfo.UpdateStoreInfo(cSock);
                                 break;
-                            case "OrderHandling":
+                            case "OrderHandling": // Handles all Order Requests from Customers & Vendors
                                 OrderHandler orderHand = new OrderHandler();
                                 orderHand.HandleOrder(ref clientM);
                                 break;
-                            case "GetUserInfo":
+                            case "GetUserInfo": //Used to Set & Retreive user Information
                                 CustomerHandler.GetCustomerInfo(cSock);
                                 break;
-                            case "UpdateUserInfo":
+                            case "UpdateUserInfo": //Same as UpdateStoreInfo but is used for Customers.
                                 CustomerHandler.UpdateUserInfo(cSock);
+                                break;
+                            case "ReviewHandling":
+                                ReviewHandler revHandle = new ReviewHandler();
+                                revHandle.HandleReviews(ref clientM);
                                 break;
                         }
                     }
                     else
                     {
-                        Console.WriteLine(clientM.SToken + "Street Token");
                         //Add Some sort of handling || just leave blank
-                        Console.WriteLine("Token No Match");
+                        ServerLogger($"Invalid Token Received From Client {token}", cSock);
                     }
                 }
                 catch (Exception)
                 {
+                    ServerLogger("Undiagnosed Error Uccored When Contacting Client Retrying...", cSock);
                 }
             }
         }
 
-        public static void ServerLogger(string message)
+        public static void ServerLogger(string message, Socket sock)
         {
-            Console.WriteLine($"{DateTime.Now}:{message}");
+            Console.WriteLine($"{DateTime.Now}:{sock.RemoteEndPoint}:{message}");
         }
 
         public static void ServerLogger(string message, string LogType = "Server")

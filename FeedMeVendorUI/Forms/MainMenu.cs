@@ -19,8 +19,10 @@ namespace FeedMeVendorUI.Forms
 
         private void Items_Click(object sender, EventArgs e)
         {
-            menuInfo1.BringToFront();
-            menuInfo1.UpdateUI();
+            categoroyViewer1.BringToFront();
+            categoroyViewer1.ShowCategories();
+            //menuInfo1.BringToFront();
+            //menuInfo1.UpdateUI();
             UpdatePointer(sender);
         }
 
@@ -28,8 +30,7 @@ namespace FeedMeVendorUI.Forms
         {
             SelectedPanel.Width = HomeButton.Width - 10;
             SelectedPanel.Location = new Point(HomeButton.Location.X + 6, 42);
-
-            menuInfo1.BringToFront();
+            orderControl1.BringToFront();
         }
 
         #region UI Helpers

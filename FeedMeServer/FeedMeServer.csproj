@@ -79,6 +79,7 @@
     <Compile Include="Functions\Commands\LoginAuthentication.cs" />
     <Compile Include="Functions\Commands\OrderHandler.cs" />
     <Compile Include="Functions\Commands\RegisterAuthentication.cs" />
+    <Compile Include="Functions\Commands\ReviewHandler.cs" />
     <Compile Include="Functions\Commands\Stripe\ChargeCard.cs" />
     <Compile Include="Functions\Commands\Vendor\Categories.cs" />
     <Compile Include="Functions\Commands\Vendor\StoreInfo.cs" />

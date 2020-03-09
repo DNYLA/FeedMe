@@ -13,7 +13,7 @@ namespace FeedMeClient.UserControls
 {
     public partial class OrderControl : UserControl
     {
-        /* STEPS TO COMPLETE ORDER CONTROL
+        /* STEPS TO COMPLETE ORDER CONTROL (X = Completed)
          *[X] 1. Query The Database for the Item Types
          *   [X] a. Use The VendorID for the current Vendor/Store Selected (This is stored in the Tag of the Control)
          *   [X] b. Only Show the Item Types for the specific vendor
@@ -23,7 +23,7 @@ namespace FeedMeClient.UserControls
          * [X] 4. Add A Panel for each Item Inside and Fill The Item with the correct information/controls
          * [X] 5. Create Event Handlers & Add Them to the Correct Controls.
          * [X] 6. Make sure the Event Handler for Selecting an Item Type works Correctly & Generates a new List of Items
-         * [] 7. Make the Place Order Button Re-Direct the User to the Checkout Control.
+         * [X] 7. Make the Place Order Button Re-Direct the User to the Checkout Control.
         */
 
         public OrderControl()

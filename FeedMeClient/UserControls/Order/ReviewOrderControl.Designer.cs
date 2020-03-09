@@ -55,9 +55,9 @@
             this.label11.Location = new System.Drawing.Point(128, 66);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(489, 32);
+            this.label11.Size = new System.Drawing.Size(481, 32);
             this.label11.TabIndex = 18;
-            this.label11.Text = "Please Review your order before contuniung";
+            this.label11.Text = "Please Review your order before continiung";
             // 
             // VendorLabel
             // 

@@ -1,10 +1,6 @@
 ﻿using FeedMeNetworking.Serialization;
 using System;
 using System.Windows.Forms;
-using System.Net;
-using System.IO;
-using System.Text;
-using System.Collections.Specialized;
 
 namespace FeedMeClient.Forms.Authentication
 {
@@ -25,6 +21,9 @@ namespace FeedMeClient.Forms.Authentication
 
         //Other Methods Were moved over to the server
 
+        /// <summary>
+        /// Checks if the users information is valid or not
+        /// </summary>
         private void CheckDetails()
         {
             if (ClientInfo.UserID != -1)
@@ -50,6 +49,7 @@ namespace FeedMeClient.Forms.Authentication
 
         private void NoAccountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //Opens Registration Form
             Register RF = new Register();
             RF.Show();
             Hide();
@@ -57,6 +57,7 @@ namespace FeedMeClient.Forms.Authentication
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            //Contacts server to authenticate login
             ClientInfo = (UserInfo)FeedMeLogic.Server.AuthenticationHandler.AuthenticateLogin(UsernameTextBox.Text, PasswordTextBox.Text, 0);
             CheckDetails();
         }

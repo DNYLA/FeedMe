@@ -165,6 +165,12 @@
     <Compile Include="UserControls\OrderControl.Designer.cs">
       <DependentUpon>OrderControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Order\CreateReview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Order\CreateReview.Designer.cs">
+      <DependentUpon>CreateReview.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Order\EnterCredentials.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -238,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\OrderControl.resx">
       <DependentUpon>OrderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Order\CreateReview.resx">
+      <DependentUpon>CreateReview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Order\EnterCredentials.resx">
       <DependentUpon>EnterCredentials.cs</DependentUpon>

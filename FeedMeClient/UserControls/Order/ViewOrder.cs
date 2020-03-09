@@ -53,16 +53,15 @@ namespace FeedMeVendorUI.UserControls.Menu
 
             #endregion Initiaizling Common Variables for Dynamic Controls
 
-            MessageBox.Show("Items Happened");
-
             #region Iterating Through DataTable
 
             List<string> CatList = new List<string>();
 
-            OrderInfo OI = FeedMeLogic.Server.ConfirmOrder.GetSpecificOrder(OrderID);
+            OrderInfo OI = FeedMeLogic.Server.ConfirmOrder.GetSpecificOrder(OrderID); //Gets Order From Server
 
             TotalCostLabel.Text = $"Total Price: £{OI.TotalPrice}";
 
+            //Iterates through each Category & checks if it has already been selected.
             foreach (ItemModel Items in OI.Items)
             {
                 if (!CatList.Contains(Items.Type))
@@ -71,6 +70,7 @@ namespace FeedMeVendorUI.UserControls.Menu
                 }
             }
 
+            //Iterates through each category
             foreach (string category in CatList)
             {
                 Label TitleLabel = GenControls.AddLabel(category + "CatLabel", category, ItemCatLoc, ItemCatFont, BlackColour, TransparentColour, EmptySize, true);
@@ -78,10 +78,13 @@ namespace FeedMeVendorUI.UserControls.Menu
 
                 OrderInfo OrderItem = ConfirmOrder.GetSpecificOrder(ViewOrderLabel.Tag.ToString());
 
+                //Iterates through each item in The Order
                 foreach (ItemModel Item in OrderItem.Items)
                 {
+                    //If the Item is in the Category it will be added underneath the category
                     if (Item.Type == category)
                     {
+                        //Item Info
                         ItemID = Item.ItemID.ToString();
                         ItemType = Item.Type;
                         ItemQuantity = Item.Quantity.ToString();
@@ -89,9 +92,11 @@ namespace FeedMeVendorUI.UserControls.Menu
                         ItemTotalPrice = Item.TotalPrice.ToString();
                         ItemName = Item.Name + " x" + ItemQuantity;
 
+                        //Generating Label
                         Label ItemNameLabel = GenControls.AddLabel(ItemName + "NameLabel", ItemName, ItemNameLoc, ItemNameFont, Color.DarkGray, TransparentColour, ItemNameSize, false);
                         Label ItemPriceLabel = GenControls.AddLabel(ItemName + "Price", "£" + ItemTotalPrice, ItemPriceLoc, ItemNameFont, Color.Maroon, Color.Transparent, EmptySize, true);
 
+                        //Adding Label to control
                         ItemPanel.Controls.Add(ItemNameLabel);
                         ItemPanel.Controls.Add(ItemPriceLabel);
 
@@ -121,7 +126,6 @@ namespace FeedMeVendorUI.UserControls.Menu
         private void OrderIDLabel_TextChanged(object sender, EventArgs e)
         {
             string orderID = OrderIDLabel.Text.Remove(0, 9);
-            Console.WriteLine($"THE ORDER ID IS {orderID} OKAYT");
             GenerateItemList(orderID);
         }
 
@@ -149,6 +153,19 @@ namespace FeedMeVendorUI.UserControls.Menu
         private void CancelButton_Click(object sender, EventArgs e)
         {
             UpdateOrderStatus("Cancelled");
+        }
+
+        private void CreateReview_Click(object sender, EventArgs e)
+        {
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("CreateReview1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Control Con = (Control)sender;
+
+            Label OrderID = userControl.Controls.Find("orderIDT", true).OfType<Label>().SingleOrDefault(); // Searched for the OrderID Label inside the Order Control
+            OrderID.Text = $"OrderID: {OrderIDLabel.Text}";
+
+            userControl.BringToFront();
         }
     }
 }

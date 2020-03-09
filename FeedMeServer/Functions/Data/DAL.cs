@@ -10,12 +10,12 @@ namespace FeedMeServer.Functions.Data
         public static int ErrorCode;
 
         /* When Using This im not sure how variables will get passed through so you will have to reference them using this.
-        // One Problem with this Function is that it executes Non-Paraterized queries which could be a problem with SQL Injections. This should be updated
-        // to allow paraterized queries. */
+        *  One Problem with this Function is that it executes Non-Paraterized queries which could be a problem with SQL Injections. This should be updated
+        *  to allow paraterized queries in the future. */
 
         public static DataTable ExecCommand(string command)
         {
-            string myConString = "server=213.48.11.122; port=3307; uid=FeedMe_User; pwd=2En6vo; database=feedme; persistsecurityinfo=True;";
+            string myConString = "server=213.48.11.122; port=3307; uid=FeedMe_User; pwd=2En6vo; database=feedme; persistsecurityinfo=True;"; //Connection String
 
             MySqlConnection conn = new MySqlConnection();
             MySqlDataAdapter adapter;
@@ -53,9 +53,9 @@ namespace FeedMeServer.Functions.Data
                 }
                 */
             }
-            catch (Exception ez)
+            catch (Exception ex)
             {
-                Console.WriteLine(ez.Message);
+                Console.WriteLine("Error Executing Query: " + ex.Message);
             }
             finally
             {
