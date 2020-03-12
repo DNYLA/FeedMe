@@ -68,6 +68,12 @@
     <Compile Include="Controls\FeedMeTextBox.Designer.cs">
       <DependentUpon>FeedMeTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ViewReviews.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ViewReviews.Designer.cs">
+      <DependentUpon>ViewReviews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\DAL.cs" />
     <Compile Include="Data\HashPass.cs" />
     <Compile Include="GenControls.cs" />
@@ -104,6 +110,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ViewReviews.resx">
+      <DependentUpon>ViewReviews.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Notification.resx">
       <DependentUpon>Notification.cs</DependentUpon>
     </EmbeddedResource>

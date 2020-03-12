@@ -30,8 +30,8 @@ namespace FeedMeServer.Functions
             IPAddress IP = GetServerInfo.GetPrivateIP();
             string PubIP = GetServerInfo.GetPublicIP();
             //GetServerInfo.RunAsync();
-            //string IPADD = "127.0.0.1";
-            string IPADD = "172.16.23.162";
+            string IPADD = "127.0.0.1";
+            //string IPADD = "172.16.23.162";
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
             //IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
             ServerLogger("Server Initiaizliation Completed.");
@@ -159,7 +159,7 @@ namespace FeedMeServer.Functions
                             case "UpdateUserInfo": //Same as UpdateStoreInfo but is used for Customers.
                                 CustomerHandler.UpdateUserInfo(cSock);
                                 break;
-                            case "ReviewHandling":
+                            case "ReviewHandler":
                                 ReviewHandler revHandle = new ReviewHandler();
                                 revHandle.HandleReviews(ref clientM);
                                 break;

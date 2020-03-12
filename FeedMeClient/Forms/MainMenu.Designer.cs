@@ -37,6 +37,7 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.HomeButton = new System.Windows.Forms.Button();
             this.UserViewPanel = new System.Windows.Forms.Panel();
+            this.createReview1 = new FeedMeClient.UserControls.Order.CreateReview();
             this.settings1 = new FeedMeClient.UserControls.settings();
             this.refund1 = new FeedMeClient.UserControls.Admin_.Refund();
             this.viewRefunds1 = new FeedMeClient.UserControls.Admin_.ViewRefunds();
@@ -47,7 +48,7 @@
             this.reviewOrderControl = new FeedMeClient.UserControls.Order.ReviewOrderControl();
             this.OrderControl = new FeedMeClient.UserControls.OrderControl();
             this.HomeControl = new FeedMeClient.UserControls.HomeControl();
-            this.createReview1 = new FeedMeClient.UserControls.Order.CreateReview();
+            this.viewReviews1 = new FeedMeLogic.Controls.ViewReviews();
             this.SideMenuPanel.SuspendLayout();
             this.UserViewPanel.SuspendLayout();
             this.SuspendLayout();
@@ -165,6 +166,7 @@
             // UserViewPanel
             // 
             this.UserViewPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.UserViewPanel.Controls.Add(this.viewReviews1);
             this.UserViewPanel.Controls.Add(this.createReview1);
             this.UserViewPanel.Controls.Add(this.settings1);
             this.UserViewPanel.Controls.Add(this.refund1);
@@ -181,6 +183,15 @@
             this.UserViewPanel.Name = "UserViewPanel";
             this.UserViewPanel.Size = new System.Drawing.Size(764, 677);
             this.UserViewPanel.TabIndex = 2;
+            // 
+            // createReview1
+            // 
+            this.createReview1.Font = new System.Drawing.Font("Nirmala UI", 14.25F);
+            this.createReview1.Location = new System.Drawing.Point(-2, 0);
+            this.createReview1.Margin = new System.Windows.Forms.Padding(6);
+            this.createReview1.Name = "createReview1";
+            this.createReview1.Size = new System.Drawing.Size(767, 677);
+            this.createReview1.TabIndex = 10;
             // 
             // settings1
             // 
@@ -273,14 +284,14 @@
             this.HomeControl.Size = new System.Drawing.Size(771, 677);
             this.HomeControl.TabIndex = 0;
             // 
-            // createReview1
+            // viewReviews1
             // 
-            this.createReview1.Font = new System.Drawing.Font("Nirmala UI", 14.25F);
-            this.createReview1.Location = new System.Drawing.Point(-2, 0);
-            this.createReview1.Margin = new System.Windows.Forms.Padding(6);
-            this.createReview1.Name = "createReview1";
-            this.createReview1.Size = new System.Drawing.Size(767, 677);
-            this.createReview1.TabIndex = 10;
+            this.viewReviews1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.viewReviews1.Location = new System.Drawing.Point(0, -5);
+            this.viewReviews1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.viewReviews1.Name = "viewReviews1";
+            this.viewReviews1.Size = new System.Drawing.Size(767, 677);
+            this.viewReviews1.TabIndex = 11;
             // 
             // MainMenu
             // 
@@ -323,5 +334,6 @@
         private UserControls.Admin_.Refund refund1;
         private UserControls.settings settings1;
         private UserControls.Order.CreateReview createReview1;
+        private FeedMeLogic.Controls.ViewReviews viewReviews1;
     }
 }

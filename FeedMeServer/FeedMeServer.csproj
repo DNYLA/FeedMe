@@ -67,6 +67,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -98,7 +99,6 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\FeedMeNetworking\FeedMeNetworking.csproj">
       <Project>{0D28C0D9-E040-460F-B2F4-42982A5E226A}</Project>
