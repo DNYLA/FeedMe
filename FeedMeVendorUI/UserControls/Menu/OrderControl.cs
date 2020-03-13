@@ -26,6 +26,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             GenerateControls("processing");
             GenerateControls("cooking");
             GenerateControls("Delivering");
+
         }
 
         private List<OrderInfo> GetUpdates(string status)
@@ -49,7 +50,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             return FeedMeLogic.Server.ConfirmOrder.CheckForOrders(Forms.Authentication.LoginForm.VendorDetails.VendorID, status);
         }
 
-        private void GenerateControls(string status)
+        public void GenerateControls(string status)
         {
             #region Initializing Variables
 
@@ -89,6 +90,19 @@ namespace FeedMeVendorUI.UserControls.Menu
                 Label orderStatusLabel = GenControls.AddLabel(orderStatus + "Rating", orderStatus, StatusLoc, DefaultFont, Color.Black, Color.Transparent, StatusSize, false);
 
                 Control[] controlArray = new Control[] { orderTitleLabel, orderCustLabel, orderPriceLabel, orderStatusLabel };
+
+                if (status == "processing")
+                {
+                    OrdersFlowPanel.Controls.Clear();
+                }
+                else if (status == "Cooking")
+                {
+                    CookingFlowPanel.Controls.Clear();
+                }
+                else if (status == "Delivering")
+                {
+                    DeliveryFlowPanel.Controls.Clear();
+                }
 
                 foreach (Control curControl in controlArray)
                 {

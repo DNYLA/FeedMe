@@ -14,6 +14,9 @@ namespace FeedMeVendorUI.Forms
         private void HomeButton_Click(object sender, EventArgs e)
         {
             orderControl1.BringToFront();
+            orderControl1.GenerateControls("processing");
+            orderControl1.GenerateControls("cooking");
+            orderControl1.GenerateControls("Delivering");
             UpdatePointer(sender);
         }
 

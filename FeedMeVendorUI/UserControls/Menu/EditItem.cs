@@ -108,7 +108,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             {
                 UpdateInfo(EditType.category);
             }
-            else if (ItemName.Text.EndsWith(""))
+            //else if (ItemName.Text.EndsWith(""))
             else
             {
                 UpdateInfo(EditType.item);

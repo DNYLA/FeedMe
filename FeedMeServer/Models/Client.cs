@@ -13,7 +13,6 @@ namespace FeedMeServer.Models
         private string tToken; //Temporary Token assigned on connection. (Temp Tokens limit the client to only Registering & Logging in)
         private string sToken; //Session Token (Given After user Logged in)
         private int clientID; //Database ID for the client
-        private bool isVendor;
         private DateTime timeConnected;
         private DateTime lastResponse;
         private Socket clientSocket;
@@ -22,7 +21,7 @@ namespace FeedMeServer.Models
         public string TToken { get => tToken; set => tToken = value; }
         public string SToken { get => sToken; set => sToken = value; }
         public int ClientID { get => clientID; set => clientID = value; }
-        public bool IsVendor { get => isVendor; set => isVendor = value; }
+        public bool IsVendor { get; set; }
         public DateTime TimeConnected { get => timeConnected; set => timeConnected = value; }
         public DateTime LastResponse { get => lastResponse; set => lastResponse = value; }
         public Socket ClientSocket { get => clientSocket; set => clientSocket = value; }
