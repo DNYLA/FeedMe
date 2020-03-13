@@ -31,7 +31,7 @@ namespace FeedMeServer.Functions
             string PubIP = GetServerInfo.GetPublicIP();
             //GetServerInfo.RunAsync();
             //string IPADD = "127.0.0.1";
-            string IPADD = "172.16.23.162";
+            string IPADD = "172.16.23.44";
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IPADD), PORT_NO);
             //IPEndPoint endPoint = new IPEndPoint(IP, PORT_NO);
             ServerLogger("Server Initiaizliation Completed.");
@@ -108,7 +108,6 @@ namespace FeedMeServer.Functions
 
                     int lastResp = clientM.GetLastResponseSpan() - DateTime.Now.Minute;
 
-                    Console.WriteLine(clientM.TToken + "TToken");
                     if (lastResp > 5)
                     {
                         //Renew Token
@@ -173,7 +172,8 @@ namespace FeedMeServer.Functions
                 }
                 catch (Exception)
                 {
-                    ServerLogger("Undiagnosed Error Uccored When Contacting Client Retrying...", cSock);
+                    //ServerLogger("Undiagnosed Error Uccored When Contacting Client Retrying...", cSock);
+                    
                 }
             }
         }
