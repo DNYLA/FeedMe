@@ -111,6 +111,19 @@ namespace FeedMeVendorUI.UserControls.Menu
             Cursor.Current = Cursors.Hand;
         }
 
+        private void OpenAddCat(object sender, EventArgs e)
+        {
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("EditItem1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Control Con = (Control)sender;
+
+            Label TitleLabel = userControl.Controls.Find("ItemName", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = "Create New";
+
+            userControl.BringToFront();
+        }
+
         private void OpenOrder(object sender, EventArgs e)
         {
             Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on

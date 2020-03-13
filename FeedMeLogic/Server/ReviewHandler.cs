@@ -1,8 +1,10 @@
 ﻿using FeedMeNetworking;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FeedMeLogic.Server
@@ -12,7 +14,7 @@ namespace FeedMeLogic.Server
         private static void SendMainCommand(string command)
         {
             Send.SendToken(ServerConnection.ServerSock);
-
+            
             Send.SendMessage(ServerConnection.ServerSock, "ReviewHandler");
 
             Send.SendMessage(ServerConnection.ServerSock, command);
@@ -27,6 +29,30 @@ namespace FeedMeLogic.Server
             Send.SendMessage(ServerConnection.ServerSock, review);
 
             Send.SendMessage(ServerConnection.ServerSock, rating);
+        }
+
+        public static DataTable GetReviews(string vendorID)
+        {
+            SendMainCommand("GetAllReviews");
+
+            Send.SendMessage(ServerConnection.ServerSock, vendorID);
+
+            return Receive.ReceiveDataTable(ServerConnection.ServerSock);
+        }
+
+        public static decimal CalculateRating(string vendorID)
+        {
+            DataTable dt = GetReviews(vendorID);
+            int total = 0;
+
+            foreach (DataRow review in dt.Rows)
+            {
+                total += Convert.ToInt32(review[4]);
+            }
+
+            return total / dt.Rows.Count;
+
+
         }
     }
 }

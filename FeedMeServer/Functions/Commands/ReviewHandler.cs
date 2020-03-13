@@ -3,6 +3,7 @@ using FeedMeServer.Functions.Data;
 using FeedMeServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -34,10 +35,16 @@ namespace FeedMeServer.Functions.Commands
             }
         }
 
-        private static void GetReviews()
+        public void GetReviews()
         {
-            throw new NotImplementedException();
+            string vendorID = Receive.ReceiveMessage(clientInf.ClientSocket);
+            string qry = $"SELECT STATUS, refunded, DatePurchased, review, rating, firstname, lastname  FROM `order`, `users` WHERE vendorID = {vendorID}  AND review IS NOT NULL AND `order`.CustomerID = `users`.UserID;";
+            DataTable dt = DAL.ExecCommand(qry);
+
+            Send.SendDataTable(clientInf.ClientSocket, dt);
         }
+
+
 
         private void CreateReview()
         {

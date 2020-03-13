@@ -42,6 +42,10 @@ namespace FeedMeVendorUI.UserControls.Menu
                 UpdateCategory();
                 EditCategoryPanel.BringToFront();
             }
+            else if (edType == EditType.AddCat)
+            {
+                AddCategory();
+            }
             else
             {
                 UpdateItemInfo();
@@ -53,6 +57,11 @@ namespace FeedMeVendorUI.UserControls.Menu
         {
             string catName = ItemName.Text.Substring(0, ItemName.Text.Length - 9);
             EditCategoryTBox.Text = catName;
+
+        }
+
+        private void AddCategory()
+        {
 
         }
 
@@ -99,6 +108,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             {
                 UpdateInfo(EditType.category);
             }
+            else if (ItemName.Text.EndsWith(""))
             else
             {
                 UpdateInfo(EditType.item);
@@ -106,7 +116,7 @@ namespace FeedMeVendorUI.UserControls.Menu
         }
         private enum EditType
         {
-            category, item
+            category, AddCat, item
         }
 
         private void AddNewCat_Click(object sender, EventArgs e)

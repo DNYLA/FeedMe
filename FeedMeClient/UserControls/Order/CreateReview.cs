@@ -22,9 +22,14 @@ namespace FeedMeClient.UserControls.Order
         {
             string orderID = orderIDT.Text.Remove(0, 9);
             string message = MessageTBox.Text;
-            string rating = RatingLbox.Text.ToString();
+            string rating = RatingCBox.SelectedItem.ToString();
             rating = rating.Substring(0, 1); //Returns first number which is rating.
             FeedMeLogic.Server.ReviewHandler.CreateReview(orderID, message, rating);
+        }
+
+        private void CreateReview_Load(object sender, EventArgs e)
+        {
+            RatingCBox.SelectedIndex = 0;
         }
     }
 }

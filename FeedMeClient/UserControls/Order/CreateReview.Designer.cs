@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.PurchaseButton = new System.Windows.Forms.Button();
             this.orderIDT = new System.Windows.Forms.Label();
+            this.RatingCBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // MessageTBox
@@ -49,7 +50,7 @@
             this.MessageTBox.Multiline = true;
             this.MessageTBox.Name = "MessageTBox";
             this.MessageTBox.SingleLine = false;
-            this.MessageTBox.Size = new System.Drawing.Size(617, 501);
+            this.MessageTBox.Size = new System.Drawing.Size(617, 25);
             this.MessageTBox.TabIndex = 0;
             this.MessageTBox.Text = "Type Your Message Here...";
             this.MessageTBox.Watermark = "Type Your Message Here...";
@@ -112,10 +113,25 @@
             this.orderIDT.TabIndex = 81;
             this.orderIDT.Text = "OrderID: ";
             // 
+            // RatingCBox
+            // 
+            this.RatingCBox.FormattingEnabled = true;
+            this.RatingCBox.Items.AddRange(new object[] {
+            "1/5",
+            "2/5",
+            "3/5",
+            "4/5",
+            "5/5"});
+            this.RatingCBox.Location = new System.Drawing.Point(279, 567);
+            this.RatingCBox.Name = "RatingCBox";
+            this.RatingCBox.Size = new System.Drawing.Size(121, 33);
+            this.RatingCBox.TabIndex = 82;
+            // 
             // CreateReview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.RatingCBox);
             this.Controls.Add(this.orderIDT);
             this.Controls.Add(this.PurchaseButton);
             this.Controls.Add(this.label2);
@@ -126,6 +142,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CreateReview";
             this.Size = new System.Drawing.Size(767, 677);
+            this.Load += new System.EventHandler(this.CreateReview_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,5 +156,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button PurchaseButton;
         private System.Windows.Forms.Label orderIDT;
+        private System.Windows.Forms.ComboBox RatingCBox;
     }
 }

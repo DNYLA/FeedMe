@@ -33,6 +33,7 @@
             this.ItemsFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ButtonsFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,10 +89,22 @@
             this.pictureBox2.TabIndex = 18;
             this.pictureBox2.TabStop = false;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(479, 23);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(67, 21);
+            this.linkLabel1.TabIndex = 19;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Reviews";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // OrderControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.ButtonsFlowPanel);
             this.Controls.Add(this.ItemsFlowPanel);
@@ -114,5 +127,6 @@
         private System.Windows.Forms.FlowLayoutPanel ItemsFlowPanel;
         private System.Windows.Forms.FlowLayoutPanel ButtonsFlowPanel;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

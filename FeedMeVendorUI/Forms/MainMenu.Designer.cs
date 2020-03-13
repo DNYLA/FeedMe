@@ -36,12 +36,13 @@
             this.SelectedPanel = new System.Windows.Forms.Panel();
             this.HomeButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.editItem1 = new FeedMeVendorUI.UserControls.Menu.EditItem();
             this.itemViewer1 = new FeedMeVendorUI.UserControls.Menu.ItemViewer();
             this.categoroyViewer1 = new FeedMeVendorUI.UserControls.Menu.CategoroyViewer();
             this.storeInfo1 = new FeedMeVendorUI.UserControls.Menu.StoreInfo();
             this.viewOrder1 = new FeedMeVendorUI.UserControls.Menu.ViewOrder();
             this.orderControl1 = new FeedMeVendorUI.UserControls.Menu.OrderControl();
-            this.editItem1 = new FeedMeVendorUI.UserControls.Menu.EditItem();
+            this.viewReviews1 = new FeedMeLogic.Controls.ViewReviews();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -152,6 +153,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.viewReviews1);
             this.panel2.Controls.Add(this.editItem1);
             this.panel2.Controls.Add(this.itemViewer1);
             this.panel2.Controls.Add(this.categoroyViewer1);
@@ -162,6 +164,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(776, 451);
             this.panel2.TabIndex = 3;
+            // 
+            // editItem1
+            // 
+            this.editItem1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.editItem1.Location = new System.Drawing.Point(0, 1);
+            this.editItem1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.editItem1.Name = "editItem1";
+            this.editItem1.Size = new System.Drawing.Size(776, 451);
+            this.editItem1.TabIndex = 7;
             // 
             // itemViewer1
             // 
@@ -208,14 +219,14 @@
             this.orderControl1.Size = new System.Drawing.Size(776, 451);
             this.orderControl1.TabIndex = 2;
             // 
-            // editItem1
+            // viewReviews1
             // 
-            this.editItem1.Font = new System.Drawing.Font("Nirmala UI", 12F);
-            this.editItem1.Location = new System.Drawing.Point(0, 1);
-            this.editItem1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.editItem1.Name = "editItem1";
-            this.editItem1.Size = new System.Drawing.Size(776, 451);
-            this.editItem1.TabIndex = 7;
+            this.viewReviews1.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.viewReviews1.Location = new System.Drawing.Point(3, 1);
+            this.viewReviews1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.viewReviews1.Name = "viewReviews1";
+            this.viewReviews1.Size = new System.Drawing.Size(767, 439);
+            this.viewReviews1.TabIndex = 8;
             // 
             // MainMenu
             // 
@@ -252,5 +263,6 @@
         private UserControls.Menu.CategoroyViewer categoroyViewer1;
         private UserControls.Menu.ItemViewer itemViewer1;
         private UserControls.Menu.EditItem editItem1;
+        private FeedMeLogic.Controls.ViewReviews viewReviews1;
     }
 }

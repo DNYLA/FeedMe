@@ -290,9 +290,10 @@ namespace FeedMeClient.UserControls
             DataTable Req = DAL.ExecCommand($"SELECT * FROM ITEMS WHERE ItemName = '{ItemName}'");
             bool alreadyAdded = false;
 
+            
+
             DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
             int vendorID = Convert.ToInt32(vendorInfo[0].ToString());
-
             foreach (ItemModel Items in ServerConnection.ItemList)
             {
                 if (Items.ItemID == Convert.ToInt32(Req.Rows[0][0]))
@@ -385,6 +386,19 @@ namespace FeedMeClient.UserControls
 
             userControl.BringToFront();
 
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            DataRow vendorInfo = getVendorDetails(VendorTitleLabel.Text);
+            string vendorName = vendorInfo[0].ToString();
+            Form CurrentForm = FindForm(); //returns the Current Form Object that the Control is on
+            UserControl userControl = CurrentForm.Controls.Find("viewReviews1", true).OfType<UserControl>().SingleOrDefault(); //Searched for the Order Control
+
+            Label TitleLabel = userControl.Controls.Find("vendorIDLabel", true).OfType<Label>().SingleOrDefault(); // Searched for the Title Label inside the Order Control
+            TitleLabel.Text = vendorInfo[0].ToString(); //Sets Vendor Title To Vendor that was just selected
+
+            userControl.BringToFront();
         }
     }
 }

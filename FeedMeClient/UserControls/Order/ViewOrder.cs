@@ -163,7 +163,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             Control Con = (Control)sender;
 
             Label OrderID = userControl.Controls.Find("orderIDT", true).OfType<Label>().SingleOrDefault(); // Searched for the OrderID Label inside the Order Control
-            OrderID.Text = $"OrderID: {OrderIDLabel.Text}";
+            OrderID.Text = $"{OrderIDLabel.Text}";
 
             userControl.BringToFront();
         }

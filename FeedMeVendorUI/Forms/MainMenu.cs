@@ -63,6 +63,9 @@ namespace FeedMeVendorUI.Forms
 
         private void ReviewButton_Click(object sender, EventArgs e)
         {
+            viewReviews1.BringToFront();
+
+            viewReviews1.GeneratControls(Authentication.LoginForm.VendorDetails.VendorID.ToString());
             UpdatePointer(sender);
         }
     }
