@@ -54,7 +54,7 @@ namespace FeedMeClient.Forms
 
                 if (menuClosed)
                 {
-                    while (SideMenuPanel.Width != OPENED_PANEL_WIDTH)
+                    while (SideMenuPanel.Width < OPENED_PANEL_WIDTH)
                     {
                         MethodInvoker updateIt = delegate
                        {
@@ -65,7 +65,7 @@ namespace FeedMeClient.Forms
                         //Adding a Panel & Then Docking it to the centre removes the need to resize controls as it is handled within the docking.
                         MethodInvoker UiThread = delegate
                          {
-                             if (MenuIndicatorPanel.Width != 15)
+                             if (MenuIndicatorPanel.Width > 15)
                              {
                                  MenuIndicatorPanel.Width += 1;
                                  System.Threading.Thread.Sleep(30);
@@ -90,7 +90,7 @@ namespace FeedMeClient.Forms
                 }
                 else
                 {
-                    while (SideMenuPanel.Width != CLOSED_PANEL_WDITH)
+                    while (SideMenuPanel.Width > CLOSED_PANEL_WDITH)
                     {
                         MethodInvoker updateIt = delegate
                        {
