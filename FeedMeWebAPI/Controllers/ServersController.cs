@@ -31,6 +31,12 @@ namespace FeedMeWebAPI.Controllers
                 s.UserCount = Convert.ToInt32(row[6].ToString());
                 Servers.Add(s);
             }
+
+            var ss = new Server();
+            ss.Name = "xx";
+
+            Servers.Add(ss);
+
             return Servers;
         }
 

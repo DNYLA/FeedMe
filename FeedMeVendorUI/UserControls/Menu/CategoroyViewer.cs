@@ -66,7 +66,7 @@ namespace FeedMeVendorUI.UserControls.Menu
             List<string> catList = GetCategories(Forms.Authentication.LoginForm.VendorDetails.VendorID.ToString());
 
 
-            AddCategory.Click += new EventHandler(OpenAddCat);
+            //AddCategory.Click += new EventHandler(OpenAddCat);
             AddCategory.MouseMove += new MouseEventHandler(CursorChangeArgs);
             Panel AddCatPanel = AddCategory;
 

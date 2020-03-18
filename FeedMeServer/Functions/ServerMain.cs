@@ -108,7 +108,6 @@ namespace FeedMeServer.Functions
 
                     int lastResp = clientM.GetLastResponseSpan() - DateTime.Now.Minute;
 
-                    Console.WriteLine(clientM.TToken + "TToken");
                     if (lastResp > 5)
                     {
                         //Renew Token
@@ -173,7 +172,8 @@ namespace FeedMeServer.Functions
                 }
                 catch (Exception)
                 {
-                    ServerLogger("Undiagnosed Error Uccored When Contacting Client Retrying...", cSock);
+                    //ServerLogger("Undiagnosed Error Uccored When Contacting Client Retrying...", cSock);
+                    
                 }
             }
         }
