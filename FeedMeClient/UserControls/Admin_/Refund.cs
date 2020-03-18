@@ -143,7 +143,7 @@ namespace FeedMeClient.UserControls.Admin_
             ItemPanel.Controls.Clear();
             RichTextBox TB = new RichTextBox();
             TB.Size = new Size(533, 387);
-            TB.Text = Info.refundMessage;
+            TB.Text = Info.RefundMessage;
             ItemPanel.Controls.Add(TB);
         }
 

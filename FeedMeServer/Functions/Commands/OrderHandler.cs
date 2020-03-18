@@ -179,8 +179,8 @@ namespace FeedMeServer.Functions.Commands
             OI.VendorID = Convert.ToInt32(Order[2]);
             OI.CustomerName = Order[4].ToString() + Order[5].ToString();
             OI.Items = new List<ItemModel>();
-            OI.refundStatus = Order[6].ToString();
-            OI.refundMessage = Order[7].ToString();
+            OI.RefundStatus = Order[6].ToString();
+            OI.RefundMessage = Order[7].ToString();
 
             DataTable orderInfo = DAL.ExecCommand($"SELECT * FROM `orderline` WHERE OrderID = {orderID}");
 
@@ -264,8 +264,8 @@ namespace FeedMeServer.Functions.Commands
                 curOrder.VendorName = DT.Rows[0][0].ToString();
                 curOrder.StartPurchase = "10/10/11 20:30";
                 curOrder.EndPurchase = "10/10/11 21:30";
-                curOrder.refundStatus = order[4].ToString();
-                curOrder.refundMessage = order[5].ToString();
+                curOrder.RefundStatus = order[4].ToString();
+                curOrder.RefundMessage = order[5].ToString();
                 Send.SendOrderDetails(clientInf.ClientSocket, curOrder);
             }
         }

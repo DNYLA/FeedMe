@@ -53,7 +53,7 @@ namespace FeedMeClient.UserControls.Admin_
             foreach (OrderInfo Order in OIList)
             {
                 string VendorStr = $"Vendor: {Order.VendorName}";
-                string refundMessage = $"Refund Message: {Order.refundMessage}";
+                string refundMessage = $"Refund Message: {Order.RefundMessage}";
 
                 string PanelName = "ObjPanelName";
 

@@ -25,6 +25,7 @@ namespace FeedMeClient.UserControls.Order
             order.Items = itemList;
             order.TotalPrice = GetTotalPrice(itemList);
             order.VendorID = order.Items[0].VendorID;
+            order.CustomerInfo = Forms.Authentication.LoginForm.ClientInfo;
 
             string resp = FeedMeLogic.Server.ConfirmOrder.SendOrder(order, Forms.Authentication.LoginForm.ClientInfo);
             

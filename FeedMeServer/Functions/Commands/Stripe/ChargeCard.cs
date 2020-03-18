@@ -6,8 +6,8 @@ namespace FeedMeServer.Functions.Commands.Stripe
 {
     class ChargeCard
     {
-        public static string PubKey = "pk_test_YQJKZKyYgy5Yxcm5xRS9SNtx00S8lExmz2"; //Public Key
-        public static string SecretKey = "sk_test_hUXfz1JlyFizkc5aYs1RQEXs00IcYtIlfB"; //Secret Key
+        private static string PubKey = "pk_test_YQJKZKyYgy5Yxcm5xRS9SNtx00S8lExmz2"; //Public Key
+        private static string SecretKey = "sk_test_hUXfz1JlyFizkc5aYs1RQEXs00IcYtIlfB"; //Secret Key
 
         /// <summary>
         /// Charged the card Using STRIPE API
@@ -26,29 +26,29 @@ namespace FeedMeServer.Functions.Commands.Stripe
             StripeConfiguration.ApiKey = PubKey;
 
             //Getting Card & Price Information // No Error Checks added so it can crash the program
-            string CardNo = OI.Card.CardNum;
-            //CardNo = "4242 4242 4242 4242";
-            string CVCText = OI.Card.CVC;
-            //CVCText = "198";
+            string cardNo = OI.Card.CardNum;
+            string cvcText = OI.Card.CVC;
 
-            string UserEmail = "Dan@Gmail.com";
-            string DescriptionText = "Tes It is";
+            //OI.Card.ExpiryDate
+
+            string UserEmail = OI.CustomerInfo.Email;
+            string DescriptionText = OI.ExtraNote;
 
             //Creating A Token to "Build" the card.
-            var TokenOptions = new TokenCreateOptions
+            var tokenOptions = new TokenCreateOptions
             {
                 Card = new CreditCardOptions //Card Object
                 {
-                    Number = CardNo,
+                    Number = cardNo,
                     ExpYear = 25,
                     ExpMonth = 12,
-                    Cvc = CVCText
+                    Cvc = cvcText
                 }
             };
 
             //Creating a Token and attaching Card Object
-            var Tokenservice = new TokenService();
-            Token stripeToken = Tokenservice.Create(TokenOptions);
+            var tokenservice = new TokenService();
+            tokenservice.Create(tokenOptions);
 
             //Set To Private key to tell API that we are Charging.
             StripeConfiguration.ApiKey = SecretKey;
@@ -66,8 +66,8 @@ namespace FeedMeServer.Functions.Commands.Stripe
             try
             {
                 //Creating a Service To Charge the Card
-                var ChargeService = new ChargeService();
-                Charge charge = ChargeService.Create(ChargeOptions);
+                var chargeService = new ChargeService();
+                Charge charge = chargeService.Create(ChargeOptions);
                 return true;
             }
             catch (StripeException ex)
@@ -75,11 +75,11 @@ namespace FeedMeServer.Functions.Commands.Stripe
                 Console.WriteLine(ex.Message);
                 //Switch Statement is from API Documentation
                 //Shows Each Invidivual Error which i can edit if i want to return specific errors.
+                //In future if the program gets built more this will be 
                 switch (ex.StripeError.ErrorType)
                 {
                     case "card_error":
-                        //MessageBox.Show("Code: " + ex.StripeError.Code);
-                        //MessageBox.Show("Message: " + ex.StripeError.Message);
+                        break;
                     case "api_connection_error":
                         break;
                     case "api_error":

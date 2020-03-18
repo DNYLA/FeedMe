@@ -244,9 +244,13 @@ namespace FeedMeNetworking.Serialization
         [ProtoMember(9)]
         public string VendorName { get; set; }
         [ProtoMember(10)]
-        public string refundStatus { get; set; }
+        public string RefundStatus { get; set; }
         [ProtoMember(11)]
-        public string refundMessage { get; set; }
+        public string RefundMessage { get; set; }
+        [ProtoMember(12)]
+        public UserInfo CustomerInfo { get; set; }
+        [ProtoMember(13)]
+        public string ExtraNote { get; set; }
     }
 
     #endregion OrderInfo
