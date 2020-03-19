@@ -2,78 +2,97 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FeedMeLogic.Server
 {
     public class ImageHandler
     {
-        public static string GetImage(ImageTypes ImageType)
+        private string domain = "https://feedme.sbond.co/";
+        public static string GetImage(ImageTypes ImageType, string name)
         {
-            string imgDir = "https://p.sbond.co/dansite/img/";
+            string url = "https://feedme.sbond.co/" + "img"; //Cant Use Private string Domain Since function is Static
+            
             switch (ImageType)
             {
                 case ImageTypes.Avatar:
-                    imgDir += "Avatars";
+                    url += "Avatars/";
                     break;
                 case ImageTypes.Category:
-                    imgDir += "Categories";
+                    url += "Categories/";
                     break;
                 case ImageTypes.Item:
-                    imgDir += "Items";
+                    url += "Items/";
                     break;
             }
-            return "N";
+
+            return url + name;
         }
 
         //public static string GetAvatar(int UID, bool isVendor)
         //{
         //}
 
-        public void UploadImage()
+        public static string GetImageName(string uri)
         {
+            return Path.GetFileName(new Uri(uri).AbsolutePath);
+        }
 
-            string url = "https://p.sbond.co/dansite/upload.php";
-            string pagesource = string.Empty;
-            using (WebClient client = new WebClient())
+        /// <summary>
+        /// Reduces the need for adding an open file dialog to every form where its needed. Instead i can call this function and it will open a file dialog.
+        /// </summary>
+        /// <param name="type">Upload Location</param>
+        public void CreateFileDialog(ImageTypes type)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Filter = "jpg files (*.jpg)|*.jpg|png files (*.png)|*.png|All files (*.*)|*.*";
+            ofd.CheckFileExists = true;
+            ofd.CheckPathExists = true;
+
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    NameValueCollection postData = new NameValueCollection()
-                    {
-                        { "destfile", "destfile" },  //order: {"parameter name", "parameter value"}
-                    };
-
-                    // client.UploadValues returns page's source as byte array (byte[])
-                    // so it must be transformed into a string
-                    client.UploadValues(url, postData);
-
-                    Console.WriteLine(pagesource);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Unable To Connect to Server...");
-                }
+                UploadImage(type, ofd.FileName);
             }
         }
 
-        private void UploadImage2(object sender, EventArgs e)
+
+        /// <summary>
+        /// Uploads image to correct directory. This function can not be accessed outside of this class which prevents any problems.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="imageLocation"></param>
+        private void UploadImage(ImageTypes type, string imageLocation)
         {
             System.Net.WebClient Client = new System.Net.WebClient();
 
+
+
             Client.Headers.Add("Content-Type", "binary/octet-stream");
 
-            Client.UploadString("https://p.sbond.co/dansite/test.php", "POST",
-                                              @"Test");
+            string phpfile = "";
 
-            byte[] result = Client.UploadFile("https://p.sbond.co/dansite/test.php", "POST",
-                                              @"maxresdefault.jpg");
+            switch (type)
+            {
+                case ImageTypes.Avatar:
+                    phpfile = "upload_avatar.php";
+                    break;
+                case ImageTypes.Category:
+                    phpfile = "upload_Categories.php";
+                    break;
+                case ImageTypes.Item:
+                    phpfile = "upload_items";
+                    break;
+            }
 
-            string s = System.Text.Encoding.UTF8.GetString(result, 0, result.Length);
-            Console.WriteLine(s);
+            string url = domain + phpfile;
+
+            Client.UploadFile(url, "POST", @imageLocation);
         }
 
         private void UploadImage3(object sender, EventArgs e)

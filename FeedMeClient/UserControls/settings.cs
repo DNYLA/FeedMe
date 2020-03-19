@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeNetworking.Serialization;
+using FeedMeLogic.Server;
+using System.IO;
 
 namespace FeedMeClient.UserControls
 {
@@ -42,6 +44,8 @@ namespace FeedMeClient.UserControls
             emailTBox.Text = userDetails.Email;
             pcodeTBox.Text = userDetails.Postcode;
             AddTBox.Text = userDetails.Address;
+
+            pictureBox1.ImageLocation = ImageHandler.GetImage(ImageTypes.Avatar, userDetails.avatarName);
             Forms.Authentication.LoginForm.ClientInfo = userDetails; //This Updates the user Details which is used globally
 
         }
@@ -56,7 +60,14 @@ namespace FeedMeClient.UserControls
             UI.Email = emailTBox.Text;
             UI.Postcode = pcodeTBox.Text;
             UI.Address = AddTBox.Text;
+            UI.avatarName = ImageHandler.GetImageName(pictureBox1.ImageLocation);
             FeedMeLogic.Server.UserHandler.UpdateUserInfo(UI);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ImageHandler IH = new ImageHandler();
+            IH.CreateFileDialog(ImageTypes.Avatar);
         }
     }
 }

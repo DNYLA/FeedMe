@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeLogic;
 using FeedMeLogic.Vendor;
+using FeedMeLogic.Server;
 
 namespace FeedMeVendorUI.UserControls.Menu
 {
@@ -57,10 +58,11 @@ namespace FeedMeVendorUI.UserControls.Menu
                 string ItemName = Item[2].ToString();
                 string ItemPrice = "£" + Item[5].ToString();
                 string ItemID = Item[0].ToString();
-
+                string imageLoc = Item[4].ToString();
                 Panel catPanel = GenControls.AddPanel(ItemName, Color.White, catPanelSize);
                 PictureBox catImage = GenControls.AddPictureBox(ItemID, emptyLoc, picBoxSize);
-                catImage.ImageLocation = "https://p.sbond.co/dansite/img/Categories/download.jpg";
+                catImage.ImageLocation = ImageHandler.GetImage(ImageTypes.Avatar, imageLoc);
+
                 catImage.SizeMode = PictureBoxSizeMode.CenterImage;
 
                 Label ItemNameLabel = GenControls.AddLabel(ItemID, ItemName, ItemNameLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);

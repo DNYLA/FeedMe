@@ -76,7 +76,7 @@ namespace FeedMeClient.UserControls
             #region Initiaizling Variables & DataTable
 
             int ItemAmount;
-            string ItemID, ItemType, ItemName, ItemDescription, ItemPrice;
+            string ItemID, ItemType, ItemName, ItemDescription, ItemPrice, imageLoc;
 
             string SQLCommand = ($"SELECT * FROM items WHERE vendorID = {vendorID} AND Category = '{itemType}'");
 
@@ -127,6 +127,7 @@ namespace FeedMeClient.UserControls
                 ItemType = Item[3].ToString();
                 ItemDescription = Item[4].ToString();
                 ItemPrice = Item[5].ToString();
+                imageLoc = Item[6].ToString();
 
                 #endregion Getting Item Information
 
@@ -142,7 +143,7 @@ namespace FeedMeClient.UserControls
                 Button AddButton = GenControls.AddButton(ItemName + "Add", "+", AddItemLoc, ButtonFont, DimGrayColour, WhiteColour, ButtonSize, false);
                 PictureBox ItemPictureBox = GenControls.AddPictureBox(ItemName, PicBoxLoc, PicBoxSize);
 
-                ItemPictureBox.Image = FeedMeClient.Properties.Resources.ChickenBurger;
+                ItemPictureBox.ImageLocation = ImageHandler.GetImage(ImageTypes.Item, imageLoc);
 
                 #endregion Creating Dynamic Item Controls
 

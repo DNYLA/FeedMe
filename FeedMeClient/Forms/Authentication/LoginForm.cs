@@ -1,4 +1,5 @@
-﻿using FeedMeNetworking.Serialization;
+﻿using FeedMeLogic.Server;
+using FeedMeNetworking.Serialization;
 using System;
 using System.Windows.Forms;
 
@@ -65,6 +66,13 @@ namespace FeedMeClient.Forms.Authentication
         private void LoginForm_Load(object sender, EventArgs e)
         {
             FeedMeLogic.Server.ServerConnection.InitiailizeConnection();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            
+            
         }
 
         #endregion Event Handlers

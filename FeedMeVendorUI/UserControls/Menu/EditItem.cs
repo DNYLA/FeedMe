@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeLogic.Vendor;
+using FeedMeLogic.Server;
 
 namespace FeedMeVendorUI.UserControls.Menu
 {
@@ -122,6 +123,24 @@ namespace FeedMeVendorUI.UserControls.Menu
         private void AddNewCat_Click(object sender, EventArgs e)
         {
             StoreMenuInfo.AddCategory(vendorID, NameTBox.Text, CategoryTBox.Text, DescTBox.Text, PriceTBox.Text);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ImageHandler IH = new ImageHandler();
+            IH.CreateFileDialog(ImageTypes.Avatar);
+        }
+
+        private void avatarPBox_Click(object sender, EventArgs e)
+        {
+            ImageHandler IH = new ImageHandler();
+            IH.CreateFileDialog(ImageTypes.Avatar);
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            ImageHandler IH = new ImageHandler();
+            IH.CreateFileDialog(ImageTypes.Avatar);
         }
     }
 

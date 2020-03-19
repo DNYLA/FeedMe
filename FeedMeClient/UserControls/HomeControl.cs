@@ -101,7 +101,7 @@ namespace FeedMeClient.UserControls
 
         private void MasterGenerator()
         {
-            string vendorID, vendorName, vendorDescription, vendorPostcode, vendorRating;
+            string vendorID, vendorName, vendorDescription, vendorPostcode, vendorRating, imageLoc;
 
             string SQLQuery = "SELECT * FROM vendors";
             using (DataTable DataResults = FeedMeLogic.Data.DAL.ExecCommand(SQLQuery))
@@ -133,7 +133,6 @@ namespace FeedMeClient.UserControls
                 //string DefaultFnt = "Nirmala UI";
 
                 int maxGen = vendorAmount;
-
                 #region Iterating Through Each Vendor
 
                 for (int i = 0; i < maxGen; i++)
@@ -146,6 +145,7 @@ namespace FeedMeClient.UserControls
                     vendorPostcode = ("(" + DataResults.Rows[i][4].ToString() + ")");
                     //vendorRating = DataResults.Rows[i][6].ToString();
                     vendorRating = "⭐⭐⭐⭐⭐";
+                    imageLoc = ImageHandler.GetImage(ImageTypes.Avatar, DataResults.Rows[i][10].ToString());
 
                     #endregion Getting Variables
 
@@ -163,6 +163,7 @@ namespace FeedMeClient.UserControls
                     Label vendorPostcodeLabel = GenControls.AddLabel(vendorName + "PostCode", vendorPostcode, PostcodeLoc, DefaultFont, Color.LightGray, Color.Transparent, PostcodeSize, true);
 
                     PictureBox vendorPictureBox = GenControls.AddPictureBox(vendorName, PictureBoxLoc, PictureBoxSize);
+                    vendorPictureBox.ImageLocation = imageLoc;
 
                     Control[] controlArray = new Control[] { vendorTitleLabel, vendorDescLabel, vendorRatingLabel, vendorPostcodeLabel, vendorPictureBox };
 

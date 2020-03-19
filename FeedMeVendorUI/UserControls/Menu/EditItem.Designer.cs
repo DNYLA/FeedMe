@@ -55,11 +55,13 @@
             this.feedMeTextBox2 = new FeedMeLogic.Controls.FeedMeTextBox();
             this.feedMeTextBox3 = new FeedMeLogic.Controls.FeedMeTextBox();
             this.feedMeTextBox4 = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.EditItemPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.avatarPBox)).BeginInit();
             this.EditCategoryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemName
@@ -99,6 +101,7 @@
             this.avatarPBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.avatarPBox.TabIndex = 27;
             this.avatarPBox.TabStop = false;
+            this.avatarPBox.Click += new System.EventHandler(this.avatarPBox_Click);
             // 
             // label5
             // 
@@ -229,6 +232,7 @@
             // 
             // EditCategoryPanel
             // 
+            this.EditCategoryPanel.Controls.Add(this.pictureBox2);
             this.EditCategoryPanel.Controls.Add(this.UpdateCategoryButton);
             this.EditCategoryPanel.Controls.Add(this.label7);
             this.EditCategoryPanel.Controls.Add(this.EditCategoryTBox);
@@ -243,7 +247,7 @@
             this.UpdateCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.UpdateCategoryButton.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateCategoryButton.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.UpdateCategoryButton.Location = new System.Drawing.Point(47, 170);
+            this.UpdateCategoryButton.Location = new System.Drawing.Point(47, 181);
             this.UpdateCategoryButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.UpdateCategoryButton.Name = "UpdateCategoryButton";
             this.UpdateCategoryButton.Size = new System.Drawing.Size(189, 44);
@@ -256,7 +260,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(19, 129);
+            this.label7.Location = new System.Drawing.Point(19, 140);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 17);
@@ -272,7 +276,7 @@
             this.EditCategoryTBox.FocusColor = System.Drawing.Color.White;
             this.EditCategoryTBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
             this.EditCategoryTBox.ForeColor = System.Drawing.Color.Gray;
-            this.EditCategoryTBox.Location = new System.Drawing.Point(92, 124);
+            this.EditCategoryTBox.Location = new System.Drawing.Point(92, 135);
             this.EditCategoryTBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EditCategoryTBox.Name = "EditCategoryTBox";
             this.EditCategoryTBox.SingleLine = true;
@@ -306,6 +310,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label1
             // 
@@ -434,6 +439,17 @@
             this.feedMeTextBox4.TabIndex = 14;
             this.feedMeTextBox4.Watermark = "";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(66, 11);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(154, 113);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 28;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // EditItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -455,6 +471,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,5 +505,6 @@
         private FeedMeLogic.Controls.FeedMeTextBox feedMeTextBox2;
         private FeedMeLogic.Controls.FeedMeTextBox feedMeTextBox3;
         private FeedMeLogic.Controls.FeedMeTextBox feedMeTextBox4;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

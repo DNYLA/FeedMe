@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FeedMeLogic.Vendor;
 using FeedMeLogic;
+using FeedMeLogic.Server;
 
 namespace FeedMeVendorUI.UserControls.Menu
 {
@@ -73,12 +74,12 @@ namespace FeedMeVendorUI.UserControls.Menu
             flowLayoutPanel1.Controls.Clear();
             foreach (string category in catList)
             {
-
                 string orderStatus = $"16 Items:"; //hard Coded right now change later
 
                 Panel catPanel = GenControls.AddPanel(category, Color.White, catPanelSize);
                 PictureBox catImage = GenControls.AddPictureBox(category, emptyLoc, picBoxSize);
-                catImage.ImageLocation = "https://p.sbond.co/dansite/img/Categories/download.jpg";
+
+                //catImage.ImageLocation = ImageHandler.GetImage(ImageTypes.Avatar, )
                 catImage.SizeMode = PictureBoxSizeMode.CenterImage;
                 catImage.Name = category + "picBox";
                 Label catTitleLabel = GenControls.AddLabel(category, category, catNameLoc, DefaultFont, Color.Black, Color.Transparent, EmptySize, true);
