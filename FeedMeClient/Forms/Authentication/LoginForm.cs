@@ -70,7 +70,8 @@ namespace FeedMeClient.Forms.Authentication
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            ImageHandler IH = new ImageHandler();
+            IH.CreateFileDialog(ImageTypes.Avatar);
             
             
         }

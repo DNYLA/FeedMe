@@ -54,7 +54,7 @@ namespace FeedMeServer.Functions.Commands
         {
             UserInfo UI = Receive.ReceiveUserInfo(clientSocket);
             string query = $@"UPDATE users
-                              SET firstname = '{UI.FirstName}', lastname = '{UI.LastName}', Postcode = '{UI.Postcode}', Address = '{UI.Address}', email = '{UI.Email}'
+                              SET firstname = '{UI.FirstName}', lastname = '{UI.LastName}', Postcode = '{UI.Postcode}', Address = '{UI.Address}', email = '{UI.Email}', avatar = '{UI.avatarName}'
                               WHERE userID = {UI.UserID};";
             DAL.ExecCommand(query);
         }

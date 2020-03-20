@@ -53,13 +53,14 @@ namespace FeedMeServer.Functions
                 //Increase Client Amount & Read Client Socket
                 clientAmount++;
                 clientSocket = serverSocket.Accept();
+                ServerMain ss = new ServerMain();
                 ServerLogger("Client Connected To FeedMe Server!"); //Informing Interface
                 Client clientModel = CreateClientInfo(clientSocket); //Creates a New Client Model for each client
-                
+
                 Thread clientThread = new Thread(new ThreadStart(() => ClassObject.ClientInterface(clientModel))); //Initializes new thread for each client for the new Class Instance
-                
+
                 clientThread.Start(); //Starts the Thread
-                
+
             }
         }
 

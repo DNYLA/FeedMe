@@ -16,7 +16,7 @@ namespace FeedMeLogic.Server
         private string domain = "https://feedme.sbond.co/";
         public static string GetImage(ImageTypes ImageType, string name)
         {
-            string url = "https://feedme.sbond.co/" + "img"; //Cant Use Private string Domain Since function is Static
+            string url = "https://feedme.sbond.co/" + "img/"; //Cant Use Private string Domain Since function is Static
             
             switch (ImageType)
             {
@@ -47,7 +47,7 @@ namespace FeedMeLogic.Server
         /// Reduces the need for adding an open file dialog to every form where its needed. Instead i can call this function and it will open a file dialog.
         /// </summary>
         /// <param name="type">Upload Location</param>
-        public void CreateFileDialog(ImageTypes type)
+        public string CreateFileDialog(ImageTypes type)
         {
             OpenFileDialog ofd = new OpenFileDialog();
 
@@ -58,7 +58,11 @@ namespace FeedMeLogic.Server
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 UploadImage(type, ofd.FileName);
+                return GetImage(type, GetImageName(ofd.FileName));
             }
+
+            return string.Empty;
+            
         }
 
 
@@ -95,22 +99,7 @@ namespace FeedMeLogic.Server
             Client.UploadFile(url, "POST", @imageLocation);
         }
 
-        private void UploadImage3(object sender, EventArgs e)
-        {
-            try
-            {
-                //create WebClient object
-                WebClient client = new WebClient();
-                string myFile = @"maxresdefault.jpg";
-                client.Credentials = CredentialCache.DefaultCredentials;
-                client.UploadFile(@"https://p.sbond.co/dansite/images/", "PUT", myFile);
-                client.Dispose();
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine(err.Message);
-            }
-        }
+
 
     }
 

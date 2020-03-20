@@ -36,14 +36,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.nameTbox = new FeedMeLogic.Controls.FeedMeTextBox();
-            this.fNameTbox = new FeedMeLogic.Controls.FeedMeTextBox();
-            this.lNameTBox = new FeedMeLogic.Controls.FeedMeTextBox();
-            this.emailTBox = new FeedMeLogic.Controls.FeedMeTextBox();
-            this.pcodeTBox = new FeedMeLogic.Controls.FeedMeTextBox();
-            this.AddTBox = new FeedMeLogic.Controls.FeedMeTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.AddTBox = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.pcodeTBox = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.emailTBox = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.lNameTBox = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.fNameTbox = new FeedMeLogic.Controls.FeedMeTextBox();
+            this.nameTbox = new FeedMeLogic.Controls.FeedMeTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,85 +131,25 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Username:";
             // 
-            // nameTbox
+            // pictureBox1
             // 
-            this.nameTbox.AutoResize = false;
-            this.nameTbox.BaseColor = System.Drawing.Color.Black;
-            this.nameTbox.BorderColor = System.Drawing.Color.Black;
-            this.nameTbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.nameTbox.FocusColor = System.Drawing.Color.White;
-            this.nameTbox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
-            this.nameTbox.ForeColor = System.Drawing.Color.Gray;
-            this.nameTbox.Location = new System.Drawing.Point(321, 232);
-            this.nameTbox.Name = "nameTbox";
-            this.nameTbox.SingleLine = true;
-            this.nameTbox.Size = new System.Drawing.Size(218, 23);
-            this.nameTbox.TabIndex = 14;
-            this.nameTbox.Watermark = "";
+            this.pictureBox1.Location = new System.Drawing.Point(363, 116);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(137, 110);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 26;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // fNameTbox
+            // label9
             // 
-            this.fNameTbox.AutoResize = false;
-            this.fNameTbox.BaseColor = System.Drawing.Color.Black;
-            this.fNameTbox.BorderColor = System.Drawing.Color.Black;
-            this.fNameTbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.fNameTbox.FocusColor = System.Drawing.Color.White;
-            this.fNameTbox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
-            this.fNameTbox.ForeColor = System.Drawing.Color.Gray;
-            this.fNameTbox.Location = new System.Drawing.Point(321, 264);
-            this.fNameTbox.Name = "fNameTbox";
-            this.fNameTbox.SingleLine = true;
-            this.fNameTbox.Size = new System.Drawing.Size(218, 23);
-            this.fNameTbox.TabIndex = 14;
-            this.fNameTbox.Watermark = "";
-            // 
-            // lNameTBox
-            // 
-            this.lNameTBox.AutoResize = false;
-            this.lNameTBox.BaseColor = System.Drawing.Color.Black;
-            this.lNameTBox.BorderColor = System.Drawing.Color.Black;
-            this.lNameTBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lNameTBox.FocusColor = System.Drawing.Color.White;
-            this.lNameTBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
-            this.lNameTBox.ForeColor = System.Drawing.Color.Gray;
-            this.lNameTBox.Location = new System.Drawing.Point(320, 296);
-            this.lNameTBox.Name = "lNameTBox";
-            this.lNameTBox.SingleLine = true;
-            this.lNameTBox.Size = new System.Drawing.Size(218, 23);
-            this.lNameTBox.TabIndex = 14;
-            this.lNameTBox.Watermark = "";
-            // 
-            // emailTBox
-            // 
-            this.emailTBox.AutoResize = false;
-            this.emailTBox.BaseColor = System.Drawing.Color.Black;
-            this.emailTBox.BorderColor = System.Drawing.Color.Black;
-            this.emailTBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emailTBox.FocusColor = System.Drawing.Color.White;
-            this.emailTBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
-            this.emailTBox.ForeColor = System.Drawing.Color.Gray;
-            this.emailTBox.Location = new System.Drawing.Point(320, 328);
-            this.emailTBox.Name = "emailTBox";
-            this.emailTBox.SingleLine = true;
-            this.emailTBox.Size = new System.Drawing.Size(218, 23);
-            this.emailTBox.TabIndex = 14;
-            this.emailTBox.Watermark = "";
-            // 
-            // pcodeTBox
-            // 
-            this.pcodeTBox.AutoResize = false;
-            this.pcodeTBox.BaseColor = System.Drawing.Color.Black;
-            this.pcodeTBox.BorderColor = System.Drawing.Color.Black;
-            this.pcodeTBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.pcodeTBox.FocusColor = System.Drawing.Color.White;
-            this.pcodeTBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
-            this.pcodeTBox.ForeColor = System.Drawing.Color.Gray;
-            this.pcodeTBox.Location = new System.Drawing.Point(321, 360);
-            this.pcodeTBox.Name = "pcodeTBox";
-            this.pcodeTBox.SingleLine = true;
-            this.pcodeTBox.Size = new System.Drawing.Size(218, 23);
-            this.pcodeTBox.TabIndex = 14;
-            this.pcodeTBox.Watermark = "";
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(230, 152);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 30);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Picture:";
             // 
             // AddTBox
             // 
@@ -227,24 +167,85 @@
             this.AddTBox.TabIndex = 14;
             this.AddTBox.Watermark = "";
             // 
-            // pictureBox1
+            // pcodeTBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(363, 116);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(137, 110);
-            this.pictureBox1.TabIndex = 26;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pcodeTBox.AutoResize = false;
+            this.pcodeTBox.BaseColor = System.Drawing.Color.Black;
+            this.pcodeTBox.BorderColor = System.Drawing.Color.Black;
+            this.pcodeTBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.pcodeTBox.FocusColor = System.Drawing.Color.White;
+            this.pcodeTBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
+            this.pcodeTBox.ForeColor = System.Drawing.Color.Gray;
+            this.pcodeTBox.Location = new System.Drawing.Point(321, 360);
+            this.pcodeTBox.Name = "pcodeTBox";
+            this.pcodeTBox.SingleLine = true;
+            this.pcodeTBox.Size = new System.Drawing.Size(218, 23);
+            this.pcodeTBox.TabIndex = 14;
+            this.pcodeTBox.Watermark = "";
             // 
-            // label9
+            // emailTBox
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(230, 152);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(88, 30);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Picture:";
+            this.emailTBox.AutoResize = false;
+            this.emailTBox.BaseColor = System.Drawing.Color.Black;
+            this.emailTBox.BorderColor = System.Drawing.Color.Black;
+            this.emailTBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.emailTBox.FocusColor = System.Drawing.Color.White;
+            this.emailTBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
+            this.emailTBox.ForeColor = System.Drawing.Color.Gray;
+            this.emailTBox.Location = new System.Drawing.Point(320, 328);
+            this.emailTBox.Name = "emailTBox";
+            this.emailTBox.SingleLine = true;
+            this.emailTBox.Size = new System.Drawing.Size(218, 23);
+            this.emailTBox.TabIndex = 14;
+            this.emailTBox.Watermark = "";
+            // 
+            // lNameTBox
+            // 
+            this.lNameTBox.AutoResize = false;
+            this.lNameTBox.BaseColor = System.Drawing.Color.Black;
+            this.lNameTBox.BorderColor = System.Drawing.Color.Black;
+            this.lNameTBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lNameTBox.FocusColor = System.Drawing.Color.White;
+            this.lNameTBox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
+            this.lNameTBox.ForeColor = System.Drawing.Color.Gray;
+            this.lNameTBox.Location = new System.Drawing.Point(320, 296);
+            this.lNameTBox.Name = "lNameTBox";
+            this.lNameTBox.SingleLine = true;
+            this.lNameTBox.Size = new System.Drawing.Size(218, 23);
+            this.lNameTBox.TabIndex = 14;
+            this.lNameTBox.Watermark = "";
+            // 
+            // fNameTbox
+            // 
+            this.fNameTbox.AutoResize = false;
+            this.fNameTbox.BaseColor = System.Drawing.Color.Black;
+            this.fNameTbox.BorderColor = System.Drawing.Color.Black;
+            this.fNameTbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.fNameTbox.FocusColor = System.Drawing.Color.White;
+            this.fNameTbox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
+            this.fNameTbox.ForeColor = System.Drawing.Color.Gray;
+            this.fNameTbox.Location = new System.Drawing.Point(321, 264);
+            this.fNameTbox.Name = "fNameTbox";
+            this.fNameTbox.SingleLine = true;
+            this.fNameTbox.Size = new System.Drawing.Size(218, 23);
+            this.fNameTbox.TabIndex = 14;
+            this.fNameTbox.Watermark = "";
+            // 
+            // nameTbox
+            // 
+            this.nameTbox.AutoResize = false;
+            this.nameTbox.BaseColor = System.Drawing.Color.Black;
+            this.nameTbox.BorderColor = System.Drawing.Color.Black;
+            this.nameTbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nameTbox.FocusColor = System.Drawing.Color.White;
+            this.nameTbox.Font = new System.Drawing.Font("Nirmala UI", 7.25F, System.Drawing.FontStyle.Italic);
+            this.nameTbox.ForeColor = System.Drawing.Color.Gray;
+            this.nameTbox.Location = new System.Drawing.Point(321, 232);
+            this.nameTbox.Name = "nameTbox";
+            this.nameTbox.SingleLine = true;
+            this.nameTbox.Size = new System.Drawing.Size(218, 23);
+            this.nameTbox.TabIndex = 14;
+            this.nameTbox.Watermark = "";
             // 
             // settings
             // 

@@ -54,30 +54,33 @@ namespace FeedMeClient.Forms
 
                 if (menuClosed)
                 {
-                    while (SideMenuPanel.Width < OPENED_PANEL_WIDTH)
+                    while (SideMenuPanel.Width < 139)
                     {
+                        Console.WriteLine(SideMenuPanel.Width);
                         MethodInvoker updateIt = delegate
-                       {
-                           SideMenuPanel.Width += 1;
-                       };
+                        {
+                           SideMenuPanel.Width = SideMenuPanel.Width + 1;
+                        };
                         SideMenuPanel.BeginInvoke(updateIt);
                         //Add User Control ReSizing Below
                         //Adding a Panel & Then Docking it to the centre removes the need to resize controls as it is handled within the docking.
-                        MethodInvoker UiThread = delegate
-                         {
-                             if (MenuIndicatorPanel.Width > 15)
-                             {
-                                 MenuIndicatorPanel.Width += 1;
-                                 System.Threading.Thread.Sleep(30);
-                             }
-                             else
-                             {
-                                 MenuIndicatorPanel.BackColor = Color.DodgerBlue;
-                                 System.Threading.Thread.Sleep(10);
-                             }
-                         };
-                        MenuIndicatorPanel.BeginInvoke(UiThread);
+                        //MethodInvoker UiThread = delegate
+                        // {
+                        //     if (MenuIndicatorPanel.Width > 15)
+                        //     {
+                        //         MenuIndicatorPanel.Width += 1;
+                        //         System.Threading.Thread.Sleep(30);
+                        //     }
+                        //     else
+                        //     {
+                        //         MenuIndicatorPanel.BackColor = Color.DodgerBlue;
+                        //         System.Threading.Thread.Sleep(10);
+                        //     }
+                        // };
+                        //MenuIndicatorPanel.BeginInvoke(UiThread);
                     }
+
+                    SideMenuPanel.Size = new Size(139, SideMenuPanel.Height);
 
                     for (int i = 0; i < 4; i++)
                     {

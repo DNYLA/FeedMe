@@ -67,7 +67,8 @@ namespace FeedMeClient.UserControls
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             ImageHandler IH = new ImageHandler();
-            IH.CreateFileDialog(ImageTypes.Avatar);
+            pictureBox1.ImageLocation = IH.CreateFileDialog(ImageTypes.Avatar);
+
         }
     }
 }
