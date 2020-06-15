@@ -1,2 +1,2 @@
 # FeedMe
-FeedMe NEA Project
+FeedMe Project
