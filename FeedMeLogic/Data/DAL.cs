@@ -16,8 +16,8 @@ namespace FeedMeLogic.Data
         [Obsolete("Not Used Anymore As Everything is done Server Side Now")]
         public static DataTable ExecCommand(string command)
         {
-            //string myConString = "server=77.102.93.95; port=3307; uid=root; pwd=blopdop; database=feedme; persistsecurityinfo=True;";
-            string myConString = "server=213.48.11.122; port=3307; uid=FeedMe_User; pwd=2En6vo; database=feedme; persistsecurityinfo=True;";
+            //string myConString = "server=IP_ADDRESS; port=3307; uid=root; pwd=blopdop; database=feedme; persistsecurityinfo=True;";
+            string myConString = "server=IP_ADDRESS; port=3307; uid=SERVER_ADDRESS; pwd=2En6vo; database=feedme; persistsecurityinfo=True;";
             //
 
             MySqlConnection conn = new MySqlConnection();
